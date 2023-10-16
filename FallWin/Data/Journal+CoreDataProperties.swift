@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import UIKit
 
 extension Journal {
 
@@ -21,9 +21,23 @@ extension Journal {
     @NSManaged public var timestamp: Date?
     @NSManaged public var mind: Int64
     @NSManaged public var image: String?
+    
+    var wrappedImage: UIImage? {
+        if let image = self.image {
+            return DataManager.shared.loadImage(name: image)
+        } else {
+            return nil
+        }
+    }
 
 }
 
 extension Journal : Identifiable {
 
+}
+
+extension Journal {
+    func setImage(_ uiImage: UIImage) {
+        self.image = DataManager.shared.saveImage(uiImage)
+    }
 }

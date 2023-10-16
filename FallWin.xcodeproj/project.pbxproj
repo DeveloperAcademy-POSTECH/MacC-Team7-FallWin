@@ -19,6 +19,7 @@
 		79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */; };
 		79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */; };
 		79AF69452ADCC2820064E410 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69442ADCC2820064E410 /* DataManager.swift */; };
+		79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79AF69442ADCC2820064E410 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		79AF69422ADCC1360064E410 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */,
 				79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */,
 				79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */,
 			);
@@ -210,6 +213,7 @@
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
+				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
