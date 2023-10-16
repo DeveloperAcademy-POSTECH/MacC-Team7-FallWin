@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct SurfView: View {
+    let store: StoreOf<SurfFeature>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            Text("Hello, world!")
+        }
     }
 }
 
 #Preview {
-    SurfView()
+    SurfView(store: Store(initialState: SurfFeature.State(), reducer: {
+        SurfFeature()
+    }))
 }

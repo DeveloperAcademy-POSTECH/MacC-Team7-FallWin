@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct SearchView: View {
+    let store: StoreOf<SearchFeature>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            Text("Hello, World!")
+        }
     }
 }
 
 #Preview {
-    SearchView()
+    SearchView(store: Store(initialState: SearchFeature.State(), reducer: {
+        SearchFeature()
+    }))
 }

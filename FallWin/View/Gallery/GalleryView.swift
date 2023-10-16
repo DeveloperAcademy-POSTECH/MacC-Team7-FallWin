@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct GalleryView: View {
+    let store: StoreOf<GalleryFeature>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            Text("Hello, world!")
+        }
     }
 }
 
 #Preview {
-    GalleryView()
+    GalleryView(store: Store(initialState: GalleryFeature.State(), reducer: {
+        GalleryFeature()
+    }))
 }
