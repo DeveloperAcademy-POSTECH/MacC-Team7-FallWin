@@ -74,10 +74,18 @@ struct CvasTabView<Content>: View where Content: View {
         HStack {
             Spacer()
             ForEach(tabItems, id: \.self) { tabItem in
-                VStack {
-//                    Label(tabItem.title, image: tabItem.image)
-                    Label(tabItem.title, systemImage: "person.circle")
-                        .labelStyle(TabBarLabelStyle())
+                //                    Label(tabItem.title, image: tabItem.image)
+                Label {
+                    Text(tabItem.title)
+                } icon: {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 36)
+                }
+                .labelStyle(TabBarLabelStyle())
+                .onTapGesture {
+                    selection = tabItem.tabItem
                 }
                 Spacer()
             }
