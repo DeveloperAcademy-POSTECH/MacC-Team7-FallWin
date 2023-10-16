@@ -22,6 +22,7 @@
 		79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
+		98DA96F52ADD8F6F000DDAFA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98DA96F42ADD8F6F000DDAFA /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98DA96F52ADD8F6F000DDAFA /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +166,9 @@
 			dependencies = (
 			);
 			name = FallWin;
+			packageProductDependencies = (
+				98DA96F42ADD8F6F000DDAFA /* Alamofire */,
+			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
 			productType = "com.apple.product-type.application";
@@ -192,6 +197,9 @@
 				Base,
 			);
 			mainGroup = 79407D462AD7E68D006C7571;
+			packageReferences = (
+				98DA96F32ADD8F6F000DDAFA /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		98DA96F32ADD8F6F000DDAFA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		98DA96F42ADD8F6F000DDAFA /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98DA96F32ADD8F6F000DDAFA /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */ = {

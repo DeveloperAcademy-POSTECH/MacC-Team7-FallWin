@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class DallEApiManager {
     static let shared = DallEApiManager()
@@ -16,32 +17,6 @@ final class DallEApiManager {
 
 // MARK: - DallE
 extension DallEApiManager {
-    
-//    func validatePrompt(_ prompt: String, apiKey: String) async throws -> Bool {
-//        guard let url = URL(string: "https://api.openai.com/v1/moderations") else {
-//            print("------------------bad URL------------------")
-//            throw ImageError.badURL
-//        }
-//        
-//        let parameters: [String: Any] = [
-//            "input": prompt
-//        ]
-//        
-//        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
-//        
-//        var request = URLRequest(url: url)
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-//        request.httpMethod = "POST"
-//        request.httpBody = data
-//        
-//        let (responseData, response) = try await URLSession.shared.data(for: request)
-//        print("response : \(response)")
-//        
-//        let result = try JSONDecoder().decode(ModerationResponse.self, from: responseData)
-//        
-//        return result.hasIssues == false
-//    }
     
     func validatePrompt(_ prompt: String, apiKey: String) async throws -> Bool {
         guard let url = URL(string: "https://api.openai.com/v1/moderations") else {
@@ -68,6 +43,49 @@ extension DallEApiManager {
         
         return result.hasIssues == false
     }
+    
+//    func validatePrompt(_ prompt: String, apiKey: String) async throws -> Bool {
+//        guard let url = URL(string: "https://api.openai.com/v1/moderations") else {
+//            print("------------------bad URL------------------")
+//            throw ImageError.badURL
+//        }
+//        
+//        let parameters: [String: Any] = [
+//            "input": prompt
+//        ]
+//        
+//        let headers: HTTPHeaders = [
+//            "Content-Type": "application/json",
+//            "Authorization": "Bearer \(apiKey)"
+//        ]
+//        
+//        let response = AF.request(url, method: .post, parameters: parameters, headers: headers).response { response in
+//            print("response: \(response)")
+//        }
+//        
+//        switch (response.result) {
+//        case .success:
+//            print()
+//        default:
+//            <#code#>
+//        }
+//        let result = try JSONDecoder().decode(ModerationResponse.self, from: response.data)
+//        return result.hasIssues == false
+        
+//        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
+//        
+//        var request = URLRequest(url: url)
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        request.httpMethod = "POST"
+//        request.httpBody = data
+//        
+//        let (responseData, response) = try await URLSession.shared.data(for: request)
+//        print("response : \(response)")
+//        
+//        let result = try JSONDecoder().decode(ModerationResponse.self, from: responseData)
+//
+//    }
     
     func generateImage(withPrompt prompt: String, apiKey: String) async throws  -> ImageGenerationResponse {
         guard try await validatePrompt(prompt, apiKey: apiKey) else {
