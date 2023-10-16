@@ -20,6 +20,7 @@
 		79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */; };
 		79AF69452ADCC2820064E410 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69442ADCC2820064E410 /* DataManager.swift */; };
 		79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */; };
+		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79AF69442ADCC2820064E410 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				79AF69442ADCC2820064E410 /* DataManager.swift */,
+				98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				79AF69452ADCC2820064E410 /* DataManager.swift in Sources */,
 				79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */,
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
+				98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
