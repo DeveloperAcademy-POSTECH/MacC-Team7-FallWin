@@ -9,6 +9,10 @@ import SwiftUI
 
 enum Colors: String {
     case backgroundPrimary
+    case backgroundSecondary
+    case backgroundTertiary
+    case backgroundTabBar
+    case backgroundOnTabBar
     
     func color() -> Color {
         return Color(self.rawValue)
