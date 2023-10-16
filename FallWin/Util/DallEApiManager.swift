@@ -45,10 +45,12 @@ extension DallEApiManager {
     
     func generateImage(withPrompt prompt: String, apiKey: String) async throws  -> ImageGenerationResponse {
         guard try await validatePrompt(prompt, apiKey: apiKey) else {
+            print("----------------Invalid Prompt----------------")
             throw ImageError.invalidPrompt
         }
         
         guard let url = URL(string: "https://api.openai.com/v1/images/generations") else {
+            print("------------------bad URL------------------")
             throw ImageError.badURL
         }
         
@@ -67,7 +69,8 @@ extension DallEApiManager {
         request.httpMethod = "POST"
         request.httpBody = data
         
-        let (responseData, _) = try await URLSession.shared.data(for: request)
+        let (responseData, response) = try await URLSession.shared.data(for: request)
+        print("response: \(response)")
         let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: responseData)
         
         return result
@@ -153,11 +156,6 @@ struct ModerationResponse: Codable {
     }
 }
 
-enum ImageError: Error {
-    case invalidPrompt
-    case badURL
-}
-
 struct ImageGenerationResponse: Codable {
     struct ImageResponse: Codable {
         let url: String
@@ -165,5 +163,10 @@ struct ImageGenerationResponse: Codable {
     
     let created: Int
     let data: [ImageResponse]
+}
+
+enum ImageError: Error {
+    case invalidPrompt
+    case badURL
 }
 
