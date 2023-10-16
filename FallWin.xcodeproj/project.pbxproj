@@ -11,6 +11,10 @@
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
 		79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D592AD7E68E006C7571 /* Preview Assets.xcassets */; };
+		79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D632AD7EC80006C7571 /* Date+Exntesion.swift */; };
+		79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D652AD7EC9E006C7571 /* String+Extension.swift */; };
+		79407D682AD7ED11006C7571 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D672AD7ED11006C7571 /* Colors.swift */; };
+		79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69392ADAD6CA0064E410 /* Carousel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79407D562AD7E68E006C7571 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79407D592AD7E68E006C7571 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		79407D632AD7EC80006C7571 /* Date+Exntesion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Exntesion.swift"; sourceTree = "<group>"; };
+		79407D652AD7EC9E006C7571 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		79407D672AD7ED11006C7571 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		79AF69392ADAD6CA0064E410 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +60,11 @@
 			isa = PBXGroup;
 			children = (
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
-				79407D542AD7E68D006C7571 /* ContentView.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
 				79407D582AD7E68E006C7571 /* Preview Content */,
+				79407D602AD7EC43006C7571 /* Extension */,
+				79407D612AD7EC50006C7571 /* Component */,
+				79407D622AD7EC58006C7571 /* View */,
 			);
 			path = FallWin;
 			sourceTree = "<group>";
@@ -65,6 +75,32 @@
 				79407D592AD7E68E006C7571 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		79407D602AD7EC43006C7571 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				79407D632AD7EC80006C7571 /* Date+Exntesion.swift */,
+				79407D652AD7EC9E006C7571 /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		79407D612AD7EC50006C7571 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				79407D672AD7ED11006C7571 /* Colors.swift */,
+				79AF69392ADAD6CA0064E410 /* Carousel.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		79407D622AD7EC58006C7571 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79407D542AD7E68D006C7571 /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */,
+				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
+				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
+				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
