@@ -16,9 +16,11 @@ struct DallEApiTestView: View {
     var body: some View {
         VStack(alignment: .leading){
             TextField("프롬프트를 입력하세요.", text: $prompt)
-                .textFieldStyle(.roundedBorder)
+                .keyboardType(.default)
+//                .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
+                
             Button("이미지 생성") {
                 Task {
                     do {
