@@ -84,7 +84,7 @@ struct CvasTabView<Content>: View where Content: View {
                         .frame(width: 36)
                 }
                 .labelStyle(TabBarLabelStyle())
-                .foregroundStyle(Colors.backgroundOnTabBar.color())
+                .foregroundStyle(Colors.tabBarItem.color())
                 .opacity(selection == tabItem.tabItem ? 1 : 0.5)
                 .onTapGesture {
                     selection = tabItem.tabItem
@@ -95,7 +95,7 @@ struct CvasTabView<Content>: View where Content: View {
         .padding(.top, 16)
         .background(
             Rectangle()
-                .fill(Colors.backgroundTabBar.color())
+                .fill(Colors.tabBar.color())
                 .clipShape(RoundedShape(radius: 24, corners: [.topLeft, .topRight]))
                 .ignoresSafeArea()
         )
