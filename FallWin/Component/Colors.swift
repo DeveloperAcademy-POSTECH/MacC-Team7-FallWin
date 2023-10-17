@@ -8,11 +8,36 @@
 import SwiftUI
 
 enum Colors: String {
+    // Background
     case backgroundPrimary
-    case backgroundSecondary
-    case backgroundTertiary
-    case backgroundTabBar
-    case backgroundOnTabBar
+    // TabBar
+    case tabBar
+    case tabBarItem
+    // Button
+    case button
+    case buttonDisabled
+    // Symbol
+    case symbol
+    case symbolDisabled
+    // Text
+    case textPrimary
+    case textSecondary
+    case textTertiary
+    // Emotions
+    case emotionHappy
+    case emotionGrateful
+    case emotionJoyful
+    case emotionProud
+    case emotionTouched
+    case emotionExciting
+    case emotionAnnoyed
+    case emotionNervous
+    case emotionSad
+    case emotionLonley
+    case emotionSuffocated
+    case emotionLazy
+    case emotionShy
+    case emotionFrustrated
     
     func color() -> Color {
         return Color(self.rawValue)
