@@ -7,13 +7,17 @@
 
 import SwiftUI
 
+struct ViewContainer: Identifiable {
+    var id: UUID
+    var view: AnyView
+}
+
 struct Carousel: View {
-    
     var onPageChanged: ((_ oldValue: Int, _ newValue: Int) -> Void)?
     
     private let visibleSpace: CGFloat
     private let spacing: CGFloat
-    private var views: [AnyView]
+    private var views: [ViewContainer]
     
     @State private var currentPage: Int = 0
     @GestureState private var dragOffset: CGFloat = 0
@@ -24,8 +28,8 @@ struct Carousel: View {
             let offsetX = (spacing + visibleSpace) + CGFloat(currentPage) * -pageWidth + CGFloat(currentPage) * -spacing + dragOffset
             
             LazyHStack(spacing: spacing) {
-                ForEach(0..<views.count) { i in
-                    views[i]
+                ForEach(views, id: \.id) { view in
+                    view.view
                         .frame(width: pageWidth, height: proxy.size.height)
                 }
                 .contentShape(Rectangle())
@@ -57,7 +61,7 @@ extension Carousel {
     init<Data: RandomAccessCollection, Content: View>(_ data: Data, id: KeyPath<Data.Element, Data.Element> = \.self, spacing: CGFloat = 8, visibleSpacing: CGFloat = 8, initialPage: Int = 0, onPageChanged: ((_ oldValue: Int, _ newValue: Int) -> Void)? = nil, @ViewBuilder _ content: @escaping (Data.Element) -> Content) {
         self.spacing = spacing
         self.visibleSpace = visibleSpacing
-        self.views = data.map { AnyView(content($0[keyPath: id])) }
+        self.views = data.map { ViewContainer(id: UUID(), view: AnyView(content($0[keyPath: id]))) }
         self.currentPage = initialPage
         self.onPageChanged = onPageChanged
     }

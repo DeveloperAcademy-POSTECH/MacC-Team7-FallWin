@@ -14,6 +14,7 @@
 		791F14702ADD8CF900F8DDD2 /* SurfView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F146F2ADD8CF900F8DDD2 /* SurfView+Feature.swift */; };
 		791F14722ADD8D0100F8DDD2 /* ProfileView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14712ADD8D0100F8DDD2 /* ProfileView+Feature.swift */; };
 		791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14732ADD8EA500F8DDD2 /* Feature.swift */; };
+		791F14762ADEEDEA00F8DDD2 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14752ADEEDEA00F8DDD2 /* TestView.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		791F146F2ADD8CF900F8DDD2 /* SurfView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurfView+Feature.swift"; sourceTree = "<group>"; };
 		791F14712ADD8D0100F8DDD2 /* ProfileView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Feature.swift"; sourceTree = "<group>"; };
 		791F14732ADD8EA500F8DDD2 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		791F14752ADEEDEA00F8DDD2 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				79E5B2C72ADD4FD900A86770 /* GalleryView.swift */,
 				791F146B2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift */,
+				791F14752ADEEDEA00F8DDD2 /* TestView.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */,
+				791F14762ADEEDEA00F8DDD2 /* TestView.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */,
 				791F14722ADD8D0100F8DDD2 /* ProfileView+Feature.swift in Sources */,
