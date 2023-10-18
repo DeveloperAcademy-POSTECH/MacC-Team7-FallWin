@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14672ADD726600F8DDD2 /* RoundedShape.swift */; };
+		791F146A2ADD736B00F8DDD2 /* TabBarLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14692ADD736B00F8DDD2 /* TabBarLabelStyle.swift */; };
+		791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F146B2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift */; };
+		791F146E2ADD8CF200F8DDD2 /* SearchView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F146D2ADD8CF200F8DDD2 /* SearchView+Feature.swift */; };
+		791F14702ADD8CF900F8DDD2 /* SurfView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F146F2ADD8CF900F8DDD2 /* SurfView+Feature.swift */; };
+		791F14722ADD8D0100F8DDD2 /* ProfileView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14712ADD8D0100F8DDD2 /* ProfileView+Feature.swift */; };
+		791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14732ADD8EA500F8DDD2 /* Feature.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -24,9 +31,23 @@
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
 		98DA96F52ADD8F6F000DDAFA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98DA96F42ADD8F6F000DDAFA /* Alamofire */; };
 		98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */; };
+		79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C12ADD23C200A86770 /* CvasTabView.swift */; };
+		79E5B2C82ADD4FD900A86770 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C72ADD4FD900A86770 /* GalleryView.swift */; };
+		79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C92ADD4FE200A86770 /* SearchView.swift */; };
+		79E5B2CC2ADD4FE900A86770 /* SurfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2CB2ADD4FE900A86770 /* SurfView.swift */; };
+		79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2CD2ADD4FF000A86770 /* ProfileView.swift */; };
+		79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D02ADD501200A86770 /* ComposableArchitecture */; };
+		79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D32ADD502100A86770 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791F14672ADD726600F8DDD2 /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
+		791F14692ADD736B00F8DDD2 /* TabBarLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarLabelStyle.swift; sourceTree = "<group>"; };
+		791F146B2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GalleryView+Feature.swift"; sourceTree = "<group>"; };
+		791F146D2ADD8CF200F8DDD2 /* SearchView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchView+Feature.swift"; sourceTree = "<group>"; };
+		791F146F2ADD8CF900F8DDD2 /* SurfView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurfView+Feature.swift"; sourceTree = "<group>"; };
+		791F14712ADD8D0100F8DDD2 /* ProfileView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Feature.swift"; sourceTree = "<group>"; };
+		791F14732ADD8EA500F8DDD2 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +65,11 @@
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
 		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
+		79E5B2C12ADD23C200A86770 /* CvasTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvasTabView.swift; sourceTree = "<group>"; };
+		79E5B2C72ADD4FD900A86770 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		79E5B2C92ADD4FE200A86770 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		79E5B2CB2ADD4FE900A86770 /* SurfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfView.swift; sourceTree = "<group>"; };
+		79E5B2CD2ADD4FF000A86770 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +78,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				98DA96F52ADD8F6F000DDAFA /* Alamofire in Frameworks */,
+				79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */,
+				79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +140,9 @@
 			children = (
 				79407D672AD7ED11006C7571 /* Colors.swift */,
 				79AF69392ADAD6CA0064E410 /* Carousel.swift */,
+				79E5B2C12ADD23C200A86770 /* CvasTabView.swift */,
+				791F14672ADD726600F8DDD2 /* RoundedShape.swift */,
+				791F14692ADD736B00F8DDD2 /* TabBarLabelStyle.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -121,6 +152,11 @@
 			children = (
 				98DA96F02ADD6878000DDAFA /* Test */,
 				79407D542AD7E68D006C7571 /* ContentView.swift */,
+				791F14732ADD8EA500F8DDD2 /* Feature.swift */,
+				79E5B2C32ADD4FA400A86770 /* Gallery */,
+				79E5B2C42ADD4FAC00A86770 /* Search */,
+				79E5B2C52ADD4FB100A86770 /* Surf */,
+				79E5B2C62ADD4FB600A86770 /* Profile */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,6 +189,42 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
+		79E5B2C32ADD4FA400A86770 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				79E5B2C72ADD4FD900A86770 /* GalleryView.swift */,
+				791F146B2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		79E5B2C42ADD4FAC00A86770 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				79E5B2C92ADD4FE200A86770 /* SearchView.swift */,
+				791F146D2ADD8CF200F8DDD2 /* SearchView+Feature.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		79E5B2C52ADD4FB100A86770 /* Surf */ = {
+			isa = PBXGroup;
+			children = (
+				79E5B2CB2ADD4FE900A86770 /* SurfView.swift */,
+				791F146F2ADD8CF900F8DDD2 /* SurfView+Feature.swift */,
+			);
+			path = Surf;
+			sourceTree = "<group>";
+		};
+		79E5B2C62ADD4FB600A86770 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				79E5B2CD2ADD4FF000A86770 /* ProfileView.swift */,
+				791F14712ADD8D0100F8DDD2 /* ProfileView+Feature.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -171,6 +243,8 @@
 			name = FallWin;
 			packageProductDependencies = (
 				98DA96F42ADD8F6F000DDAFA /* Alamofire */,
+				79E5B2D02ADD501200A86770 /* ComposableArchitecture */,
+				79E5B2D32ADD502100A86770 /* Alamofire */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -202,6 +276,8 @@
 			mainGroup = 79407D462AD7E68D006C7571;
 			packageReferences = (
 				98DA96F32ADD8F6F000DDAFA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				79E5B2D22ADD502100A86770 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -232,16 +308,29 @@
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
 				79AF69452ADCC2820064E410 /* DataManager.swift in Sources */,
 				79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */,
+				791F146E2ADD8CF200F8DDD2 /* SearchView+Feature.swift in Sources */,
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
 				98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
+				79E5B2CC2ADD4FE900A86770 /* SurfView.swift in Sources */,
+				79E5B2C82ADD4FD900A86770 /* GalleryView.swift in Sources */,
+				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
+				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
+				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
+				79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,
+				79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */,
+				791F14722ADD8D0100F8DDD2 /* ProfileView+Feature.swift in Sources */,
+				791F146A2ADD736B00F8DDD2 /* TabBarLabelStyle.swift in Sources */,
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
+				791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */,
+				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
+				791F14702ADD8CF900F8DDD2 /* SurfView+Feature.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,7 +539,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		98DA96F32ADD8F6F000DDAFA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+		79E5B2D22ADD502100A86770 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -461,9 +558,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		98DA96F42ADD8F6F000DDAFA /* Alamofire */ = {
+		79E5B2D02ADD501200A86770 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 98DA96F32ADD8F6F000DDAFA /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		79E5B2D32ADD502100A86770 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79E5B2D22ADD502100A86770 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
