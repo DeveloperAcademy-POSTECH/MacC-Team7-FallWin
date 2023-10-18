@@ -19,16 +19,16 @@ struct WritingView: View {
                 ZStack {
                     Color.backgroundPrimary
                     VStack {
-                        HStack {
-                            Text("<")
-                            Spacer()
-                            Text("일기 쓰기")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundStyle(.textPrimary)
-                            Spacer()
-                            Text("X")
-                        }
-                        Spacer()
+//                        HStack {
+//                            Text("<")
+//                            Spacer()
+//                            Text("일기 쓰기")
+//                                .font(.system(size: 18, weight: .bold))
+//                                .foregroundStyle(.textPrimary)
+//                            Spacer()
+//                            Text("X")
+//                        }
+//                        Spacer()
                         HStack {
                             Text("<")
                             Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
@@ -57,6 +57,7 @@ struct WritingView: View {
                                 .cornerRadius(12)
                                 .foregroundColor(Color.white)
                         }
+                        .navigationTitle(Text("일기 쓰기"))
                         .navigationDestination(for: String.self) { emotion in
                                 TestView()
                         }
@@ -82,7 +83,7 @@ struct EmotionView: View {
     var colors: [[Color]] = [
         [Color.emotionHappy, Color.emotionNervous],
         [Color.emotionGrateful, Color.emotionSad],
-        [Color.emotionJoyful, Color.emotionLonley],
+        [Color.emotionJoyful, Color.emotionLonely],
         [Color.emotionProud, Color.emotionSuffocated],
         [Color.emotionTouched, Color.emotionShy],
         [Color.emotionExciting, Color.emotionLazy],
@@ -97,13 +98,22 @@ struct EmotionView: View {
         ["기대되는", "귀찮은"],
         ["짜증나는", "당황한"]
     ]
+    var images: [[Image]] = [
+        [Image("IconHappy"), Image("IconNervous")],
+        [Image("IconGrateful"), Image("IconSad")],
+        [Image("IconJoyful"), Image("IconLonely")],
+        [Image("IconProud"), Image("IconSuffocated")],
+        [Image("IconTouched"), Image("IconShy")],
+        [Image("IconExciting"), Image("IconLazy")],
+        [Image("IconAnnoyed"), Image("IconFrustrated")]
+    ]
     var cardWidth: CGFloat = (UIScreen.main.bounds.width-60)/2
     
     var body: some View {
         VStack {
             ForEach(0..<7) {row in
                 HStack {
-                    EmotionCardView(color: colors[row][0], name: names[row][0], cardWidth: cardWidth)
+                    EmotionCardView(image: images[row][0], name: names[row][0], cardWidth: cardWidth)
                         .frame(width: cardWidth, height: cardWidth)
                         .border(selectedEmotion==names[row][0] ? colors[row][0] : Color.black, width: selectedEmotion==names[row][0] ? 2 : 0)
                         .opacity((selectedEmotion==nil || selectedEmotion == names[row][0]) ? 1 : 0.5 )
@@ -111,7 +121,7 @@ struct EmotionView: View {
                             selectedEmotion = names[row][0]
                         })
                     Spacer()
-                    EmotionCardView(color: colors[row][1], name: names[row][1], cardWidth: cardWidth)
+                    EmotionCardView(image: images[row][1], name: names[row][1], cardWidth: cardWidth)
                         .frame(width: cardWidth, height: cardWidth)
                         .border(selectedEmotion==names[row][1] ? colors[row][1] : Color.black, width: selectedEmotion==names[row][1] ? 2 : 0)
                         .opacity((selectedEmotion==nil || selectedEmotion == names[row][1]) ? 1 : 0.5 )
@@ -126,13 +136,15 @@ struct EmotionView: View {
     
     
 struct EmotionCardView: View {
-    var color: Color
+    var image: Image
     var name: String
     var cardWidth: CGFloat
     
     var body: some View {
         VStack {
-            color
+            image
+                .resizable()
+                .scaledToFit()
                 .frame(width: cardWidth/2, height: cardWidth/2)
             Text(name)
         }
