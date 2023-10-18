@@ -8,12 +8,23 @@
 import SwiftUI
 import ComposableArchitecture
 
+//@main
+//struct FallWinApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            ContentView(store: Store(initialState: Feature.State(), reducer: {
+//                Feature()
+//            }))
+//        }
+//    }
+//}
+
 @main
 struct FallWinApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(store: Store(initialState: Feature.State(), reducer: {
-                Feature()
+            ContentView(store: Store(initialState: WritingFeature.State(), reducer: {
+                WritingFeature()
             }))
         }
     }
