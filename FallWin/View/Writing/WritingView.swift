@@ -11,7 +11,7 @@ import ComposableArchitecture
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
     var date = Date()
-    var selectedEmotion: String? = "행복함"
+    @State var selectedEmotion: String?
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -46,7 +46,8 @@ struct WritingView: View {
                                 .foregroundStyle(.textSecondary)
                         }
                         ScrollView() {
-                            EmotionView()
+                            EmotionView(selectedEmotion: $selectedEmotion)
+                                .padding()
                         }
                         NavigationLink(value: selectedEmotion) {
                             Text("다음")
@@ -76,7 +77,9 @@ struct TestView: View {
 }
 
 struct EmotionView: View {
-    var images: [[Color]] = [
+    @Binding var selectedEmotion: String?
+    
+    var colors: [[Color]] = [
         [Color.emotionHappy, Color.emotionNervous],
         [Color.emotionGrateful, Color.emotionSad],
         [Color.emotionJoyful, Color.emotionLonley],
@@ -94,13 +97,27 @@ struct EmotionView: View {
         ["기대되는", "귀찮은"],
         ["짜증나는", "당황한"]
     ]
+    var cardWidth: CGFloat = (UIScreen.main.bounds.width-60)/2
     
     var body: some View {
         VStack {
             ForEach(0..<7) {row in
                 HStack {
-                    EmotionCardView(image: images[row][0], name: names[row][0])
-                    EmotionCardView(image: images[row][1], name: names[row][1])
+                    EmotionCardView(color: colors[row][0], name: names[row][0], cardWidth: cardWidth)
+                        .frame(width: cardWidth, height: cardWidth)
+                        .border(selectedEmotion==names[row][0] ? colors[row][0] : Color.black, width: selectedEmotion==names[row][0] ? 2 : 0)
+                        .opacity((selectedEmotion==nil || selectedEmotion == names[row][0]) ? 1 : 0.5 )
+                        .onTapGesture(perform: {
+                            selectedEmotion = names[row][0]
+                        })
+                    Spacer()
+                    EmotionCardView(color: colors[row][1], name: names[row][1], cardWidth: cardWidth)
+                        .frame(width: cardWidth, height: cardWidth)
+                        .border(selectedEmotion==names[row][1] ? colors[row][1] : Color.black, width: selectedEmotion==names[row][1] ? 2 : 0)
+                        .opacity((selectedEmotion==nil || selectedEmotion == names[row][1]) ? 1 : 0.5 )
+                        .onTapGesture(perform: {
+                            selectedEmotion = names[row][1]
+                        })
                 }
             }
         }
@@ -109,24 +126,23 @@ struct EmotionView: View {
     
     
 struct EmotionCardView: View {
-    var image: Color
+    var color: Color
     var name: String
+    var cardWidth: CGFloat
     
     var body: some View {
         VStack {
-            Rectangle()
-                .fill(image)
-                .frame(width: 100, height: 100)
+            color
+                .frame(width: cardWidth/2, height: cardWidth/2)
             Text(name)
         }
-        .padding()
         .background(
             Rectangle()
                 .fill(Color.backgroundPrimary)
-//                .frame(width: 150, height: 150)
-                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                .cornerRadius(8)
+                .shadow(radius: 2)
+                .frame(width: cardWidth, height: cardWidth)
         )
-        .padding()
     }
 }
 
