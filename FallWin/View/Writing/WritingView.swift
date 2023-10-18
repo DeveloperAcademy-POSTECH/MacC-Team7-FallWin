@@ -10,7 +10,6 @@ import ComposableArchitecture
 
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
-    var date = Date()
     @State var selectedEmotion: String?
     
     var body: some View {
@@ -29,22 +28,9 @@ struct WritingView: View {
 //                            Text("X")
 //                        }
 //                        Spacer()
-                        HStack {
-                            Text("<")
-                            Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
-                                .font(.system(size: 20, weight: .semibold))
-                                .foregroundStyle(.textPrimary)
-                            Text(">")
-                        }
+                        DateView()
                         Spacer()
-                        VStack {
-                            Text("오늘은 어떤 감정을 느꼈나요?")
-                                .font(.system(size: 24, weight: .bold))
-                                .foregroundStyle(.textPrimary)
-                            Text("오늘 느낀 감정을 선택해보세요")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundStyle(.textSecondary)
-                        }
+                        MessageEmotionView()
                         ScrollView() {
                             EmotionView(selectedEmotion: $selectedEmotion)
                                 .padding()
@@ -69,11 +55,30 @@ struct WritingView: View {
     }
 }
 
-struct TestView: View {
-    var selectedEmotion: String?
+struct DateView: View {
+    var date = Date()
     
     var body: some View {
-        Text(selectedEmotion ?? "")
+        HStack {
+            Text("<")
+            Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundStyle(.textPrimary)
+            Text(">")
+        }
+    }
+}
+
+struct MessageEmotionView: View {
+    var body: some View {
+        VStack {
+            Text("오늘은 어떤 감정을 느꼈나요?")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundStyle(.textPrimary)
+            Text("오늘 느낀 감정을 선택해보세요")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(.textSecondary)
+        }
     }
 }
 
@@ -118,7 +123,11 @@ struct EmotionView: View {
                         .border(selectedEmotion==names[row][0] ? colors[row][0] : Color.black, width: selectedEmotion==names[row][0] ? 2 : 0)
                         .opacity((selectedEmotion==nil || selectedEmotion == names[row][0]) ? 1 : 0.5 )
                         .onTapGesture(perform: {
-                            selectedEmotion = names[row][0]
+                            if selectedEmotion == names[row][0] {
+                                selectedEmotion = nil
+                            } else {
+                                selectedEmotion = names[row][0]
+                            }
                         })
                     Spacer()
                     EmotionCardView(image: images[row][1], name: names[row][1], cardWidth: cardWidth)
@@ -126,7 +135,11 @@ struct EmotionView: View {
                         .border(selectedEmotion==names[row][1] ? colors[row][1] : Color.black, width: selectedEmotion==names[row][1] ? 2 : 0)
                         .opacity((selectedEmotion==nil || selectedEmotion == names[row][1]) ? 1 : 0.5 )
                         .onTapGesture(perform: {
-                            selectedEmotion = names[row][1]
+                            if selectedEmotion == names[row][1] {
+                                selectedEmotion = nil
+                            } else {
+                                selectedEmotion = names[row][1]
+                            }
                         })
                 }
             }
@@ -158,6 +171,13 @@ struct EmotionCardView: View {
     }
 }
 
+struct TestView: View {
+    var selectedEmotion: String?
+    
+    var body: some View {
+        Text(selectedEmotion ?? "")
+    }
+}
 
 
 #Preview {
