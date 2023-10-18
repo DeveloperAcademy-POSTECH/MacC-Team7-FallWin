@@ -23,6 +23,7 @@
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
 		98DA96F52ADD8F6F000DDAFA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98DA96F42ADD8F6F000DDAFA /* Alamofire */; };
+		98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
+		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				79AF69442ADCC2820064E410 /* DataManager.swift */,
 				98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */,
+				98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
 				98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
+				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,

@@ -8,32 +8,50 @@
 import SwiftUI
 
 struct DallEApiTestView: View {
-    @State private var prompt: String = ""
+    @State private var promptInput: String = ""
     @State private var image: UIImage? = nil
     @State private var isThereSomethingWrong: Bool = false
+    @State private var promptOutput: String = ""
     private var apiKey: String = "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"
     
     var body: some View {
         VStack(alignment: .leading){
-            TextField("프롬프트를 입력하세요.", text: $prompt)
+            TextField("프롬프트를 입력하세요.", text: $promptInput)
                 .keyboardType(.default)
-//                .textFieldStyle(.roundedBorder)
+            //                .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
-                
+            
             Button("이미지 생성") {
                 Task {
                     do {
-                        let response = try await DallEApiManager.shared.generateImage(withPrompt: prompt, apiKey: apiKey)
+                        let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: promptInput, apiKey: apiKey)
                         
-                        if let url = response.data.map(\.url).first {
-                            guard let url = URL(string: url) else {
-                                isThereSomethingWrong = true
-                                return
+                        if let promptOutput = chatResponse.choices.map(\.message.content).first {
+                            print(promptOutput)
+                            let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: promptOutput, apiKey: apiKey)
+                            
+                            if let url = imageResponse.data.map(\.url).first {
+                                guard let url = URL(string: url) else {
+                                    isThereSomethingWrong = true
+                                    return
+                                }
+                                let (data, _) = try await URLSession.shared.data(from: url)
+                                image = UIImage(data: data)
+                                isThereSomethingWrong = false
                             }
-                            let (data, _) = try await URLSession.shared.data(from: url)
-                            image = UIImage(data: data)
-                            isThereSomethingWrong = false
+                        } else {
+                            let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: promptInput, apiKey: apiKey)
+                            
+                            if let url = imageResponse.data.map(\.url).first {
+                                guard let url = URL(string: url) else {
+                                    isThereSomethingWrong = true
+                                    return
+                                }
+                                let (data, _) = try await URLSession.shared.data(from: url)
+                                image = UIImage(data: data)
+                                isThereSomethingWrong = false
+                            }
                         }
                     } catch {
                         print(error)
