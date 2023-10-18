@@ -45,7 +45,7 @@ struct WritingView: View {
                         }
                         .navigationTitle(Text("일기 쓰기"))
                         .navigationDestination(for: String.self) { emotion in
-                                TestView()
+                            MainTextView(store: store)
                         }
                     }
                     .padding()
