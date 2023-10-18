@@ -13,6 +13,7 @@ import ComposableArchitecture
 struct SearchFeature: Reducer {
     struct State: Equatable {
         
+        
     }
     
     enum Action: Equatable {
