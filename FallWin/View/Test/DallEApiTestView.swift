@@ -12,7 +12,7 @@ struct DallEApiTestView: View {
     @State private var image: UIImage? = nil
     @State private var isThereSomethingWrong: Bool = false
     @State private var promptOutput: String = ""
-    private var apiKey: String = "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"
+    private var apiKey: String = ""
     
     var body: some View {
         VStack(alignment: .leading){
