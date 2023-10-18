@@ -12,7 +12,7 @@ struct DallEApiTestView: View {
     @State private var image: UIImage? = nil
     @State private var isThereSomethingWrong: Bool = false
     @State private var promptOutput: String = ""
-    private var apiKey: String = ""
+    private var apiKey: String = Bundle.main.apiKey
     
     var body: some View {
         VStack(alignment: .leading){
@@ -25,6 +25,7 @@ struct DallEApiTestView: View {
             Button("이미지 생성") {
                 Task {
                     do {
+                        print(apiKey)
                         let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: promptInput, apiKey: apiKey)
                         
                         if let promptOutput = chatResponse.choices.map(\.message.content).first {

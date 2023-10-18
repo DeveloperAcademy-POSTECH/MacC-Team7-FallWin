@@ -365,3 +365,6 @@ $RECYCLE.BIN/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,xcode,swift,swiftpm,swiftpackagemanager,python,windows,visualstudiocode,cocoapods 
+
+# Secret files
+FallWin/Secret.plist
