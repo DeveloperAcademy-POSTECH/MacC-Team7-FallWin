@@ -18,21 +18,10 @@ struct WritingView: View {
                 ZStack {
                     Color.backgroundPrimary
                     VStack {
-//                        HStack {
-//                            Text("<")
-//                            Spacer()
-//                            Text("일기 쓰기")
-//                                .font(.system(size: 18, weight: .bold))
-//                                .foregroundStyle(.textPrimary)
-//                            Spacer()
-//                            Text("X")
-//                        }
-//                        Spacer()
                         DateView()
-                        Spacer()
                         MessageEmotionView()
                         ScrollView() {
-                            EmotionView(selectedEmotion: $selectedEmotion)
+                            generateEmotionView()
                                 .padding()
                         }
                         NavigationLink(value: selectedEmotion) {
@@ -50,6 +39,87 @@ struct WritingView: View {
                     }
                     .padding()
                 }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func generateEmotionView() -> some View {
+        
+        let emotions: [(String, Color, Image)] = [
+            ("행복한", Color.emotionHappy, Image("IconHappy")),
+            ("불안한", Color.emotionNervous, Image("IconNervous")),
+            ("감사한", Color.emotionGrateful, Image("IconGrateful")),
+            ("슬픈", Color.emotionSad, Image("IconSad")),
+            ("신나는", Color.emotionJoyful, Image("IconJoyful")),
+            ("외로운", Color.emotionLonely, Image("IconLonely")),
+            ("뿌듯한", Color.emotionProud, Image("IconProud")),
+            ("답답한", Color.emotionSuffocated, Image("IconSuffocated")),
+            ("감동받은", Color.emotionTouched, Image("IconTouched")),
+            ("부끄러운", Color.emotionShy, Image("IconShy")),
+            ("기대되는", Color.emotionExciting, Image("IconExciting")),
+            ("귀찮은", Color.emotionLazy, Image("IconLazy")),
+            ("짜증나는", Color.emotionAnnoyed, Image("IconAnnoyed")),
+            ("당황한", Color.emotionFrustrated, Image("IconFrustrated"))
+        ]
+        
+        let cardWidth: CGFloat = UIScreen.main.bounds.width * 0.4
+        
+        WithViewStore(store , observe: { $0 }) { viewStore in
+            VStack {
+                ForEach(0..<14) { idx in
+                    if idx % 2 == 0 {
+                        HStack {
+                            Spacer()
+                            generateEmotionCardView(emotion: emotions[idx])
+                                .frame(width: cardWidth, height: cardWidth)
+                                .onTapGesture(perform: {
+                                    if viewStore.selectedEmotion == emotions[idx].0 {
+                                        viewStore.send(.emotionSelection(nil))
+                                    } else {
+                                        viewStore.send(.emotionSelection(emotions[idx].0))
+                                    }
+                                })
+                            Spacer()
+                            generateEmotionCardView(emotion: emotions[idx+1])
+                                .frame(width: cardWidth, height: cardWidth)
+                                .onTapGesture(perform: {
+                                    if viewStore.selectedEmotion == emotions[idx+1].0 {
+                                        viewStore.send(.emotionSelection(nil))
+                                    } else {
+                                        viewStore.send(.emotionSelection(emotions[idx+1].0))
+                                    }
+                                })
+                            Spacer()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func generateEmotionCardView(emotion: (String, Color, Image)) -> some View {
+        
+        WithViewStore(store, observe: {$0}) { viewStore in
+            GeometryReader { geo in
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.black, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0)
+                    .fill(Color.backgroundPrimary)
+                    .shadow(radius: 2)
+                    .frame(width: geo.size.width, height: geo.size.width)
+                    .overlay(
+                        VStack {
+                            emotion.2
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: geo.size.width/2, height: geo.size.width/2)
+                            Text(emotion.0)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundStyle(.textPrimary)
+                        }
+                    )
+                    .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
             }
         }
     }
@@ -79,95 +149,6 @@ struct MessageEmotionView: View {
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundStyle(.textSecondary)
         }
-    }
-}
-
-struct EmotionView: View {
-    @Binding var selectedEmotion: String?
-    
-    var colors: [[Color]] = [
-        [Color.emotionHappy, Color.emotionNervous],
-        [Color.emotionGrateful, Color.emotionSad],
-        [Color.emotionJoyful, Color.emotionLonely],
-        [Color.emotionProud, Color.emotionSuffocated],
-        [Color.emotionTouched, Color.emotionShy],
-        [Color.emotionExciting, Color.emotionLazy],
-        [Color.emotionAnnoyed, Color.emotionFrustrated]
-    ]
-    var names: [[String]] = [
-        ["행복한", "불안한"],
-        ["감사한", "슬픈"],
-        ["신나는", "외로운"],
-        ["뿌듯한", "답답한"],
-        ["감동받은", "부끄러운"],
-        ["기대되는", "귀찮은"],
-        ["짜증나는", "당황한"]
-    ]
-    var images: [[Image]] = [
-        [Image("IconHappy"), Image("IconNervous")],
-        [Image("IconGrateful"), Image("IconSad")],
-        [Image("IconJoyful"), Image("IconLonely")],
-        [Image("IconProud"), Image("IconSuffocated")],
-        [Image("IconTouched"), Image("IconShy")],
-        [Image("IconExciting"), Image("IconLazy")],
-        [Image("IconAnnoyed"), Image("IconFrustrated")]
-    ]
-    var cardWidth: CGFloat = (UIScreen.main.bounds.width-60)/2
-    
-    var body: some View {
-        VStack {
-            ForEach(0..<7) {row in
-                HStack {
-                    EmotionCardView(image: images[row][0], name: names[row][0], cardWidth: cardWidth)
-                        .frame(width: cardWidth, height: cardWidth)
-                        .border(selectedEmotion==names[row][0] ? colors[row][0] : Color.black, width: selectedEmotion==names[row][0] ? 2 : 0)
-                        .opacity((selectedEmotion==nil || selectedEmotion == names[row][0]) ? 1 : 0.5 )
-                        .onTapGesture(perform: {
-                            if selectedEmotion == names[row][0] {
-                                selectedEmotion = nil
-                            } else {
-                                selectedEmotion = names[row][0]
-                            }
-                        })
-                    Spacer()
-                    EmotionCardView(image: images[row][1], name: names[row][1], cardWidth: cardWidth)
-                        .frame(width: cardWidth, height: cardWidth)
-                        .border(selectedEmotion==names[row][1] ? colors[row][1] : Color.black, width: selectedEmotion==names[row][1] ? 2 : 0)
-                        .opacity((selectedEmotion==nil || selectedEmotion == names[row][1]) ? 1 : 0.5 )
-                        .onTapGesture(perform: {
-                            if selectedEmotion == names[row][1] {
-                                selectedEmotion = nil
-                            } else {
-                                selectedEmotion = names[row][1]
-                            }
-                        })
-                }
-            }
-        }
-    }
-}
-    
-    
-struct EmotionCardView: View {
-    var image: Image
-    var name: String
-    var cardWidth: CGFloat
-    
-    var body: some View {
-        VStack {
-            image
-                .resizable()
-                .scaledToFit()
-                .frame(width: cardWidth/2, height: cardWidth/2)
-            Text(name)
-        }
-        .background(
-            Rectangle()
-                .fill(Color.backgroundPrimary)
-                .cornerRadius(8)
-                .shadow(radius: 2)
-                .frame(width: cardWidth, height: cardWidth)
-        )
     }
 }
 
