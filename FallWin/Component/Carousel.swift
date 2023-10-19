@@ -19,18 +19,20 @@ struct Carousel: View {
     private let spacing: CGFloat
     private var views: [ViewContainer]
     
-    @State private var currentPage: Int = 0
+    @Binding private var currentPage: Int
     @GestureState private var dragOffset: CGFloat = 0
     
     var body: some View {
         GeometryReader { proxy in
             let pageWidth = proxy.size.width - (spacing + visibleSpace) * 2
-            let offsetX = (spacing + visibleSpace) + CGFloat(currentPage) * -pageWidth + CGFloat(currentPage) * -spacing + dragOffset
+            let offsetX = (spacing + visibleSpace) + CGFloat(currentPage) * (-pageWidth * 0.9) + CGFloat(currentPage) * -spacing + dragOffset
             
             LazyHStack(spacing: spacing) {
-                ForEach(views, id: \.id) { view in
-                    view.view
-                        .frame(width: pageWidth, height: proxy.size.height)
+                ForEach(views.indices, id: \.self) { i in
+                    let width = currentPage == i ? pageWidth : pageWidth * 0.9
+                    let height = currentPage == i ? proxy.size.height : proxy.size.height * 0.9
+                    views[i].view
+                        .frame(width: width, height: height)
                 }
                 .contentShape(Rectangle())
             }
@@ -53,22 +55,21 @@ struct Carousel: View {
                 }
             }
         }
-        
     }
 }
 
 extension Carousel {
-    init<Data: RandomAccessCollection, Content: View>(_ data: Data, id: KeyPath<Data.Element, Data.Element> = \.self, spacing: CGFloat = 8, visibleSpacing: CGFloat = 8, initialPage: Int = 0, onPageChanged: ((_ oldValue: Int, _ newValue: Int) -> Void)? = nil, @ViewBuilder _ content: @escaping (Data.Element) -> Content) {
+    init<Data: RandomAccessCollection, Content: View>(_ data: Data, id: KeyPath<Data.Element, Data.Element> = \.self, index: Binding<Int> = .constant(0), spacing: CGFloat = 8, visibleSpacing: CGFloat = 8, initialPage: Int = 0, onPageChanged: ((_ oldValue: Int, _ newValue: Int) -> Void)? = nil, @ViewBuilder _ content: @escaping (Data.Element) -> Content) {
         self.spacing = spacing
         self.visibleSpace = visibleSpacing
         self.views = data.map { ViewContainer(id: UUID(), view: AnyView(content($0[keyPath: id]))) }
-        self.currentPage = initialPage
+        self._currentPage = index
         self.onPageChanged = onPageChanged
     }
 }
 
 #Preview {
-    Carousel(0..<5, id: \.self) { i in
+    Carousel(0..<5, id: \.self, initialPage: 3) { i in
         VStack {
             Spacer()
             Text("\(i)")

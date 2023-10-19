@@ -13,29 +13,78 @@ struct GalleryView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Carousel(viewStore.journals, id: \.self, spacing: 24, visibleSpacing: 24, initialPage: viewStore.journals.endIndex) { oldValue, newValue in
-                // OnPageChanged
-                
-            } _: { journal in
+            GeometryReader { proxy in
                 ZStack {
-                    if let image = journal.wrappedImage {
-                        Image(uiImage: image)
-                    } else {
-                        Rectangle()
-                            .fill(.white)
+                    VStack {
+                        Spacer()
+                        
+                        HStack {
+                            Button("Previous Month", systemImage: "chevron.left") {
+                                viewStore.send(.prevMonth)
+                            }
+                            .labelStyle(.iconOnly)
+                            
+                            Button(String(format: "%d년 %02d월", viewStore.date.year, viewStore.date.month)) {
+                                
+                            }
+                            .font(.body.bold())
+                            
+                            Button("Next Month", systemImage: "chevron.right") {
+                                viewStore.send(.nextMonth)
+                            }
+                            .labelStyle(.iconOnly)
+                            .disabled(!viewStore.hasNextMonth)
+                        }
+                        
+                        Carousel(viewStore.journals, id: \.self, index: viewStore.binding(get: \.carouselIndex, send: GalleryFeature.Action.setCarouselIndex), spacing: 36, visibleSpacing: 24, initialPage: viewStore.journals.endIndex) { oldValue, newValue in
+                            // OnPageChanged
+                            
+                        } _: { journal in
+                            ZStack {
+                                if let image = journal.wrappedImage {
+                                    Image(uiImage: image)
+                                } else {
+                                    Rectangle()
+                                        .fill(.white)
+                                }
+                            }
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 24)
+                            )
+                            .shadow(color: .black.opacity(0.12), radius: 10)
+                            .aspectRatio(0.6, contentMode: .fit)
+                        }
+                        .aspectRatio(0.7, contentMode: .fit)
+                        .onAppear {
+                            viewStore.send(.fetchAll)
+                            viewStore.send(.setCarouselIndex(viewStore.journals.count - 1))
+                        }
+                        
+                        Spacer()
                     }
                 }
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 24)
-                )
-                .shadow(color: .black.opacity(0.12), radius: 10)
                 
-            }
-            .onAppear {
-                viewStore.send(.fetchAll)
-                print(viewStore.journals)
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "pencil")
+                                .foregroundStyle(Colors.tabBarItem.color())
+                                .padding()
+                                .background(
+                                    Circle()
+                                        .fill(Colors.button.color())
+                                )
+                        }
+                    }
+                }
+                .padding()
             }
         }
+        .padding(.bottom, CvasTabViewValue.tabBarHeight)
     }
 }
 
@@ -48,6 +97,22 @@ struct GalleryView: View {
     journal.mind = 1
     journal.timestamp = Date()
     context.insert(journal)
+    
+    let journal2 = Journal(context: context)
+    journal2.id = UUID()
+    journal2.content = "blah blah blah"
+    journal2.image = nil
+    journal2.mind = 1
+    journal2.timestamp = Date()
+    context.insert(journal2)
+    
+    let journal3 = Journal(context: context)
+    journal3.id = UUID()
+    journal3.content = "blah blah blah"
+    journal3.image = nil
+    journal3.mind = 1
+    journal3.timestamp = Date()
+    context.insert(journal3)
     
     return GalleryView(store: Store(initialState: GalleryFeature.State(), reducer: {
         GalleryFeature()
