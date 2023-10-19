@@ -12,37 +12,35 @@ struct SearchView: View {
     let store: StoreOf<SearchFeature>
     
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    @State private var searchTerm: String = ""
-    @State private var searchResults: [String] = []
+//    @State private var searchTerm: String = ""
+//    @State private var searchResults: [String] = []
 
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             NavigationStack {
                 ScrollView() {
-                    LazyVGrid(columns: columns, spacing: 4) {
+                    LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
                         Section(header:
-                                    
-                                    HStack(){
-                            
-                            Text("2023년 10월 \(searchTerm)")
+                            HStack(){
+                            ZStack{
+                                Text("2023년 10월")
+                            }
+
                                 .font(
                                     Font.custom("Pretendard", size: 20)
                                         .weight(.semibold)
                                 )
                             Spacer()
-                            
-                            
                         }
                                 
                                 
                         ){
-                            ForEach((0...9), id: \.self) { _ in
+                            ForEach((viewStore.searchResults.prefix(2)), id: \.self) { _ in
                                 Color(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1))
                                     .cornerRadius(4)
                                     .frame(width: 115, height: 115)
                                     .padding(4)
-                                    .overlay(Text(["r", "b", "c", "s"].randomElement() ?? ""))
                                 
                             }
                         }
@@ -63,7 +61,7 @@ struct SearchView: View {
                                 
                                 
                         ){
-                            ForEach((10...19), id: \.self) { _ in
+                            ForEach((viewStore.searchResults.dropFirst(2)), id: \.self) { _ in
                                 Color(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1))
                                     .cornerRadius(4)
                                     .frame(width: 115, height: 115)
@@ -74,58 +72,38 @@ struct SearchView: View {
                         
                     }
                 }
+                .onAppear {
+                    viewStore.send(.fetchData)
+                }
+                .onChange(of: viewStore.searchTerm) { newValue in
+                    viewStore.send(.filterData(newValue))
+                }
                 .padding(.horizontal, 12)
                 .navigationTitle("검색")
-                .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("찾고 싶은 추억을 입력해보세요"))
+                .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("찾고 싶은 추억을 입력해보세요"))
                 
                 
             }
             
             
         }
+        
     }
 }
 
-//
-//struct Month {
-//    let name : String
-//    let numberOfDays: Int
-//    var days : [Day]
-//
-//    init(name: String, numberOfDays: Int) {
-//        self.name = name
-//        self.numberOfDays = numberOfDays
-//        self.days = []
-//
-//        for n in 1...numberOfDays {
-//            self.days.append(Day(value: n))
-//        }
-//
-//    }
-//}
-//
-//struct Day: Identifiable {
-//    let id = UUID()
-//    let value : Int
-//}
-//
-//let year = [
-//    Month(name: "January", numberOfDays: 31),
-//    Month(name: "February", numberOfDays: 28),
-//    Month(name: "March", numberOfDays: 31),
-//    Month(name: "April", numberOfDays: 30),
-//    Month(name: "May", numberOfDays: 31),
-//    Month(name: "June", numberOfDays: 30),
-//    Month(name: "July", numberOfDays: 31),
-//    Month(name: "August", numberOfDays: 31),
-//    Month(name: "September", numberOfDays: 30),
-//    Month(name: "October", numberOfDays: 31),
-//    Month(name: "November", numberOfDays: 30),
-//    Month(name: "December", numberOfDays: 31),
-//]
 
 #Preview {
-    SearchView(store: Store(initialState: SearchFeature.State(), reducer: {
+    let context = PersistenceController.debug.container.viewContext
+    
+    let j1 = Journal(context: context)
+    j1.content = ""
+    j1.id = UUID()
+    j1.image = nil
+    j1.mind = 1
+    j1.timestamp = Date()
+    context.insert(j1)
+    
+    return SearchView(store: Store(initialState: SearchFeature.State(), reducer: {
         SearchFeature()
     }))
 }
