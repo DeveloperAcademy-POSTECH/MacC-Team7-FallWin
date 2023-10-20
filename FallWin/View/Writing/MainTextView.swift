@@ -9,64 +9,36 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MainTextView: View {
-    var store: StoreOf<WritingFeature>
+    var store: StoreOf<MainTextFeature>
     @State var mainText: String = ""
+    @FocusState var focused
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
                 VStack {
+                    Spacer()
+                        .frame(height: 30)
                     DateView()
                     Spacer()
-                    MessageMainTextView()
+                        .frame(height: 36)
+                    MessageView(titleText: "오늘 하루는 어땠나요?")
                     Spacer()
-//                    TextField(text: $mainText) {
-//                        Text("무슨 일이 있었는지 작성해보세요.")
-//                            .font(.system(size: 18, weight: .regular))
-//                            .foregroundStyle(.textTeritary)
-//                    }
-//                    .foregroundColor(.textSecondary)
-//                    .background(
-//                        Rectangle()
-//                            .fill(Color.backgroundPrimary)
-//                            .cornerRadius(8)
-//                            .shadow(radius: 2)
-//                    )
-//                    .shadow(radius: 2)
-//                    .frame(width: UIScreen.main.bounds.width-30)
+                        .frame(height: 15)
                     TextEditor(text: $mainText)
                         .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.textSecondary)
-                        .frame(width: UIScreen.main.bounds.width-30)
-                        .background(
-                            Rectangle()
+                        .foregroundColor(.textPrimary)
+                        .focused($focused)
+                        .padding(9)
+                        .background() {
+                            RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.backgroundPrimary)
-                                .cornerRadius(8)
-                                .shadow(radius: 2)
-                            //                                .frame(width: UIScreen.main.bounds.width-30, height: .infinity)
-                        )
-                        .shadow(radius: 2)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width-30)
-                        .overlay(
-                            // Placeholder 설정
-                            mainText.isEmpty ? Text("무슨 일이 있었는지 작성해보세요.").foregroundColor(.textTeritary) : nil
-                        )
-                    Spacer()
+                                .shadow(radius: 12)
+                        }
+                        
                 }
-//                NavigationLink(value: selectedEmotion) {
-//                    Text("다음")
-//                        .font(.system(size: 18, weight: .semibold))
-//                        .frame(width: UIScreen.main.bounds.width-30, height: 60)
-//                        .background(Color.button)
-//                        .cornerRadius(12)
-//                        .foregroundColor(Color.white)
-//                }
-//                .navigationTitle(Text("일기 쓰기"))
-//                .navigationDestination(for: String.self) { emotion in
-//                    MainTextView(store: store)
-//                }
+                .padding()
             }
         }
     }
@@ -81,7 +53,7 @@ struct MessageMainTextView: View {
 }
 
 #Preview {
-    MainTextView(store: Store(initialState: WritingFeature.State()) {
-        WritingFeature()
+    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한")) {
+        MainTextFeature()
     })
 }

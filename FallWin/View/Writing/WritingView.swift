@@ -10,7 +10,6 @@ import ComposableArchitecture
 
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
-    @State var selectedEmotion: String?
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -19,12 +18,12 @@ struct WritingView: View {
                     Color.backgroundPrimary
                     VStack {
                         DateView()
-                        MessageEmotionView()
+                        MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
                         ScrollView() {
                             generateEmotionView()
                                 .padding()
                         }
-                        NavigationLink(value: selectedEmotion) {
+                        NavigationLink(value: viewStore.selectedEmotion) {
                             Text("다음")
                                 .font(.system(size: 18, weight: .semibold))
                                 .frame(width: UIScreen.main.bounds.width-30, height: 60)
@@ -34,7 +33,9 @@ struct WritingView: View {
                         }
                         .navigationTitle(Text("일기 쓰기"))
                         .navigationDestination(for: String.self) { emotion in
-                            MainTextView(store: store)
+                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
+                                MainTextFeature()
+                            }))
                         }
                     }
                     .padding()
@@ -139,15 +140,20 @@ struct DateView: View {
     }
 }
 
-struct MessageEmotionView: View {
+struct MessageView: View {
+    var titleText: String
+    var subTitleText: String?
+    
     var body: some View {
         VStack {
-            Text("오늘은 어떤 감정을 느꼈나요?")
+            Text(titleText)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(.textPrimary)
-            Text("오늘 느낀 감정을 선택해보세요")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(.textSecondary)
+            if let subTitleText = subTitleText {
+                Text(subTitleText)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(.textSecondary)
+            }
         }
     }
 }

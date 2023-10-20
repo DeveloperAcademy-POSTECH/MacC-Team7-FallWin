@@ -56,8 +56,8 @@ struct ContentView: View {
     let store: StoreOf<WritingFeature>
     
     var body: some View {
-        DallEApiTestView()
-//        WritingView(store: store)
+//        DallEApiTestView()
+        WritingView(store: store)
     }
 }
 
