@@ -18,6 +18,8 @@ struct GalleryFeature: Reducer {
         var hasNextMonth: Bool {
             date.year <= Date().year && date.month < Date().month
         }
+        
+        @PresentationState var journal: JournalFeature.State?
     }
     
     enum Action: Equatable {
@@ -25,6 +27,9 @@ struct GalleryFeature: Reducer {
         case setCarouselIndex(Int)
         case prevMonth
         case nextMonth
+        case showJournalView(Journal)
+        
+        case journal(PresentationAction<JournalFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -53,8 +58,15 @@ struct GalleryFeature: Reducer {
                 state.date = Calendar.current.date(byAdding: .month, value: 1, to: state.date) ?? Date()
                 return .none
                 
+            case let .showJournalView(journal):
+                state.journal = .init(journal: journal)
+                return .none
+                
             default: return .none
             }
+        }
+        .ifLet(\.$journal, action: /Action.journal) {
+            JournalFeature()
         }
     }
 }

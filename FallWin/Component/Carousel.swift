@@ -13,7 +13,7 @@ struct ViewContainer: Identifiable {
 }
 
 struct Carousel: View {
-    var onPageChanged: ((_ oldValue: Int, _ newValue: Int) -> Void)?
+    var onPageChanged: ((_ newValue: Int) -> Void)?
     
     private let visibleSpace: CGFloat
     private let spacing: CGFloat
@@ -49,9 +49,9 @@ struct Carousel: View {
                         }
                     }
             )
-            .onChange(of: currentPage) { old, new in
+            .onChange(of: currentPage) { new in
                 if let onPageChanged = self.onPageChanged {
-                    onPageChanged(new, old)
+                    onPageChanged(new)
                 }
             }
         }
@@ -59,7 +59,7 @@ struct Carousel: View {
 }
 
 extension Carousel {
-    init<Data: RandomAccessCollection, Content: View>(_ data: Data, id: KeyPath<Data.Element, Data.Element> = \.self, index: Binding<Int> = .constant(0), spacing: CGFloat = 8, visibleSpacing: CGFloat = 8, initialPage: Int = 0, onPageChanged: ((_ oldValue: Int, _ newValue: Int) -> Void)? = nil, @ViewBuilder _ content: @escaping (Data.Element) -> Content) {
+    init<Data: RandomAccessCollection, Content: View>(_ data: Data, id: KeyPath<Data.Element, Data.Element> = \.self, index: Binding<Int> = .constant(0), spacing: CGFloat = 8, visibleSpacing: CGFloat = 8, initialPage: Int = 0, onPageChanged: ((_ newValue: Int) -> Void)? = nil, @ViewBuilder _ content: @escaping (Data.Element) -> Content) {
         self.spacing = spacing
         self.visibleSpace = visibleSpacing
         self.views = data.map { ViewContainer(id: UUID(), view: AnyView(content($0[keyPath: id]))) }

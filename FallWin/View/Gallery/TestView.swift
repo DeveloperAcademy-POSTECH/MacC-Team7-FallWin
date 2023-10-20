@@ -12,7 +12,7 @@ struct TestView: View {
     
     var body: some View {
         VStack {
-            Carousel(0..<count, id: \.self, spacing: 24, visibleSpacing: 24, initialPage: count - 1) { oldValue, newValue in
+            Carousel(0..<count, id: \.self, spacing: 24, visibleSpacing: 24, initialPage: count - 1) { newValue in
                 
             } _: { i in
                 Text("\(i)")
