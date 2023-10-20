@@ -19,7 +19,7 @@ struct SearchView: View {
             NavigationStack {
                 ScrollView() {
                     if viewStore.searchTerm.isEmpty {
-                        LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
+                        LazyVGrid(columns: columns, spacing: 4) {
                             Section(header:
                                 HStack(){
                                     Text("2023년 10월")
@@ -83,6 +83,7 @@ struct SearchView: View {
                         }
                     }
                 }
+                
                 
                 HStack{
                     Button(action: {
