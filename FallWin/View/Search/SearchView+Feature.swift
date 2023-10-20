@@ -7,8 +7,8 @@ struct SearchFeature: Reducer {
     struct State: Equatable {
         var searchTerm: String = ""
         //검색 텍스트 필드에 적히는 String
-        var searchResults: [String] = [] // 여기에 사용할 모델 타입을 지정해야 합니다.
-        //우리가 받아야하는 일기는 어떤 데이터지..?
+        var searchResults: [Journal] = [] // 여기에 사용할 모델 타입을 지정해야 합니다.
+       
     }
 
     enum Action: Equatable {
@@ -34,17 +34,31 @@ struct SearchFeature: Reducer {
 
         case let .filterData(query):
             // 검색 결과를 필터링
-            state.searchResults = query.isEmpty ? fetchData() : fetchData().filter { $0.lowercased().contains(query.lowercased()) }
+            state.searchResults = query.isEmpty ? fetchData() : fetchData().filter { journal in
+                if let content = journal.content {
+                    return content.lowercased().contains(query.lowercased())
+                }
+                return false
+            }
             return .none
         }
     }
 
-    // fetchData 함수는 실제로 데이터를 가져오는 로직을 구현해야 합니다.
-    private func fetchData() -> [String] {
-        // 여기에서 검색 결과를 초기화하는 데이터를 가져오는 논리를 추가합니다.
-        // 예를 들어, 서버에서 데이터를 가져올 수도 있고, 로컬 데이터를 사용할 수도 있습니다.
-        return ["Apple", "Banana", "Cherry", "Date", "Elderberry"]
+
+    func fetchData() -> [Journal] {
+        // Core Data에서 저장된 Journal 엔터티를 가져옵니다.
+        let context = PersistenceController.shared.container.viewContext
+        let fetchRequest: NSFetchRequest<Journal> = Journal.fetchRequest()
+
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("Error fetching data: \(error)")
+            return []
+        }
     }
     
     
 }
+
+
