@@ -10,6 +10,7 @@ import CoreData
 
 final class PersistenceController {
     static let shared = PersistenceController()
+    static let debug = PersistenceController(inMemory: true)
     let container: NSPersistentContainer
     
     private init(inMemory: Bool = false) {
