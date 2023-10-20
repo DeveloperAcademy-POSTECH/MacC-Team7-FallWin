@@ -35,7 +35,6 @@
 		79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D02ADD501200A86770 /* ComposableArchitecture */; };
 		79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D32ADD502100A86770 /* Alamofire */; };
 		9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31D2AE01F2600FD0E30 /* MainTextView.swift */; };
-		9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
 		98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -74,7 +73,6 @@
 		79E5B2CB2ADD4FE900A86770 /* SurfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfView.swift; sourceTree = "<group>"; };
 		79E5B2CD2ADD4FF000A86770 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9814C31D2AE01F2600FD0E30 /* MainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextView.swift; sourceTree = "<group>"; };
-		9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTextView+Feature.swift"; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
 		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
@@ -246,7 +244,6 @@
 				98DA96F92ADFA585000DDAFA /* WritingView.swift */,
 				98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */,
 				9814C31D2AE01F2600FD0E30 /* MainTextView.swift */,
-				9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */,
 			);
 			path = Writing;
 			sourceTree = "<group>";
@@ -347,7 +344,6 @@
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
-				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,
