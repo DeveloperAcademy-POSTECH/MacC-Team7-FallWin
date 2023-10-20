@@ -33,7 +33,7 @@ enum Colors: String {
     case emotionAnnoyed
     case emotionNervous
     case emotionSad
-    case emotionLonley
+    case emotionLonely
     case emotionSuffocated
     case emotionLazy
     case emotionShy

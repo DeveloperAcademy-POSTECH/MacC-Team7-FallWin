@@ -12,6 +12,7 @@ struct ContentView: View {
     let store: StoreOf<Feature>
     
     var body: some View {
+        
         WithViewStore(store, observe: { $0 }) { viewStore in
             CvasTabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
                 
@@ -47,4 +48,21 @@ struct ContentView: View {
     ContentView(store: Store(initialState: Feature.State(), reducer: {
         Feature()
     }))
+
 }
+
+
+//struct ContentView: View {
+//    let store: StoreOf<WritingFeature>
+//    
+//    var body: some View {
+////        DallEApiTestView()
+//        WritingView(store: store)
+//    }
+//}
+
+//#Preview {
+//    ContentView(store: Store(initialState: WritingFeature.State(), reducer: {
+//        WritingFeature()
+//    }))
+//}
