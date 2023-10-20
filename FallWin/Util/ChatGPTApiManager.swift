@@ -38,6 +38,8 @@ extension ChatGPTApiManager {
         return template
     }
     
+    
+    
     func validatePrompt(_ prompt: String, apiKey: String) async throws -> Bool {
         guard let url = URL(string: "https://api.openai.com/v1/moderations") else {
             print("------------------bad URL------------------")

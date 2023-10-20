@@ -44,6 +44,17 @@ extension DallEApiManager {
         return result.hasIssues == false
     }
     
+    func addDrawingStyle(withPrompt prompt: String, drawingStyle: String) -> String {
+        let drawingStyleTemplate: String = """
+        <<DRAWING STYLE>>
+        \(drawingStyle)
+        <</DRAWING STYLE>>
+        """
+        let dallEPrompt = prompt + "\n" + drawingStyleTemplate
+        
+        return dallEPrompt
+    }
+    
     func generateImage(withPrompt prompt: String, apiKey: String) async throws  -> ImageGenerationResponse {
         guard try await validatePrompt(prompt, apiKey: apiKey) else {
             print("----------------Invalid Prompt----------------")

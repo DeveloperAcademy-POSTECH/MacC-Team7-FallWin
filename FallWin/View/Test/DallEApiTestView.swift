@@ -12,6 +12,8 @@ struct DallEApiTestView: View {
     @State private var image: UIImage? = nil
     @State private var isThereSomethingWrong: Bool = false
     @State private var promptOutput: String = ""
+    @State private var drawingStyle: String = ""
+    @State private var dallEInputPrompt: String = ""
     private var apiKey: String = Bundle.main.apiKey
     
     var body: some View {
@@ -21,6 +23,14 @@ struct DallEApiTestView: View {
             //                .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
+                .border(Color.black)
+            Spacer()
+                .frame(height: 20)
+            TextField("화풍을 입력하세요. (영어)", text: $drawingStyle)
+                .keyboardType(.default)
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .border(Color.black)
             
             Button("이미지 생성") {
                 Task {
@@ -29,8 +39,10 @@ struct DallEApiTestView: View {
                         let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: promptInput, apiKey: apiKey)
                         
                         if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                            print(promptOutput)
-                            let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: promptOutput, apiKey: apiKey)
+                            let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyle)
+                            print("chatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
+                            dallEInputPrompt = dallEPrompt
+                            let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
                             
                             if let url = imageResponse.data.map(\.url).first {
                                 guard let url = URL(string: url) else {
@@ -81,6 +93,8 @@ struct DallEApiTestView: View {
                         }
                     }
             }
+            
+            Text("Dall-E에 들어간 프롬프트:\n\(dallEInputPrompt ?? "(Error)")")
         }
         .padding()
     }
