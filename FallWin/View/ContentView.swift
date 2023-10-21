@@ -18,22 +18,22 @@ struct ContentView: View {
                 
                 IfLetStore(store.scope(state: \.$gallery, action: Feature.Action.gallery)) { store in
                     GalleryView(store: store)
-                        .tabItem(.init(title: "Gallery", image: "circle.fill", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                        .tabItem(.init(title: "Gallery", enabledImage: "MainEnabled", disabledImage: "MainDisabled", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
                 }
                 
                 IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
                     SearchView(store: store)
-                        .tabItem(.init(title: "Search", image: "circle.fill", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                        .tabItem(.init(title: "Search", enabledImage: "FeedEnabled", disabledImage: "FeedDisabled", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
                 }
                 
                 IfLetStore(store.scope(state: \.$surf, action: Feature.Action.surf)) { store in
                     SurfView(store: store)
-                        .tabItem(.init(title: "Surf", image: "circle.fill", tabItem: .surf), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                        .tabItem(.init(title: "Surf", enabledImage: "SurfEnabled", disabledImage: "SurfDisabled", tabItem: .surf), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
                 }
                 
                 IfLetStore(store.scope(state: \.$profile, action: Feature.Action.profile)) { store in
                     ProfileView(store: store)
-                        .tabItem(.init(title: "Profile", image: "circle.fill", tabItem: .profile), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                        .tabItem(.init(title: "Profile", enabledImage: "ProfileEnabled", disabledImage: "ProfileDisabled", tabItem: .profile), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
                 }
                 
             }
