@@ -15,63 +15,78 @@ struct CollapsingScrollViewKey: PreferenceKey {
 }
 
 struct CollapsingScrollView<Header: View, Content: View>: View {
-    @ViewBuilder var header: () -> Header
-    @ViewBuilder var content: () -> Content
+    @Binding var scrollRatio: CGFloat
+    
+    @ViewBuilder var header: Header
+    @ViewBuilder var content: Content
     
     @State private var headerHeight: CGFloat = 0
     @State private var scrollY: CGFloat = .zero
     @State private var originY: CGFloat = .zero
     @State private var scale: CGFloat = 1
     
+    init(scrollRatio: Binding<CGFloat> = .constant(1), @ViewBuilder header: () -> Header, @ViewBuilder content: () -> Content) {
+        self._scrollRatio = scrollRatio
+        self.header = header()
+        self.content = content()
+    }
+    
     var body: some View {
-        ZStack {
-            VStack {
-                header()
-                    .overlay {
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onAppear {
-                                    headerHeight = proxy.size.height
-                                }
+        GeometryReader { proxy in
+            ZStack {
+                VStack {
+                    header
+                        .overlay {
+                            GeometryReader { proxy in
+                                Color.clear
+                                    .onAppear {
+                                        headerHeight = proxy.size.height
+                                    }
+                            }
+                        }
+                        .scaleEffect(CGSize(width: scale < 1 ? 1 : scale, height: scale < 1 ? 1 : scale), anchor: .top)
+                    Spacer()
+                }
+                
+                ScrollView {
+                    VStack(spacing: 0) {
+                        header
+                            .opacity(0)
+                            .drawingGroup()
+                        
+                        LazyVStack {
+                            content
+                                .background(
+                                    GeometryReader { proxy in
+                                        Color.clear
+                                            .preference(key: CollapsingScrollViewKey.self, value: proxy.frame(in: .global).origin.y)
+                                    }
+                                )
+                            
+                            Rectangle()
+                                .opacity(0)
+                                .frame(height: proxy.size.height / 2)
+                        }
+                        .background {
+                            Colors.backgroundPrimary.color().ignoresSafeArea()
                         }
                     }
-                    .scaleEffect(CGSize(width: scale < 1 ? 1 : scale, height: scale < 1 ? 1 : scale), anchor: .top)
-                Spacer()
-            }
-            
-            ScrollView {
-                VStack(spacing: 0) {
-                    header()
-                        .opacity(0)
-                        .drawingGroup()
-                    
-                    LazyVStack {
-                        content()
-                            .background(
-                                GeometryReader { proxy in
-                                    Color.clear
-                                        .preference(key: CollapsingScrollViewKey.self, value: proxy.frame(in: .global).origin.y)
-                                }
-                            )
+                }
+                .scrollContentBackground(.visible)
+                .onPreferenceChange(CollapsingScrollViewKey.self) { value in
+                    if originY == .zero {
+                        originY = value
                     }
-                    .background {
-                        Colors.backgroundPrimary.color().ignoresSafeArea()
-                    }
+                    scrollY = value
+                    scale = scrollY / originY
+                    scrollRatio = scale
                 }
             }
-            .onPreferenceChange(CollapsingScrollViewKey.self) { value in
-                if originY == .zero {
-                    originY = value
-                }
-                scrollY = value
-                scale = scrollY / originY
-                print("scroll:", scrollY, ", origin:", originY)
-            }
+            .ignoresSafeArea(.all, edges: .top)
+            .background(
+                Colors.backgroundPrimary.color().ignoresSafeArea()
+            )
         }
-        .ignoresSafeArea(.all, edges: .top)
-        .background(
-            Colors.backgroundPrimary.color().ignoresSafeArea()
-        )
     }
 }
 

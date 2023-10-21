@@ -16,14 +16,16 @@ struct JournalView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                CollapsingScrollView {
-                    if let image = viewStore.journal.wrappedImage {
-                        Image(uiImage: image)
-                            .aspectRatio(1, contentMode: .fit)
-                    } else {
-                        Rectangle()
-                            .fill(.blue)
-                            .aspectRatio(1, contentMode: .fit)
+                CollapsingScrollView(scrollRatio: viewStore.binding(get: \.scrollRatio, send: JournalFeature.Action.setScrollRatio)) {
+                    ZStack(alignment: .bottomTrailing) {
+                        if let image = viewStore.journal.wrappedImage {
+                            Image(uiImage: image)
+                                .aspectRatio(1, contentMode: .fit)
+                        } else {
+                            Rectangle()
+                                .fill(.blue)
+                                .aspectRatio(1, contentMode: .fit)
+                        }
                     }
                 } content: {
                     VStack(spacing: 9) {
@@ -49,57 +51,66 @@ struct JournalView: View {
                 
                 VStack {
                     toolbar
+                        .padding(12)
+                        .background(
+                            .ultraThickMaterial
+                                .opacity(1.0 - viewStore.scrollRatio)
+                        )
                     Spacer()
                 }
-                .padding(12)
             }
         }
     }
     
     @ViewBuilder
     private var toolbar: some View {
-        HStack {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark")
-                    .padding(8)
-                    .background(
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                    )
-            }
-            .labelStyle(.iconOnly)
-            
-            Spacer()
-            
-            Button {
-                // TODO: Share
-            } label: {
-                Image(systemName: "square.and.arrow.up")
-                    .padding(8)
-                    .background(
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                    )
-            }
-            .labelStyle(.iconOnly)
-            
-            Menu {
-                Button("편집", systemImage: "pencil") {
-                    // TODO: Edit
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .padding(8)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .opacity(viewStore.scrollRatio)
+                        )
                 }
+                .labelStyle(.iconOnly)
                 
-                Button("삭제", systemImage: "trash", role: .destructive) {
-                    // TODO: Delete
+                Spacer()
+                
+                Button {
+                    // TODO: Share
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .padding(8)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .opacity(viewStore.scrollRatio)
+                        )
                 }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .padding(8)
-                    .background(
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                    )
+                .labelStyle(.iconOnly)
+                
+                Menu {
+                    Button("편집", systemImage: "pencil") {
+                        // TODO: Edit
+                    }
+                    
+                    Button("삭제", systemImage: "trash", role: .destructive) {
+                        // TODO: Delete
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .padding(8)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .opacity(viewStore.scrollRatio)
+                        )
+                }
             }
         }
     }
