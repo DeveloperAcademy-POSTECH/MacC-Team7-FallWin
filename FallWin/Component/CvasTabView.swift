@@ -74,12 +74,11 @@ struct CvasTabView<Content>: View where Content: View {
         HStack {
             Spacer()
             ForEach(tabItems, id: \.self) { tabItem in
-                //  Label(tabItem.title, image: tabItem.image)
                 Label {
                     Text(tabItem.title)
                         .font(.system(size: 11))
                 } icon: {
-                    Image(systemName: "person.circle")
+                    Image(tabItem.image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
