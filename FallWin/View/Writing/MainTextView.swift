@@ -11,14 +11,14 @@ import ComposableArchitecture
 struct MainTextView: View {
     var store: StoreOf<MainTextFeature>
     @State var mainText: String = ""
-    @FocusState var focused
+    @FocusState var isFocused: Bool
+    @Binding var navPath: NavigationPath
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
                 VStack {
-                    Text("text: \(viewStore.selectedEmotion ?? "nil")")
                     Spacer()
                         .frame(height: 30)
                     DateView()
@@ -30,14 +30,29 @@ struct MainTextView: View {
                     TextEditor(text: $mainText)
                         .font(.system(size: 18, weight: .medium))
                         .foregroundColor(.textPrimary)
-                        .focused($focused)
+                        .focused($isFocused)
                         .padding(9)
                         .background() {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(radius: 12)
                         }
-                        
+                        .onAppear() {
+                            isFocused = true
+                        }
+                    NavigationLink(value: viewStore.mainText) {
+                        Text("다음")
+                            .font(.system(size: 18, weight: .semibold))
+                            .frame(width: UIScreen.main.bounds.width-30, height: 60)
+                            .background(Color.button)
+                            .cornerRadius(12)
+                            .foregroundColor(Color.white)
+                    }
+                    .navigationDestination(for: String.self) { mainText in
+                        DrawingStyleView(store: Store(initialState: DrawingStyleFeature.State(selectedEmotion: viewStore.selectedEmotion, mainText: mainText), reducer: {
+                            DrawingStyleFeature()
+                        }))
+                    }
                 }
                 .padding()
             }
@@ -54,7 +69,7 @@ struct MessageMainTextView: View {
 }
 
 #Preview {
-    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한")) {
+    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한", navPath: NavigationPath([NavPathState.mainText]))) {
         MainTextFeature()
-    })
+    }, navPath: .constant(NavigationPath([NavPathState.mainText])))
 }

@@ -8,12 +8,20 @@
 import SwiftUI
 import ComposableArchitecture
 
+enum NavPathState {
+    case emotion
+    case mainText
+    case drawStyle
+    case done
+}
+
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
+    @State var navPath: NavigationPath = .init()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            NavigationStack {
+            NavigationStack(path: $navPath) {
                 ZStack {
                     Color.backgroundPrimary
                     VStack {
@@ -23,7 +31,11 @@ struct WritingView: View {
                             generateEmotionView()
                                 .padding()
                         }
-                        NavigationLink(value: viewStore.selectedEmotion) {
+                        Button {
+                            if let selectedEmotion = viewStore.selectedEmotion {
+                                navPath.append(NavPathState.mainText)
+                            }
+                        } label: {
                             Text("다음")
                                 .font(.system(size: 18, weight: .semibold))
                                 .frame(width: UIScreen.main.bounds.width-30, height: 60)
@@ -31,14 +43,30 @@ struct WritingView: View {
                                 .cornerRadius(12)
                                 .foregroundColor(Color.white)
                         }
-                        .navigationTitle(Text("일기 쓰기"))
-                        .navigationDestination(for: String.self) { emotion in
-                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
+                        .disabled(viewStore.selectedEmotion == nil)
+                        .navigationDestination(for: NavPathState.self) { _ in
+                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: viewStore.selectedEmotion ?? "", navPath: navPath), reducer: {
                                 MainTextFeature()
-                            }))
+                            }), navPath: $navPath)
                         }
+//                        NavigationLink(value: viewStore.selectedEmotion) {
+//                            Text("다음")
+//                                .font(.system(size: 18, weight: .semibold))
+//                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
+//                                .background(Color.button)
+//                                .cornerRadius(12)
+//                                .foregroundColor(Color.white)
+//                        }
+//                        .navigationTitle(Text("일기 쓰기"))
+//                        .navigationDestination(for: String.self) { emotion in
+//                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
+//                                MainTextFeature()
+//                            }))
+//                        }
                         
-                        NavigationLink(value: "") {
+                        Button {
+                            navPath.append(NavPathState.mainText)
+                        } label: {
                             Text("건너뛰기")
                                 .font(.system(size: 18, weight: .semibold))
                                 .frame(width: UIScreen.main.bounds.width-30, height: 60)
@@ -46,11 +74,25 @@ struct WritingView: View {
                                 .cornerRadius(12)
                                 .foregroundColor(Color.white)
                         }
-                        .navigationDestination(for: String.self) { emotion in
-                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
+                        .navigationDestination(for: NavPathState.self) { _ in
+                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", navPath: navPath), reducer: {
                                 MainTextFeature()
-                            }))
+                            }), navPath: $navPath)
                         }
+                        
+//                        NavigationLink(value: "") {
+//                            Text("건너뛰기")
+//                                .font(.system(size: 18, weight: .semibold))
+//                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
+//                                .background(Color.button)
+//                                .cornerRadius(12)
+//                                .foregroundColor(Color.white)
+//                        }
+//                        .navigationDestination(for: String.self) { emotion in
+//                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
+//                                MainTextFeature()
+//                            }))
+//                        }
                     }
                     .padding()
                 }
