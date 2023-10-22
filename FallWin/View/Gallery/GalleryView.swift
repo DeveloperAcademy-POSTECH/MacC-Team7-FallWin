@@ -38,6 +38,15 @@ struct GalleryView: View {
                 
                 writingActionButton
                     .padding()
+                    .navigationDestination(store: store.scope(state: \.$writing, action: GalleryFeature.Action.writing)) { store in
+                        WritingView(store: store)
+                            .onAppear {
+                                viewStore.send(.hideTabBar(true))
+                            }
+                            .onDisappear {
+                                viewStore.send(.hideTabBar(false))
+                            }
+                    }
             }
             .onAppear {
                 viewStore.send(.fetchAll)

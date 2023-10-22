@@ -30,6 +30,7 @@ struct GalleryFeature: Reducer {
         case nextMonth
         case showJournalView(Journal)
         case showWritingView
+        case hideTabBar(Bool)
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)

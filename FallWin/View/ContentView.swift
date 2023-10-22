@@ -14,11 +14,14 @@ struct ContentView: View {
     var body: some View {
         
         WithViewStore(store, observe: { $0 }) { viewStore in
-            CvasTabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
+            CvasTabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect),
+                        hideTabBar: viewStore.binding(get: \.hideTabBar, send: Feature.Action.hideTabBar)) {
                 
                 IfLetStore(store.scope(state: \.$gallery, action: Feature.Action.gallery)) { store in
-                    GalleryView(store: store)
-                        .tabItem(.init(title: "Gallery", enabledImage: "MainEnabled", disabledImage: "MainDisabled", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                    NavigationStack {
+                        GalleryView(store: store)
+                            .tabItem(.init(title: "Gallery", enabledImage: "MainEnabled", disabledImage: "MainDisabled", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                    }
                 }
                 
                 IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in

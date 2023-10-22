@@ -59,11 +59,13 @@ extension View {
 
 struct CvasTabView<Content>: View where Content: View {
     @Binding private var selection: TabItem
+    @Binding private var hideTabBar: Bool
     @State private var tabItems: [TabBarItem] = []
     private let content: Content
     
-    init(selection: Binding<TabItem>, @ViewBuilder _ content: @escaping () -> Content) {
+    init(selection: Binding<TabItem>, hideTabBar: Binding<Bool> = .constant(false), @ViewBuilder _ content: @escaping () -> Content) {
         self._selection = selection
+        self._hideTabBar = hideTabBar
         self.content = content()
     }
     
@@ -74,6 +76,8 @@ struct CvasTabView<Content>: View where Content: View {
             VStack {
                 Spacer()
                 tabBar
+                    .offset(y: hideTabBar ? 100 : 0)
+                    .animation(.easeInOut, value: hideTabBar)
             }
             .padding(0)
         }
