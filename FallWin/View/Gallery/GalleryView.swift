@@ -59,6 +59,7 @@ struct GalleryView: View {
                 HStack {
                     Spacer()
                     Button {
+                        viewStore.send(.showWritingView)
                         
                     } label: {
                         Image(systemName: "pencil")
