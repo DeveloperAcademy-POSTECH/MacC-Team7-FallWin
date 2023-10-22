@@ -32,7 +32,7 @@ struct WritingView: View {
                                 .padding()
                         }
                         Button {
-                            if let selectedEmotion = viewStore.selectedEmotion {
+                            if let _ = viewStore.selectedEmotion {
                                 navPath.append(NavPathState.mainText)
                             }
                         } label: {
