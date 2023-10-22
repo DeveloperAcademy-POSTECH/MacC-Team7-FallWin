@@ -116,35 +116,35 @@ struct GalleryView: View {
     }
 }
 
-#Preview {
-    let context = PersistenceController.debug.container.viewContext
-    let journal = Journal(context: context)
-    journal.id = UUID()
-    journal.content = "blah blah blah"
-    journal.image = nil
-    journal.mind = 1
-    journal.timestamp = Date()
-    context.insert(journal)
-    
-    let journal2 = Journal(context: context)
-    journal2.id = UUID()
-    journal2.content = "blah blah blah"
-    journal2.image = nil
-    journal2.mind = 1
-    journal2.timestamp = Date()
-    context.insert(journal2)
-    
-    let journal3 = Journal(context: context)
-    journal3.id = UUID()
-    journal3.content = "blah blah blah"
-    journal3.image = nil
-    journal3.mind = 1
-    journal3.timestamp = Date()
-    context.insert(journal3)
-    
-    return NavigationStack {
-        ContentView(store: Store(initialState: Feature.State(), reducer: {
-            Feature()
-        }))
-    }
-}
+//#Preview {
+//    let context = PersistenceController.debug.container.viewContext
+//    let journal = Journal(context: context)
+//    journal.id = UUID()
+//    journal.content = "blah blah blah"
+//    journal.image = nil
+//    journal.mind = 1
+//    journal.timestamp = Date()
+//    context.insert(journal)
+//    
+//    let journal2 = Journal(context: context)
+//    journal2.id = UUID()
+//    journal2.content = "blah blah blah"
+//    journal2.image = nil
+//    journal2.mind = 1
+//    journal2.timestamp = Date()
+//    context.insert(journal2)
+//    
+//    let journal3 = Journal(context: context)
+//    journal3.id = UUID()
+//    journal3.content = "blah blah blah"
+//    journal3.image = nil
+//    journal3.mind = 1
+//    journal3.timestamp = Date()
+//    context.insert(journal3)
+//    
+//    return NavigationStack {
+//        ContentView(store: Store(initialState: Feature.State(), reducer: {
+//            Feature()
+//        }))
+//    }
+//}

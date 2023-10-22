@@ -18,6 +18,7 @@ struct MainTextView: View {
             ZStack {
                 Color.backgroundPrimary
                 VStack {
+                    Text("text: \(viewStore.selectedEmotion ?? "nil")")
                     Spacer()
                         .frame(height: 30)
                     DateView()

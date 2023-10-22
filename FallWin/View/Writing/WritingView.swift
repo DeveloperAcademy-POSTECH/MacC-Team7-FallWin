@@ -37,6 +37,20 @@ struct WritingView: View {
                                 MainTextFeature()
                             }))
                         }
+                        
+                        NavigationLink(value: "") {
+                            Text("건너뛰기")
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
+                                .background(Color.button)
+                                .cornerRadius(12)
+                                .foregroundColor(Color.white)
+                        }
+                        .navigationDestination(for: String.self) { emotion in
+                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
+                                MainTextFeature()
+                            }))
+                        }
                     }
                     .padding()
                 }
