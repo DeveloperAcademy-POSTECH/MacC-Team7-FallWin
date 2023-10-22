@@ -46,7 +46,6 @@
 		98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */; };
 		98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F92ADFA585000DDAFA /* WritingView.swift */; };
 		98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */; };
-		98DA96FE2ADFA6DE000DDAFA /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98DA96FD2ADFA6DE000DDAFA /* Secret.plist */; };
 		98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96FF2ADFA715000DDAFA /* Bundle+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +87,6 @@
 		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
 		98DA96F92ADFA585000DDAFA /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WritingView+Feature.swift"; sourceTree = "<group>"; };
-		98DA96FD2ADFA6DE000DDAFA /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
 		98DA96FF2ADFA715000DDAFA /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,7 +135,6 @@
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
-				98DA96FD2ADFA6DE000DDAFA /* Secret.plist */,
 				79407D582AD7E68E006C7571 /* Preview Content */,
 				79AF69432ADCC2390064E410 /* Util */,
 				79AF69422ADCC1360064E410 /* Data */,
@@ -337,7 +334,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98DA96FE2ADFA6DE000DDAFA /* Secret.plist in Resources */,
 				79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */,
 				79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */,
 			);
