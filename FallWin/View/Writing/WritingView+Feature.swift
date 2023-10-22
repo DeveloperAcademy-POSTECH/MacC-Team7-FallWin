@@ -12,30 +12,31 @@ import SwiftUI
 struct WritingFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String?
-        var navPath: NavigationPath = .init()
+        @PresentationState var mainText: MainTextFeature.State?
     }
     
     enum Action: Equatable {
         case emotionSelection(_ selectedEmotion: String?)
-        case appendNavPath(_ navPathState: NavPathState)
-        case clearNavPath
+        case showMainTextView(_ selectedEmotion: String?)
+        case mainText(PresentationAction<MainTextFeature.Action>)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        case let .emotionSelection(selectedEmotion):
-            state.selectedEmotion = selectedEmotion
-            return .none
-            
-        case let .appendNavPath(navPathState):
-            state.navPath.append(navPathState)
-            return .none
-            
-        case .clearNavPath:
-            state.navPath = .init()
-            return .none
-            
-        default: return .none
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case let .emotionSelection(selectedEmotion):
+                state.selectedEmotion = selectedEmotion
+                return .none
+                
+            case let .showMainTextView(emotion):
+                state.mainText = .init(selectedEmotion: emotion ?? "")
+                return .none
+                
+            default: return .none
+            }
+        }
+        .ifLet(\.$mainText, action: /Action.mainText) {
+            MainTextFeature()
         }
     }
 }

@@ -13,8 +13,105 @@ struct DrawingStyleView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Text("selectedEmotion: \(viewStore.selectedEmotion)")
-            Text("selectedEmotion: \(viewStore.mainText)")
+                ZStack {
+                    Color.backgroundPrimary
+                    VStack {
+                        DateView()
+                        MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
+                        ScrollView() {
+                            generateDrawingStyleView()
+                                .padding()
+                        }
+                        Button {
+                            viewStore.send(.showGeneratedDiaryView)
+                            
+                        } label: {
+                            Text("다음")
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
+                                .background(Color.button)
+                                .cornerRadius(12)
+                                .foregroundColor(Color.white)
+                        }
+                        .disabled(viewStore.selectedDrawingStyle == nil)
+                    }
+                    .padding()
+                }
+                .navigationTitle(Text("일기 쓰기"))
+                .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
+                    GeneratedDiaryView(store: store)
+                })
+        }
+    }
+    
+    @ViewBuilder
+    func generateDrawingStyleView() -> some View {
+        
+        let drawingStyles: [(String, Color, Image)] = [
+            ("minimalism", Color.emotionHappy, Image("IconHappy")),
+            ("sketch", Color.emotionNervous, Image("IconNervous")),
+            ("comics", Color.emotionGrateful, Image("IconGrateful")),
+            ("digital art", Color.emotionSad, Image("IconSad"))
+        ]
+        
+        let cardWidth: CGFloat = UIScreen.main.bounds.width * 0.4
+        
+        WithViewStore(store , observe: { $0 }) { viewStore in
+            VStack {
+                ForEach(0..<4) { idx in
+                    if idx % 2 == 0 {
+                        HStack {
+                            Spacer()
+                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx])
+                                .frame(width: cardWidth, height: cardWidth)
+                                .onTapGesture(perform: {
+                                    if viewStore.selectedDrawingStyle == drawingStyles[idx].0 {
+                                        viewStore.send(.selectDrawingStyle(nil))
+                                    } else {
+                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx].0))
+                                    }
+                                })
+                            Spacer()
+                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx+1])
+                                .frame(width: cardWidth, height: cardWidth)
+                                .onTapGesture(perform: {
+                                    if viewStore.selectedDrawingStyle == drawingStyles[idx+1].0 {
+                                        viewStore.send(.selectDrawingStyle(nil))
+                                    } else {
+                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx+1].0))
+                                    }
+                                })
+                            Spacer()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image)) -> some View {
+        
+        WithViewStore(store, observe: {$0}) { viewStore in
+            GeometryReader { geo in
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(viewStore.selectedDrawingStyle == drawingStyle.0 ? drawingStyle.1 : Color.black, lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 0)
+                    .fill(Color.backgroundPrimary)
+                    .shadow(radius: 2)
+                    .frame(width: geo.size.width, height: geo.size.width)
+                    .overlay(
+                        VStack {
+                            drawingStyle.2
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: geo.size.width/2, height: geo.size.width/2)
+                            Text(drawingStyle.0)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundStyle(.textPrimary)
+                        }
+                    )
+                    .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))
+            }
         }
     }
 }

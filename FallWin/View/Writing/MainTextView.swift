@@ -12,7 +12,6 @@ struct MainTextView: View {
     var store: StoreOf<MainTextFeature>
     @State var mainText: String = ""
     @FocusState var isFocused: Bool
-    @Binding var navPath: NavigationPath
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -40,7 +39,9 @@ struct MainTextView: View {
                         .onAppear() {
                             isFocused = true
                         }
-                    NavigationLink(value: viewStore.mainText) {
+                    Button {
+                        viewStore.send(.showDrawingStyleView)
+                    } label: {
                         Text("다음")
                             .font(.system(size: 18, weight: .semibold))
                             .frame(width: UIScreen.main.bounds.width-30, height: 60)
@@ -48,14 +49,13 @@ struct MainTextView: View {
                             .cornerRadius(12)
                             .foregroundColor(Color.white)
                     }
-                    .navigationDestination(for: String.self) { mainText in
-                        DrawingStyleView(store: Store(initialState: DrawingStyleFeature.State(selectedEmotion: viewStore.selectedEmotion, mainText: mainText), reducer: {
-                            DrawingStyleFeature()
-                        }))
-                    }
                 }
                 .padding()
             }
+            .navigationTitle(Text("일기 쓰기"))
+            .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
+                DrawingStyleView(store: store)
+            })
         }
     }
 }
@@ -68,8 +68,8 @@ struct MessageMainTextView: View {
     }
 }
 
-#Preview {
-    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한", navPath: NavigationPath([NavPathState.mainText]))) {
-        MainTextFeature()
-    }, navPath: .constant(NavigationPath([NavPathState.mainText])))
-}
+//#Preview {
+//    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한", navPath: NavigationPath([NavPathState.mainText]))) {
+//        MainTextFeature()
+//    }, navPath: .constant(NavigationPath([NavPathState.mainText])))
+//}

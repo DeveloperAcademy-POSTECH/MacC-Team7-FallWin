@@ -38,10 +38,17 @@ struct GalleryView: View {
                 
                 writingActionButton
                     .padding()
+                    .navigationDestination(store: store.scope(state: \.$writing, action: GalleryFeature.Action.writing)) { store in
+                        WritingView(store: store)
+                            .onAppear {
+                                viewStore.send(.hideTabBar(true))
+                            }
+                    }
             }
             .onAppear {
                 viewStore.send(.fetchAll)
                 viewStore.send(.setCarouselIndex(viewStore.journals.count - 1))
+                viewStore.send(.hideTabBar(false))
             }
             .fullScreenCover(store: store.scope(state: \.$journal, action: GalleryFeature.Action.journal)) { store in
                 NavigationStack {
@@ -59,6 +66,7 @@ struct GalleryView: View {
                 HStack {
                     Spacer()
                     Button {
+                        viewStore.send(.showWritingView)
                         
                     } label: {
                         Image(systemName: "pencil")

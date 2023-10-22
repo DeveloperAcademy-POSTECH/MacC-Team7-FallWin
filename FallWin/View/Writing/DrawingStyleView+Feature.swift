@@ -12,16 +12,34 @@ struct DrawingStyleFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String
         var mainText: String
+        var selectedDrawingStyle: String?
+        @PresentationState var generatedDiary: GeneratedDiaryFeature.State?
     }
     
     enum Action: Equatable {
-        
+        case selectDrawingStyle(_ selectedDrawingStyle: String?)
+        case showGeneratedDiaryView
+        case generatedDiary(PresentationAction<GeneratedDiaryFeature.Action>)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-            
-        default: return .none
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case let .selectDrawingStyle(style):
+                state.selectedDrawingStyle = style
+                return .none
+                
+            case .showGeneratedDiaryView:
+                if let selectedDrawingStyle = state.selectedDrawingStyle {
+                    state.generatedDiary = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText, selectedDrawingStyle: selectedDrawingStyle)
+                }
+                return .none
+                
+            default: return .none
+            }
+        }
+        .ifLet(\.$generatedDiary, action: /Action.generatedDiary) {
+            GeneratedDiaryFeature()
         }
     }
 }

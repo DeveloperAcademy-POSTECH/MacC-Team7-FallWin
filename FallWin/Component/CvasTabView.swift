@@ -16,8 +16,20 @@ enum TabItem {
 
 struct TabBarItem: Equatable, Hashable {
     var title: String
-    var image: String
+    private var _enabledImage: String
+    private var _disabledImage: String
     var tabItem: TabItem
+    
+    func getStateImage(enabled: Bool) -> String {
+        enabled ? _enabledImage : _disabledImage
+    }
+    
+    init(title: String, enabledImage: String, disabledImage: String? = nil, tabItem: TabItem) {
+        self.title = title
+        self._enabledImage = enabledImage
+        self._disabledImage = disabledImage ?? enabledImage
+        self.tabItem = tabItem
+    }
 }
 
 struct CvasTabItemPreferenceKey: PreferenceKey {
@@ -47,11 +59,13 @@ extension View {
 
 struct CvasTabView<Content>: View where Content: View {
     @Binding private var selection: TabItem
+    @Binding private var hideTabBar: Bool
     @State private var tabItems: [TabBarItem] = []
     private let content: Content
     
-    init(selection: Binding<TabItem>, @ViewBuilder _ content: @escaping () -> Content) {
+    init(selection: Binding<TabItem>, hideTabBar: Binding<Bool> = .constant(false), @ViewBuilder _ content: @escaping () -> Content) {
         self._selection = selection
+        self._hideTabBar = hideTabBar
         self.content = content()
     }
     
@@ -62,9 +76,12 @@ struct CvasTabView<Content>: View where Content: View {
             VStack {
                 Spacer()
                 tabBar
+                    .offset(y: hideTabBar ? 100 : 0)
+                    .animation(.easeInOut, value: hideTabBar)
             }
             .padding(0)
         }
+        .background(Colors.backgroundPrimary.color().ignoresSafeArea())
         .onPreferenceChange(CvasTabItemPreferenceKey.self) { value in
             self.tabItems = value
         }
@@ -74,24 +91,26 @@ struct CvasTabView<Content>: View where Content: View {
         HStack {
             Spacer()
             ForEach(tabItems, id: \.self) { tabItem in
-                //  Label(tabItem.title, image: tabItem.image)
+                Spacer()
+                Spacer()
                 Label {
                     Text(tabItem.title)
                         .font(.system(size: 11))
                 } icon: {
-                    Image(systemName: "person.circle")
+                    Image(tabItem.getStateImage(enabled: selection == tabItem.tabItem))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
                 }
                 .labelStyle(TabBarLabelStyle())
                 .foregroundStyle(Colors.tabBarItem.color())
-                .opacity(selection == tabItem.tabItem ? 1 : 0.5)
                 .onTapGesture {
                     selection = tabItem.tabItem
                 }
                 Spacer()
+                Spacer()
             }
+            Spacer()
         }
         .frame(height: CvasTabViewValue.tabBarHeight)
         .background(
@@ -105,16 +124,4 @@ struct CvasTabView<Content>: View where Content: View {
 
 final class CvasTabViewValue {
     static let tabBarHeight: CGFloat = 63
-}
-
-#Preview {
-    CvasTabView(selection: .constant(.gallery)) {
-        Rectangle()
-            .fill(.gray)
-            .tabItem(.init(title: "갤러리", image: "", tabItem: .gallery), selection: .constant(.gallery))
-        
-        Rectangle()
-            .fill(.black)
-            .tabItem(.init(title: "프로필", image: "", tabItem: .profile), selection: .constant(.gallery))
-    }
 }

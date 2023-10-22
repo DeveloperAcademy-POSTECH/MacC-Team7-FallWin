@@ -13,30 +13,32 @@ struct MainTextFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String
         var mainText: String?
-        var navPath: NavigationPath
+        @PresentationState var drawingStyle: DrawingStyleFeature.State?
     }
     
     enum Action: Equatable {
         case inputMainText(_ mainText: String?)
-        case appendNavPath(_ navPathState: NavPathState)
-        case clearNavPath
+        case showDrawingStyleView
+        case drawingStyle(PresentationAction<DrawingStyleFeature.Action>)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        case let .inputMainText(mainText):
-            state.mainText = mainText
-            return .none
-            
-        case let .appendNavPath(navPathState):
-            state.navPath.append(navPathState)
-            return .none
-            
-        case .clearNavPath:
-            state.navPath = .init()
-            return .none
-            
-        default: return .none
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case let .inputMainText(mainText):
+                state.mainText = mainText
+                return .none
+                
+            case .showDrawingStyleView:
+                state.drawingStyle = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText ?? "")
+                return .none
+                
+            default: return .none
+            }
+        }
+        .ifLet(\.$drawingStyle, action: /Action.drawingStyle) {
+            DrawingStyleFeature()
         }
     }
 }

@@ -23,8 +23,8 @@ import ComposableArchitecture
 struct FallWinApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(store: Store(initialState: WritingFeature.State(), reducer: {
-                WritingFeature()
+            ContentView(store: Store(initialState: Feature.State(), reducer: {
+                Feature()
             }))
         }
     }
