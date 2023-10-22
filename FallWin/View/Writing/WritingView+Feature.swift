@@ -29,7 +29,7 @@ struct WritingFeature: Reducer {
                 return .none
                 
             case let .showMainTextView(emotion):
-                state.mainText = .init(selectedEmotion: emotion ?? "")
+                state.mainText = .init(selectedEmotion: emotion ?? "", mainText: "")
                 return .none
                 
             default: return .none
