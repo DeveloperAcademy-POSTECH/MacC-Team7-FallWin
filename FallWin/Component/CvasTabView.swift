@@ -81,6 +81,7 @@ struct CvasTabView<Content>: View where Content: View {
             }
             .padding(0)
         }
+        .ignoresSafeArea(.keyboard)
         .background(Colors.backgroundPrimary.color().ignoresSafeArea())
         .onPreferenceChange(CvasTabItemPreferenceKey.self) { value in
             self.tabItems = value

@@ -24,11 +24,10 @@ struct GalleryView: View {
                             // OnPageChanged
                             
                         } _: { journal in
-                            Button {
-                                viewStore.send(.showJournalView(journal))
-                            } label: {
-                                journalCell(journal: journal)
-                            }
+                            journalCell(journal: journal)
+                                .onTapGesture {
+                                    viewStore.send(.showJournalView(journal))
+                                }
                         }
                         .aspectRatio(0.7, contentMode: .fit)
                         
