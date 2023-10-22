@@ -47,6 +47,11 @@
 		98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F92ADFA585000DDAFA /* WritingView.swift */; };
 		98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */; };
 		98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96FF2ADFA715000DDAFA /* Bundle+Extension.swift */; };
+		98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A7E2AE4E18100FEE4D2 /* DrawingStyleView.swift */; };
+		98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A802AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift */; };
+		98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A822AE5308200FEE4D2 /* WritingPathState.swift */; };
+		98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */; };
+		98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +93,11 @@
 		98DA96F92ADFA585000DDAFA /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WritingView+Feature.swift"; sourceTree = "<group>"; };
 		98DA96FF2ADFA715000DDAFA /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		98F70A7E2AE4E18100FEE4D2 /* DrawingStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStyleView.swift; sourceTree = "<group>"; };
+		98F70A802AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingStyleView+Feature.swift"; sourceTree = "<group>"; };
+		98F70A822AE5308200FEE4D2 /* WritingPathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPathState.swift; sourceTree = "<group>"; };
+		98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedDiaryView.swift; sourceTree = "<group>"; };
+		98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedDiaryView+Feature.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +183,7 @@
 				791F14672ADD726600F8DDD2 /* RoundedShape.swift */,
 				791F14692ADD736B00F8DDD2 /* TabBarLabelStyle.swift */,
 				794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */,
+				98F70A822AE5308200FEE4D2 /* WritingPathState.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -264,6 +275,10 @@
 				98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */,
 				9814C31D2AE01F2600FD0E30 /* MainTextView.swift */,
 				9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */,
+				98F70A7E2AE4E18100FEE4D2 /* DrawingStyleView.swift */,
+				98F70A802AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift */,
+				98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */,
+				98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */,
 			);
 			path = Writing;
 			sourceTree = "<group>";
@@ -358,6 +373,7 @@
 				98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */,
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				79E5B2CC2ADD4FE900A86770 /* SurfView.swift in Sources */,
+				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
 				79E5B2C82ADD4FD900A86770 /* GalleryView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
@@ -373,14 +389,18 @@
 				791F14792AE0D8A400F8DDD2 /* JournalView.swift in Sources */,
 				791F146A2ADD736B00F8DDD2 /* TabBarLabelStyle.swift in Sources */,
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
+				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
 				98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */,
+				98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */,
 				791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
+				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
 				791F14702ADD8CF900F8DDD2 /* SurfView+Feature.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
+				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

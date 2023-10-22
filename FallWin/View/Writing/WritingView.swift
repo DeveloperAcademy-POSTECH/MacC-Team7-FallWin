@@ -10,10 +10,10 @@ import ComposableArchitecture
 
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
+//    @State var navPath: NavigationPath = .init()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            NavigationStack {
                 ZStack {
                     Color.backgroundPrimary
                     VStack {
@@ -23,7 +23,10 @@ struct WritingView: View {
                             generateEmotionView()
                                 .padding()
                         }
-                        NavigationLink(value: viewStore.selectedEmotion) {
+                        Button {
+                            viewStore.send(.showMainTextView(viewStore.selectedEmotion))
+                            
+                        } label: {
                             Text("다음")
                                 .font(.system(size: 18, weight: .semibold))
                                 .frame(width: UIScreen.main.bounds.width-30, height: 60)
@@ -31,16 +34,25 @@ struct WritingView: View {
                                 .cornerRadius(12)
                                 .foregroundColor(Color.white)
                         }
-                        .navigationTitle(Text("일기 쓰기"))
-                        .navigationDestination(for: String.self) { emotion in
-                            MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: emotion), reducer: {
-                                MainTextFeature()
-                            }))
+                        .disabled(viewStore.selectedEmotion == nil)
+                        
+                        Button {
+                            viewStore.send(.showMainTextView(nil))
+                        } label: {
+                            Text("건너뛰기")
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
+                                .background(Color.button)
+                                .cornerRadius(12)
+                                .foregroundColor(Color.white)
                         }
                     }
                     .padding()
                 }
-            }
+                .navigationTitle(Text("일기 쓰기"))
+                .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
+                    MainTextView(store: store)
+                })
         }
     }
     

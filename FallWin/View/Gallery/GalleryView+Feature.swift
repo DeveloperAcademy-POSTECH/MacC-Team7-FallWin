@@ -67,7 +67,7 @@ struct GalleryFeature: Reducer {
                 return .none
                 
             case .showWritingView:
-                state.writing = .init()
+                state.writing = WritingFeature.State()
                 return .none
                 
             default: return .none
