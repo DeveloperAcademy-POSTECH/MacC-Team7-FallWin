@@ -33,7 +33,6 @@ extension Journal {
 }
 
 extension Journal : Identifiable {
-
 }
 
 extension Journal {

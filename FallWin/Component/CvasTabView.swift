@@ -74,14 +74,14 @@ struct CvasTabView<Content>: View where Content: View {
         HStack {
             Spacer()
             ForEach(tabItems, id: \.self) { tabItem in
-                //                    Label(tabItem.title, image: tabItem.image)
                 Label {
                     Text(tabItem.title)
+                        .font(.system(size: 11))
                 } icon: {
-                    Image(systemName: "person.circle")
+                    Image(tabItem.image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 36)
+                        .frame(width: 24)
                 }
                 .labelStyle(TabBarLabelStyle())
                 .foregroundStyle(Colors.tabBarItem.color())
@@ -92,7 +92,7 @@ struct CvasTabView<Content>: View where Content: View {
                 Spacer()
             }
         }
-        .padding(.top, 16)
+        .frame(height: CvasTabViewValue.tabBarHeight)
         .background(
             Rectangle()
                 .fill(Colors.tabBar.color())
@@ -100,6 +100,10 @@ struct CvasTabView<Content>: View where Content: View {
                 .ignoresSafeArea()
         )
     }
+}
+
+final class CvasTabViewValue {
+    static let tabBarHeight: CGFloat = 63
 }
 
 #Preview {

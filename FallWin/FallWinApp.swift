@@ -18,3 +18,14 @@ struct FallWinApp: App {
         }
     }
 }
+
+//@main
+//struct FallWinApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            ContentView(store: Store(initialState: WritingFeature.State(), reducer: {
+//                WritingFeature()
+//            }))
+//        }
+//    }
+//}

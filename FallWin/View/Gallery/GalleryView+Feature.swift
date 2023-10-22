@@ -12,16 +12,61 @@ import ComposableArchitecture
 
 struct GalleryFeature: Reducer {
     struct State: Equatable {
+        var journals: [Journal] = []
+        var carouselIndex: Int = 0
+        var date: Date = Date()
+        var hasNextMonth: Bool {
+            date.year <= Date().year && date.month < Date().month
+        }
         
+        @PresentationState var journal: JournalFeature.State?
     }
     
     enum Action: Equatable {
+        case fetchAll
+        case setCarouselIndex(Int)
+        case prevMonth
+        case nextMonth
+        case showJournalView(Journal)
         
+        case journal(PresentationAction<JournalFeature.Action>)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        default: return .none
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .fetchAll:
+                let context = PersistenceController.debug.container.viewContext
+                do {
+                    let fetchRequest = NSFetchRequest<Journal>(entityName: "Journal")
+                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
+                    state.journals = try context.fetch(fetchRequest)
+                } catch {
+                    print(#function, error)
+                }
+                return .none
+                
+            case let .setCarouselIndex(index):
+                state.carouselIndex = index
+                return .none
+                
+            case .prevMonth:
+                state.date = Calendar.current.date(byAdding: .month, value: -1, to: state.date) ?? Date()
+                return .none
+                
+            case .nextMonth:
+                state.date = Calendar.current.date(byAdding: .month, value: 1, to: state.date) ?? Date()
+                return .none
+                
+            case let .showJournalView(journal):
+                state.journal = .init(journal: journal)
+                return .none
+                
+            default: return .none
+            }
+        }
+        .ifLet(\.$journal, action: /Action.journal) {
+            JournalFeature()
         }
     }
 }
