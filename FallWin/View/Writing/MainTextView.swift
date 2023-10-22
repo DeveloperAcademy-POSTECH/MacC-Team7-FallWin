@@ -44,11 +44,12 @@ struct MainTextView: View {
                     } label: {
                         Text("다음")
                             .font(.system(size: 18, weight: .semibold))
-                            .frame(width: UIScreen.main.bounds.width-30, height: 60)
-                            .background(Color.button)
-                            .cornerRadius(12)
+                            .frame(width: UIScreen.main.bounds.width-24, height: 45)
+                            .background(viewStore.mainText == "" ? Color.buttonDisabled : Color.button)
+                            .cornerRadius(9)
                             .foregroundColor(Color.white)
                     }
+                    .disabled(viewStore.mainText == "")
                 }
                 .padding()
             }
