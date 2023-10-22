@@ -20,6 +20,7 @@ struct GalleryFeature: Reducer {
         }
         
         @PresentationState var journal: JournalFeature.State?
+        @PresentationState var writing: WritingFeature.State?
     }
     
     enum Action: Equatable {
@@ -28,8 +29,11 @@ struct GalleryFeature: Reducer {
         case prevMonth
         case nextMonth
         case showJournalView(Journal)
+        case showWritingView
+        case hideTabBar(Bool)
         
         case journal(PresentationAction<JournalFeature.Action>)
+        case writing(PresentationAction<WritingFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -62,11 +66,18 @@ struct GalleryFeature: Reducer {
                 state.journal = .init(journal: journal)
                 return .none
                 
+            case .showWritingView:
+                state.writing = .init()
+                return .none
+                
             default: return .none
             }
         }
         .ifLet(\.$journal, action: /Action.journal) {
             JournalFeature()
+        }
+        .ifLet(\.$writing, action: /Action.writing) {
+            WritingFeature()
         }
     }
 }
