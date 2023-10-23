@@ -50,9 +50,7 @@ struct GalleryView: View {
                 viewStore.send(.hideTabBar(false))
             }
             .fullScreenCover(store: store.scope(state: \.$journal, action: GalleryFeature.Action.journal)) { store in
-                NavigationStack {
-                    JournalView(store: store)
-                }
+                JournalView(store: store)
             }
         }
         .padding(.bottom, CvasTabViewValue.tabBarHeight)

@@ -17,14 +17,34 @@ struct JournalView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 CollapsingScrollView {
-                    if let image = viewStore.journal.wrappedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                    } else {
-                        Rectangle()
-                            .fill(.blue)
-                            .aspectRatio(1, contentMode: .fit)
+                    ZStack(alignment: .bottomTrailing) {
+                        if let image = viewStore.journal.wrappedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                        } else {
+                            Rectangle()
+                                .fill(.blue)
+                                .aspectRatio(1, contentMode: .fit)
+                        }
+                        if let mind = Mind(rawValue: viewStore.journal.mind)?.string() {
+                            HStack(spacing: 0) {
+                                Image("IconHappy")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 36, height: 36)
+                                Text(mind)
+                            }
+                            .padding(.horizontal, 16)
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 18)
+                            )
+                            .background(
+                                RoundedRectangle(cornerRadius: 18)
+                                    .fill(.white)
+                            )
+                            .padding(16)
+                        }
                     }
                 } content: {
                     VStack(spacing: 9) {

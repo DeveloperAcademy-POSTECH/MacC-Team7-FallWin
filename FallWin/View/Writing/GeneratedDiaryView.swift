@@ -22,19 +22,20 @@ struct GeneratedDiaryView: View {
     ]
     
     let emotionToEnglish: [String: String] = [
-        "행복한": "Happy",
-        "감사한": "Grateful",
-        "슬픈": "Sad",
-        "신나는": "Joyful",
-        "외로운": "Lonely",
-        "뿌듯한": "Proud",
-        "답답한": "Suffocated",
-        "감동받은": "Touched",
-        "부끄러운": "Shy",
-        "기대되는": "Exciting",
-        "귀찮은": "Lazy",
-        "짜증나는": "Annoyed",
-        "당황한": "Frustrated"
+        "happy": "Happy",
+        "nervous": "Nervous",
+        "grateful": "Grateful",
+        "sad": "Sad",
+        "joyful": "Joyful",
+        "lonely": "Lonely",
+        "proud": "Proud",
+        "suffocated": "Suffocated",
+        "touched": "Touched",
+        "shy": "Shy",
+        "exciting": "Exciting",
+        "lazy": "Lazy",
+        "annoyed": "Annoyed",
+        "frustrated": "Frustrated"
     ]
 
     

@@ -70,20 +70,20 @@ struct WritingView: View {
     func generateEmotionView() -> some View {
         
         let emotions: [(String, Color, Image)] = [
-            ("행복한", Color.emotionHappy, Image("IconHappy")),
-            ("불안한", Color.emotionNervous, Image("IconNervous")),
-            ("감사한", Color.emotionGrateful, Image("IconGrateful")),
-            ("슬픈", Color.emotionSad, Image("IconSad")),
-            ("신나는", Color.emotionJoyful, Image("IconJoyful")),
-            ("외로운", Color.emotionLonely, Image("IconLonely")),
-            ("뿌듯한", Color.emotionProud, Image("IconProud")),
-            ("답답한", Color.emotionSuffocated, Image("IconSuffocated")),
-            ("감동받은", Color.emotionTouched, Image("IconTouched")),
-            ("부끄러운", Color.emotionShy, Image("IconShy")),
-            ("기대되는", Color.emotionExciting, Image("IconExciting")),
-            ("귀찮은", Color.emotionLazy, Image("IconLazy")),
-            ("짜증나는", Color.emotionAnnoyed, Image("IconAnnoyed")),
-            ("당황한", Color.emotionFrustrated, Image("IconFrustrated"))
+            ("happy", Color.emotionHappy, Image("IconHappy")),
+            ("nervous", Color.emotionNervous, Image("IconNervous")),
+            ("grateful", Color.emotionGrateful, Image("IconGrateful")),
+            ("sad", Color.emotionSad, Image("IconSad")),
+            ("joyful", Color.emotionJoyful, Image("IconJoyful")),
+            ("lonely", Color.emotionLonely, Image("IconLonely")),
+            ("proud", Color.emotionProud, Image("IconProud")),
+            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated")),
+            ("touched", Color.emotionTouched, Image("IconTouched")),
+            ("shy", Color.emotionShy, Image("IconShy")),
+            ("exciting", Color.emotionExciting, Image("IconExciting")),
+            ("lazy", Color.emotionLazy, Image("IconLazy")),
+            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed")),
+            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"))
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -107,12 +107,29 @@ struct WritingView: View {
     
     @ViewBuilder
     func generateEmotionCardView(emotion: (String, Color, Image)) -> some View {
+        let emotionTexts: [String : String] = [
+            "happy" : "행복한",
+            "nervous" : "불안한",
+            "grateful" : "감사한",
+            "sad" : "슬픈",
+            "joyful" : "신나는",
+            "lonely" : "외로운",
+            "proud" : "뿌듯함",
+            "suffocated" : "답답함",
+            "touched" : "감동받은",
+            "shy" : "부끄러운",
+            "exciting" : "기대되는",
+            "lazy" : "귀찮은",
+            "annoyed" : "짜증나는",
+            "frustrated" : "당황한"
+        ]
+        
         WithViewStore(store, observe: {$0}) { viewStore in
             HStack {
                 Spacer()
                 VStack(spacing: 24) {
                     emotion.2
-                    Text(emotion.0)
+                    Text(emotionTexts[emotion.0]!)
                         .font(.pretendard(.medium, size: 18))
                         .foregroundColor(Color.textPrimary)
                 }

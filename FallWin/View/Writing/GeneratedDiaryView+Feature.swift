@@ -38,7 +38,7 @@ struct GeneratedDiaryFeature: Reducer {
             let context = PersistenceController.shared.container.viewContext
             let journal = Journal(context: context)
             journal.content = state.mainText
-            journal.mind = 0
+            journal.mind = getMind(mind: state.selectedEmotion).rawValue
             if let image = state.image {
                 journal.setImage(image)
             }
@@ -48,6 +48,55 @@ struct GeneratedDiaryFeature: Reducer {
             return .send(.doneImage(journal))
             
         default: return .none
+        }
+    }
+    
+    private func getMind(mind: String) -> Mind {
+        switch mind {
+        case "happy":
+            return Mind.happy
+            
+        case "nervous":
+            return .nervous
+            
+        case "grateful":
+            return .grateful
+            
+        case "sad":
+            return .sad
+            
+        case "joyful":
+            return .joyful
+            
+        case "lonely":
+            return .lonely
+            
+        case "proud":
+            return .proud
+            
+        case "suffocated":
+            return .suffocated
+            
+        case "touched":
+            return .touched
+            
+        case "shy":
+            return .shy
+            
+        case "exciting":
+            return .exciting
+            
+        case "lazy":
+            return .lazy
+            
+        case "annoyed":
+            return .annoyed
+            
+        case "frustrated":
+            return .frustrated
+            
+        default:
+            return .none
         }
     }
 }
