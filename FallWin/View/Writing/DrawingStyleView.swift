@@ -24,7 +24,7 @@ struct DrawingStyleView: View {
                             
                         } label: {
                             Text("다음")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.pretendard(.semiBold, size: 18))
                                 .frame(width: UIScreen.main.bounds.width-24, height: 45)
                                 .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
                                 .cornerRadius(9)
@@ -120,7 +120,7 @@ struct DrawingStyleView: View {
                     )
                     .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ? 24 : 8)
                 Text(drawingStyle.0)
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)
             }
             .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))

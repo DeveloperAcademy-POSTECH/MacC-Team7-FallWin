@@ -31,7 +31,8 @@ struct JournalView: View {
                         if let date = viewStore.journal.timestamp {
                             HStack {
                                 Text(String(format: "%d년 %02d월 %02d일", date.year, date.month, date.day))
-                                    .font(.system(size: 22).bold())
+                                    .font(.pretendard(.bold, size: 22))
+                                    .foregroundStyle(Color.textPrimary)
                                 Spacer()
                             }
                         }
@@ -39,6 +40,8 @@ struct JournalView: View {
                         if let content = viewStore.journal.content {
                             HStack {
                                 Text(content)
+                                    .font(.pretendard(.medium, size: 18))
+                                    .foregroundStyle(Color.textSecondary)
                                     .multilineTextAlignment(.leading)
                                 Spacer()
                             }

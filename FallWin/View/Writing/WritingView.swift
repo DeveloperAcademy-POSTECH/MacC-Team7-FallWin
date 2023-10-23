@@ -30,7 +30,7 @@ struct WritingView: View {
                             viewStore.send(.showMainTextView(nil))
                         } label: {
                             Text("건너뛰기")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.pretendard(.semiBold, size: 18))
                                 .frame(width: UIScreen.main.bounds.width * 0.16, height: 45)
                                 .background(Color.backgroundPrimary)
                                 .foregroundColor(Color.textSecondary)
@@ -42,7 +42,7 @@ struct WritingView: View {
                             
                         } label: {
                             Text("다음")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.pretendard(.semiBold, size: 18))
                                 .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
                                 .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
                                 .cornerRadius(9)
@@ -113,6 +113,8 @@ struct WritingView: View {
                 VStack(spacing: 24) {
                     emotion.2
                     Text(emotion.0)
+                        .font(.pretendard(.medium, size: 18))
+                        .foregroundColor(Color.textPrimary)
                 }
                 Spacer()
             }
@@ -141,7 +143,7 @@ struct DateView: View {
         HStack {
             Text("<")
             Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
-                .font(.system(size: 20, weight: .semibold))
+                .font(.pretendard(.semiBold, size: 20))
                 .foregroundStyle(.textPrimary)
             Text(">")
         }
@@ -155,12 +157,13 @@ struct MessageView: View {
     var body: some View {
         VStack(spacing: 12) {
             Text(titleText)
-                .font(.system(size: 24, weight: .bold))
+                .font(.pretendard(.bold, size: 24))
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)
             if let subTitleText = subTitleText {
                 Text(subTitleText)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.pretendard(.medium, size: 18))
+                    .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(.textSecondary)
             }
         }

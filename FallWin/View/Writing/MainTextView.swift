@@ -26,7 +26,7 @@ struct MainTextView: View {
                     Spacer()
                         .frame(height: 15)
                     TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0 ?? "")}))
-                        .font(.system(size: 18, weight: .medium))
+                        .font(.pretendard(.medium, size: 18))
                         .foregroundColor(.textPrimary)
                         .focused($isFocused)
                         .padding(9)
@@ -43,7 +43,7 @@ struct MainTextView: View {
                         viewStore.send(.showDrawingStyleView)
                     } label: {
                         Text("다음")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.pretendard(.semiBold, size: 18))
                             .frame(width: UIScreen.main.bounds.width-24, height: 45)
                             .background(viewStore.mainText == "" ? Color.buttonDisabled : Color.button)
                             .cornerRadius(9)
@@ -64,7 +64,7 @@ struct MainTextView: View {
 struct MessageMainTextView: View {
     var body: some View {
         Text("오늘 하루는 어땠나요?")
-            .font(.system(size: 24, weight: .bold))
+            .font(.pretendard(.bold, size: 24))
             .foregroundStyle(.textPrimary)
     }
 }

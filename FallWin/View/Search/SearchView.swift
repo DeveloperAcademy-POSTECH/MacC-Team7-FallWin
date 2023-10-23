@@ -24,7 +24,7 @@ struct SearchView: View {
                                 if !searchResults.isEmpty {
                                     Section(header: HStack {
                                         Text(key)
-                                            .font(Font.custom("Pretendard", size: 20).weight(.semibold))
+                                            .font(.pretendard(.semiBold, size: 20))
                                         Spacer()
                                     }
                                         .padding(.vertical, 12)
