@@ -19,7 +19,7 @@ struct MainTextFeature: Reducer {
     enum Action: Equatable {
         case inputMainText(_ mainText: String?)
         case showDrawingStyleView
-        case doneGenerating
+        case doneGenerating(Journal)
         case drawingStyle(PresentationAction<DrawingStyleFeature.Action>)
     }
     
@@ -35,8 +35,8 @@ struct MainTextFeature: Reducer {
                 state.drawingStyle = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText ?? "")
                 return .none
                 
-            case .drawingStyle(.presented(.doneGenerating)):
-                return .send(.doneGenerating)
+            case .drawingStyle(.presented(.doneGenerating(let journal))):
+                return .send(.doneGenerating(journal))
                 
             default: return .none
             }

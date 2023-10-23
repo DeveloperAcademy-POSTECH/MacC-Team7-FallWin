@@ -21,6 +21,7 @@ struct GeneratedDiaryFeature: Reducer {
         case selectDrawingStyle(_ selectedDrawingStyle: String)
         case setImage(UIImage)
         case doneGenerating
+        case doneImage(Journal)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -44,7 +45,7 @@ struct GeneratedDiaryFeature: Reducer {
             journal.timestamp = Date()
             context.insert(journal)
             PersistenceController.shared.saveContext()
-            return .none
+            return .send(.doneImage(journal))
             
         default: return .none
         }

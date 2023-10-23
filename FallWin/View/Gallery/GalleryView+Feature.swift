@@ -31,7 +31,7 @@ struct GalleryFeature: Reducer {
         case showJournalView(Journal)
         case showWritingView
         case hideTabBar(Bool)
-        case doneGenerating
+        case doneGenerating(Journal)
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -67,6 +67,9 @@ struct GalleryFeature: Reducer {
                 state.journal = .init(journal: journal)
                 return .none
                 
+            case let .doneGenerating(journal):
+                return .send(.showJournalView(journal))
+                
             case .showWritingView:
                 state.writing = WritingFeature.State()
                 return .none
@@ -87,9 +90,9 @@ struct GalleryFeature: Reducer {
     
     private func handleWritingAction(state: inout State, action: PresentationAction<WritingFeature.Action>) -> Effect<Action> {
         switch action {
-        case .presented(.doneGenerating):
+        case .presented(.doneGenerating(let journal)):
             state.writing = nil
-            return .send(.fetchAll)
+            return .send(.doneGenerating(journal))
             
         default: return .none
         }
