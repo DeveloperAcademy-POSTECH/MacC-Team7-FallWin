@@ -102,37 +102,6 @@ struct WritingView: View {
                 }
                 .padding()
             }
-            
-            
-            //            VStack {
-            //                ForEach(0..<14) { idx in
-            //                    if idx % 2 == 0 {
-            //                        HStack {
-            //                            Spacer()
-            //                            generateEmotionCardView(emotion: emotions[idx])
-            //                                .frame(width: cardWidth, height: cardWidth)
-            //                                .onTapGesture(perform: {
-            //                                    if viewStore.selectedEmotion == emotions[idx].0 {
-            //                                        viewStore.send(.emotionSelection(nil))
-            //                                    } else {
-            //                                        viewStore.send(.emotionSelection(emotions[idx].0))
-            //                                    }
-            //                                })
-            //                            Spacer()
-            //                            generateEmotionCardView(emotion: emotions[idx+1])
-            //                                .frame(width: cardWidth, height: cardWidth)
-            //                                .onTapGesture(perform: {
-            //                                    if viewStore.selectedEmotion == emotions[idx+1].0 {
-            //                                        viewStore.send(.emotionSelection(nil))
-            //                                    } else {
-            //                                        viewStore.send(.emotionSelection(emotions[idx+1].0))
-            //                                    }
-            //                                })
-            //                            Spacer()
-            //                        }
-            //                    }
-            //                }
-            //            }
         }
     }
     
@@ -150,10 +119,16 @@ struct WritingView: View {
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.backgroundPrimary)
+                    .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.clear, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0)
+                    .background {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.backgroundPrimary)
+                    }
                     .aspectRatio(1, contentMode: .fill)
-                    .shadow(color: Color(hexCode: "#191919").opacity(0.1), radius: 6)
+                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0.1), radius: 6)
+
             }
+            .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
             .padding(8)
         }
     }
