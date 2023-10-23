@@ -27,31 +27,35 @@ struct JournalView: View {
                                 .fill(.blue)
                                 .aspectRatio(1, contentMode: .fit)
                         }
-                        if let mind = Mind(rawValue: viewStore.journal.mind)?.string() {
+                        if let mind = Mind(rawValue: viewStore.journal.mind), let string = mind.string(), let icon = mind.iconName() {
                             HStack(spacing: 0) {
-                                Image("IconHappy")
+                                Image(icon)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 36, height: 36)
-                                Text(mind)
+                                Text(string)
+                                    .font(.pretendard(.medium, size: 16))
                             }
-                            .padding(.horizontal, 16)
+                            .padding(.trailing, 16)
+                            .padding(.leading, 12)
+                            .padding(.vertical, 4)
                             .clipShape(
-                                RoundedRectangle(cornerRadius: 18)
+                                RoundedRectangle(cornerRadius: 22)
                             )
                             .background(
-                                RoundedRectangle(cornerRadius: 18)
-                                    .fill(.white)
+                                RoundedRectangle(cornerRadius: 22)
+                                    .fill(.ultraThinMaterial)
                             )
                             .padding(16)
                         }
                     }
                 } content: {
-                    VStack(spacing: 9) {
+                    VStack(spacing: 14) {
                         if let date = viewStore.journal.timestamp {
                             HStack {
                                 Text(String(format: "%d년 %02d월 %02d일", date.year, date.month, date.day))
-                                    .font(.pretendard(.bold, size: 22))
+                                    .font(.pretendard(.semiBold, size: 22))
+                                    .lineSpacing(140)
                                     .foregroundStyle(Color.textPrimary)
                                 Spacer()
                             }
@@ -61,13 +65,14 @@ struct JournalView: View {
                             HStack {
                                 Text(content)
                                     .font(.pretendard(.medium, size: 18))
+                                    .lineSpacing(180)
                                     .foregroundStyle(Color.textSecondary)
                                     .multilineTextAlignment(.leading)
                                 Spacer()
                             }
                         }
                     }
-                    .padding(21)
+                    .padding(24)
                     .padding(.top, 3)
                 }
                 
@@ -82,18 +87,21 @@ struct JournalView: View {
     
     @ViewBuilder
     private var toolbar: some View {
-        HStack {
+        HStack(spacing: 16) {
             Button {
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
-                    .padding(8)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(12)
                     .background(
                         Circle()
                             .fill(.ultraThinMaterial)
                     )
             }
             .labelStyle(.iconOnly)
+            .frame(width: 40)
             
             Spacer()
             
@@ -101,13 +109,16 @@ struct JournalView: View {
                 // TODO: Share
             } label: {
                 Image(systemName: "square.and.arrow.up")
-                    .padding(8)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(10)
                     .background(
                         Circle()
                             .fill(.ultraThinMaterial)
                     )
             }
             .labelStyle(.iconOnly)
+            .frame(width: 40)
             
             Menu {
                 Button("편집", systemImage: "pencil") {
@@ -119,12 +130,15 @@ struct JournalView: View {
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
-                    .padding(8)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(10)
                     .background(
                         Circle()
                             .fill(.ultraThinMaterial)
                     )
             }
+            .frame(width: 40)
         }
     }
 }

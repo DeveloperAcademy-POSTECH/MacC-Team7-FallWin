@@ -58,10 +58,10 @@ enum Mind: Int64 {
     case annoyed = 13
     case frustrated = 14
     
-    func string() -> String {
+    func string() -> String? {
         switch self {
         case .none:
-            return ""
+            return nil
         case .happy:
             return "행복한"
         case .nervous:
@@ -90,6 +90,41 @@ enum Mind: Int64 {
             return "짜증나는"
         case .frustrated:
             return "당황한"
+        }
+    }
+    
+    func iconName() -> String? {
+        switch self {
+        case .none:
+            return nil
+        case .happy:
+            return "IconHappy"
+        case .nervous:
+            return "IconNervous"
+        case .grateful:
+            return "IconGrateful"
+        case .sad:
+            return "IconSad"
+        case .joyful:
+            return "IconJoyful"
+        case .lonely:
+            return "IconLonely"
+        case .proud:
+            return "IconProud"
+        case .suffocated:
+            return "IconSuffocated"
+        case .touched:
+            return "IconTouched"
+        case .shy:
+            return "IconShy"
+        case .exciting:
+            return "IconExciting"
+        case .lazy:
+            return "IconLazy"
+        case .annoyed:
+            return "IconAnnoyed"
+        case .frustrated:
+            return "IconFrustrated"
         }
     }
 }

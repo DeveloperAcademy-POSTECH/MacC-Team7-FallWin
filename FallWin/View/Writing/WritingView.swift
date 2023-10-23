@@ -23,7 +23,7 @@ struct WritingView: View {
                     MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
                         .padding(.top, 36)
                     generateEmotionView()
-                        .padding(.top, 21)
+                        .padding(.top, 16)
                     HStack {
                         Spacer()
                         Button {
@@ -51,7 +51,7 @@ struct WritingView: View {
                         .padding(.trailing, 20)
                     }
                     .padding(.top, 15)
-                    .padding(.bottom, 30)
+                    .padding(.bottom, 16)
 //                    .padding([.leading, .trailing], 20)
                     .background{
                         Color.backgroundPrimary
@@ -102,6 +102,7 @@ struct WritingView: View {
                     }
                 }
                 .padding()
+                .padding(.bottom, 32)
             }
         }
     }
@@ -130,9 +131,12 @@ struct WritingView: View {
                 Spacer()
                 VStack(spacing: 24) {
                     emotion.2
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 90)
                     Text(emotionTexts[emotion.0]!)
-                        .font(.pretendard(.medium, size: 18))
-                        .foregroundColor(Color.textPrimary)
+                        .font(viewStore.selectedEmotion == emotion.0 ? .pretendard(.bold, size: 18) : .pretendard(.medium, size: 18))
+                        .foregroundColor(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.textPrimary)
                 }
                 Spacer()
             }

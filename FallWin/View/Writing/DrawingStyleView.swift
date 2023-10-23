@@ -16,27 +16,38 @@ struct DrawingStyleView: View {
                 ZStack {
                     Color.backgroundPrimary
                         .ignoresSafeArea()
-                    VStack {
+                    VStack(spacing: 0) {
                         DateView()
                             .padding(.top, 30)
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
                         generateDrawingStyleView()
-                            .padding(.top, 21)
+                            .padding(.top, 16)
+                            .padding(.horizontal)
                         Button {
                             viewStore.send(.showGeneratedDiaryView)
                         } label: {
-                            Text("다음")
-                                .font(.pretendard(.semiBold, size: 18))
-                                .frame(width: UIScreen.main.bounds.width-40, height: 54)
-                                .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
-                                .cornerRadius(9)
-                                .foregroundColor(Color.white)
+                            HStack {
+                                Spacer()
+                                Text("다음")
+                                    .font(.pretendard(.semiBold, size: 18))
+                                Spacer()
+                            }
+                            .padding()
+                            .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
+                            .cornerRadius(9)
+                            .foregroundColor(Color.white)
                         }
                         .disabled(viewStore.selectedDrawingStyle == nil)
                         .padding(.top, 15)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 16)
+                        .background{
+                            Color.backgroundPrimary
+                                .ignoresSafeArea()
+                                .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                        }
                     }
-                    .padding()
                 }
                 .navigationTitle(Text("일기 쓰기"))
                 .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
@@ -65,7 +76,7 @@ struct DrawingStyleView: View {
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 36) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
                     ForEach(drawingStyles, id: \.0) { style in
                         generateDrawingStyleCardView(drawingStyle: style)
                             .onTapGesture(perform: {
@@ -79,36 +90,8 @@ struct DrawingStyleView: View {
                     }
                 }
                 .padding(4)
+                .padding(.bottom, 32)
             }
-//            VStack {
-//                ForEach(0..<4) { idx in
-//                    if idx % 2 == 0 {
-//                        HStack {
-//                            Spacer()
-//                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx])
-//                                .onTapGesture(perform: {
-//                                    if viewStore.selectedDrawingStyle == drawingStyles[idx].0 {
-//                                        viewStore.send(.selectDrawingStyle(nil))
-//                                    } else {
-//                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx].0))
-//                                    }
-//                                })
-//                                .border(.red)
-//                            Spacer()
-//                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx+1])
-//                                .onTapGesture(perform: {
-//                                    if viewStore.selectedDrawingStyle == drawingStyles[idx+1].0 {
-//                                        viewStore.send(.selectDrawingStyle(nil))
-//                                    } else {
-//                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx+1].0))
-//                                    }
-//                                })
-//                                .border(.red)
-//                            Spacer()
-//                        }
-//                    }
-//                }
-//            }
         }
     }
     
@@ -124,13 +107,9 @@ struct DrawingStyleView: View {
                     )
                     .background (
                         Circle()
-//                            .stroke(Color(hexCode: "#191919"), lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 0)
-//                            .background(
-//                                Circle().fill(Color.backgroundPrimary)
-//                            )
                             .fill(Color.backgroundPrimary)
+                            .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
-                    .shadow(radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  6 : 4)
                 Text(drawingStyle.0)
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)

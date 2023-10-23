@@ -39,6 +39,9 @@ struct Carousel: View {
             .offset(x: offsetX)
             .gesture(
                 DragGesture()
+//                    .updating($dragOffset, body: { value, out, _ in
+//                        out = value.translate.width
+//                    })
                     .onEnded { value in
                         let offsetX = value.translation.width
                         let progress = -offsetX / pageWidth
