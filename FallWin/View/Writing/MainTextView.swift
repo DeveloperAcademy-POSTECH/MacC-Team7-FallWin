@@ -10,7 +10,6 @@ import ComposableArchitecture
 
 struct MainTextView: View {
     var store: StoreOf<MainTextFeature>
-    @State var mainText: String = ""
     @FocusState var isFocused: Bool
     
     var body: some View {
@@ -26,7 +25,7 @@ struct MainTextView: View {
                     MessageView(titleText: "오늘 하루는 어땠나요?")
                     Spacer()
                         .frame(height: 15)
-                    TextEditor(text: $mainText)
+                    TextEditor(text: viewStore.binding(get: { $0.mainText ?? "" }, send: { .inputMainText($0) }))
                         .font(.system(size: 18, weight: .medium))
                         .foregroundColor(.textPrimary)
                         .focused($isFocused)
