@@ -125,7 +125,7 @@ struct WritingView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.black, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0)
                     .background(
-                        RoundedRectangle(cornerRadius: 24)
+                        RoundedRectangle(cornerRadius: 12)
                             .fill(Color.backgroundPrimary)
                     )
                     .shadow(radius: 2)
@@ -170,6 +170,7 @@ struct MessageView: View {
             Text(titleText)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(.textPrimary)
+                .multilineTextAlignment(.center)
             if let subTitleText = subTitleText {
                 Text(subTitleText)
                     .font(.system(size: 18, weight: .semibold))

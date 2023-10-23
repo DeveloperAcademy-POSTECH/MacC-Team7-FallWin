@@ -41,6 +41,8 @@
 		79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D32ADD502100A86770 /* Alamofire */; };
 		9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31D2AE01F2600FD0E30 /* MainTextView.swift */; };
 		9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */; };
+		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
+		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
 		98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -89,6 +91,8 @@
 		79E5B2CD2ADD4FF000A86770 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9814C31D2AE01F2600FD0E30 /* MainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextView.swift; sourceTree = "<group>"; };
 		9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTextView+Feature.swift"; sourceTree = "<group>"; };
+		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
 		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				79407D652AD7EC9E006C7571 /* String+Extension.swift */,
 				98DA96FF2ADFA715000DDAFA /* Bundle+Extension.swift */,
 				791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */,
+				98726DC82AE6439200A14860 /* UIColor+Extension.swift */,
+				98726DCA2AE643A700A14860 /* Color+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */,
+				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,
 				79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */,
@@ -394,6 +401,7 @@
 				791F146A2ADD736B00F8DDD2 /* TabBarLabelStyle.swift in Sources */,
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
+				98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */,
 				98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */,
 				98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */,
 				791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */,
@@ -539,7 +547,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -569,7 +577,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
