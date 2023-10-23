@@ -12,12 +12,12 @@ import SwiftUI
 struct MainTextFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String
-        var mainText: String?
+        var mainText: String
         @PresentationState var drawingStyle: DrawingStyleFeature.State?
     }
     
     enum Action: Equatable {
-        case inputMainText(_ mainText: String?)
+        case inputMainText(_ mainText: String)
         case showDrawingStyleView
         case doneGenerating(Journal)
         case drawingStyle(PresentationAction<DrawingStyleFeature.Action>)

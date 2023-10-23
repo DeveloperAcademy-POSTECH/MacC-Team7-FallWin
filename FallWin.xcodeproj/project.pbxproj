@@ -53,6 +53,7 @@
 		98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A822AE5308200FEE4D2 /* WritingPathState.swift */; };
 		98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */; };
 		98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */; };
+		98F70A892AE5570E00FEE4D2 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98F70A882AE5570E00FEE4D2 /* Secret.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		98F70A822AE5308200FEE4D2 /* WritingPathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPathState.swift; sourceTree = "<group>"; };
 		98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedDiaryView.swift; sourceTree = "<group>"; };
 		98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedDiaryView+Feature.swift"; sourceTree = "<group>"; };
+		98F70A882AE5570E00FEE4D2 /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

@@ -23,28 +23,34 @@ struct WritingView: View {
                             generateEmotionView()
                                 .padding()
                         }
-                        Button {
-                            viewStore.send(.showMainTextView(viewStore.selectedEmotion))
-                            
-                        } label: {
-                            Text("다음")
-                                .font(.system(size: 18, weight: .semibold))
-                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
-                                .background(Color.button)
-                                .cornerRadius(12)
-                                .foregroundColor(Color.white)
-                        }
-                        .disabled(viewStore.selectedEmotion == nil)
-                        
-                        Button {
-                            viewStore.send(.showMainTextView(nil))
-                        } label: {
-                            Text("건너뛰기")
-                                .font(.system(size: 18, weight: .semibold))
-                                .frame(width: UIScreen.main.bounds.width-30, height: 60)
-                                .background(Color.button)
-                                .cornerRadius(12)
-                                .foregroundColor(Color.white)
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Spacer()
+                            Button {
+                                viewStore.send(.showMainTextView(nil))
+                            } label: {
+                                Text("건너뛰기")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .frame(width: UIScreen.main.bounds.width * 0.16, height: 45)
+                                    .background(Color.backgroundPrimary)
+                                    .foregroundColor(Color.textSecondary)
+                            }
+                            Spacer()
+                            Spacer()
+                            Button {
+                                viewStore.send(.showMainTextView(viewStore.selectedEmotion))
+                                
+                            } label: {
+                                Text("다음")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
+                                    .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
+                                    .cornerRadius(9)
+                                    .foregroundColor(Color.white)
+                            }
+                            .disabled(viewStore.selectedEmotion == nil)
+                            Spacer()
                         }
                     }
                     .padding()

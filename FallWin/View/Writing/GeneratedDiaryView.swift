@@ -28,12 +28,13 @@ struct GeneratedDiaryView: View {
             }
             .task {
                 do {
+                    print(apiKey)
                     let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: viewStore.mainText, apiKey: apiKey)
                     
                     var image: UIImage?
                     if let promptOutput = chatResponse.choices.map(\.message.content).first {
                         let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: viewStore.selectedDrawingStyle)
-                        print("chatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
+                        print("original input text: \(viewStore.mainText)\nchatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
                         let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
                         
                         if let url = imageResponse.data.map(\.url).first {
