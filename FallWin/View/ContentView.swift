@@ -27,8 +27,10 @@ struct ContentView: View {
                 }
                 
                 IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
-                    SearchView(store: store)
-                        .tabItem(.init(title: "Search", enabledImage: "FeedEnabled", disabledImage: "FeedDisabled", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                    NavigationStack {
+                        SearchView(store: store)
+                    }
+                    .tabItem(.init(title: "Feed", enabledImage: "FeedEnabled", disabledImage: "FeedDisabled", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
                 }
                 
 //                IfLetStore(store.scope(state: \.$surf, action: Feature.Action.surf)) { store in
