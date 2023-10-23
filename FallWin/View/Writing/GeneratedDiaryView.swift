@@ -49,13 +49,28 @@ struct GeneratedDiaryView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                Text("기댜려")
-                
                 if let image = viewStore.image {
                     Image(uiImage: image)
                         .onAppear {
                             viewStore.send(.doneGenerating)
                         }
+                } else {
+                    ZStack {
+                        LottieImageGenView(jsonName: "LottieImageGen")
+                        VStack {
+                            Spacer()
+                            Text("폴윈의 하루를\n그림으로 그리고 있어요")
+                                .font(.pretendard(.bold, size: 28))
+                                .foregroundStyle(Color.textPrimary)
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                        }
+                    }
                 }
                 
             }
