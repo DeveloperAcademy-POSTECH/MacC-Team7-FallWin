@@ -14,18 +14,14 @@ struct GeneratedDiaryView: View {
     private let apiKey: String = Bundle.main.apiKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "미니멀리즘": "Minimalism",
+        "크레용": "Childlike crayon",
         "스케치": "Sketch",
-        "코믹스": "Comics",
+        "동화": "Children's illustration",
+        "수채화": "Water color",
         "디지털 아트": "Digital art",
         "네온": "Neon",
-        "크레용": "Child's crayon",
-        "수채화": "Water color",
-        "사이키델릭": "Psychedelic",
-        "고흐": "Vincent Van Gogh",
-        "모네": "Claude Monet",
-        "달리": "Salvador Dali",
-        "피카소": "Pablo Ruiz Picasso"
+        "반 고흐": "Vincent Van Gogh",
+        "살바도르 달리": "Salvador Dali"
     ]
     
     let emotionToEnglish: [String: String] = [
@@ -82,7 +78,7 @@ struct GeneratedDiaryView: View {
                     var image: UIImage?
                     if let promptOutput = chatResponse.choices.map(\.message.content).first {
                         let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
-                        print("original input text: \(viewStore.mainText)\nchatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
+                        print("original input text:\n\(viewStore.mainText)\nchatGPT's output:\n\(promptOutput)\nprompt with drawing style:\n\(dallEPrompt)")
                         let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
                         
                         if let url = imageResponse.data.map(\.url).first {

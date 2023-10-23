@@ -34,7 +34,7 @@ struct MainTextFeature: Reducer {
                 return .none
                 
             case .showDrawingStyleView:
-                state.drawingStyle = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText ?? "")
+                state.drawingStyle = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText)
                 return .none
                 
             case .drawingStyle(.presented(.doneGenerating(let journal))):

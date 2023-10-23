@@ -60,18 +60,14 @@ struct DrawingStyleView: View {
     func generateDrawingStyleView() -> some View {
         
         let drawingStyles: [(String, Color, Image)] = [
-            ("미니멀리즘", Color.emotionHappy, Image("IconHappy")),
-            ("스케치", Color.emotionNervous, Image("IconNervous")),
-            ("코믹스", Color.emotionGrateful, Image("IconGrateful")),
-            ("디지털 아트", Color.emotionSad, Image("IconSad")),
-            ("네온", Color.emotionJoyful, Image("IconJoyful")),
-            ("크레용", Color.emotionLonely, Image("IconLonely")),
-            ("수채화", Color.emotionProud, Image("IconProud")),
-            ("사이키델릭", Color.emotionSuffocated, Image("IconSuffocated")),
-            ("고흐", Color.emotionTouched, Image("IconTouched")),
-            ("모네", Color.emotionShy, Image("IconShy")),
-            ("달리", Color.emotionExciting, Image("IconExciting")),
-            ("피카소", Color.emotionLazy, Image("IconLazy")) 
+            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
+            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
+            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
+            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
+            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
+            ("네온", Color(hexCode: "#191919"), Image("Neon")),
+            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
+            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -88,6 +84,7 @@ struct DrawingStyleView: View {
                             })
                             .padding(12)
                     }
+                    .aspectRatio(1.0, contentMode: .fit)
                 }
                 .padding(4)
                 .padding(.bottom, 32)

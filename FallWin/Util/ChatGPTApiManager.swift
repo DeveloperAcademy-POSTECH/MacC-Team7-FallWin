@@ -52,6 +52,7 @@ extension ChatGPTApiManager {
 
         <</FORM>>
 
+        <<BEST EXAMPLES>>
         <<BEST EXAMPLE 1>>
 
         INPUT TEXT: 오늘은 하루 종일 대학교에서 보냈어. 아침에 일어나서 바쁜 아침을 시작했어. 강의에 늦지 않으려고 서둘러 간단한 아침 식사를 하고, 학교로 출발했어. 강의 중에는 교수님의 열정적인 강의를 듣는 동안 재미있게 시간을 보낼 수 있었어.
@@ -108,6 +109,7 @@ extension ChatGPTApiManager {
         - time of day: From Afternoon to Night
 
         <</BEST EXAMPLE 3>>
+        <</BEST EXAMPLES>>
 
         Make prompt for Dall-E 2 image generator referring to <<YOUR ROLE>>, <<GOAL>>, <<INPUT TEXT>>, <<FORM>> and <<EXAMPLE>>.
 

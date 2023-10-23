@@ -55,7 +55,7 @@ struct JournalView: View {
                             HStack {
                                 Text(String(format: "%d년 %02d월 %02d일", date.year, date.month, date.day))
                                     .font(.pretendard(.semiBold, size: 22))
-                                    .lineSpacing(140)
+//                                    .lineSpacing(140)
                                     .foregroundStyle(Color.textPrimary)
                                 Spacer()
                             }
@@ -65,7 +65,7 @@ struct JournalView: View {
                             HStack {
                                 Text(content)
                                     .font(.pretendard(.medium, size: 18))
-                                    .lineSpacing(180)
+//                                    .lineSpacing(180)
                                     .foregroundStyle(Color.textSecondary)
                                     .multilineTextAlignment(.leading)
                                 Spacer()
