@@ -19,6 +19,8 @@ struct DrawingStyleFeature: Reducer {
     enum Action: Equatable {
         case selectDrawingStyle(_ selectedDrawingStyle: String?)
         case showGeneratedDiaryView
+        case doneGenerating(Journal)
+        
         case generatedDiary(PresentationAction<GeneratedDiaryFeature.Action>)
     }
     
@@ -34,6 +36,9 @@ struct DrawingStyleFeature: Reducer {
                     state.generatedDiary = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText, selectedDrawingStyle: selectedDrawingStyle)
                 }
                 return .none
+                
+            case .generatedDiary(.presented(.doneImage(let journal))):
+                return .send(.doneGenerating(journal))
                 
             default: return .none
             }

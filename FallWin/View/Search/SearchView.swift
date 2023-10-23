@@ -35,6 +35,8 @@ struct SearchView: View {
                                             ZStack {
                                                 if let image = journal.wrappedImage {
                                                     Image(uiImage: image)
+                                                        .resizable()
+                                                        .scaledToFit()
                                                         .cornerRadius(4)
                                                         .frame(width: 115, height: 115)
                                                         .padding(4)

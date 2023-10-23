@@ -31,6 +31,7 @@ struct GalleryFeature: Reducer {
         case showJournalView(Journal)
         case showWritingView
         case hideTabBar(Bool)
+        case doneGenerating(Journal)
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -43,7 +44,7 @@ struct GalleryFeature: Reducer {
                 let context = PersistenceController.shared.container.viewContext
                 do {
                     let fetchRequest = NSFetchRequest<Journal>(entityName: "Journal")
-                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
+                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: true)]
                     state.journals = try context.fetch(fetchRequest)
                 } catch {
                     print(#function, error)
@@ -66,9 +67,15 @@ struct GalleryFeature: Reducer {
                 state.journal = .init(journal: journal)
                 return .none
                 
+            case let .doneGenerating(journal):
+                return .send(.showJournalView(journal))
+                
             case .showWritingView:
                 state.writing = WritingFeature.State()
                 return .none
+                
+            case .writing(let action):
+                return handleWritingAction(state: &state, action: action)
                 
             default: return .none
             }
@@ -78,6 +85,16 @@ struct GalleryFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
+        }
+    }
+    
+    private func handleWritingAction(state: inout State, action: PresentationAction<WritingFeature.Action>) -> Effect<Action> {
+        switch action {
+        case .presented(.doneGenerating(let journal)):
+            state.writing = nil
+            return .send(.doneGenerating(journal))
+            
+        default: return .none
         }
     }
 }

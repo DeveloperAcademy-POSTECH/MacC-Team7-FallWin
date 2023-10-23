@@ -25,6 +25,7 @@
 		79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D652AD7EC9E006C7571 /* String+Extension.swift */; };
 		79407D682AD7ED11006C7571 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D672AD7ED11006C7571 /* Colors.swift */; };
 		794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */; };
+		79ADA5FE2AE55280007A56EC /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79ADA5FD2AE55280007A56EC /* Secret.plist */; };
 		79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69392ADAD6CA0064E410 /* Carousel.swift */; };
 		79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */; };
 		79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */; };
@@ -75,6 +76,7 @@
 		79407D652AD7EC9E006C7571 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		79407D672AD7ED11006C7571 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingScrollView.swift; sourceTree = "<group>"; };
+		79ADA5FD2AE55280007A56EC /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
 		79AF69392ADAD6CA0064E410 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		79AF693C2ADCC07E0064E410 /* Journal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Journal.xcdatamodel; sourceTree = "<group>"; };
 		79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
-				98F70A882AE5570E00FEE4D2 /* Secret.plist */,
+				79ADA5FD2AE55280007A56EC /* Secret.plist */,
 				79407D582AD7E68E006C7571 /* Preview Content */,
 				79AF69432ADCC2390064E410 /* Util */,
 				79AF69422ADCC1360064E410 /* Data */,
@@ -352,7 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98F70A892AE5570E00FEE4D2 /* Secret.plist in Resources */,
+				79ADA5FE2AE55280007A56EC /* Secret.plist in Resources */,
 				79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */,
 				79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */,
 			);

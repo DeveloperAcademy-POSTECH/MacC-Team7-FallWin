@@ -44,7 +44,7 @@ struct Carousel: View {
                         let progress = -offsetX / pageWidth
                         let increment = Int(progress.rounded())
                         
-                        withAnimation {
+                        withAnimation(.linear(duration: 0.2)) {
                             currentPage = max(min(currentPage + increment, views.count - 1), 0)
                         }
                     }

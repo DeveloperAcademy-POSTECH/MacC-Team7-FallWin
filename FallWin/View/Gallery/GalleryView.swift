@@ -68,14 +68,15 @@ struct GalleryView: View {
                         viewStore.send(.showWritingView)
                         
                     } label: {
-                        Image(systemName: "pencil")
-                            .foregroundStyle(Colors.tabBarItem.color())
-                            .padding()
-                            .background(
-                                Circle()
-                                    .fill(Colors.button.color())
-                            )
+                        ZStack {
+                            Circle()
+                                .fill(Colors.button.color())
+                            Image(systemName: "pencil")
+                                .foregroundStyle(Colors.tabBarItem.color())
+                                .frame(width: 16, height: 16)
+                        }
                     }
+                    .frame(width: 42, height: 42)
                 }
             }
         }
@@ -106,19 +107,26 @@ struct GalleryView: View {
     @ViewBuilder
     func journalCell(journal: Journal) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ZStack {
-                if let image = journal.wrappedImage {
-                    Image(uiImage: image)
-                } else {
-                    Rectangle()
-                        .fill(.white)
-                }
+            if let image = journal.wrappedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .mask(
+                        RoundedRectangle(cornerRadius: 24)
+                            .aspectRatio(0.6, contentMode: .fit)
+                    )
+                    .drawingGroup()
+                    .shadow(color: .black.opacity(0.12), radius: 10)
+                    .aspectRatio(0.6, contentMode: .fit)
+            } else {
+                Rectangle()
+                    .fill(.white)
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: 24)
+                    )
+                    .shadow(color: .black.opacity(0.12), radius: 10)
+                    .aspectRatio(0.6, contentMode: .fit)
             }
-            .clipShape(
-                RoundedRectangle(cornerRadius: 24)
-            )
-            .shadow(color: .black.opacity(0.12), radius: 10)
-            .aspectRatio(0.6, contentMode: .fit)
         }
     }
 }

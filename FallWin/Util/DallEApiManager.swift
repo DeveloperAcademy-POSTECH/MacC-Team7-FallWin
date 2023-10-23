@@ -69,7 +69,7 @@ extension DallEApiManager {
         let parameters: [String: Any] = [
             "prompt": prompt,
             "n": 1,
-            "size": "256x256",
+            "size": "1024x1024",
             "user": sessionID
         ]
         

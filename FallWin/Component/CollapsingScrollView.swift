@@ -24,38 +24,42 @@ struct CollapsingScrollView<Header: View, Content: View>: View {
     @State private var scale: CGFloat = 1
     
     var body: some View {
-        ZStack {
-            VStack {
-                header()
-                    .overlay {
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onAppear {
-                                    headerHeight = proxy.size.height
-                                }
-                        }
-                    }
-                    .scaleEffect(CGSize(width: scale < 1 ? 1 : scale, height: scale < 1 ? 1 : scale), anchor: .top)
-                Spacer()
-            }
-            
-            ScrollView {
-                VStack(spacing: 0) {
+        GeometryReader { proxy in
+            ZStack {
+                VStack {
                     header()
-                        .opacity(0)
-                        .drawingGroup()
-                    
-                    LazyVStack {
-                        content()
-                            .background(
-                                GeometryReader { proxy in
-                                    Color.clear
-                                        .preference(key: CollapsingScrollViewKey.self, value: proxy.frame(in: .global).origin.y)
-                                }
-                            )
-                    }
-                    .background {
-                        Colors.backgroundPrimary.color().ignoresSafeArea()
+                        .overlay {
+                            GeometryReader { proxy in
+                                Color.clear
+                                    .onAppear {
+                                        headerHeight = proxy.size.height
+                                    }
+                            }
+                        }
+                        .scaleEffect(CGSize(width: scale < 1 ? 1 : scale, height: scale < 1 ? 1 : scale), anchor: .top)
+                    Spacer()
+                }
+                
+                ScrollView {
+                    VStack(spacing: 0) {
+                        header()
+                            .opacity(0)
+                            .drawingGroup()
+                        
+                        LazyVStack {
+                            content()
+                                .background(
+                                    GeometryReader { proxy in
+                                        Color.clear
+                                            .preference(key: CollapsingScrollViewKey.self, value: proxy.frame(in: .global).origin.y)
+                                    }
+                                )
+                            Colors.backgroundPrimary.color()
+                                .frame(height: proxy.size.height / 2)
+                        }
+                        .background {
+                            Colors.backgroundPrimary.color().ignoresSafeArea()
+                        }
                     }
                 }
             }
