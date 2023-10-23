@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "IconTouched.png",
+      "filename" : "IconTouched~universal@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "IconTouched~universal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "IconTouched~universal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
