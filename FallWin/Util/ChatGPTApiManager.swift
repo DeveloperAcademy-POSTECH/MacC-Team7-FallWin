@@ -19,20 +19,64 @@ extension ChatGPTApiManager {
     func generatePromptForChat(_ prompt: String) -> String {
         let template: String = """
         <<YOUR ROLE>>
-        DALL-E 2 prompt engineer
+
+        You are the DALL-E2 Prompt engineer from now on.
+
+        You can summarize the contents of <INPUT TEXT> according to the form.
+
+        <</YOUR ROLE>>
 
         <<GOAL>>
-        1) Making appropriate prompt to get image that describe input text
-        2) Making the image like masterpiece in gallery
+
+        1) The image that Dall-E2 draws should not contain text.
+
+        2) The summary results should always be translated into English.
+
+        <</GOAL>>
 
         <<INPUT TEXT>>
+
         "\(prompt)"
 
-        Make prompt for Dall-E2 image generator referring to <<YOUR ROLE>>, <<GOAL>>, <<INPUT TEXT>>.
-        Generated image must consists of only image.
-        The output must be simple and brief and must contain keywords in input text.
-        Output must be english prompt without other text.
-        Output must be between <<PROMPT>> and <</PROMPT>>
+        <</INPUT TEXT>>
+
+        <<FORM>>
+
+        - Subject
+        - Subject pose or action
+        - Setting
+        - Background Imagery
+        - Mood
+        - Time of day
+
+        <</FORM>>
+
+        <<BEST EXAMPLE>>
+
+        INPUT TEXT: 오늘은 하루 종일 대학교에서 보냈어. 아침에 일어나서 바쁜 아침을 시작했어. 강의에 늦지 않으려고 서둘러 간단한 아침 식사를 하고, 학교로 출발했어. 강의 중에는 교수님의 열정적인 강의를 듣는 동안 재미있게 시간을 보낼 수 있었어.
+        
+        점심 시간에는 친구들과 함께 학식에서 맛있는 음식을 먹었어. 얘기를 나누면서 편안한 시간을 보낼 수 있어서 기분이 좋았어.
+
+        오후에는 도서관에서 과제를 마무리하려고 열심히 공부했어. 공부하는 동안 몇몇 어려운 문제에 부딪쳐서 고민하다가, 친구한테 도움을 청하니 함께 공부하면서 문제를 해결할 수 있었어.
+
+        저녁에는 동아리 모임이 있어서 함께 활동했어. 동아리 멤버들과 함께 프로젝트를 진행하는 것은 항상 즐거워.
+
+        오늘은 하루 종일 바쁘게 보냈지만, 즐거운 순간들이 많았어. 항상 내 곁에 있는 친구들과 함께 시간을 보내는 것이 얼마나 소중한 지 깨달았어. 내일도 더 행복한 순간들이 가득하기를 기대해봐야겠다.
+
+        RESULT:
+
+        - Subject: Daily life in University
+        - Subject pose or action: University, breakfast, lectures, learning with friends, studying assignments in the library, club meetings
+        - Setting: University Campus
+        - Background Imagery: Inside the University and library
+        - mood: Positive, Happy
+        - time of day: From Morning to Evening
+
+        <</BEST EXAMPLE>>
+
+        Make prompt for Dall-E 2 image generator referring to <<YOUR ROLE>>, <<GOAL>>, <<INPUT TEXT>>, <<FORM>> and <<EXAMPLE>>.
+
+        Generated image must consists of only image. The output must be simple and brief and must contain keywords in input text. Output must be english prompt without other text.
         """
         
         return template

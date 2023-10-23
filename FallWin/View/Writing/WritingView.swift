@@ -16,6 +16,7 @@ struct WritingView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
+                    .ignoresSafeArea()
                 VStack(spacing: 0) {
                     DateView()
                         .padding(.top, 30)
@@ -59,7 +60,7 @@ struct WritingView: View {
                     }
                 }
             }
-            .navigationTitle(Text("일기 쓰기"))
+            .navigationTitle("일기 쓰기")
             .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
                 MainTextView(store: store)
             })

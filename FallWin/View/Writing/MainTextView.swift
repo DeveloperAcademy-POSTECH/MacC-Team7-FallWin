@@ -16,16 +16,18 @@ struct MainTextView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
+                    .ignoresSafeArea()
                 VStack(spacing: 0) {
                     DateView()
                         .padding(.top, 30)
                     MessageMainTextView()
                         .padding(.top, 36)
-                    TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0 )}))
+                    TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0)}))
                         .font(.pretendard(.medium, size: 18))
                         .foregroundColor(.textPrimary)
                         .scrollContentBackground(.hidden)
                         .focused($isFocused)
+//                        .focused(viewStore.binding(get: \.isKeyboardShown, send: { .showKeyboard($0)}))
                         .padding([.top, .bottom], 9)
                         .padding([.leading, .trailing], 12)
                         .background() {
@@ -51,7 +53,8 @@ struct MainTextView: View {
                     .disabled(viewStore.mainText == "")
                     .padding([.top, .bottom], 15)
                 }
-                .padding(20)
+                .padding([.leading, .trailing], 20)
+                .padding(.bottom, 15)
             }
             .navigationTitle(Text("일기 쓰기"))
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
@@ -71,7 +74,7 @@ struct MessageMainTextView: View {
 }
 
 #Preview {
-    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤"), reducer: {
+    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤", isKeyboardShown: true), reducer: {
         MainTextFeature()
     }))
 }

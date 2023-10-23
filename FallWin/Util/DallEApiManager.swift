@@ -48,21 +48,19 @@ extension DallEApiManager {
         var drawingStyleTemplate: String = ""
         if drawingStyle != "" {
             drawingStyleTemplate = """
-                <<DRAWING STYLE>>
-                \(drawingStyle)
-                <</DRAWING STYLE>>
+                Drawing Style: \(drawingStyle) depicting the abstract concept of \(emotion).
                 """
         }
         
-        var emotionTemplate: String = ""
-        if emotion != "" {
-            emotionTemplate = """
-                <<EMOTION>>
-                \(emotion)
-                <</EMOTION>>
-                """
-        }
-        let dallEPrompt = prompt + "\n" + drawingStyleTemplate + "\n" + emotionTemplate
+//        var emotionTemplate: String = ""
+//        if emotion != "" {
+//            emotionTemplate = """
+//                <<EMOTION>>
+//                \(emotion)
+//                <</EMOTION>>
+//                """
+//        }
+        let dallEPrompt = prompt + "\n" + drawingStyleTemplate
         
         return dallEPrompt
     }

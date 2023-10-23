@@ -14,11 +14,14 @@ struct GeneratedDiaryView: View {
     private let apiKey: String = Bundle.main.apiKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "미니멀리즘": "minimalism",
-        "스케치": "sketch",
-        "코믹스": "comics",
-        "디지털 아트": "digital art",
-        "랜덤": ""
+        "미니멀리즘": "Minimalism",
+        "스케치": "Sketch",
+        "코믹스": "Comics",
+        "디지털 아트": "Digital art",
+        "네온": "Neon",
+        "크레용": "Child's crayon",
+        "수채화": "Water color",
+        "사이키델릭": "Psychedelic"
     ]
     
     let emotionToEnglish: [String: String] = [

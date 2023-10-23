@@ -13,6 +13,7 @@ struct MainTextFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String
         var mainText: String
+        var isKeyboardShown: Bool
         @PresentationState var drawingStyle: DrawingStyleFeature.State?
     }
     
@@ -21,6 +22,7 @@ struct MainTextFeature: Reducer {
         case showDrawingStyleView
         case doneGenerating(Journal)
         case drawingStyle(PresentationAction<DrawingStyleFeature.Action>)
+        case showKeyboard(_ isKeyboardShown: Bool)
     }
     
     
@@ -37,6 +39,10 @@ struct MainTextFeature: Reducer {
                 
             case .drawingStyle(.presented(.doneGenerating(let journal))):
                 return .send(.doneGenerating(journal))
+                
+            case let .showKeyboard(isKeyboardShown):
+                state.isKeyboardShown =  isKeyboardShown
+                return .none
                 
             default: return .none
             }

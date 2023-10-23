@@ -30,7 +30,7 @@ struct WritingFeature: Reducer {
                 return .none
                 
             case let .showMainTextView(emotion):
-                state.mainText = .init(selectedEmotion: emotion ?? "", mainText: "")
+                state.mainText = .init(selectedEmotion: emotion ?? "", mainText: "", isKeyboardShown: true)
                 return .none
                 
             case .mainText(.presented(.doneGenerating(let journal))):

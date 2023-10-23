@@ -15,6 +15,7 @@ struct DrawingStyleView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
                 ZStack {
                     Color.backgroundPrimary
+                        .ignoresSafeArea()
                     VStack {
                         DateView()
                             .padding(.top, 30)
@@ -51,7 +52,12 @@ struct DrawingStyleView: View {
             ("미니멀리즘", Color.emotionHappy, Image("IconHappy")),
             ("스케치", Color.emotionNervous, Image("IconNervous")),
             ("코믹스", Color.emotionGrateful, Image("IconGrateful")),
-            ("디지털 아트", Color.emotionSad, Image("IconSad"))
+            ("디지털 아트", Color.emotionSad, Image("IconSad")),
+            ("네온", Color.emotionJoyful, Image("IconJoyful")),
+            ("크레용", Color.emotionLonely, Image("IconLonely")),
+            ("수채화", Color.emotionProud, Image("IconProud")),
+            ("사이키델릭", Color.emotionSuffocated, Image("IconSuffocated")),
+            
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
