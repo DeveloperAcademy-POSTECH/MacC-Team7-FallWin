@@ -50,9 +50,7 @@ struct GalleryView: View {
                 viewStore.send(.hideTabBar(false))
             }
             .fullScreenCover(store: store.scope(state: \.$journal, action: GalleryFeature.Action.journal)) { store in
-                NavigationStack {
-                    JournalView(store: store)
-                }
+                JournalView(store: store)
             }
         }
         .padding(.bottom, CvasTabViewValue.tabBarHeight)
@@ -72,11 +70,12 @@ struct GalleryView: View {
                             Circle()
                                 .fill(Colors.button.color())
                             Image(systemName: "pencil")
+                                .resizable()
                                 .foregroundStyle(Colors.tabBarItem.color())
-                                .frame(width: 16, height: 16)
+                                .frame(width: 24, height: 24)
                         }
                     }
-                    .frame(width: 42, height: 42)
+                    .frame(width: 56, height: 56)
                 }
             }
         }

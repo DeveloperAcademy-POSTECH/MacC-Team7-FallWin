@@ -88,7 +88,6 @@ struct SearchView: View {
                 }
                 .onAppear {
                     viewStore.send(.fetchData)
-                    print("onAppear", viewStore.searchResults.count)
                 }
                 .onReceive(dataInsertNotification) { output in
                     viewStore.send(.fetchData)
