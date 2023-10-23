@@ -70,11 +70,12 @@ struct GalleryView: View {
                             Circle()
                                 .fill(Colors.button.color())
                             Image(systemName: "pencil")
+                                .resizable()
                                 .foregroundStyle(Colors.tabBarItem.color())
-                                .frame(width: 16, height: 16)
+                                .frame(width: 24, height: 24)
                         }
                     }
-                    .frame(width: 42, height: 42)
+                    .frame(width: 56, height: 56)
                 }
             }
         }
