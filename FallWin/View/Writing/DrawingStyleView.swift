@@ -104,7 +104,9 @@ struct DrawingStyleView: View {
                         .background (
                             Circle()
                                 .stroke(viewStore.selectedDrawingStyle == drawingStyle.0 ? drawingStyle.1 : Color.black, lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 1)
-                                .fill(Color.backgroundPrimary)
+                                .background(
+                                    Circle().fill(Color.backgroundPrimary)
+                                )
                         )
 //                        .frame(width: geo.size.width, height: geo.size.height)
                         .shadow(radius: viewStore.selectedDrawingStyle == drawingStyle.0 ? 24 : 12)

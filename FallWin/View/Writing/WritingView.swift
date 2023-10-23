@@ -124,7 +124,10 @@ struct WritingView: View {
             GeometryReader { geo in
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.black, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0)
-                    .fill(Color.backgroundPrimary)
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(Color.backgroundPrimary)
+                    )
                     .shadow(radius: 2)
                     .frame(width: geo.size.width, height: geo.size.width)
                     .overlay(
