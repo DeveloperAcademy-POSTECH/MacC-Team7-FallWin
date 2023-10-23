@@ -31,6 +31,7 @@ struct GalleryFeature: Reducer {
         case showJournalView(Journal)
         case showWritingView
         case hideTabBar(Bool)
+        case doneGenerating
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -70,6 +71,9 @@ struct GalleryFeature: Reducer {
                 state.writing = WritingFeature.State()
                 return .none
                 
+            case .writing(let action):
+                return handleWritingAction(state: &state, action: action)
+                
             default: return .none
             }
         }
@@ -78,6 +82,16 @@ struct GalleryFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
+        }
+    }
+    
+    private func handleWritingAction(state: inout State, action: PresentationAction<WritingFeature.Action>) -> Effect<Action> {
+        switch action {
+        case .presented(.doneGenerating):
+            state.writing = nil
+            return .send(.fetchAll)
+            
+        default: return .none
         }
     }
 }

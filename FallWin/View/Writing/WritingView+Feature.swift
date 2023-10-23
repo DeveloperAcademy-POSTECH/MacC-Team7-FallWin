@@ -18,6 +18,7 @@ struct WritingFeature: Reducer {
     enum Action: Equatable {
         case emotionSelection(_ selectedEmotion: String?)
         case showMainTextView(_ selectedEmotion: String?)
+        case doneGenerating
         case mainText(PresentationAction<MainTextFeature.Action>)
     }
     
@@ -31,6 +32,9 @@ struct WritingFeature: Reducer {
             case let .showMainTextView(emotion):
                 state.mainText = .init(selectedEmotion: emotion ?? "")
                 return .none
+                
+            case .mainText(.presented(.doneGenerating)):
+                return .send(.doneGenerating)
                 
             default: return .none
             }
