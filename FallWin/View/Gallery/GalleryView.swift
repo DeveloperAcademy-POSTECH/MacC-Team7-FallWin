@@ -11,6 +11,8 @@ import ComposableArchitecture
 struct GalleryView: View {
     let store: StoreOf<GalleryFeature>
     
+    let dataInsertNotification = NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextDidSave)
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             GeometryReader { proxy in
@@ -43,6 +45,9 @@ struct GalleryView: View {
                                 viewStore.send(.hideTabBar(true))
                             }
                     }
+            }
+            .onReceive(dataInsertNotification) { output in
+                viewStore.send(.fetchAll)
             }
             .onAppear {
                 viewStore.send(.fetchAll)

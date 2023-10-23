@@ -97,4 +97,10 @@ struct GalleryFeature: Reducer {
         default: return .none
         }
     }
+    
+    private func handleJournalAction(state: inout State, action: PresentationAction<JournalFeature.Action>) -> Effect<Action> {
+        switch action {
+        default: return .none
+        }
+    }
 }

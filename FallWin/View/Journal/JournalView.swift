@@ -55,7 +55,7 @@ struct JournalView: View {
                             HStack {
                                 Text(String(format: "%d년 %02d월 %02d일", date.year, date.month, date.day))
                                     .font(.pretendard(.semiBold, size: 22))
-//                                    .lineSpacing(140)
+                                //                                    .lineSpacing(140)
                                     .foregroundStyle(Color.textPrimary)
                                 Spacer()
                             }
@@ -65,7 +65,7 @@ struct JournalView: View {
                             HStack {
                                 Text(content)
                                     .font(.pretendard(.medium, size: 18))
-//                                    .lineSpacing(180)
+                                //                                    .lineSpacing(180)
                                     .foregroundStyle(Color.textSecondary)
                                     .multilineTextAlignment(.leading)
                                 Spacer()
@@ -82,63 +82,68 @@ struct JournalView: View {
                 }
                 .padding(12)
             }
+            .onChange(of: viewStore.dismiss, perform: { value in
+                dismiss()
+            })
         }
     }
     
     @ViewBuilder
     private var toolbar: some View {
-        HStack(spacing: 16) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(12)
-                    .background(
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                    )
-            }
-            .labelStyle(.iconOnly)
-            .frame(width: 40)
-            
-            Spacer()
-            
-            Button {
-                // TODO: Share
-            } label: {
-                Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(10)
-                    .background(
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                    )
-            }
-            .labelStyle(.iconOnly)
-            .frame(width: 40)
-            
-            Menu {
-                Button("편집", systemImage: "pencil") {
-                    // TODO: Edit
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            HStack(spacing: 16) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(12)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                        )
                 }
+                .labelStyle(.iconOnly)
+                .frame(width: 40)
                 
-                Button("삭제", systemImage: "trash", role: .destructive) {
-                    // TODO: Delete
+                Spacer()
+                
+                Button {
+                    // TODO: Share
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(10)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                        )
                 }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(10)
-                    .background(
-                        Circle()
-                            .fill(.ultraThinMaterial)
-                    )
+                .labelStyle(.iconOnly)
+                .frame(width: 40)
+                
+                Menu {
+                    //                Button("편집", systemImage: "pencil") {
+                    // TODO: Edit
+                    //                }
+                    
+                    Button("삭제", systemImage: "trash", role: .destructive) {
+                        viewStore.send(.delete)
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(10)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                        )
+                }
+                .frame(width: 40)
             }
-            .frame(width: 40)
         }
     }
 }
