@@ -13,6 +13,7 @@ struct DallEApiTestView: View {
     @State private var isThereSomethingWrong: Bool = false
     @State private var promptOutput: String = ""
     @State private var drawingStyle: String = ""
+    @State private var emotion: String = ""
     @State private var dallEInputPrompt: String = ""
     private var apiKey: String = Bundle.main.apiKey
     
@@ -31,6 +32,13 @@ struct DallEApiTestView: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .border(Color.black)
+            Spacer()
+                .frame(height: 20)
+            TextField("감정을 입력하세요. (영어)", text: $emotion)
+                .keyboardType(.default)
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .border(Color.black)
             
             Button("이미지 생성") {
                 Task {
@@ -39,7 +47,7 @@ struct DallEApiTestView: View {
                         let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: promptInput, apiKey: apiKey)
                         
                         if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                            let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyle)
+                            let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyle, emotion: emotion)
                             print("chatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
                             dallEInputPrompt = dallEPrompt
                             let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)

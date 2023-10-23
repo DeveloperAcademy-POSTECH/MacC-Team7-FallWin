@@ -20,6 +20,22 @@ struct GeneratedDiaryView: View {
         "디지털 아트": "digital art",
         "랜덤": ""
     ]
+    
+    let emotionToEnglish: [String: String] = [
+        "행복한": "Happy",
+        "감사한": "Grateful",
+        "슬픈": "Sad",
+        "신나는": "Joyful",
+        "외로운": "Lonely",
+        "뿌듯한": "Proud",
+        "답답한": "Suffocated",
+        "감동받은": "Touched",
+        "부끄러운": "Shy",
+        "기대되는": "Exciting",
+        "귀찮은": "Lazy",
+        "짜증나는": "Annoyed",
+        "당황한": "Frustrated"
+    ]
 
     
     var body: some View {
@@ -42,7 +58,7 @@ struct GeneratedDiaryView: View {
                     
                     var image: UIImage?
                     if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
+                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
                         print("original input text: \(viewStore.mainText)\nchatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
                         let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
                         

@@ -44,13 +44,25 @@ extension DallEApiManager {
         return result.hasIssues == false
     }
     
-    func addDrawingStyle(withPrompt prompt: String, drawingStyle: String) -> String {
-        let drawingStyleTemplate: String = """
-        <<DRAWING STYLE>>
-        \(drawingStyle)
-        <</DRAWING STYLE>>
-        """
-        let dallEPrompt = prompt + "\n" + drawingStyleTemplate
+    func addDrawingStyle(withPrompt prompt: String, drawingStyle: String, emotion: String) -> String {
+        var drawingStyleTemplate: String = ""
+        if drawingStyle != "" {
+            drawingStyleTemplate = """
+                <<DRAWING STYLE>>
+                \(drawingStyle)
+                <</DRAWING STYLE>>
+                """
+        }
+        
+        var emotionTemplate: String = ""
+        if emotion != "" {
+            emotionTemplate = """
+                <<EMOTION>>
+                \(emotion)
+                <</EMOTION>>
+                """
+        }
+        let dallEPrompt = prompt + "\n" + drawingStyleTemplate + "\n" + emotionTemplate
         
         return dallEPrompt
     }
