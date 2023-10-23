@@ -48,10 +48,11 @@ extension ChatGPTApiManager {
         - Background Imagery
         - Mood
         - Time of day
+        - Artist's Style
 
         <</FORM>>
 
-        <<BEST EXAMPLE>>
+        <<BEST EXAMPLE 1>>
 
         INPUT TEXT: 오늘은 하루 종일 대학교에서 보냈어. 아침에 일어나서 바쁜 아침을 시작했어. 강의에 늦지 않으려고 서둘러 간단한 아침 식사를 하고, 학교로 출발했어. 강의 중에는 교수님의 열정적인 강의를 듣는 동안 재미있게 시간을 보낼 수 있었어.
         
@@ -72,7 +73,41 @@ extension ChatGPTApiManager {
         - mood: Positive, Happy
         - time of day: From Morning to Evening
 
-        <</BEST EXAMPLE>>
+        <</BEST EXAMPLE 1>>
+        
+        <<BEST EXAMPLE 2>>
+
+        INPUT TEXT: 바쁘지만 내가 좋아하는 일들로 채운 하루. 가벼운 브런치, 햇살 뜨거운 바닷가에서의 오후. 저녁엔 술 한잔과 좋아하는 사람들. 모닥불 앞에서 나눈 대화.
+        
+        별이 쏟아지는 밤하늘은 덤이었지. 가끔 너무 정신 없는 나머지 내가 진실로 원하던 일들이 무엇이었는지 잊곤 해. 그 사실을 일꺠워주는 하루였어.
+
+        RESULT:
+
+        - Subject: Special Day in Beach
+        - Subject pose or action: brunch, afternoon, beach, sunshine, talking with friends, a bottle of drink, lovely people, campfire, conversation, comtemplation
+        - Setting: Sunshine Beach, Starry Night
+        - Background Imagery: Beach and Horizon
+        - mood: Peaceful, Sentimental, Calm
+        - time of day: From Morning to Night
+
+        <</BEST EXAMPLE 2>>
+        
+        <<BEST EXAMPLE 3>>
+
+        INPUT TEXT: 할 일이 많아 하루종일 까페에 있던 날이었다. 내가 먹은 커피만 몇 잔인지. 정신없이 일할 땐 정말 우울하기만 했는데 끝내고 나니 문득 감성적이게 되더라고.
+        
+        밖은 어느새 어두워져서 조명이 별처럼 빛났고 커피 때문인지, 문득 찾아온 정적 떄문인지 머릿속은 온갖 감상들이 뒤섞였어.
+
+        RESULT:
+
+        - Subject: Busy time at the cafe
+        - Subject pose or action: working, sitting, chair, table, cafe, coffe, thinking, light
+        - Setting: Cafe
+        - Background Imagery: Cafe
+        - mood: Passionate, Sentimental
+        - time of day: From Afternoon to Night
+
+        <</BEST EXAMPLE 3>>
 
         Make prompt for Dall-E 2 image generator referring to <<YOUR ROLE>>, <<GOAL>>, <<INPUT TEXT>>, <<FORM>> and <<EXAMPLE>>.
 

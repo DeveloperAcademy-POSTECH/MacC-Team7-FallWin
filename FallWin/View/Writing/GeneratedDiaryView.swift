@@ -21,7 +21,11 @@ struct GeneratedDiaryView: View {
         "네온": "Neon",
         "크레용": "Child's crayon",
         "수채화": "Water color",
-        "사이키델릭": "Psychedelic"
+        "사이키델릭": "Psychedelic",
+        "고흐": "Vincent Van Gogh",
+        "모네": "Claude Monet",
+        "달리": "Salvador Dali",
+        "피카소": "Pablo Ruiz Picasso"
     ]
     
     let emotionToEnglish: [String: String] = [

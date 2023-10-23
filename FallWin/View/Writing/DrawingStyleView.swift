@@ -57,7 +57,10 @@ struct DrawingStyleView: View {
             ("크레용", Color.emotionLonely, Image("IconLonely")),
             ("수채화", Color.emotionProud, Image("IconProud")),
             ("사이키델릭", Color.emotionSuffocated, Image("IconSuffocated")),
-            
+            ("고흐", Color.emotionTouched, Image("IconTouched")),
+            ("모네", Color.emotionShy, Image("IconShy")),
+            ("달리", Color.emotionExciting, Image("IconExciting")),
+            ("피카소", Color.emotionLazy, Image("IconLazy")) 
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
