@@ -19,6 +19,7 @@ struct JournalView: View {
                 CollapsingScrollView {
                     if let image = viewStore.journal.wrappedImage {
                         Image(uiImage: image)
+                            .resizable()
                             .aspectRatio(1, contentMode: .fit)
                     } else {
                         Rectangle()

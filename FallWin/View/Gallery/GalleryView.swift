@@ -109,6 +109,11 @@ struct GalleryView: View {
             ZStack {
                 if let image = journal.wrappedImage {
                     Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 24)
+                        )
                 } else {
                     Rectangle()
                         .fill(.white)

@@ -6,20 +6,23 @@
 //
 
 import SwiftUI
+import UIKit
 import ComposableArchitecture
 
 struct GeneratedDiaryView: View {
     let store: StoreOf<GeneratedDiaryFeature>
     private let apiKey: String = Bundle.main.apiKey
-    @State var image: UIImage? = nil
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Text("기댜려")
                 
-                if let image = image {
+                if let image = viewStore.image {
                     Image(uiImage: image)
+                        .onAppear {
+                            viewStore.send(.doneGenerating)
+                        }
                 }
                 
             }
@@ -27,6 +30,7 @@ struct GeneratedDiaryView: View {
                 do {
                     let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: viewStore.mainText, apiKey: apiKey)
                     
+                    var image: UIImage?
                     if let promptOutput = chatResponse.choices.map(\.message.content).first {
                         let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: viewStore.selectedDrawingStyle)
                         print("chatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
@@ -49,6 +53,10 @@ struct GeneratedDiaryView: View {
                             let (data, _) = try await URLSession.shared.data(from: url)
                             image = UIImage(data: data)
                         }
+                    }
+                    
+                    if let image = image {
+                        viewStore.send(.setImage(image))
                     }
                 } catch {
                     print(error)
