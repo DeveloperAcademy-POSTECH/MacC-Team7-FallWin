@@ -10,55 +10,59 @@ import ComposableArchitecture
 
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
-//    @State var navPath: NavigationPath = .init()
+    //    @State var navPath: NavigationPath = .init()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-                ZStack {
-                    Color.backgroundPrimary
-                    VStack {
-                        DateView()
-                        MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
-                        ScrollView() {
-                            generateEmotionView()
-                                .padding()
+            ZStack {
+                Color.backgroundPrimary
+                VStack(spacing: 0) {
+                    DateView()
+                        .padding(.top, 30)
+                    MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
+                        .padding(.top, 36)
+                    generateEmotionView()
+                        .padding(.top, 15)
+                    HStack {
+                        Spacer()
+                        Spacer()
+                        Button {
+                            viewStore.send(.showMainTextView(nil))
+                        } label: {
+                            Text("건너뛰기")
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(width: UIScreen.main.bounds.width * 0.16, height: 45)
+                                .background(Color.backgroundPrimary)
+                                .foregroundColor(Color.textSecondary)
                         }
                         Spacer()
-                        HStack {
-                            Spacer()
-                            Spacer()
-                            Button {
-                                viewStore.send(.showMainTextView(nil))
-                            } label: {
-                                Text("건너뛰기")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .frame(width: UIScreen.main.bounds.width * 0.16, height: 45)
-                                    .background(Color.backgroundPrimary)
-                                    .foregroundColor(Color.textSecondary)
-                            }
-                            Spacer()
-                            Spacer()
-                            Button {
-                                viewStore.send(.showMainTextView(viewStore.selectedEmotion))
-                                
-                            } label: {
-                                Text("다음")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
-                                    .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
-                                    .cornerRadius(9)
-                                    .foregroundColor(Color.white)
-                            }
-                            .disabled(viewStore.selectedEmotion == nil)
-                            Spacer()
+                        Spacer()
+                        Button {
+                            viewStore.send(.showMainTextView(viewStore.selectedEmotion))
+                            
+                        } label: {
+                            Text("다음")
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
+                                .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
+                                .cornerRadius(9)
+                                .foregroundColor(Color.white)
                         }
+                        .disabled(viewStore.selectedEmotion == nil)
+                        Spacer()
                     }
                     .padding()
+                    .background{
+                        Color.backgroundPrimary
+                            .ignoresSafeArea()
+                            .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                    }
                 }
-                .navigationTitle(Text("일기 쓰기"))
-                .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
-                    MainTextView(store: store)
-                })
+            }
+            .navigationTitle(Text("일기 쓰기"))
+            .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
+                MainTextView(store: store)
+            })
         }
     }
     
@@ -82,67 +86,75 @@ struct WritingView: View {
             ("당황한", Color.emotionFrustrated, Image("IconFrustrated"))
         ]
         
-        let cardWidth: CGFloat = UIScreen.main.bounds.width * 0.4
-        
         WithViewStore(store , observe: { $0 }) { viewStore in
-            VStack {
-                ForEach(0..<14) { idx in
-                    if idx % 2 == 0 {
-                        HStack {
-                            Spacer()
-                            generateEmotionCardView(emotion: emotions[idx])
-                                .frame(width: cardWidth, height: cardWidth)
-                                .onTapGesture(perform: {
-                                    if viewStore.selectedEmotion == emotions[idx].0 {
-                                        viewStore.send(.emotionSelection(nil))
-                                    } else {
-                                        viewStore.send(.emotionSelection(emotions[idx].0))
-                                    }
-                                })
-                            Spacer()
-                            generateEmotionCardView(emotion: emotions[idx+1])
-                                .frame(width: cardWidth, height: cardWidth)
-                                .onTapGesture(perform: {
-                                    if viewStore.selectedEmotion == emotions[idx+1].0 {
-                                        viewStore.send(.emotionSelection(nil))
-                                    } else {
-                                        viewStore.send(.emotionSelection(emotions[idx+1].0))
-                                    }
-                                })
-                            Spacer()
-                        }
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 32) {
+                    ForEach(emotions, id: \.0) { emotion in
+                        generateEmotionCardView(emotion: emotion)
+                            .onTapGesture {
+                                if viewStore.selectedEmotion == emotion.0 {
+                                    viewStore.send(.emotionSelection(nil))
+                                } else {
+                                    viewStore.send(.emotionSelection(emotion.0))
+                                }
+                            }
                     }
                 }
+                .padding()
             }
+            
+            
+            //            VStack {
+            //                ForEach(0..<14) { idx in
+            //                    if idx % 2 == 0 {
+            //                        HStack {
+            //                            Spacer()
+            //                            generateEmotionCardView(emotion: emotions[idx])
+            //                                .frame(width: cardWidth, height: cardWidth)
+            //                                .onTapGesture(perform: {
+            //                                    if viewStore.selectedEmotion == emotions[idx].0 {
+            //                                        viewStore.send(.emotionSelection(nil))
+            //                                    } else {
+            //                                        viewStore.send(.emotionSelection(emotions[idx].0))
+            //                                    }
+            //                                })
+            //                            Spacer()
+            //                            generateEmotionCardView(emotion: emotions[idx+1])
+            //                                .frame(width: cardWidth, height: cardWidth)
+            //                                .onTapGesture(perform: {
+            //                                    if viewStore.selectedEmotion == emotions[idx+1].0 {
+            //                                        viewStore.send(.emotionSelection(nil))
+            //                                    } else {
+            //                                        viewStore.send(.emotionSelection(emotions[idx+1].0))
+            //                                    }
+            //                                })
+            //                            Spacer()
+            //                        }
+            //                    }
+            //                }
+            //            }
         }
     }
     
     @ViewBuilder
     func generateEmotionCardView(emotion: (String, Color, Image)) -> some View {
-        
         WithViewStore(store, observe: {$0}) { viewStore in
-            GeometryReader { geo in
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.black, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.backgroundPrimary)
-                    )
-                    .shadow(radius: 2)
-                    .frame(width: geo.size.width, height: geo.size.width)
-                    .overlay(
-                        VStack {
-                            emotion.2
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geo.size.width/2, height: geo.size.width/2)
-                            Text(emotion.0)
-                                .font(.system(size: 18, weight: .medium))
-                                .foregroundStyle(.textPrimary)
-                        }
-                    )
-                    .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
+            HStack {
+                Spacer()
+                VStack(spacing: 24) {
+                    emotion.2
+                    Text(emotion.0)
+                }
+                Spacer()
             }
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.backgroundPrimary)
+                    .aspectRatio(1, contentMode: .fill)
+                    .shadow(color: Color(hexCode: "#191919").opacity(0.1), radius: 6)
+            }
+            .padding(8)
         }
     }
 }
@@ -166,7 +178,7 @@ struct MessageView: View {
     var subTitleText: String?
     
     var body: some View {
-        VStack {
+        VStack(spacing: 12) {
             Text(titleText)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(.textPrimary)
