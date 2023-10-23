@@ -109,20 +109,35 @@ struct JournalView: View {
                 
                 Spacer()
                 
-                Button {
-                    // TODO: Share
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding(10)
-                        .background(
-                            Circle()
-                                .fill(.ultraThinMaterial)
-                        )
+                if let image = viewStore.journal.wrappedImage {
+                    let imageToShare = Image(uiImage: image)
+                    ShareLink(item: imageToShare, preview: SharePreview("그림 일기", image: imageToShare)) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(10)
+                            .background(
+                                Circle()
+                                    .fill(.ultraThinMaterial)
+                            )
+                    }
+                    .frame(width: 40)
                 }
-                .labelStyle(.iconOnly)
-                .frame(width: 40)
+                
+//                Button {
+//                    // TODO: Share
+//                } label: {
+//                    Image(systemName: "square.and.arrow.up")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .padding(10)
+//                        .background(
+//                            Circle()
+//                                .fill(.ultraThinMaterial)
+//                        )
+//                }
+//                .labelStyle(.iconOnly)
+//                .frame(width: 40)
                 
                 Menu {
                     //                Button("편집", systemImage: "pencil") {
