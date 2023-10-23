@@ -17,11 +17,8 @@ struct DrawingStyleView: View {
                     Color.backgroundPrimary
                     VStack {
                         DateView()
-                        MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
-                        ScrollView() {
-                            generateDrawingStyleView()
-                                .padding()
-                        }
+                        MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
+                        generateDrawingStyleView()
                         Button {
                             viewStore.send(.showGeneratedDiaryView)
                             
@@ -54,68 +51,79 @@ struct DrawingStyleView: View {
             ("digital art", Color.emotionSad, Image("IconSad"))
         ]
         
-        let cardWidth: CGFloat = UIScreen.main.bounds.width * 0.4
-        
         WithViewStore(store , observe: { $0 }) { viewStore in
-            VStack {
-                ForEach(0..<4) { idx in
-                    if idx % 2 == 0 {
-                        HStack {
-                            Spacer()
-                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx])
-                                .frame(width: cardWidth, height: cardWidth)
-                                .onTapGesture(perform: {
-                                    if viewStore.selectedDrawingStyle == drawingStyles[idx].0 {
-                                        viewStore.send(.selectDrawingStyle(nil))
-                                    } else {
-                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx].0))
-                                    }
-                                })
-                            Spacer()
-                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx+1])
-                                .frame(width: cardWidth, height: cardWidth)
-                                .onTapGesture(perform: {
-                                    if viewStore.selectedDrawingStyle == drawingStyles[idx+1].0 {
-                                        viewStore.send(.selectDrawingStyle(nil))
-                                    } else {
-                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx+1].0))
-                                    }
-                                })
-                            Spacer()
-                        }
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 36) {
+                    ForEach(drawingStyles, id: \.0) { style in
+                        generateDrawingStyleCardView(drawingStyle: style)
+                            .onTapGesture(perform: {
+                                if viewStore.selectedDrawingStyle == style.0 {
+                                    viewStore.send(.selectDrawingStyle(nil))
+                                } else {
+                                    viewStore.send(.selectDrawingStyle(style.0))
+                                }
+                            })
+                            .padding(12)
                     }
                 }
+                .padding(4)
             }
+//            VStack {
+//                ForEach(0..<4) { idx in
+//                    if idx % 2 == 0 {
+//                        HStack {
+//                            Spacer()
+//                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx])
+//                                .onTapGesture(perform: {
+//                                    if viewStore.selectedDrawingStyle == drawingStyles[idx].0 {
+//                                        viewStore.send(.selectDrawingStyle(nil))
+//                                    } else {
+//                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx].0))
+//                                    }
+//                                })
+//                                .border(.red)
+//                            Spacer()
+//                            generateDrawingStyleCardView(drawingStyle: drawingStyles[idx+1])
+//                                .onTapGesture(perform: {
+//                                    if viewStore.selectedDrawingStyle == drawingStyles[idx+1].0 {
+//                                        viewStore.send(.selectDrawingStyle(nil))
+//                                    } else {
+//                                        viewStore.send(.selectDrawingStyle(drawingStyles[idx+1].0))
+//                                    }
+//                                })
+//                                .border(.red)
+//                            Spacer()
+//                        }
+//                    }
+//                }
+//            }
         }
     }
     
     @ViewBuilder
     func generateDrawingStyleCardView(drawingStyle: (String, Color, Image)) -> some View {
-        
         WithViewStore(store, observe: {$0}) { viewStore in
-            GeometryReader { geo in
-                VStack {
-                    drawingStyle.2
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(
-                            Circle()
-                        )
-                        .background (
-                            Circle()
-                                .stroke(viewStore.selectedDrawingStyle == drawingStyle.0 ? drawingStyle.1 : Color.black, lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 1)
-                                .background(
-                                    Circle().fill(Color.backgroundPrimary)
-                                )
-                        )
-//                        .frame(width: geo.size.width, height: geo.size.height)
-                        .shadow(radius: viewStore.selectedDrawingStyle == drawingStyle.0 ? 24 : 12)
-                    Text(drawingStyle.0)
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundStyle(.textPrimary)
-                }
-                .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))
+            VStack(spacing: 16) {
+                drawingStyle.2
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(
+                        Circle()
+                    )
+                    .background (
+                        Circle()
+//                            .stroke(viewStore.selectedDrawingStyle == drawingStyle.0 ? drawingStyle.1 : Color.black, lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 1)
+//                            .background(
+//                                Circle().fill(Color.backgroundPrimary)
+//                            )
+                            .fill(Color.backgroundPrimary)
+                    )
+                    .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ? 24 : 8)
+                Text(drawingStyle.0)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(.textPrimary)
             }
+            .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))
         }
     }
 }
