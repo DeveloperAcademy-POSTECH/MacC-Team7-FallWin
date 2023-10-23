@@ -141,11 +141,11 @@ struct DateView: View {
     
     var body: some View {
         HStack {
-            Text("<")
+//            Text("<")
             Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
                 .font(.pretendard(.semiBold, size: 20))
                 .foregroundStyle(.textPrimary)
-            Text(">")
+//            Text(">")
         }
     }
 }

@@ -13,6 +13,15 @@ struct GeneratedDiaryView: View {
     let store: StoreOf<GeneratedDiaryFeature>
     private let apiKey: String = Bundle.main.apiKey
     
+    let drawingStyleToEnglish: [String: String] = [
+        "미니멀리즘": "minimalism",
+        "스케치": "sketch",
+        "코믹스": "comics",
+        "디지털 아트": "digital art",
+        "랜덤": ""
+    ]
+
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
@@ -33,7 +42,7 @@ struct GeneratedDiaryView: View {
                     
                     var image: UIImage?
                     if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: viewStore.selectedDrawingStyle)
+                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
                         print("original input text: \(viewStore.mainText)\nchatGPT's output: \(promptOutput)\nprompt with drawing style: \(dallEPrompt)")
                         let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
                         
