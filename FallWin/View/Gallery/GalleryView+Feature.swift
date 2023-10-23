@@ -43,7 +43,7 @@ struct GalleryFeature: Reducer {
                 let context = PersistenceController.shared.container.viewContext
                 do {
                     let fetchRequest = NSFetchRequest<Journal>(entityName: "Journal")
-                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
+                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: true)]
                     state.journals = try context.fetch(fetchRequest)
                 } catch {
                     print(#function, error)
