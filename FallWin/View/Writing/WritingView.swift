@@ -22,20 +22,18 @@ struct WritingView: View {
                     MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
                         .padding(.top, 36)
                     generateEmotionView()
-                        .padding(.top, 15)
+                        .padding(.top, 21)
                     HStack {
-                        Spacer()
                         Spacer()
                         Button {
                             viewStore.send(.showMainTextView(nil))
                         } label: {
                             Text("건너뛰기")
-                                .font(.pretendard(.semiBold, size: 18))
-                                .frame(width: UIScreen.main.bounds.width * 0.16, height: 45)
+                                .font(.pretendard(.medium, size: 18))
+                                .frame(height: 54)
                                 .background(Color.backgroundPrimary)
                                 .foregroundColor(Color.textSecondary)
                         }
-                        Spacer()
                         Spacer()
                         Button {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
@@ -43,15 +41,17 @@ struct WritingView: View {
                         } label: {
                             Text("다음")
                                 .font(.pretendard(.semiBold, size: 18))
-                                .frame(width: UIScreen.main.bounds.width * 0.6, height: 45)
+                                .frame(width: UIScreen.main.bounds.width * 0.6, height: 54)
                                 .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
                                 .cornerRadius(9)
                                 .foregroundColor(Color.white)
                         }
                         .disabled(viewStore.selectedEmotion == nil)
-                        Spacer()
+                        .padding(.trailing, 20)
                     }
-                    .padding()
+                    .padding(.top, 15)
+                    .padding(.bottom, 30)
+//                    .padding([.leading, .trailing], 20)
                     .background{
                         Color.backgroundPrimary
                             .ignoresSafeArea()
@@ -121,13 +121,13 @@ struct WritingView: View {
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.clear, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0)
+                    .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.clear, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0) // line width 조금 더 늘려보기
                     .background {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.backgroundPrimary)
                     }
                     .aspectRatio(1, contentMode: .fill)
-                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0.1), radius: 6)
+                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0.1), radius: 6) // 더 퍼지게
 
             }
             .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
@@ -165,6 +165,7 @@ struct MessageView: View {
                     .font(.pretendard(.medium, size: 18))
                     .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(.textSecondary)
+                    .padding(.bottom, 15)
             }
         }
     }

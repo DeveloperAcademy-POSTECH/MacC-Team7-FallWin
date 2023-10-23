@@ -17,20 +17,23 @@ struct DrawingStyleView: View {
                     Color.backgroundPrimary
                     VStack {
                         DateView()
+                            .padding(.top, 30)
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
+                            .padding(.top, 24)
                         generateDrawingStyleView()
+                            .padding(.top, 21)
                         Button {
                             viewStore.send(.showGeneratedDiaryView)
-                            
                         } label: {
                             Text("다음")
                                 .font(.pretendard(.semiBold, size: 18))
-                                .frame(width: UIScreen.main.bounds.width-24, height: 45)
+                                .frame(width: UIScreen.main.bounds.width-40, height: 54)
                                 .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
                                 .cornerRadius(9)
                                 .foregroundColor(Color.white)
                         }
                         .disabled(viewStore.selectedDrawingStyle == nil)
+                        .padding(.top, 15)
                     }
                     .padding()
                 }
@@ -45,10 +48,10 @@ struct DrawingStyleView: View {
     func generateDrawingStyleView() -> some View {
         
         let drawingStyles: [(String, Color, Image)] = [
-            ("minimalism", Color.emotionHappy, Image("IconHappy")),
-            ("sketch", Color.emotionNervous, Image("IconNervous")),
-            ("comics", Color.emotionGrateful, Image("IconGrateful")),
-            ("digital art", Color.emotionSad, Image("IconSad"))
+            ("미니멀리즘", Color.emotionHappy, Image("IconHappy")),
+            ("스케치", Color.emotionNervous, Image("IconNervous")),
+            ("코믹스", Color.emotionGrateful, Image("IconGrateful")),
+            ("디지털 아트", Color.emotionSad, Image("IconSad"))
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -112,13 +115,13 @@ struct DrawingStyleView: View {
                     )
                     .background (
                         Circle()
-//                            .stroke(viewStore.selectedDrawingStyle == drawingStyle.0 ? drawingStyle.1 : Color.black, lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 1)
+//                            .stroke(Color(hexCode: "#191919"), lineWidth: viewStore.selectedDrawingStyle == drawingStyle.0 ? 2 : 0)
 //                            .background(
 //                                Circle().fill(Color.backgroundPrimary)
 //                            )
                             .fill(Color.backgroundPrimary)
                     )
-                    .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ? 24 : 8)
+                    .shadow(radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  6 : 4)
                 Text(drawingStyle.0)
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)

@@ -16,42 +16,42 @@ struct MainTextView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
-                VStack {
-                    Spacer()
-                        .frame(height: 30)
+                VStack(spacing: 0) {
                     DateView()
-                    Spacer()
-                        .frame(height: 36)
-                    MessageView(titleText: "오늘 하루는 어땠나요?")
-                    Spacer()
-                        .frame(height: 15)
-                    TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0 ?? "")}))
+                        .padding(.top, 30)
+                    MessageMainTextView()
+                        .padding(.top, 36)
+                    TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0 )}))
                         .font(.pretendard(.medium, size: 18))
                         .foregroundColor(.textPrimary)
+                        .scrollContentBackground(.hidden)
                         .focused($isFocused)
-                        .padding(9)
+                        .padding([.top, .bottom], 9)
+                        .padding([.leading, .trailing], 12)
                         .background() {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.backgroundPrimary)
-                                .shadow(radius: 12)
+                                .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
                         }
                         .onAppear() {
                             isFocused = true
                         }
+                        .padding(.top, 12)
                     Button {
 //                        viewStore.send(.inputMainText(mainText))
                         viewStore.send(.showDrawingStyleView)
                     } label: {
                         Text("다음")
                             .font(.pretendard(.semiBold, size: 18))
-                            .frame(width: UIScreen.main.bounds.width-24, height: 45)
+                            .frame(width: UIScreen.main.bounds.width-40, height: 54)
                             .background(viewStore.mainText == "" ? Color.buttonDisabled : Color.button)
                             .cornerRadius(9)
                             .foregroundColor(Color.white)
                     }
                     .disabled(viewStore.mainText == "")
+                    .padding([.top, .bottom], 15)
                 }
-                .padding()
+                .padding(20)
             }
             .navigationTitle(Text("일기 쓰기"))
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
@@ -66,11 +66,12 @@ struct MessageMainTextView: View {
         Text("오늘 하루는 어땠나요?")
             .font(.pretendard(.bold, size: 24))
             .foregroundStyle(.textPrimary)
+            .padding(.bottom, 15)
     }
 }
 
-//#Preview {
-//    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한", navPath: NavigationPath([NavPathState.mainText]))) {
-//        MainTextFeature()
-//    }, navPath: .constant(NavigationPath([NavPathState.mainText])))
-//}
+#Preview {
+    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤"), reducer: {
+        MainTextFeature()
+    }))
+}

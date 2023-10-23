@@ -20,7 +20,7 @@ enum PretendardType: String {
     case extraLight = "Pretendard-ExtraLight"
     case light = "Pretendard-Light"
     case medium = "Pretendard-Medium"
-    case semiBold = "Pretendard-SemoBold"
+    case semiBold = "Pretendard-SemiBold"
     case bold = "Pretendard-Bold"
     case extraBold = "Pretendard-ExtraBold"
     case black = "Pretendard-Black"
