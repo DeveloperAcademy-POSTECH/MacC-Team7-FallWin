@@ -68,7 +68,10 @@ struct GalleryFeature: Reducer {
                 return .none
                 
             case let .doneGenerating(journal):
-                return .send(.showJournalView(journal))
+                return .run { send in
+                    sleep(1)
+                    await send(.showJournalView(journal))
+                }
                 
             case .showWritingView:
                 state.writing = WritingFeature.State()
