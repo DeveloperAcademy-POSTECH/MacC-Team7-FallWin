@@ -31,8 +31,14 @@ struct Carousel: View {
                 ForEach(views.indices, id: \.self) { i in
                     let width = currentPage == i ? pageWidth : pageWidth * 0.9
                     let height = currentPage == i ? proxy.size.height : proxy.size.height * 0.9
-                    views[i].view
-                        .frame(width: width, height: height)
+                    
+                    if currentPage - 2 ..< currentPage + 3 ~= i {
+                        views[i].view
+                            .frame(width: width, height: height)
+
+                    } else {
+                        Spacer().frame(width: width, height: height)
+                    }
                 }
                 .contentShape(Rectangle())
             }
@@ -40,7 +46,7 @@ struct Carousel: View {
             .gesture(
                 DragGesture()
 //                    .updating($dragOffset, body: { value, out, _ in
-//                        out = value.translate.width
+//                        out = value.translation.width
 //                    })
                     .onEnded { value in
                         let offsetX = value.translation.width
