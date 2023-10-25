@@ -73,15 +73,40 @@ struct GeneratedDiaryView: View {
             .task {
                 do {
                     print(apiKey)
-                    let chatResponse = try await ChatGPTApiManager.shared.createChat(withPrompt: viewStore.mainText, apiKey: apiKey)
+                    print("input to chatGPT: \(ChatGPTApiManager.shared.generatePromptForChat2(viewStore.mainText, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? ""))")
+                    let chatResponse = try await ChatGPTApiManager.shared.createChat2(prompt: viewStore.mainText, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", apiKey: apiKey)
                     
                     var image: UIImage?
+//                    if let promptOutput = chatResponse.choices.map(\.message.content).first {
+//                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
+//                        print("original input text:\n\(viewStore.mainText)\nchatGPT's output:\n\(promptOutput)\nprompt with drawing style:\n\(dallEPrompt)")
+//                        let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
+//                        
+//                        if let url = imageResponse.data.map(\.url).first {
+//                            guard let url = URL(string: url) else {
+//                                return
+//                            }
+//                            let (data, _) = try await URLSession.shared.data(from: url)
+//                            image = UIImage(data: data)
+//                        }
+//                    } else {
+//                        let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: viewStore.mainText, apiKey: apiKey)
+//                        
+//                        if let url = imageResponse.data.map(\.url).first {
+//                            guard let url = URL(string: url) else {
+//                                return
+//                            }
+//                            let (data, _) = try await URLSession.shared.data(from: url)
+//                            image = UIImage(data: data)
+//                        }
+//                    }
+                    
                     if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
-                        print("original input text:\n\(viewStore.mainText)\nchatGPT's output:\n\(promptOutput)\nprompt with drawing style:\n\(dallEPrompt)")
-                        let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
+                        let karloPrompt = KarloApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
+                        print("original input text:\n\(viewStore.mainText)\n------\nchatGPT's output:\n\(promptOutput)\n------\nprompt with drawing style:\n\(karloPrompt)")
+                        let imageResponse = try await KarloApiManager.shared.generateImage(prompt: promptOutput, negativePrompt: "ugly, text, words, alphabet, text-like, alphabet-like, letter, letter-like, Text-Like Patterns, Letter-Resembling Features, misspelled letters, name, title, poorly drawn hands, poorly drawn feet, poorly drawn face, extra limbs, disfigured, deformed", apiKey: apiKey)
                         
-                        if let url = imageResponse.data.map(\.url).first {
+                        if let url = imageResponse.images.first?.image {
                             guard let url = URL(string: url) else {
                                 return
                             }
