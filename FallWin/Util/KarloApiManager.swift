@@ -44,7 +44,7 @@ extension KarloApiManager {
         let parameters: [String: Any] = [
             "prompt": prompt,
             "negative_prompt": negativePrompt,
-            "samples": 4,
+            "samples": 8,
             "num_inference_steps": 30,
             "guidance_scale": 15
         ]
