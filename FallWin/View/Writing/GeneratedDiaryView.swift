@@ -15,11 +15,11 @@ struct GeneratedDiaryView: View {
     private let apiKey: String = Bundle.main.apiKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "크레용": "Childlike crayon",
+        "유화": "Oil painting",
         "스케치": "Sketch, Croquis, Black and White",
-        "동화": "Children's illustration",
-        "수채화": "Water color",
-        "디지털 아트": "Digital art",
+        "판타지": "Fantasy",
+        "수채화": "Water color, Pastel",
+        "샤갈": "marc chagall, Modernism",
         "네온": "Neon",
         "반 고흐": "Vincent Van Gogh",
         "살바도르 달리": "Salvador Dali"

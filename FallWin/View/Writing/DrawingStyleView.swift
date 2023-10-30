@@ -59,12 +59,23 @@ struct DrawingStyleView: View {
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
         
+//        let drawingStyles: [(String, Color, Image)] = [
+//            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
+//            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
+//            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
+//            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
+//            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
+//            ("네온", Color(hexCode: "#191919"), Image("Neon")),
+//            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
+//            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
+//        ]
+        
         let drawingStyles: [(String, Color, Image)] = [
-            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
+            ("유화", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
             ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
-            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
+            ("판타지", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
             ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
-            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
+            ("샤갈", Color(hexCode: "#191919"), Image("DigitalArt")),
             ("네온", Color(hexCode: "#191919"), Image("Neon")),
             ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
             ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
