@@ -16,7 +16,7 @@ struct GeneratedDiaryView: View {
     
     let drawingStyleToEnglish: [String: String] = [
         "크레용": "Childlike crayon",
-        "스케치": "Sketch",
+        "스케치": "Sketch, Croquis, Black and White",
         "동화": "Children's illustration",
         "수채화": "Water color",
         "디지털 아트": "Digital art",
