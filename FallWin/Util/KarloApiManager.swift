@@ -43,7 +43,10 @@ extension KarloApiManager {
         
         let parameters: [String: Any] = [
             "prompt": prompt,
-            "negative_prompt": negativePrompt
+            "negative_prompt": negativePrompt,
+            "samples": 4,
+            "num_inference_steps": 30,
+            "guidance_scale": 15
         ]
         
         let data: Data = try JSONSerialization.data(withJSONObject: parameters)

@@ -105,12 +105,13 @@ extension ChatGPTApiManager {
     
     func generatePromptForChat2(_ prompt: String, emotion: String, drawingStyle: String) -> String {
         let template: String = """
-        Make comma seperated prompt(keyword#1, keyword#2, keyword#3, ..., keyword#n) for AI Image generator referring to below <<INPUT TEXT>>, <<MOOD>>, <<DRAWING STYLE>>.
+        Make comma seperated english prompt(keyword#1, keyword#2, keyword#3, ..., keyword#n, <<MOOD>>, [[<<DRAWING STYLE>>]]) for AI Image generator referring to below <<INPUT TEXT>>, <<MOOD>>, <<DRAWING STYLE>>.
 
+        The output must be 'english' prompt.
         The output must be simple and brief.
         The output must be comma seperated.
         The output must contain the context and meaning of <<INPUT TEXT>>.
-        The output must be english prompt.
+        The drawing style mush be in double brackets.
         
         <<INPUT TEXT>>
         \(prompt)
@@ -294,7 +295,7 @@ extension ChatGPTApiManager {
     }
     
     func createChat2(prompt: String, emotion: String, drawingStyle: String, apiKey: String) async throws -> ChatCreationResponse {
-        guard try await validatePrompt(generatePromptForChat(prompt), apiKey: apiKey) else {
+        guard try await validatePrompt(generatePromptForChat2(prompt, emotion: emotion, drawingStyle: drawingStyle), apiKey: apiKey) else {
             print("----------------Invalid Prompt----------------")
             throw ImageError.invalidPrompt
         }
