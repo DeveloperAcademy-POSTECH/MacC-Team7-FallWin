@@ -128,7 +128,24 @@ extension ChatGPTApiManager {
         
         return template
     }
-    
+
+    func generatePromptForChat3(_ prompt: String) -> String {
+        let template: String = """
+        Make comma seperated english prompt(keyword#1, keyword#2, keyword#3, ..., keyword#n) for AI Image generator referring to below <<INPUT TEXT>>.
+
+        The output must be 'english' prompt.
+        The output must be simple and brief.
+        The output must be comma seperated.
+        The output must contain the context and meaning of <<INPUT TEXT>>.
+        
+        <<INPUT TEXT>>
+        \(prompt)
+        <</INPUT TEXT>>
+        """
+        
+        return template
+    }
+
     
     
     
@@ -219,6 +236,46 @@ extension ChatGPTApiManager {
                 [
                     "role": "user",
                     "content": generatePromptForChat2(prompt, emotion: emotion, drawingStyle: drawingStyle)
+                ]
+            ]
+        ]
+        
+        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
+        
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = data
+        
+        let (responseData, response) = try await URLSession.shared.data(for: request)
+        print("response: \(response)")
+        let result = try JSONDecoder().decode(ChatCreationResponse.self, from: responseData)
+        
+        return result
+    }
+    
+    func createChat3(prompt: String, apiKey: String) async throws -> ChatCreationResponse {
+        guard try await validatePrompt(generatePromptForChat3(prompt), apiKey: apiKey) else {
+            print("----------------Invalid Prompt----------------")
+            throw ImageError.invalidPrompt
+        }
+        
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+            print("------------------bad URL------------------")
+            throw ImageError.badURL
+        }
+        
+        let parameters: [String: Any] = [
+            "model": "gpt-3.5-turbo",
+            "messages": [
+//                [
+//                    "role": "system",
+//                    "content": "You are Dall-E version 2 prompt engineer."
+//                ],
+                [
+                    "role": "user",
+                    "content": generatePromptForChat(prompt)
                 ]
             ]
         ]

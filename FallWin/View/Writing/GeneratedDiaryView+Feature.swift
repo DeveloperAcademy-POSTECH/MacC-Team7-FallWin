@@ -16,6 +16,10 @@ struct GeneratedDiaryFeature: Reducer {
         var selectedDrawingStyle: String
         var image: UIImage?
         var imageSet: [UIImage?] = []
+        var priorSteps: Double = 25.0
+        var priorScale: Double = 5.0
+        var steps: Double = 25.0
+        var scale: Double = 5.0
     }
     
     
@@ -25,6 +29,10 @@ struct GeneratedDiaryFeature: Reducer {
         case setImages([UIImage?])
         case doneGenerating
         case doneImage(Journal)
+        case setPriorSteps(_ priorSteps: Double)
+        case setPriorScale(_ priorScale: Double)
+        case setSteps(_ steps: Double)
+        case setScale(_ scale: Double)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -53,6 +61,22 @@ struct GeneratedDiaryFeature: Reducer {
             context.insert(journal)
             PersistenceController.shared.saveContext()
             return .send(.doneImage(journal))
+            
+        case let .setPriorSteps(priorSteps):
+            state.priorSteps = priorSteps
+            return .none
+        
+        case let .setPriorScale(priorScale):
+            state.priorScale = priorScale
+            return .none
+            
+        case let .setSteps(steps):
+            state.steps = steps
+            return .none
+            
+        case let .setScale(scale):
+            state.scale = scale
+            return .none
             
         default: return .none
         }

@@ -15,14 +15,14 @@ struct GeneratedDiaryView: View {
     private let apiKey: String = Bundle.main.apiKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "유화": "Oil painting",
-        "스케치": "Sketch, Croquis, Black and White",
-        "판타지": "Fantasy",
-        "수채화": "Water color, Pastel",
-        "샤갈": "marc chagall, Modernism",
-        "네온": "Neon",
-        "반 고흐": "Vincent Van Gogh",
-        "살바도르 달리": "Salvador Dali"
+        "유화": "[[Oil painting]]",
+        "스케치": "[[Sketch]], [[Croquis]], [[Black and White]]",
+        "판타지": "[[Fantasy]]",
+        "수채화": "[[Water color]], [[Pastel]]",
+        "샤갈": "[[Marc Chagall]], [[Modernism]]",
+        "네온": "[[Neon]]",
+        "반 고흐": "[[Vincent Van Gogh]], [[Impressionism]]",
+        "살바도르 달리": "[[Salvador Dali]], [[Surreallism]]"
     ]
     
     let emotionToEnglish: [String: String] = [
@@ -59,6 +59,7 @@ struct GeneratedDiaryView: View {
                                     Image(uiImage: image)
                                         .resizable()
                                         .scaledToFit()
+                                        .shadow(color: viewStore.image == image ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.image == image ?  8 : 4)
                                         .onTapGesture {
                                             if viewStore.image == image {
                                                 viewStore.send(.setImage(nil))
@@ -71,17 +72,6 @@ struct GeneratedDiaryView: View {
                                         .scaledToFit()
                                 }
                             }
-                            
-                            //                        ForEach(images, id: \.0) { image in
-                            //                            Image(UIImage(data: URL(string: image)))
-                            //                                .onTapGesture {
-                            //                                    if viewStore.image == image {
-                            //                                        viewStore.send(.setImage(nil))
-                            //                                    } else {
-                            //                                        viewStore.send(.setImage(image))
-                            //                                    }
-                            //                                }
-                            //                        }
                         }
                         .padding()
                         .padding(.bottom, 32)
@@ -110,10 +100,6 @@ struct GeneratedDiaryView: View {
                             .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
                     }
                 }
-                //                    Image(uiImage: image)
-                //                        .onAppear {
-                //                            viewStore.send(.doneGenerating)
-                //                        }
             } else {
                 ZStack {
                     LottieImageGenView(jsonName: "LottieImageGen")
@@ -138,46 +124,16 @@ struct GeneratedDiaryView: View {
             do {
                 print(apiKey)
                 print("input to chatGPT: \(ChatGPTApiManager.shared.generatePromptForChat2(viewStore.mainText, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? ""))")
-                let chatResponse = try await ChatGPTApiManager.shared.createChat2(prompt: viewStore.mainText, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", apiKey: apiKey)
+                let chatResponse = try await ChatGPTApiManager.shared.createChat3(prompt: viewStore.mainText,  apiKey: apiKey)
                 
                 var image: UIImage?
-                //                    if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                //                        let dallEPrompt = DallEApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
-                //                        print("original input text:\n\(viewStore.mainText)\nchatGPT's output:\n\(promptOutput)\nprompt with drawing style:\n\(dallEPrompt)")
-                //                        let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: dallEPrompt, apiKey: apiKey)
-                //
-                //                        if let url = imageResponse.data.map(\.url).first {
-                //                            guard let url = URL(string: url) else {
-                //                                return
-                //                            }
-                //                            let (data, _) = try await URLSession.shared.data(from: url)
-                //                            image = UIImage(data: data)
-                //                        }
-                //                    } else {
-                //                        let imageResponse = try await DallEApiManager.shared.generateImage(withPrompt: viewStore.mainText, apiKey: apiKey)
-                //
-                //                        if let url = imageResponse.data.map(\.url).first {
-                //                            guard let url = URL(string: url) else {
-                //                                return
-                //                            }
-                //                            let (data, _) = try await URLSession.shared.data(from: url)
-                //                            image = UIImage(data: data)
-                //                        }
-                //                    }
                 
                 if let promptOutput = chatResponse.choices.map(\.message.content).first {
-                    let karloPrompt = KarloApiManager.shared.addDrawingStyle(withPrompt: promptOutput, drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "", emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "")
+                    let karloPrompt = KarloApiManager.shared.addEmotionDrawingStyle(prompt: promptOutput, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
                     print("original input text:\n\(viewStore.mainText)\n------\nchatGPT's output:\n\(promptOutput)\n------\nprompt with drawing style:\n\(karloPrompt)")
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: promptOutput, negativePrompt: "scary, dirty, ugly, text, letter, poorly drawn face, side face, poorly drawn feet, poorly drawn hand, divided, framed, cross line", apiKey: apiKey)
                     
-//                    if let url = imageResponse.images.map(\.image).first {
-//                        guard let url = URL(string: url) else {
-//                            return
-//                        }
-//                        let (data, _) = try await URLSession.shared.data(from: url)
-//                        image = UIImage(data: data)
-//                        viewStore.send(.setImages([image]))
-//                    }
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "scary, dirty, ugly, text, letter, poorly drawn face, side face, poorly drawn feet, poorly drawn hand, divided, framed, cross line", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: apiKey)
+                    
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {
                         let imageString = imageOutput.image
@@ -189,11 +145,6 @@ struct GeneratedDiaryView: View {
                         let (imageData, _) = try await URLSession.shared.data(from: imageURL)
                         images.append(UIImage(data: imageData))
                     }
-//                    guard let imageURLs = imageResponse.images.map( URL(string: $0.image) ) else {
-//                        return
-//                    }
-//                    let imageDatas = try await imageURLs.map( URLSession.shared.data(from: $0).0 )
-//                    let images = imageDatas.map( UIImage(data: $0) )
                     viewStore.send(.setImages(images))
                     
                 } else {
@@ -208,10 +159,6 @@ struct GeneratedDiaryView: View {
                         viewStore.send(.setImages([image]))
                     }
                 }
-                
-                //                    if let image = image {
-                //                        viewStore.send(.setImage(image))
-                //                    }
             } catch {
                 print(error)
             }

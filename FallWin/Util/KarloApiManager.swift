@@ -22,31 +22,27 @@ extension KarloApiManager {
         return false
     }
     
-    func addDrawingStyle(withPrompt prompt: String, drawingStyle: String, emotion: String) -> String {
-        var drawingStyleTemplate: String = ""
-        if drawingStyle != "" {
-            drawingStyleTemplate = """
-                Drawing Style: \(drawingStyle) depicting the abstract concept of \(emotion).
-                """
-        }
-        let KarloPrompt = prompt + "\n" + drawingStyleTemplate
+    func addEmotionDrawingStyle(prompt: String, emotion: String, drawingStyle: String) -> String {
         
-        return KarloPrompt
+        return prompt + ", \(emotion)" + ", \(drawingStyle)"
     }
     
-    func generateImage(prompt: String, negativePrompt: String, apiKey: String) async throws  -> KarloImageGenerationResponse {
+    func generateImage(prompt: String, negativePrompt: String, priorSteps: Double, priorScale: Double, steps: Double, scale: Double, apiKey: String) async throws  -> KarloImageGenerationResponse {
         
         guard let url = URL(string: "https://api.kakaobrain.com/v2/inference/karlo/t2i") else {
             print("------------------bad URL------------------")
             throw KarloImageError.badURL
         }
+        print(Int(priorSteps), Int(steps))
         
         let parameters: [String: Any] = [
             "prompt": prompt,
             "negative_prompt": negativePrompt,
             "samples": 8,
-            "num_inference_steps": 30,
-            "guidance_scale": 15
+            "prior_num_inference_steps": Int(priorSteps),
+            "prior_guidance_scale": priorScale,
+            "num_inference_steps": Int(steps),
+            "guidance_scale": scale
         ]
         
         let data: Data = try JSONSerialization.data(withJSONObject: parameters)
