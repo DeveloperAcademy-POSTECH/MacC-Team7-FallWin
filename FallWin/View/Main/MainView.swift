@@ -16,29 +16,23 @@ struct MainView: View {
             ZStack {
                 ScrollView {
                     LazyVStack {
-                        ForEach(viewStore.journals) { journal in
-                            ZStack {
-                                ZStack {
-                                    if let image = journal.wrappedImage {
-                                        Image(uiImage: image)
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.blue)
-                                    }
+                        ForEach(viewStore.journals.indices, id: \.self) { i in
+                            let journal = viewStore.journals[i]
+                            
+                            VStack(spacing: 0) {
+                                if let image = journal.wrappedImage {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                                } else {
+                                    Rectangle()
+                                        .fill(Color.blue)
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 24))
                                 }
-                                .overlay(.ultraThinMaterial)
                                 
                                 VStack(spacing: 0) {
-                                    if let image = journal.wrappedImage {
-                                        Image(uiImage: image)
-                                            .clipShape(RoundedRectangle(cornerRadius: 24))
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.blue)
-                                            .aspectRatio(1, contentMode: .fit)
-                                            .clipShape(RoundedRectangle(cornerRadius: 24))
-                                    }
-                                    
                                     HStack(alignment: .center) {
                                         if let date = journal.timestamp {
                                             Text(date.dateString)
@@ -47,7 +41,7 @@ struct MainView: View {
                                                 .padding(.horizontal)
                                                 .background(
                                                     Capsule()
-                                                        .fill(.ultraThinMaterial)
+                                                        .fill(.regularMaterial)
                                                 )
                                         }
                                         Spacer()
@@ -64,12 +58,38 @@ struct MainView: View {
                                             .padding(.horizontal)
                                             .background(
                                                 Capsule()
-                                                    .fill(.ultraThinMaterial)
+                                                    .fill(.regularMaterial)
                                             )
                                         }
                                     }
-                                    .padding()
+                                    
+                                    if let content = journal.content {
+                                        HStack {
+                                            Text(content)
+                                                .font(.pretendard(.medium, size: 16))
+                                                .lineLimit(2)
+                                                .truncationMode(.tail)
+                                                .multilineTextAlignment(.leading)
+                                            Spacer()
+                                        }
+                                        .padding()
+                                    }
                                 }
+                                .padding()
+                            }
+                            .background {
+                                ZStack {
+                                    if let image = journal.wrappedImage {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFill()
+                                        
+                                    } else {
+                                        Rectangle()
+                                            .fill(Color.blue)
+                                    }
+                                }
+                                .overlay(.ultraThinMaterial)
                             }
                             .clipShape(RoundedRectangle(cornerRadius: 24))
                             .padding()
@@ -77,10 +97,12 @@ struct MainView: View {
                         }
                     }
                     .padding()
+                    .padding(.bottom, CvasTabViewValue.tabBarHeight)
                 }
                 
                 writingActionButton
                     .padding()
+                    .padding(.bottom, CvasTabViewValue.tabBarHeight)
                     .navigationDestination(store: store.scope(state: \.$writing, action: MainFeature.Action.writing)) { store in
                         WritingView(store: store)
                             .onAppear {
@@ -90,6 +112,18 @@ struct MainView: View {
             }
             .onAppear {
                 viewStore.send(.fetchAll)
+            }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("설정", systemImage: "gearshape") {
+                        viewStore.send(.showSettingsView)
+                    }
+                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
+                        NavigationStack {
+                            SettingsView(store: store)
+                        }
+                    }
+                }
             }
         }
     }

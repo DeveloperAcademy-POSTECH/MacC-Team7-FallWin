@@ -53,10 +53,30 @@ struct PasscodeView: View {
     
     var body: some View {
         VStack {
+            if dismissable {
+                HStack {
+                    Button {
+                        dismiss()
+                        
+                    } label: {
+                        Image(systemName: "xmark")
+                            .padding(8)
+                            .background(
+                                Circle()
+                                    .fill(.ultraThickMaterial)
+                            )
+                    }
+                    
+                    Spacer()
+                }
+                .padding()
+            }
+            
             Spacer()
             
             Text(message)
                 .font(.pretendard(.semiBold, size: 24))
+                .multilineTextAlignment(.center)
             
             Spacer()
             
@@ -80,8 +100,16 @@ struct PasscodeView: View {
                         deleteButton
                         
                     case .biometric:
-                        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) && laContext.biometryType != .none {
+                        if biometric &&
+                            UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.biometric) &&
+                            laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) &&
+                            laContext.biometryType != .none {
                             biometricButton
+                                .onAppear {
+                                    if authenticateOnLaunch {
+                                        authenticateViaBiometric()
+                                    }
+                                }
                         } else {
                             Spacer()
                         }
@@ -89,24 +117,14 @@ struct PasscodeView: View {
                 }
             }
             .frame(maxWidth: 360)
-            .padding(.bottom)
+            .padding()
         }
         .background(Color.backgroundPrimary.ignoresSafeArea())
     }
     
     private var biometricButton: some View {
         Button {
-            
-            if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "일기장 잠금 해제") { success, error in
-                    if let error = error {
-                        print(error)
-                    }
-                    if success {
-                        validate(typed: nil, biometric: true)
-                    }
-                }
-            }
+            authenticateViaBiometric()
             
         } label: {
             var icon: String = {
@@ -170,6 +188,19 @@ struct PasscodeView: View {
                         .fill(.backgroundPrimary)
                 )
                 .shadow(color: .shadow.opacity(0.1), radius: 8, y: 4)
+        }
+    }
+    
+    private func authenticateViaBiometric() {
+        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "일기장 잠금 해제") { success, error in
+                if let error = error {
+                    print(error)
+                }
+                if success {
+                    validate(typed: nil, biometric: true)
+                }
+            }
         }
     }
     

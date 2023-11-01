@@ -71,6 +71,7 @@ struct SettingsFeature: Reducer {
                 
             case let .setBiometric(biometric):
                 UserDefaults.standard.setValue(biometric, forKey: UserDefaultsKey.Settings.biometric)
+                state.biometric = biometric
                 return .none
                 
             case let .showPasscodeView(show):

@@ -11,6 +11,8 @@ import ComposableArchitecture
 struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             Form {
@@ -19,10 +21,14 @@ struct SettingsView: View {
                     
                     if let biometricString = viewStore.biometricString {
                         Toggle(biometricString, isOn: viewStore.binding(get: \.biometric, send: SettingsFeature.Action.setBiometric))
+                            .disabled(!viewStore.lock)
                     }
                     
                 } header: {
                     Text("보안")
+                }
+                .onAppear {
+                    viewStore.send(.initBiometricString)
                 }
                 
                 Section {
@@ -53,6 +59,14 @@ struct SettingsView: View {
                     }
                 }
             })
+            .navigationTitle("설정")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("닫기") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

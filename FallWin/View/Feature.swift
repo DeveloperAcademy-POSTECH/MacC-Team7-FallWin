@@ -7,14 +7,19 @@
 
 import Foundation
 import SwiftUI
+import SwiftKeychainWrapper
 import ComposableArchitecture
 
 struct Feature: Reducer {
     struct State: Equatable {
         var tabSelection: TabItem = .gallery
         var hideTabBar: Bool = false
+        var invisible: Bool = false
+        var lock: Bool = false
+        var showPasscodeView: Bool = true
         
         @PresentationState var gallery: GalleryFeature.State?
+        @PresentationState var main: MainFeature.State?
         @PresentationState var search: SearchFeature.State?
         @PresentationState var surf: SurfFeature.State?
         @PresentationState var profile: ProfileFeature.State?
@@ -24,8 +29,12 @@ struct Feature: Reducer {
         case initViews
         case tabSelect(TabItem)
         case hideTabBar(Bool)
+        case setInvisibility(Bool)
+        case setLock(Bool)
+        case showPasscodeView(Bool)
         
         case gallery(PresentationAction<GalleryFeature.Action>)
+        case main(PresentationAction<MainFeature.Action>)
         case search(PresentationAction<SearchFeature.Action>)
         case surf(PresentationAction<SurfFeature.Action>)
         case profile(PresentationAction<ProfileFeature.Action>)
@@ -36,6 +45,7 @@ struct Feature: Reducer {
             switch action {
             case .initViews:
                 state.gallery = .init()
+                state.main = .init()
                 state.search = .init()
                 state.surf = .init()
                 state.profile = .init()
@@ -51,6 +61,18 @@ struct Feature: Reducer {
                 }
                 return .none
                 
+            case let .setInvisibility(invisible):
+                state.invisible = invisible
+                return .none
+                
+            case let .setLock(lock):
+                state.lock = lock
+                return .none
+                
+            case let .showPasscodeView(show):
+                state.showPasscodeView = show
+                return .none
+                
             case let .gallery(action):
                 return handleGalleryAction(state: &state, action: action)
                 
@@ -59,6 +81,9 @@ struct Feature: Reducer {
         }
         .ifLet(\.$gallery, action: /Action.gallery) {
             GalleryFeature()
+        }
+        .ifLet(\.$main, action: /Action.main) {
+            MainFeature()
         }
         .ifLet(\.$search, action: /Action.search) {
             SearchFeature()

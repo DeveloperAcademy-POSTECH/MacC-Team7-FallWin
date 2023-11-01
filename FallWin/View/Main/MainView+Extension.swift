@@ -15,6 +15,7 @@ struct MainFeature: Reducer {
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
+        @PresentationState var settings: SettingsFeature.State?
     }
     
     enum Action: Equatable {
@@ -23,16 +24,18 @@ struct MainFeature: Reducer {
         case doneGenerating(Journal)
         case showJournalView(Journal)
         case showWritingView
+        case showSettingsView
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
+        case settings(PresentationAction<SettingsFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .fetchAll:
-                let context = PersistenceController.debug.container.viewContext
+                let context = PersistenceController.shared.container.viewContext
                 do {
                     let fetchRequest = NSFetchRequest<Journal>(entityName: "Journal")
                     fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: true)]
@@ -56,6 +59,10 @@ struct MainFeature: Reducer {
                 state.writing = WritingFeature.State()
                 return .none
                 
+            case .showSettingsView:
+                state.settings = .init()
+                return .none
+                
             case .writing(let action):
                 return handleWritingAction(state: &state, action: action)
                 
@@ -67,6 +74,9 @@ struct MainFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
+        }
+        .ifLet(\.$settings, action: /Action.settings) {
+            SettingsFeature()
         }
     }
     
