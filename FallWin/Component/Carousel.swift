@@ -23,6 +23,40 @@ struct Carousel: View {
     @GestureState private var dragOffset: CGFloat = 0
     
     var body: some View {
+        if #available(iOS 17, *) {
+            scrollView
+        } else {
+            lazyHStackView
+        }
+    }
+    
+    @available(iOS 17.0, *)
+    @ViewBuilder
+    private var scrollView: some View {
+        GeometryReader { proxy in
+            let pageWidth = proxy.size.width - (spacing + visibleSpace) * 2
+            
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 0) {
+                    ForEach(views.indices, id: \.self) { i in
+                        views[i].view
+                            .containerRelativeFrame(.horizontal)
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(phase.isIdentity ? 1.0 : 0.8)
+                                    .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
+                            }
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .scrollTargetBehavior(.viewAligned)
+            .scrollIndicators(.hidden)
+        }
+    }
+    
+    @ViewBuilder
+    private var lazyHStackView: some View {
         GeometryReader { proxy in
             let pageWidth = proxy.size.width - (spacing + visibleSpace) * 2
             let offsetX = (spacing + visibleSpace) + CGFloat(currentPage) * (-pageWidth * 0.9) + CGFloat(currentPage) * -spacing + dragOffset
@@ -45,9 +79,6 @@ struct Carousel: View {
             .offset(x: offsetX)
             .gesture(
                 DragGesture()
-//                    .updating($dragOffset, body: { value, out, _ in
-//                        out = value.translation.width
-//                    })
                     .onEnded { value in
                         let offsetX = value.translation.width
                         let progress = -offsetX / pageWidth
