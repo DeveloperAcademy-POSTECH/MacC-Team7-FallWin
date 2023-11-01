@@ -20,6 +20,11 @@
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Extension.swift */; };
 		792751172AF221260023123C /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751162AF221260023123C /* PasscodeView.swift */; };
+		7927511C2AF232FD0023123C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511B2AF232FD0023123C /* SettingsView.swift */; };
+		7927511E2AF233060023123C /* SettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511D2AF233060023123C /* SettingsView+Feature.swift */; };
+		792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511F2AF2392C0023123C /* UserDefaultsKey.swift */; };
+		792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 792751242AF23DC10023123C /* SwiftKeychainWrapper */; };
+		792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -87,6 +92,10 @@
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Extension.swift"; sourceTree = "<group>"; };
 		792751162AF221260023123C /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		7927511B2AF232FD0023123C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7927511D2AF233060023123C /* SettingsView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Feature.swift"; sourceTree = "<group>"; };
+		7927511F2AF2392C0023123C /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftKeychainWrapper+Extension.swift"; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,6 +154,7 @@
 			files = (
 				98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */,
 				79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */,
+				792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */,
 				79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */,
 				98202FA72AE6A0360089CF79 /* Lottie in Frameworks */,
 			);
@@ -177,6 +187,15 @@
 				792751162AF221260023123C /* PasscodeView.swift */,
 			);
 			path = Passcode;
+			sourceTree = "<group>";
+		};
+		7927511A2AF232F00023123C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7927511B2AF232FD0023123C /* SettingsView.swift */,
+				7927511D2AF233060023123C /* SettingsView+Feature.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		79407D462AD7E68D006C7571 = {
@@ -232,6 +251,7 @@
 				98726DC82AE6439200A14860 /* UIColor+Extension.swift */,
 				98726DCA2AE643A700A14860 /* Color+Extension.swift */,
 				9867B6392AE6533A00C7359B /* Font+Extension.swift */,
+				792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -246,6 +266,7 @@
 				791F14692ADD736B00F8DDD2 /* TabBarLabelStyle.swift */,
 				794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */,
 				98F70A822AE5308200FEE4D2 /* WritingPathState.swift */,
+				7927511F2AF2392C0023123C /* UserDefaultsKey.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -265,6 +286,7 @@
 				98DA96F02ADD6878000DDAFA /* Test */,
 				791F14772AE0D88F00F8DDD2 /* Journal */,
 				98202FA82AE6A04A0089CF79 /* Lottie */,
+				7927511A2AF232F00023123C /* Settings */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -409,6 +431,7 @@
 				79E5B2D02ADD501200A86770 /* ComposableArchitecture */,
 				79E5B2D32ADD502100A86770 /* Alamofire */,
 				98202FA62AE6A0360089CF79 /* Lottie */,
+				792751242AF23DC10023123C /* SwiftKeychainWrapper */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -442,6 +465,7 @@
 				79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				79E5B2D22ADD502100A86770 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				98202FA52AE6A0360089CF79 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -494,6 +518,7 @@
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				79E5B2CC2ADD4FE900A86770 /* SurfView.swift in Sources */,
 				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
+				7927511C2AF232FD0023123C /* SettingsView.swift in Sources */,
 				79E5B2C82ADD4FD900A86770 /* GalleryView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
@@ -520,7 +545,10 @@
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
+				792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
+				792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */,
+				7927511E2AF233060023123C /* SettingsView+Feature.swift in Sources */,
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
 				792751172AF221260023123C /* PasscodeView.swift in Sources */,
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
@@ -749,6 +777,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 		79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -776,6 +812,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		792751242AF23DC10023123C /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
 		79E5B2D02ADD501200A86770 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
