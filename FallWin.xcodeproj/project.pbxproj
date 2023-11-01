@@ -17,6 +17,8 @@
 		791F14792AE0D8A400F8DDD2 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14782AE0D8A400F8DDD2 /* JournalView.swift */; };
 		791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */; };
 		791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */; };
+		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
+		792751142AF21AAB0023123C /* MainView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Extension.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -81,6 +83,8 @@
 		791F14782AE0D8A400F8DDD2 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalView+Feature.swift"; sourceTree = "<group>"; };
 		791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		792751132AF21AAB0023123C /* MainView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Extension.swift"; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,6 +158,15 @@
 				791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */,
 			);
 			path = Journal;
+			sourceTree = "<group>";
+		};
+		792751102AF21A900023123C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				792751112AF21AA30023123C /* MainView.swift */,
+				792751132AF21AAB0023123C /* MainView+Extension.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		79407D462AD7E68D006C7571 = {
@@ -233,6 +246,7 @@
 				79407D542AD7E68D006C7571 /* ContentView.swift */,
 				791F14732ADD8EA500F8DDD2 /* Feature.swift */,
 				98DA96F82ADFA577000DDAFA /* Writing */,
+				792751102AF21A900023123C /* Main */,
 				79E5B2C32ADD4FA400A86770 /* Gallery */,
 				79E5B2C42ADD4FAC00A86770 /* Search */,
 				79E5B2C52ADD4FB100A86770 /* Surf */,
@@ -474,6 +488,7 @@
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
+				792751122AF21AA30023123C /* MainView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */,
@@ -483,6 +498,7 @@
 				79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */,
 				791F14722ADD8D0100F8DDD2 /* ProfileView+Feature.swift in Sources */,
 				791F14792AE0D8A400F8DDD2 /* JournalView.swift in Sources */,
+				792751142AF21AAB0023123C /* MainView+Extension.swift in Sources */,
 				791F146A2ADD736B00F8DDD2 /* TabBarLabelStyle.swift in Sources */,
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
