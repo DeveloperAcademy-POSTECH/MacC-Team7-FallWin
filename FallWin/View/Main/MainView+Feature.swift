@@ -38,7 +38,7 @@ struct MainFeature: Reducer {
                 let context = PersistenceController.shared.container.viewContext
                 do {
                     let fetchRequest = NSFetchRequest<Journal>(entityName: "Journal")
-                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: true)]
+                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
                     state.journals = try context.fetch(fetchRequest)
                 } catch {
                     print(#function, error)

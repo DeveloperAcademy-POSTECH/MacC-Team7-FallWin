@@ -16,7 +16,7 @@ struct MainView: View {
             ZStack {
                 ScrollView {
                     LazyVStack {
-                        ForEach(viewStore.journals.reversed().indices, id: \.self) { i in
+                        ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
                             
                             VStack(spacing: 0) {
@@ -94,6 +94,9 @@ struct MainView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 24))
                             .padding()
                             .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
+                            .onTapGesture {
+                                viewStore.send(.showJournalView(journal))
+                            }
                         }
                     }
                     .padding()
@@ -110,8 +113,12 @@ struct MainView: View {
                             }
                     }
             }
+            .fullScreenCover(store: store.scope(state: \.$journal, action: MainFeature.Action.journal)) { store in
+                JournalView(store: store)
+            }
             .onAppear {
                 viewStore.send(.fetchAll)
+                viewStore.send(.hideTabBar(false))
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {

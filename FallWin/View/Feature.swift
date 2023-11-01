@@ -76,6 +76,9 @@ struct Feature: Reducer {
             case let .gallery(action):
                 return handleGalleryAction(state: &state, action: action)
                 
+            case let .main(action):
+                return handleMainAction(state: &state, action: action)
+                
             default: return .none
             }
         }
@@ -97,6 +100,16 @@ struct Feature: Reducer {
     }
     
     private func handleGalleryAction(state: inout State, action: PresentationAction<GalleryFeature.Action>) -> Effect<Action> {
+        switch action {
+        case .presented(.hideTabBar(let hide)):
+            return .send(.hideTabBar(hide))
+            
+        default:
+            return .none
+        }
+    }
+    
+    private func handleMainAction(state: inout State, action: PresentationAction<MainFeature.Action>) -> Effect<Action> {
         switch action {
         case .presented(.hideTabBar(let hide)):
             return .send(.hideTabBar(hide))
