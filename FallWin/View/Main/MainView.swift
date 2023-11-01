@@ -16,7 +16,7 @@ struct MainView: View {
             ZStack {
                 ScrollView {
                     LazyVStack {
-                        ForEach(viewStore.journals.indices, id: \.self) { i in
+                        ForEach(viewStore.journals.reversed().indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
                             
                             VStack(spacing: 0) {
