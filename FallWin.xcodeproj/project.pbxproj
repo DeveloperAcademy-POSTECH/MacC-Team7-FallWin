@@ -19,6 +19,7 @@
 		791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */; };
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Extension.swift */; };
+		792751172AF221260023123C /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751162AF221260023123C /* PasscodeView.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Extension.swift"; sourceTree = "<group>"; };
+		792751162AF221260023123C /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -169,6 +171,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		792751152AF221140023123C /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				792751162AF221260023123C /* PasscodeView.swift */,
+			);
+			path = Passcode;
+			sourceTree = "<group>";
+		};
 		79407D462AD7E68D006C7571 = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 			children = (
 				79407D542AD7E68D006C7571 /* ContentView.swift */,
 				791F14732ADD8EA500F8DDD2 /* Feature.swift */,
+				792751152AF221140023123C /* Passcode */,
 				98DA96F82ADFA577000DDAFA /* Writing */,
 				792751102AF21A900023123C /* Main */,
 				79E5B2C32ADD4FA400A86770 /* Gallery */,
@@ -511,6 +522,7 @@
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
+				792751172AF221260023123C /* PasscodeView.swift in Sources */,
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
 				791F14702ADD8CF900F8DDD2 /* SurfView+Feature.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
