@@ -76,6 +76,8 @@ struct JournalView: View {
                     }
                     .padding(24)
                     .padding(.top, 3)
+                } onPullAction: {
+                    dismiss()
                 }
                 
                 VStack {

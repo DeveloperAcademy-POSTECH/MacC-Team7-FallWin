@@ -25,6 +25,7 @@
 		792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511F2AF2392C0023123C /* UserDefaultsKey.swift */; };
 		792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 792751242AF23DC10023123C /* SwiftKeychainWrapper */; };
 		792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */; };
+		7927512B2AF359590023123C /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927512A2AF359590023123C /* HapticManager.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		7927511D2AF233060023123C /* SettingsView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Feature.swift"; sourceTree = "<group>"; };
 		7927511F2AF2392C0023123C /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftKeychainWrapper+Extension.swift"; sourceTree = "<group>"; };
+		7927512A2AF359590023123C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */,
 				98F70A822AE5308200FEE4D2 /* WritingPathState.swift */,
 				7927511F2AF2392C0023123C /* UserDefaultsKey.swift */,
+				7927512A2AF359590023123C /* HapticManager.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */,
 				98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */,
 				98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */,
+				7927512B2AF359590023123C /* HapticManager.swift in Sources */,
 				791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */,
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,

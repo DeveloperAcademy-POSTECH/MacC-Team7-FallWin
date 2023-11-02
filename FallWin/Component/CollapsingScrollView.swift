@@ -17,11 +17,13 @@ struct CollapsingScrollViewKey: PreferenceKey {
 struct CollapsingScrollView<Header: View, Content: View>: View {
     @ViewBuilder var header: () -> Header
     @ViewBuilder var content: () -> Content
+    var onPullAction: (() -> Void)? = nil
     
     @State private var headerHeight: CGFloat = 0
     @State private var scrollY: CGFloat = .zero
     @State private var originY: CGFloat = .zero
     @State private var scale: CGFloat = 1
+    @State private var pullAction: Bool = false
     
     var body: some View {
         GeometryReader { proxy in
@@ -69,7 +71,16 @@ struct CollapsingScrollView<Header: View, Content: View>: View {
                 }
                 scrollY = value
                 scale = scrollY / originY
-                print("scroll:", scrollY, ", origin:", originY)
+                
+                if scale > 1.4 {
+                    pullAction = true
+                }
+            }
+            .onChange(of: pullAction) { value in
+                if let onPullAction = onPullAction {
+                    HapticManager.shared.impact()
+                    onPullAction()
+                }
             }
         }
         .ignoresSafeArea(.all, edges: .top)
