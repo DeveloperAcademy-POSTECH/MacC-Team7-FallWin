@@ -17,18 +17,20 @@ struct SettingsFeature: Reducer {
         var biometricString: String? = nil
         
         // Settings
+        var haptic: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.haptic)
         var lock: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)
         var biometric: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.biometric)
         
         // States
         var showPasscodeView: Bool = false
-        var passcode: String = ""
         
         // Passcode
+        var passcode: String = ""
     }
     
     enum Action: Equatable {
         // Settings
+        case setHaptic(Bool)
         case setLock(Bool)
         case saveLockSettings(Bool)
         case setBiometric(Bool)
@@ -42,6 +44,11 @@ struct SettingsFeature: Reducer {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case let .setHaptic(haptic):
+                UserDefaults.standard.setValue(haptic, forKey: UserDefaultsKey.Settings.haptic)
+                state.haptic = haptic
+                return .none
+                
             case .initBiometricString:
                 if state.laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
                     if state.laContext.biometryType == .touchID {

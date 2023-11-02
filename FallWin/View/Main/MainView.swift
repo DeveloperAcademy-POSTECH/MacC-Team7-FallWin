@@ -95,6 +95,7 @@ struct MainView: View {
                             .padding()
                             .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
                             .onTapGesture {
+                                HapticManager.shared.impact()
                                 viewStore.send(.showJournalView(journal))
                             }
                         }

@@ -17,6 +17,12 @@ struct SettingsView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             Form {
                 Section {
+                    Toggle("햅틱 피드백 사용", isOn: viewStore.binding(get: \.haptic, send: SettingsFeature.Action.setHaptic))
+                } header: {
+                    Text("환경")
+                }
+                
+                Section {
                     Toggle("앱 잠금", isOn: viewStore.binding(get: \.lock, send: SettingsFeature.Action.setLock))
                     
                     if let biometricString = viewStore.biometricString {

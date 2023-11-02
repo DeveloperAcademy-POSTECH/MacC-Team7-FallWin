@@ -20,4 +20,5 @@ extension UserDefaultsKey.AppEnvironment {
 extension UserDefaultsKey.Settings {
     static let lock = "lock"
     static let biometric = "biometric"
+    static let haptic = "haptic"
 }

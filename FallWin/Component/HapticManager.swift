@@ -13,8 +13,21 @@ final class HapticManager {
     
     private init() { }
     
+    var isHapticEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.haptic)
+    }
+    
+    func notification(_ style: UINotificationFeedbackGenerator.FeedbackType) {
+        if isHapticEnabled {
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(style)
+        }
+    }
+    
     func impact(_ style: UIImpactFeedbackGenerator.FeedbackStyle = .medium) {
-        let generator = UIImpactFeedbackGenerator(style: style)
-        generator.impactOccurred()
+        if isHapticEnabled {
+            let generator = UIImpactFeedbackGenerator(style: style)
+            generator.impactOccurred()
+        }
     }
 }
