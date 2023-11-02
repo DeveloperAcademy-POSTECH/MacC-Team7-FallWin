@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 import ComposableArchitecture
 
 struct JournalView: View {
     let store: StoreOf<JournalFeature>
     
+    @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -81,10 +83,56 @@ struct JournalView: View {
                     Spacer()
                 }
                 .padding(12)
+                
+                if viewStore.invisible {
+                    Rectangle()
+                        .fill(.regularMaterial)
+                        .ignoresSafeArea()
+                }
             }
             .onChange(of: viewStore.dismiss, perform: { value in
                 dismiss()
             })
+            .onChange(of: scenePhase) { value in
+                if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
+                    return
+                }
+                
+                switch value {
+                case .background:
+                    viewStore.send(.setLock(true))
+                    break
+                    
+                case .inactive:
+                    viewStore.send(.setInvisibility(true))
+                    break
+                    
+                case .active:
+                    if viewStore.lock {
+                        viewStore.send(.showPasscodeView(true))
+                    }
+                    viewStore.send(.setInvisibility(false))
+                    break
+                    
+                @unknown default: break
+                }
+            }
+            .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: JournalFeature.Action.showPasscodeView)) {
+                PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
+                    if typed == KeychainWrapper.standard[.password] || biometric ?? false {
+                        viewStore.send(.setLock(false))
+                        return .dismiss
+                        
+                    } else {
+                        return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
+                    }
+                }
+            }
+            .transaction { transaction in
+                if viewStore.showPasscodeView {
+                    transaction.disablesAnimations = true
+                }
+            }
         }
     }
     

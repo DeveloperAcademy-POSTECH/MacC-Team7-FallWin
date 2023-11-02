@@ -55,7 +55,7 @@ struct ContentView: View {
                 
                 if viewStore.invisible {
                     Rectangle()
-                        .fill(.ultraThinMaterial)
+                        .fill(.regularMaterial)
                         .ignoresSafeArea()
                 }
             }
@@ -95,6 +95,11 @@ struct ContentView: View {
                     } else {
                         return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
                     }
+                }
+            }
+            .transaction { transaction in
+                if viewStore.showPasscodeView {
+                    transaction.disablesAnimations = true
                 }
             }
         }

@@ -11,10 +11,17 @@ import ComposableArchitecture
 struct JournalFeature: Reducer {
     struct State: Equatable {
         var journal: Journal
+        var invisible: Bool = false
+        var lock: Bool = false
+        var showPasscodeView: Bool = false
         var dismiss: Bool = false
     }
     
     enum Action: Equatable {
+        case setInvisibility(Bool)
+        case setLock(Bool)
+        case showPasscodeView(Bool)
+        
         case delete
         case dismiss
     }
@@ -30,6 +37,18 @@ struct JournalFeature: Reducer {
                 print(error)
             }
             return .send(.dismiss)
+            
+        case let .setInvisibility(invisible):
+            state.invisible = invisible
+            return .none
+            
+        case let .setLock(lock):
+            state.lock = lock
+            return .none
+            
+        case let .showPasscodeView(show):
+            state.showPasscodeView = show
+            return .none
             
         case .dismiss:
             state.dismiss = true
