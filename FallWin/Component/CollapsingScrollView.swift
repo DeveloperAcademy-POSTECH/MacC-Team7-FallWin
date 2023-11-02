@@ -72,7 +72,7 @@ struct CollapsingScrollView<Header: View, Content: View>: View {
                 scrollY = value
                 scale = scrollY / originY
                 
-                if scale > 1.4 {
+                if scale > 1.25 {
                     pullAction = true
                 }
             }
