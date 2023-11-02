@@ -7,6 +7,7 @@
 
 import Foundation
 import ComposableArchitecture
+import SwiftUI
 
 struct JournalFeature: Reducer {
     struct State: Equatable {
@@ -47,7 +48,11 @@ struct JournalFeature: Reducer {
             return .none
             
         case let .showPasscodeView(show):
-            state.showPasscodeView = show
+            var transaction = Transaction()
+            transaction.disablesAnimations = true
+            withTransaction(transaction) {
+                state.showPasscodeView = show
+            }
             return .none
             
         case .dismiss:

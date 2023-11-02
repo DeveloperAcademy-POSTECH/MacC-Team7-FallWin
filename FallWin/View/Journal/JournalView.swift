@@ -103,6 +103,7 @@ struct JournalView: View {
                 switch value {
                 case .background:
                     viewStore.send(.setLock(true))
+                    print("background")
                     break
                     
                 case .inactive:
@@ -110,10 +111,11 @@ struct JournalView: View {
                     break
                     
                 case .active:
+                    viewStore.send(.setInvisibility(false))
                     if viewStore.lock {
                         viewStore.send(.showPasscodeView(true))
+                        print("lock")
                     }
-                    viewStore.send(.setInvisibility(false))
                     break
                     
                 @unknown default: break
@@ -128,11 +130,6 @@ struct JournalView: View {
                     } else {
                         return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
                     }
-                }
-            }
-            .transaction { transaction in
-                if viewStore.showPasscodeView {
-                    transaction.disablesAnimations = true
                 }
             }
         }

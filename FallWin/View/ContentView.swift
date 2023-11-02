@@ -97,11 +97,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .transaction { transaction in
-                if viewStore.showPasscodeView {
-                    transaction.disablesAnimations = true
-                }
-            }
         }
     }
 }
