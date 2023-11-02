@@ -130,13 +130,29 @@ extension ChatGPTApiManager {
     }
 
     func generatePromptForChat3(_ prompt: String) -> String {
+//        let template: String = """
+//        Make comma seperated english noun phrases(noun phrase #1, noun phrase #2, noun phrase #3, ..., noun phrase #n) that can be drawn referring to below <<INPUT TEXT>>.
+//
+//        The noun phrases must be 'english'.
+//        The noun phrases must be 'comma seperated'.
+//        Each element must be 'noun phrase'.
+//        
+//        The noun phrases must contain the context of <<INPUT TEXT>>.
+//        The noun phrases must be condensed into a few noun phrases that are key to the <<INPUT TEXT>>. Some phrases can be removed.
+//        The noun phrases can be modified, such as adding modifiers or changing words to be related to each other.
+//        
+//        <<INPUT TEXT>>
+//        \(prompt)
+//        <</INPUT TEXT>>
+//        """
+        
         let template: String = """
-        Make comma seperated english prompt(keyword#1, keyword#2, keyword#3, ..., keyword#n) for AI Image generator referring to below <<INPUT TEXT>>.
+        Make one to three drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
 
-        The output must be 'english' prompt.
-        The output must be simple and brief.
-        The output must be comma seperated.
-        The output must contain the context and meaning of <<INPUT TEXT>>.
+        The output must be only comma seperated noun phrases.
+        The output must contain upto three noun phrases.
+        The output must be english.
+        Each noun phrase should contain enough modifiers.
         
         <<INPUT TEXT>>
         \(prompt)
@@ -189,10 +205,6 @@ extension ChatGPTApiManager {
         let parameters: [String: Any] = [
             "model": "gpt-3.5-turbo",
             "messages": [
-//                [
-//                    "role": "system",
-//                    "content": "You are Dall-E version 2 prompt engineer."
-//                ],
                 [
                     "role": "user",
                     "content": generatePromptForChat(prompt)
@@ -256,7 +268,8 @@ extension ChatGPTApiManager {
     }
     
     func createChat3(prompt: String, apiKey: String) async throws -> ChatCreationResponse {
-        guard try await validatePrompt(generatePromptForChat3(prompt), apiKey: apiKey) else {
+        let output = generatePromptForChat3(prompt)
+        guard try await validatePrompt(output, apiKey: apiKey) else {
             print("----------------Invalid Prompt----------------")
             throw ImageError.invalidPrompt
         }
@@ -271,11 +284,11 @@ extension ChatGPTApiManager {
             "messages": [
 //                [
 //                    "role": "system",
-//                    "content": "You are Dall-E version 2 prompt engineer."
+//                    "content": "Pick some noun phrases that can be drawn."
 //                ],
                 [
                     "role": "user",
-                    "content": generatePromptForChat(prompt)
+                    "content": output
                 ]
             ]
         ]

@@ -32,7 +32,7 @@ struct DrawingStyleView: View {
                             Spacer()
                             Text("num_inference_steps: \(viewStore.steps)")
                                 .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 1...100, step: 1)
+                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
                             Spacer()
                             Text("guidance_scale: \(viewStore.scale)")
                                 .font(.pretendard(.semiBold, size: 18))
@@ -90,12 +90,12 @@ struct DrawingStyleView: View {
         let drawingStyles: [(String, Color, Image)] = [
             ("유화", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
             ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
-            ("판타지", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
-            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
+            ("르누아르", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
+            ("화풍 선택 안함", Color(hexCode: "#191919"), Image("WaterColor")),
             ("샤갈", Color(hexCode: "#191919"), Image("DigitalArt")),
-            ("네온", Color(hexCode: "#191919"), Image("Neon")),
+            ("애니메이션", Color(hexCode: "#191919"), Image("Neon")),
             ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
-            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
+            ("칸딘스키", Color(hexCode: "#191919"), Image("SalvadorDali")),
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in

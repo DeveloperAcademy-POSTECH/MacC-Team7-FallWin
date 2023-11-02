@@ -15,31 +15,31 @@ struct GeneratedDiaryView: View {
     private let apiKey: String = Bundle.main.apiKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "유화": "[[Oil painting]]",
-        "스케치": "[[Sketch]], [[Croquis]], [[Black and White]]",
-        "판타지": "[[Fantasy]]",
-        "수채화": "[[Water color]], [[Pastel]]",
-        "샤갈": "[[Marc Chagall]], [[Modernism]]",
-        "네온": "[[Neon]]",
-        "반 고흐": "[[Vincent Van Gogh]], [[Impressionism]]",
-        "살바도르 달리": "[[Salvador Dali]], [[Surreallism]]"
+        "유화": "<<Oil painting>>",
+        "스케치": "<<Sketch>>, <<Croquis>>, <<Black and White>>",
+        "르누아르": "<<Renoir>>",
+        "화풍 선택 안함": "",
+        "샤갈": "Modernism, <<Chagall>>",
+        "애니메이션": "<<Anime>>",
+        "반 고흐": "Impressionism, <<Van Gogh>>",
+        "칸딘스키": "<<Kandinsky>>"
     ]
     
     let emotionToEnglish: [String: String] = [
-        "happy": "Happy",
-        "nervous": "Nervous",
-        "grateful": "Grateful",
-        "sad": "Sad",
-        "joyful": "Joyful",
-        "lonely": "Lonely",
-        "proud": "Proud",
-        "suffocated": "Suffocated",
-        "touched": "Touched",
-        "shy": "Shy",
-        "exciting": "Exciting",
-        "lazy": "Lazy",
-        "annoyed": "Annoyed",
-        "frustrated": "Frustrated"
+        "happy": "<<Happy>>",
+        "nervous": "<<Nervous>>",
+        "grateful": "<<Grateful>>",
+        "sad": "<<Sad>>",
+        "joyful": "<<Joyful>>",
+        "lonely": "<<Lonely>>",
+        "proud": "<<Proud>>",
+        "suffocated": "<<Suffocated>>",
+        "touched": "<<Touched>>",
+        "shy": "<<Shy>>",
+        "exciting": "<<Exciting>>",
+        "lazy": "<<Lazy>>",
+        "annoyed": "<<Annoyed>>",
+        "frustrated": "<<Frustrated>>"
     ]
     
     init(store: StoreOf<GeneratedDiaryFeature>) {
@@ -123,7 +123,6 @@ struct GeneratedDiaryView: View {
         .task {
             do {
                 print(apiKey)
-                print("input to chatGPT: \(ChatGPTApiManager.shared.generatePromptForChat2(viewStore.mainText, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? ""))")
                 let chatResponse = try await ChatGPTApiManager.shared.createChat3(prompt: viewStore.mainText,  apiKey: apiKey)
                 
                 var image: UIImage?
@@ -132,7 +131,7 @@ struct GeneratedDiaryView: View {
                     let karloPrompt = KarloApiManager.shared.addEmotionDrawingStyle(prompt: promptOutput, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
                     print("original input text:\n\(viewStore.mainText)\n------\nchatGPT's output:\n\(promptOutput)\n------\nprompt with drawing style:\n\(karloPrompt)")
                     
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "scary, dirty, ugly, text, letter, poorly drawn face, side face, poorly drawn feet, poorly drawn hand, divided, framed, cross line", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: apiKey)
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "scary, dirty, ugly, text, letter, alphabet, signature, watermark, text-like, letter-like, alphabet-like, poorly drawn face, side face, poorly drawn feet, poorly drawn hand, divided, framed, cross line", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: apiKey)
                     
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {
@@ -141,7 +140,6 @@ struct GeneratedDiaryView: View {
                             print("imageURL something wrong")
                             return
                         }
-                        print("imageURL: \(imageURL)")
                         let (imageData, _) = try await URLSession.shared.data(from: imageURL)
                         images.append(UIImage(data: imageData))
                     }
