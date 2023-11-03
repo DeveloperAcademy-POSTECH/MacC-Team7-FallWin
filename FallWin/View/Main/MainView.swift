@@ -19,85 +19,12 @@ struct MainView: View {
                         ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
                             
-                            VStack(spacing: 0) {
-                                if let image = journal.wrappedImage {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .clipShape(RoundedRectangle(cornerRadius: 24))
-                                } else {
-                                    Rectangle()
-                                        .fill(Color.blue)
-                                        .aspectRatio(1, contentMode: .fit)
-                                        .clipShape(RoundedRectangle(cornerRadius: 24))
-                                }
-                                
-                                VStack(spacing: 0) {
-                                    HStack(alignment: .center) {
-                                        if let date = journal.timestamp {
-                                            Text(date.dateString)
-                                                .font(.pretendard(.medium, size: 16))
-                                                .padding(.vertical, 8)
-                                                .padding(.horizontal)
-                                                .background(
-                                                    Capsule()
-                                                        .fill(.regularMaterial)
-                                                )
-                                        }
-                                        Spacer()
-                                        if let mind = Mind(rawValue: journal.mind), let string = mind.string(), let icon = mind.iconName() {
-                                            HStack {
-                                                Image(icon)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 36, height: 36)
-                                                Text(string)
-                                                    .font(.pretendard(.medium, size: 16))
-                                            }
-                                            .padding(.vertical, 4)
-                                            .padding(.horizontal)
-                                            .background(
-                                                Capsule()
-                                                    .fill(.regularMaterial)
-                                            )
-                                        }
-                                    }
-                                    
-                                    if let content = journal.content {
-                                        HStack {
-                                            Text(content)
-                                                .font(.pretendard(.medium, size: 16))
-                                                .lineLimit(2)
-                                                .truncationMode(.tail)
-                                                .multilineTextAlignment(.leading)
-                                            Spacer()
-                                        }
-                                        .padding()
-                                    }
-                                }
+                            mainCell(journal: journal)
                                 .padding()
-                            }
-                            .background {
-                                ZStack {
-                                    if let image = journal.wrappedImage {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .scaledToFill()
-                                        
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.blue)
-                                    }
+                                .onTapGesture {
+                                    HapticManager.shared.impact()
+                                    viewStore.send(.showJournalView(journal))
                                 }
-                                .overlay(.ultraThinMaterial)
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 24))
-                            .padding()
-                            .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
-                            .onTapGesture {
-                                HapticManager.shared.impact()
-                                viewStore.send(.showJournalView(journal))
-                            }
                         }
                     }
                     .padding()
@@ -131,6 +58,42 @@ struct MainView: View {
                     }
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func mainCell(journal: Journal) -> some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack(spacing: 16) {
+                Group {
+                    if let image = journal.wrappedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Rectangle()
+                            .fill(Color.blue)
+                            .aspectRatio(1, contentMode: .fit)
+                    }
+                }
+                .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
+                
+                HStack {
+                    VStack {
+                        Text(String(format: "%d", journal.timestamp?.day ?? 0))
+                        Text(journal.timestamp?.dayOfWeek ?? "")
+                    }
+                    Divider()
+                    Text(journal.content ?? "")
+                    Spacer()
+                }
+                .padding(.horizontal)
+            }
+            .padding()
+            .background(
+                Color.white
+                    .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
+            )
         }
     }
     
