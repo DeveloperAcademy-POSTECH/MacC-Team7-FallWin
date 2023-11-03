@@ -153,6 +153,7 @@ extension ChatGPTApiManager {
         The output must contain upto three noun phrases.
         The output must be english.
         Each noun phrase should contain enough modifiers.
+        If they are all noun phrase containing only emotion, convert the phrase into representative object.
         
         <<INPUT TEXT>>
         \(prompt)
@@ -162,6 +163,21 @@ extension ChatGPTApiManager {
         return template
     }
 
+    func generatePromptForChat4(_ prompt: String) -> String {
+        let template: String = """
+        Make noun phrases that best express smooth english translation of <<INPUT TEXT>> very well.
+
+        The output must be only comma seperated noun phrases.
+        The output must be english.
+        Each noun phrase should contain enough modifiers(like pose, action, perspective).
+        
+        <<INPUT TEXT>>
+        \(prompt)
+        <</INPUT TEXT>>
+        """
+        
+        return template
+    }
     
     
     
