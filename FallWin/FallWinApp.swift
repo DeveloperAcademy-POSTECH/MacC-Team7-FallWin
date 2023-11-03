@@ -25,6 +25,7 @@ struct FallWinApp: App {
     }
     
     @State private var locked: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)
+    
     var body: some Scene {
         WindowGroup {
             if !locked {

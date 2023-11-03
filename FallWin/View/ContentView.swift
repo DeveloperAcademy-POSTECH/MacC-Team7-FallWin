@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                TabView {
+                TabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
                     Group {
                         IfLetStore(store.scope(state: \.$main, action: Feature.Action.main)) { store in
                             NavigationStack {
@@ -25,8 +25,9 @@ struct ContentView: View {
                             }
                             .tabItem {
                                 Text("Main")
-                                Image("MainEnabled")
+                                viewStore.tabSelection == 0 ? Image("MainEnabled") : Image("MainDisabled")
                             }
+                            .tag(0)
                         }
                         
                         IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
@@ -35,8 +36,9 @@ struct ContentView: View {
                             }
                             .tabItem {
                                 Text("Feed")
-                                Image("FeedEnabled")
+                                viewStore.tabSelection == 1 ? Image("FeedEnabled") : Image("FeedDisabled")
                             }
+                            .tag(1)
                         }
                     }
                     .toolbarBackground(Color(hexCode: "ededed"), for: .tabBar)
