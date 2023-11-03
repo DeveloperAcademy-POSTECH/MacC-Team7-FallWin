@@ -6,46 +6,74 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 import ComposableArchitecture
 
 struct ContentView: View {
     let store: StoreOf<Feature>
     
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some View {
-//        DallEApiTestView()
-//        WritingView(store: store)
-        
         WithViewStore(store, observe: { $0 }) { viewStore in
-            CvasTabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect),
-                        hideTabBar: viewStore.binding(get: \.hideTabBar, send: Feature.Action.hideTabBar)) {
-                
-                IfLetStore(store.scope(state: \.$gallery, action: Feature.Action.gallery)) { store in
-                    NavigationStack {
-                        GalleryView(store: store)
+            ZStack {
+                TabView {
+                    Group {
+                        IfLetStore(store.scope(state: \.$main, action: Feature.Action.main)) { store in
+                            NavigationStack {
+                                MainView(store: store)
+                            }
+                            .tabItem {
+                                Text("Main")
+                                Image("MainEnabled")
+                            }
+                        }
+                        
+                        IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
+                            NavigationStack {
+                                SearchView(store: store)
+                            }
+                            .tabItem {
+                                Text("Feed")
+                                Image("FeedEnabled")
+                            }
+                        }
                     }
-                    .tabItem(.init(title: "Gallery", enabledImage: "MainEnabled", disabledImage: "MainDisabled", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                    .toolbarBackground(Color(hexCode: "ededed"), for: .tabBar)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .toolbarColorScheme(.light, for: .tabBar)
                 }
                 
-                IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
-                    NavigationStack {
-                        SearchView(store: store)
-                    }
-                    .tabItem(.init(title: "Feed", enabledImage: "FeedEnabled", disabledImage: "FeedDisabled", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                if viewStore.invisible {
+                    Rectangle()
+                        .fill(.regularMaterial)
+                        .ignoresSafeArea()
                 }
-                
-//                IfLetStore(store.scope(state: \.$surf, action: Feature.Action.surf)) { store in
-//                    SurfView(store: store)
-//                        .tabItem(.init(title: "Surf", enabledImage: "SurfEnabled", disabledImage: "SurfDisabled", tabItem: .surf), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-//                }
-//                
-//                IfLetStore(store.scope(state: \.$profile, action: Feature.Action.profile)) { store in
-//                    ProfileView(store: store)
-//                        .tabItem(.init(title: "Profile", enabledImage: "ProfileEnabled", disabledImage: "ProfileDisabled", tabItem: .profile), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-//                }
-                
             }
             .onAppear {
                 viewStore.send(.initViews)
+            }
+            .onChange(of: scenePhase) { value in
+                if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    switch value {
+                    case .inactive:
+                        viewStore.send(.setInvisibility(true))
+                        break
+                        
+                    case .active:
+                        viewStore.send(.setInvisibility(false))
+                        break
+                        
+                    case .background:
+                        break
+                        
+                    @unknown default: break
+                    }
+                }
             }
         }
     }
