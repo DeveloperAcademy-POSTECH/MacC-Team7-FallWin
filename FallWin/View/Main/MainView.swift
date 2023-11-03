@@ -28,6 +28,7 @@ struct MainView: View {
                         }
                     }
                     .padding()
+                    .padding(.vertical, 40)
                 }
                 
                 writingActionButton
@@ -38,7 +39,15 @@ struct MainView: View {
                                 viewStore.send(.hideTabBar(true))
                             }
                     }
+                
+                VStack {
+                    toolbar
+                    Spacer()
+                }
             }
+            .background(
+                Color.backgroundPrimary.ignoresSafeArea()
+            )
             .fullScreenCover(store: store.scope(state: \.$journal, action: MainFeature.Action.journal)) { store in
                 JournalView(store: store)
             }
@@ -46,18 +55,19 @@ struct MainView: View {
                 viewStore.send(.fetchAll)
                 viewStore.send(.hideTabBar(false))
             }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("설정", systemImage: "gearshape") {
-                        viewStore.send(.showSettingsView)
-                    }
-                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
-                        NavigationStack {
-                            SettingsView(store: store)
-                        }
-                    }
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
+//            .toolbar {
+//                ToolbarItem(placement: .primaryAction) {
+//                    Button("설정", systemImage: "gearshape") {
+//                        viewStore.send(.showSettingsView)
+//                    }
+//                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
+//                        NavigationStack {
+//                            SettingsView(store: store)
+//                        }
+//                    }
+//                }
+//            }
         }
     }
     
@@ -76,24 +86,64 @@ struct MainView: View {
                             .aspectRatio(1, contentMode: .fit)
                     }
                 }
-                .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
+                .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 4)
                 
-                HStack {
+                HStack(spacing: 24) {
                     VStack {
                         Text(String(format: "%d", journal.timestamp?.day ?? 0))
+                            .font(.pretendard(.bold, size: 28))
                         Text(journal.timestamp?.dayOfWeek ?? "")
+                            .font(.pretendard(.semiBold, size: 16))
                     }
                     Divider()
+                        .background(Color.separator)
                     Text(journal.content ?? "")
                     Spacer()
                 }
-                .padding(.horizontal)
+                .foregroundStyle(Color.textPrimary)
+                .padding(.horizontal, 12)
             }
             .padding()
             .background(
-                Color.white
-                    .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
+                Color.backgroundCard
+                    .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 4)
             )
+        }
+    }
+    
+    private var toolbar: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            HStack(alignment: .center) {
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Text(String(format: "%d년 %d월", viewStore.year, viewStore.month))
+                            .font(.pretendard(.bold, size: 24))
+                        Image(systemName: "chevron.down")
+                    }
+                }
+                .foregroundStyle(Color.textPrimary)
+                
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "calendar")
+                        .resizable()
+                        .frame(width: 20, height: 18)
+                        .padding(10)
+                        .background {
+                            Circle()
+                                .fill(Color.backgroundCard)
+                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+                        }
+                }
+            }
+            .padding(.top)
+            .padding(.horizontal)
+            .background(Color.backgroundPrimary)
         }
     }
     
@@ -109,10 +159,11 @@ struct MainView: View {
                     } label: {
                         ZStack {
                             Circle()
-                                .fill(Colors.button.color())
-                            Image(systemName: "pencil")
+                                .fill(Color.buttonFloating)
+                                .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 4)
+                            Image(systemName: "plus")
                                 .resizable()
-                                .foregroundStyle(Colors.tabBarItem.color())
+                                .foregroundStyle(Color.textOnFloatingButton)
                                 .frame(width: 24, height: 24)
                         }
                     }

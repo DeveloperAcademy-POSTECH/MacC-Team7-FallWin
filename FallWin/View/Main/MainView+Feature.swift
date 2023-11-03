@@ -12,6 +12,8 @@ import ComposableArchitecture
 struct MainFeature: Reducer {
     struct State: Equatable {
         var journals: [Journal] = []
+        var year: Int = Date().year
+        var month: Int = Date().month
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
@@ -35,7 +37,7 @@ struct MainFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .fetchAll:
-                let context = PersistenceController.debug.container.viewContext
+                let context = PersistenceController.shared.container.viewContext
                 do {
                     let fetchRequest = NSFetchRequest<Journal>(entityName: "Journal")
                     fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
