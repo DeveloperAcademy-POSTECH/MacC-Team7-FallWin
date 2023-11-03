@@ -24,11 +24,24 @@ struct FallWinApp: App {
         }
     }
     
+    @State private var locked: Bool = true
     var body: some Scene {
         WindowGroup {
-            ContentView(store: Store(initialState: Feature.State(), reducer: {
-                Feature()
-            }))
+            if !locked {
+                ContentView(store: Store(initialState: Feature.State(), reducer: {
+                    Feature()
+                }))
+            } else {
+                PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
+                    if typed == KeychainWrapper.standard[.password] || biometric ?? false {
+                        locked = false
+                        return .dismiss
+                        
+                    } else {
+                        return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
+                    }
+                }
+            }
         }
     }
 }

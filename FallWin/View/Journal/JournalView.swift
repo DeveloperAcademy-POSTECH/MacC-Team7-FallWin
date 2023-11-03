@@ -92,9 +92,9 @@ struct JournalView: View {
                         .ignoresSafeArea()
                 }
             }
-            .onChange(of: viewStore.dismiss, perform: { value in
+            .onChange(of: viewStore.dismiss) { value in
                 dismiss()
-            })
+            }
             .onChange(of: scenePhase) { value in
                 if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
                     return
@@ -102,8 +102,6 @@ struct JournalView: View {
                 
                 switch value {
                 case .background:
-                    viewStore.send(.setLock(true))
-                    print("background")
                     break
                     
                 case .inactive:
@@ -112,24 +110,9 @@ struct JournalView: View {
                     
                 case .active:
                     viewStore.send(.setInvisibility(false))
-                    if viewStore.lock {
-                        viewStore.send(.showPasscodeView(true))
-                        print("lock")
-                    }
                     break
                     
                 @unknown default: break
-                }
-            }
-            .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: JournalFeature.Action.showPasscodeView)) {
-                PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
-                    if typed == KeychainWrapper.standard[.password] || biometric ?? false {
-                        viewStore.send(.setLock(false))
-                        return .dismiss
-                        
-                    } else {
-                        return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
-                    }
                 }
             }
         }

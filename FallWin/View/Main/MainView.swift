@@ -101,12 +101,10 @@ struct MainView: View {
                         }
                     }
                     .padding()
-                    .padding(.bottom, CvasTabViewValue.tabBarHeight)
                 }
                 
                 writingActionButton
                     .padding()
-                    .padding(.bottom, CvasTabViewValue.tabBarHeight)
                     .navigationDestination(store: store.scope(state: \.$writing, action: MainFeature.Action.writing)) { store in
                         WritingView(store: store)
                             .onAppear {
