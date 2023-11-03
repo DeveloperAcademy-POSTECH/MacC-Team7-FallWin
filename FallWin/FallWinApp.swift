@@ -24,7 +24,7 @@ struct FallWinApp: App {
         }
     }
     
-    @State private var locked: Bool = true
+    @State private var locked: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)
     var body: some Scene {
         WindowGroup {
             if !locked {
@@ -32,16 +32,13 @@ struct FallWinApp: App {
                     Feature()
                 }))
             } else {
-                if UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) &&
-                    KeychainWrapper.standard.hasValue(forKey: KeychainWrapper.Key.password.rawValue) {
-                    PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
-                        if typed == KeychainWrapper.standard[.password] || biometric ?? false {
-                            locked = false
-                            return .dismiss
-                            
-                        } else {
-                            return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
-                        }
+                PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
+                    if typed == KeychainWrapper.standard[.password] || biometric ?? false {
+                        locked = false
+                        return .dismiss
+                        
+                    } else {
+                        return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
                     }
                 }
             }
