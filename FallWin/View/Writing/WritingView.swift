@@ -72,41 +72,28 @@ struct WritingView: View {
         
         let emotions: [(String, Color, Image, String)] = [
             ("happy", Color.emotionHappy, Image("IconHappy"), "행복한"),
-            ("nervous", Color.emotionNervous, Image("IconNervous"), "불안한"),
-            ("grateful", Color.emotionGrateful, Image("IconGrateful"), "감사한"),
-            ("sad", Color.emotionSad, Image("IconSad"), "슬픈"),
-            ("joyful", Color.emotionJoyful, Image("IconJoyful"), "신나는"),
-            ("lonely", Color.emotionLonely, Image("IconLonely"), "외로운"),
-            ("proud", Color.emotionProud, Image("IconProud"), "뿌듯함"),
-            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), "답답함"),
+            ("proud", Color.emotionProud, Image("IconProud"), "뿌듯한"),
             ("touched", Color.emotionTouched, Image("IconTouched"), "감동받은"),
-            ("shy", Color.emotionShy, Image("IconShy"), "부끄러운"),
-            ("exciting", Color.emotionExciting, Image("IconExciting"), "기대되는"),
-            ("lazy", Color.emotionLazy, Image("IconLazy"), "귀찮은"),
             ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed"), "짜증나는"),
-            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), "당황한")
+            ("sad", Color.emotionSad, Image("IconSad"), "슬픈"),
+            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), "답답한"),
+            ("lazy", Color.emotionLazy, Image("IconLazy"), "귀찮은"),
+            ("grateful", Color.emotionGrateful, Image("IconGrateful"), "감사한"),
+            ("joyful", Color.emotionJoyful, Image("IconJoyful"), "신나는"),
+            ("exciting", Color.emotionExciting, Image("IconExciting"), "기대되는"),
+            ("nervous", Color.emotionNervous, Image("IconNervous"), "불안한"),
+            ("lonely", Color.emotionLonely, Image("IconLonely"), "외로운"),
+            ("shy", Color.emotionShy, Image("IconShy"), "부끄러운"),
+            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), "당황한"),
+            ("tough", Color.emotionTough, Image("IconTough"), "힘든"),
+            ("peaceful", Color.emotionPeaceful, Image("IconPeaceful"), "평온한"),
+            ("surprised", Color.emotionSurprised, Image("IconSurprised"), "놀란"),
+            ("reassuring", Color.emotionReassuring, Image("IconReassuring"), "안심되는")
         ]
-        
-//        let emotionToTexts: [String : String] = [
-//            "happy" : "행복한",
-//            "nervous" : "불안한",
-//            "grateful" : "감사한",
-//            "sad" : "슬픈",
-//            "joyful" : "신나는",
-//            "lonely" : "외로운",
-//            "proud" : "뿌듯함",
-//            "suffocated" : "답답함",
-//            "touched" : "감동받은",
-//            "shy" : "부끄러운",
-//            "exciting" : "기대되는",
-//            "lazy" : "귀찮은",
-//            "annoyed" : "짜증나는",
-//            "frustrated" : "당황한"
-//        ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 32) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 32) {
                     ForEach(emotions, id: \.0) { emotion in
                         generateEmotionCardView(emotion: emotion)
                             .onTapGesture {
@@ -150,10 +137,11 @@ struct WritingView: View {
                     emotion.2
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 90)
+//                        .frame(width: 40)
                     Text(emotion.3)
-                        .font(viewStore.selectedEmotion == emotion.0 ? .pretendard(.bold, size: 18) : .pretendard(.medium, size: 18))
+                        .font(viewStore.selectedEmotion == emotion.0 ? .pretendard(.bold, size: 16) : .pretendard(.medium, size: 16))
                         .foregroundColor(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.textPrimary)
+                        .frame(width: 60)
                 }
                 Spacer()
             }
@@ -163,10 +151,10 @@ struct WritingView: View {
                     .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.clear, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0) // line width 조금 더 늘려보기
                     .background {
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.backgroundPrimary)
+                            .fill(viewStore.selectedEmotion == emotion.0 ? Color.backgroundPrimary : Color.clear)
                     }
                     .aspectRatio(1, contentMode: .fill)
-                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0.1), radius: 6) // 더 퍼지게
+                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0), radius: 6) // 더 퍼지게
 
             }
             .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))

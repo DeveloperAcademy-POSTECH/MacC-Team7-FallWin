@@ -130,27 +130,12 @@ extension ChatGPTApiManager {
     }
 
     func generatePromptForChat3(_ prompt: String) -> String {
-//        let template: String = """
-//        Make comma seperated english noun phrases(noun phrase #1, noun phrase #2, noun phrase #3, ..., noun phrase #n) that can be drawn referring to below <<INPUT TEXT>>.
-//
-//        The noun phrases must be 'english'.
-//        The noun phrases must be 'comma seperated'.
-//        Each element must be 'noun phrase'.
-//        
-//        The noun phrases must contain the context of <<INPUT TEXT>>.
-//        The noun phrases must be condensed into a few noun phrases that are key to the <<INPUT TEXT>>. Some phrases can be removed.
-//        The noun phrases can be modified, such as adding modifiers or changing words to be related to each other.
-//        
-//        <<INPUT TEXT>>
-//        \(prompt)
-//        <</INPUT TEXT>>
-//        """
         
         let template: String = """
-        Make one to five drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
+        Make one to four drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
 
         The output must be only comma seperated noun phrases.
-        The output must contain upto five noun phrases.
+        The output must contain upto four noun phrases.
         The output must be english.
         Each noun phrase should contain enough modifiers.
         If they are all noun phrase containing only emotion, convert the phrase into representative object.
