@@ -34,10 +34,22 @@ struct MainTextView: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
+                                .overlay {
+                                    VStack {
+                                        Spacer()
+                                        HStack{
+                                            Spacer()
+                                            Text("1000") // 글자 수 표시
+                                                .font(.system(size: 12))
+                                                .offset(y: -4) // 수직으로 위로 이동
+                                                .padding(.trailing, 8) // 오른쪽 패딩 추가
+                                        }
+                                        
+                                    }
+                                }
                         }
-                        .onAppear() {
-                            isFocused = true
-                        }
+                    
+                    
                         .padding(.top, 12)
                     Button {
 //                        viewStore.send(.inputMainText(mainText))
