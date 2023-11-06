@@ -12,6 +12,14 @@ extension Font {
     static func pretendard(_ type: PretendardType = .regular, size: CGFloat) -> Font {
         return .custom(type.rawValue, size: size)
     }
+    
+    static func sejong(size: CGFloat) -> Font {
+        return .custom(SejongGeulggot.regular.rawValue, size: size)
+    }
+    
+    static func uhbeeSehyun(_ type: UhBeeSehyun = .regular, size: CGFloat) -> Font {
+        return .custom(type.rawValue, size: size)
+    }
 }
 
 enum PretendardType: String {
@@ -24,4 +32,13 @@ enum PretendardType: String {
     case bold = "Pretendard-Bold"
     case extraBold = "Pretendard-ExtraBold"
     case black = "Pretendard-Black"
+}
+
+enum SejongGeulggot: String {
+    case regular = "SejongGeulggot"
+}
+
+enum UhBeeSehyun: String {
+    case regular = "UhBeeSe_hyun"
+    case bold = "UhBeeSe_hyunBold"
 }

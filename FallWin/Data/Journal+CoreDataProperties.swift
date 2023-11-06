@@ -20,6 +20,7 @@ extension Journal {
     @NSManaged public var content: String?
     @NSManaged public var timestamp: Date?
     @NSManaged public var mind: Int64
+    @NSManaged public var drawingStyle: Int64
     @NSManaged public var image: String?
     
     var wrappedImage: UIImage? {
@@ -38,6 +39,16 @@ extension Journal : Identifiable {
 extension Journal {
     func setImage(_ uiImage: UIImage) {
         self.image = DataManager.shared.saveImage(uiImage)
+    }
+}
+
+extension Journal {
+    var wrappedMind: Mind {
+        return Mind(rawValue: self.mind) ?? .none
+    }
+    
+    var wrappedDrawingStyle: DrawingStyle {
+        return DrawingStyle(rawValue: self.drawingStyle) ?? .none
     }
 }
 
@@ -125,6 +136,21 @@ enum Mind: Int64 {
             return "IconAnnoyed"
         case .frustrated:
             return "IconFrustrated"
+        }
+    }
+}
+
+enum DrawingStyle: Int64 {
+    case none = 0
+    case crayon = 1
+    case sketch = 2
+    
+    func name() -> String? {
+        switch self {
+        case .none: return nil
+        case .crayon: return "크레용"
+        case .sketch: return "스케치"
+        default: return nil
         }
     }
 }

@@ -49,7 +49,9 @@ struct MainView: View {
                 Color.backgroundPrimary.ignoresSafeArea()
             )
             .fullScreenCover(store: store.scope(state: \.$journal, action: MainFeature.Action.journal)) { store in
-                JournalView(store: store)
+                NavigationStack {
+                    JournalView(store: store)
+                }
             }
             .onAppear {
                 viewStore.send(.fetchAll)

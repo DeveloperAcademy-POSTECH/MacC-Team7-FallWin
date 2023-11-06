@@ -18,73 +18,14 @@ struct JournalView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                CollapsingScrollView {
-                    ZStack(alignment: .bottomTrailing) {
-                        if let image = viewStore.journal.wrappedImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(1, contentMode: .fit)
-                        } else {
-                            Rectangle()
-                                .fill(.blue)
-                                .aspectRatio(1, contentMode: .fit)
-                        }
-                        if let mind = Mind(rawValue: viewStore.journal.mind), let string = mind.string(), let icon = mind.iconName() {
-                            HStack(spacing: 0) {
-                                Image(icon)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 36, height: 36)
-                                Text(string)
-                                    .font(.pretendard(.medium, size: 16))
-                            }
-                            .padding(.trailing, 16)
-                            .padding(.leading, 12)
-                            .padding(.vertical, 4)
-                            .clipShape(
-                                RoundedRectangle(cornerRadius: 22)
-                            )
-                            .background(
-                                RoundedRectangle(cornerRadius: 22)
-                                    .fill(.ultraThinMaterial)
-                            )
-                            .padding(16)
-                        }
-                    }
-                } content: {
-                    VStack(spacing: 14) {
-                        if let date = viewStore.journal.timestamp {
-                            HStack {
-                                Text(String(format: "%d년 %02d월 %02d일", date.year, date.month, date.day))
-                                    .font(.pretendard(.semiBold, size: 22))
-                                //                                    .lineSpacing(140)
-                                    .foregroundStyle(Color.textPrimary)
-                                Spacer()
-                            }
-                        }
+                ScrollView(.vertical) {
+                    VStack(spacing: 28) {
+                        journalDrawing
                         
-                        if let content = viewStore.journal.content {
-                            HStack {
-                                Text(content)
-                                    .font(.pretendard(.medium, size: 18))
-                                //                                    .lineSpacing(180)
-                                    .foregroundStyle(Color.textSecondary)
-                                    .multilineTextAlignment(.leading)
-                                Spacer()
-                            }
-                        }
+                        journalContent
                     }
-                    .padding(24)
-                    .padding(.top, 3)
-                } onPullAction: {
-                    dismiss()
+                    .padding()
                 }
-                
-                VStack {
-                    toolbar
-                    Spacer()
-                }
-                .padding(12)
                 
                 if viewStore.invisible {
                     Rectangle()
@@ -92,6 +33,7 @@ struct JournalView: View {
                         .ignoresSafeArea()
                 }
             }
+            .background(Color.backgroundPrimary.ignoresSafeArea())
             .onChange(of: viewStore.dismiss) { value in
                 dismiss()
             }
@@ -115,95 +57,139 @@ struct JournalView: View {
                 @unknown default: break
                 }
             }
-        }
-    }
-    
-    @ViewBuilder
-    private var toolbar: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            HStack(spacing: 16) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding(12)
-                        .background(
-                            Circle()
-                                .fill(.ultraThinMaterial)
-                        )
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .labelStyle(.iconOnly)
                 }
-                .labelStyle(.iconOnly)
-                .frame(width: 40)
-                
-                Spacer()
                 
                 if let image = viewStore.journal.wrappedImage {
                     let imageToShare = Image(uiImage: image)
-                    ShareLink(item: imageToShare, preview: SharePreview("그림 일기", image: imageToShare)) {
-                        Image(systemName: "square.and.arrow.up")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .padding(10)
-                            .background(
-                                Circle()
-                                    .fill(.ultraThinMaterial)
-                            )
+                    ToolbarItem(placement: .primaryAction) {
+                        ShareLink(item: imageToShare, preview: SharePreview("그림 일기", image: imageToShare)) {
+                            Image(systemName: "square.and.arrow.up")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
                     }
-                    .frame(width: 40)
                 }
                 
-//                Button {
-//                    // TODO: Share
-//                } label: {
-//                    Image(systemName: "square.and.arrow.up")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .padding(10)
-//                        .background(
-//                            Circle()
-//                                .fill(.ultraThinMaterial)
-//                        )
-//                }
-//                .labelStyle(.iconOnly)
-//                .frame(width: 40)
-                
-                Menu {
-                    //                Button("편집", systemImage: "pencil") {
-                    // TODO: Edit
-                    //                }
-                    
+                ToolbarItem(placement: .secondaryAction) {
                     Button("삭제", systemImage: "trash", role: .destructive) {
                         viewStore.send(.delete)
                     }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding(10)
-                        .background(
-                            Circle()
-                                .fill(.ultraThinMaterial)
-                        )
                 }
-                .frame(width: 40)
             }
         }
     }
+    
+    private var journalDrawing: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack(spacing: 22) {
+                Group {
+                    if let image = viewStore.journal.wrappedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                    } else {
+                        Rectangle()
+                            .fill(.blue)
+                            .aspectRatio(1, contentMode: .fit)
+                    }
+                }
+                .shadow(color: .shadow.opacity(0.14), radius: 6, y: 3)
+                
+                if let timestamp = viewStore.journal.timestamp {
+                    Text(String(format: "%d/%02d/%02d(\(timestamp.dayOfWeek))", timestamp.year, timestamp.month, timestamp.day))
+                        .font(.uhbeeSehyun(size: 22))
+                        .padding(.bottom, 8)
+                }
+            }
+            .padding()
+            .background {
+                Rectangle()
+                    .fill(.backgroundCard)
+                    .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+            }
+        }
+    }
+    
+    private var journalContent: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack {
+                let mind = viewStore.journal.wrappedMind
+                let drawingStyle = viewStore.journal.wrappedDrawingStyle
+                
+                HStack {
+                    if mind != .none, let string = mind.string(), let icon = mind.iconName() {
+                        Spacer()
+                        VStack {
+                            Text("오늘의 기분")
+                            HStack(spacing: 0) {
+                                Image(icon)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 36, height: 36)
+                                Text(string)
+                                    .font(.pretendard(.medium, size: 16))
+                            }
+                        }
+                        Spacer()
+                    }
+                    if mind != .none && drawingStyle != .none {
+                        Divider()
+                            .background(.separator)
+                    }
+                    if drawingStyle != .none, let string = drawingStyle.name() {
+                        Spacer()
+                        VStack {
+                            Text("오늘의 그림")
+                            Text(string)
+                        }
+                        Spacer()
+                    }
+                }
+                
+                if mind != .none || drawingStyle != .none {
+                    Divider()
+                        .background(.separator)
+                }
+                
+                HStack {
+                    LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 20)
+                    Spacer()
+                }
+            }
+            .padding()
+            .background {
+                Rectangle()
+                    .fill(.backgroundCard)
+                    .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+            }
+        }
+    }
+    
 }
 
 #Preview {
     let context = PersistenceController.debug.container.viewContext
     let journal = Journal(context: context)
     journal.id = UUID()
-    journal.content = "blah blah blah"
+    journal.content = "blah blah blah sdlkfjas fjklasd flkasjd flaksdjf laksdjflkasdj flkasjdf lkasjdflkawjfoiejalskdmf laskdjf lkawjfl kewj lidsjflkawjs deflkjaw dsoifjaweiopfj awoeifj osdaijf oawijf oiawej foiawejf iowajef oiawjef oisdjf oiasdj foiawje foiwaje foij\nasdf \nasdfasdf"
     journal.image = nil
     journal.mind = 1
     journal.timestamp = Date()
     context.insert(journal)
     
-    return JournalView(store: Store(initialState: JournalFeature.State(journal: journal), reducer: {
-        JournalFeature()
-    }))
+    return NavigationStack {
+        JournalView(store: Store(initialState: JournalFeature.State(journal: journal), reducer: {
+            JournalFeature()
+        }))
+    }
 }
