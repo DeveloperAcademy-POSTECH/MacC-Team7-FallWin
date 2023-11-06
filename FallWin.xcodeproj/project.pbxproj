@@ -55,6 +55,7 @@
 		98202FA42AE69FA90089CF79 /* LottieImageGen.json in Resources */ = {isa = PBXBuildFile; fileRef = 98202FA32AE69FA90089CF79 /* LottieImageGen.json */; };
 		98202FA72AE6A0360089CF79 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 98202FA62AE6A0360089CF79 /* Lottie */; };
 		98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98202FA92AE6A0800089CF79 /* LottieImageGenView.swift */; };
+		98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98202FAB2AE933D50089CF79 /* KarloApiManager.swift */; };
 		9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6262AE6524800C7359B /* Pretendard-Regular.ttf */; };
 		9867B6302AE6524900C7359B /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6272AE6524800C7359B /* Pretendard-Black.ttf */; };
 		9867B6312AE6524900C7359B /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6282AE6524900C7359B /* Pretendard-Light.ttf */; };
@@ -127,6 +128,7 @@
 		9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTextView+Feature.swift"; sourceTree = "<group>"; };
 		98202FA32AE69FA90089CF79 /* LottieImageGen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieImageGen.json; sourceTree = "<group>"; };
 		98202FA92AE6A0800089CF79 /* LottieImageGenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieImageGenView.swift; sourceTree = "<group>"; };
+		98202FAB2AE933D50089CF79 /* KarloApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarloApiManager.swift; sourceTree = "<group>"; };
 		9867B6262AE6524800C7359B /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9867B6272AE6524800C7359B /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
 		9867B6282AE6524900C7359B /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.ttf"; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				79AF69442ADCC2820064E410 /* DataManager.swift */,
 				98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */,
 				98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */,
+				98202FAB2AE933D50089CF79 /* KarloApiManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				7927512B2AF359590023123C /* HapticManager.swift in Sources */,
 				791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */,
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
+				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */,
@@ -701,7 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -738,7 +742,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
