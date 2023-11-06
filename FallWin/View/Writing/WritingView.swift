@@ -70,22 +70,39 @@ struct WritingView: View {
     @ViewBuilder
     func generateEmotionView() -> some View {
         
-        let emotions: [(String, Color, Image)] = [
-            ("happy", Color.emotionHappy, Image("IconHappy")),
-            ("nervous", Color.emotionNervous, Image("IconNervous")),
-            ("grateful", Color.emotionGrateful, Image("IconGrateful")),
-            ("sad", Color.emotionSad, Image("IconSad")),
-            ("joyful", Color.emotionJoyful, Image("IconJoyful")),
-            ("lonely", Color.emotionLonely, Image("IconLonely")),
-            ("proud", Color.emotionProud, Image("IconProud")),
-            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated")),
-            ("touched", Color.emotionTouched, Image("IconTouched")),
-            ("shy", Color.emotionShy, Image("IconShy")),
-            ("exciting", Color.emotionExciting, Image("IconExciting")),
-            ("lazy", Color.emotionLazy, Image("IconLazy")),
-            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed")),
-            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"))
+        let emotions: [(String, Color, Image, String)] = [
+            ("happy", Color.emotionHappy, Image("IconHappy"), "행복한"),
+            ("nervous", Color.emotionNervous, Image("IconNervous"), "불안한"),
+            ("grateful", Color.emotionGrateful, Image("IconGrateful"), "감사한"),
+            ("sad", Color.emotionSad, Image("IconSad"), "슬픈"),
+            ("joyful", Color.emotionJoyful, Image("IconJoyful"), "신나는"),
+            ("lonely", Color.emotionLonely, Image("IconLonely"), "외로운"),
+            ("proud", Color.emotionProud, Image("IconProud"), "뿌듯함"),
+            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), "답답함"),
+            ("touched", Color.emotionTouched, Image("IconTouched"), "감동받은"),
+            ("shy", Color.emotionShy, Image("IconShy"), "부끄러운"),
+            ("exciting", Color.emotionExciting, Image("IconExciting"), "기대되는"),
+            ("lazy", Color.emotionLazy, Image("IconLazy"), "귀찮은"),
+            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed"), "짜증나는"),
+            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), "당황한")
         ]
+        
+//        let emotionToTexts: [String : String] = [
+//            "happy" : "행복한",
+//            "nervous" : "불안한",
+//            "grateful" : "감사한",
+//            "sad" : "슬픈",
+//            "joyful" : "신나는",
+//            "lonely" : "외로운",
+//            "proud" : "뿌듯함",
+//            "suffocated" : "답답함",
+//            "touched" : "감동받은",
+//            "shy" : "부끄러운",
+//            "exciting" : "기대되는",
+//            "lazy" : "귀찮은",
+//            "annoyed" : "짜증나는",
+//            "frustrated" : "당황한"
+//        ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
@@ -108,23 +125,23 @@ struct WritingView: View {
     }
     
     @ViewBuilder
-    func generateEmotionCardView(emotion: (String, Color, Image)) -> some View {
-        let emotionTexts: [String : String] = [
-            "happy" : "행복한",
-            "nervous" : "불안한",
-            "grateful" : "감사한",
-            "sad" : "슬픈",
-            "joyful" : "신나는",
-            "lonely" : "외로운",
-            "proud" : "뿌듯함",
-            "suffocated" : "답답함",
-            "touched" : "감동받은",
-            "shy" : "부끄러운",
-            "exciting" : "기대되는",
-            "lazy" : "귀찮은",
-            "annoyed" : "짜증나는",
-            "frustrated" : "당황한"
-        ]
+    func generateEmotionCardView(emotion: (String, Color, Image, String)) -> some View {
+//        let emotionTexts: [String : String] = [
+//            "happy" : "행복한",
+//            "nervous" : "불안한",
+//            "grateful" : "감사한",
+//            "sad" : "슬픈",
+//            "joyful" : "신나는",
+//            "lonely" : "외로운",
+//            "proud" : "뿌듯함",
+//            "suffocated" : "답답함",
+//            "touched" : "감동받은",
+//            "shy" : "부끄러운",
+//            "exciting" : "기대되는",
+//            "lazy" : "귀찮은",
+//            "annoyed" : "짜증나는",
+//            "frustrated" : "당황한"
+//        ]
         
         WithViewStore(store, observe: {$0}) { viewStore in
             HStack {
@@ -134,7 +151,7 @@ struct WritingView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 90)
-                    Text(emotionTexts[emotion.0]!)
+                    Text(emotion.3)
                         .font(viewStore.selectedEmotion == emotion.0 ? .pretendard(.bold, size: 18) : .pretendard(.medium, size: 18))
                         .foregroundColor(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.textPrimary)
                 }

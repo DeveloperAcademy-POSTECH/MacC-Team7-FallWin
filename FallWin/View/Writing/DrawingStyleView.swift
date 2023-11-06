@@ -87,15 +87,19 @@ struct DrawingStyleView: View {
 //            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
 //        ]
         
-        let drawingStyles: [(String, Color, Image)] = [
-            ("유화", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
-            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
-            ("르누아르", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
-            ("화풍 선택 안함", Color(hexCode: "#191919"), Image("WaterColor")),
-            ("샤갈", Color(hexCode: "#191919"), Image("DigitalArt")),
-            ("애니메이션", Color(hexCode: "#191919"), Image("Neon")),
-            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
-            ("칸딘스키", Color(hexCode: "#191919"), Image("SalvadorDali")),
+        let drawingStyles: [(String, Color, Image, String)] = [
+            ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화"),
+            ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치"),
+            ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르"),
+            ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함"),
+            ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈"),
+            ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
+            ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐"),
+            ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키"),
+            ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱"),
+            ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소"),
+            ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트"),
+            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -121,7 +125,7 @@ struct DrawingStyleView: View {
     }
     
     @ViewBuilder
-    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image)) -> some View {
+    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String)) -> some View {
         WithViewStore(store, observe: {$0}) { viewStore in
             VStack(spacing: 16) {
                 drawingStyle.2
@@ -135,7 +139,7 @@ struct DrawingStyleView: View {
                             .fill(Color.backgroundPrimary)
                             .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
-                Text(drawingStyle.0)
+                Text(drawingStyle.3)
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)
             }

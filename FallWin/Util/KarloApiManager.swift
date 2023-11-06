@@ -48,7 +48,7 @@ extension KarloApiManager {
         let data: Data = try JSONSerialization.data(withJSONObject: parameters)
         
         var request = URLRequest(url: url)
-        request.addValue("KaKaoAK 2c6515b9fb1db8ba3875f3a3c6fba239", forHTTPHeaderField: "Authorization")
+        request.addValue("KaKaoAK \(apiKey)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = data

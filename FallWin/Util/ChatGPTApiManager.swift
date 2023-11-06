@@ -147,10 +147,10 @@ extension ChatGPTApiManager {
 //        """
         
         let template: String = """
-        Make one to three drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
+        Make one to five drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
 
         The output must be only comma seperated noun phrases.
-        The output must contain upto three noun phrases.
+        The output must contain upto five noun phrases.
         The output must be english.
         Each noun phrase should contain enough modifiers.
         If they are all noun phrase containing only emotion, convert the phrase into representative object.
