@@ -84,7 +84,9 @@ struct SearchView: View {
             }
             .padding(.bottom, CvasTabViewValue.tabBarHeight)
             .fullScreenCover(store: store.scope(state: \.$journal, action: SearchFeature.Action.journal)) { store in
-                JournalView(store: store)
+                NavigationStack {
+                    JournalView(store: store)
+                }
             }
             .onAppear {
                 viewStore.send(.fetchData)

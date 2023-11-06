@@ -23,10 +23,6 @@ struct LineNoteView: View {
                     Divider()
                         .background(.separator)
                 }
-                .onChange(of: textViewSize, perform: { value in
-                    print("text lines: \(textViewSize.height / (fontSize + lineSpacing))")
-                    print("div lines: \((0...Int(textViewSize.height / (fontSize + lineSpacing))).count)")
-                })
             }
             .frame(height: textViewSize.height + lineSpacing)
             

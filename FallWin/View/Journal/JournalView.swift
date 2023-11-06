@@ -26,6 +26,9 @@ struct JournalView: View {
                     }
                     .padding()
                 }
+                .refreshable {
+                    dismiss()
+                }
                 
                 if viewStore.invisible {
                     Rectangle()
