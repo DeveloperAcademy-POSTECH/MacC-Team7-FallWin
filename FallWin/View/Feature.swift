@@ -12,7 +12,7 @@ import ComposableArchitecture
 
 struct Feature: Reducer {
     struct State: Equatable {
-        var tabSelection: TabItem = .gallery
+        var tabSelection: Int = 0
         var hideTabBar: Bool = false
         var invisible: Bool = false
         var lock: Bool = false
@@ -27,7 +27,7 @@ struct Feature: Reducer {
     
     enum Action: Equatable {
         case initViews
-        case tabSelect(TabItem)
+        case tabSelect(Int)
         case hideTabBar(Bool)
         case setInvisibility(Bool)
         case setLock(Bool)

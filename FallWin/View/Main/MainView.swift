@@ -19,88 +19,16 @@ struct MainView: View {
                         ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
                             
-                            VStack(spacing: 0) {
-                                if let image = journal.wrappedImage {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .clipShape(RoundedRectangle(cornerRadius: 24))
-                                } else {
-                                    Rectangle()
-                                        .fill(Color.blue)
-                                        .aspectRatio(1, contentMode: .fit)
-                                        .clipShape(RoundedRectangle(cornerRadius: 24))
-                                }
-                                
-                                VStack(spacing: 0) {
-                                    HStack(alignment: .center) {
-                                        if let date = journal.timestamp {
-                                            Text(date.dateString)
-                                                .font(.pretendard(.medium, size: 16))
-                                                .padding(.vertical, 8)
-                                                .padding(.horizontal)
-                                                .background(
-                                                    Capsule()
-                                                        .fill(.regularMaterial)
-                                                )
-                                        }
-                                        Spacer()
-                                        if let mind = Mind(rawValue: journal.mind), let string = mind.string(), let icon = mind.iconName() {
-                                            HStack {
-                                                Image(icon)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 36, height: 36)
-                                                Text(string)
-                                                    .font(.pretendard(.medium, size: 16))
-                                            }
-                                            .padding(.vertical, 4)
-                                            .padding(.horizontal)
-                                            .background(
-                                                Capsule()
-                                                    .fill(.regularMaterial)
-                                            )
-                                        }
-                                    }
-                                    
-                                    if let content = journal.content {
-                                        HStack {
-                                            Text(content)
-                                                .font(.pretendard(.medium, size: 16))
-                                                .lineLimit(2)
-                                                .truncationMode(.tail)
-                                                .multilineTextAlignment(.leading)
-                                            Spacer()
-                                        }
-                                        .padding()
-                                    }
-                                }
+                            mainCell(journal: journal)
                                 .padding()
-                            }
-                            .background {
-                                ZStack {
-                                    if let image = journal.wrappedImage {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .scaledToFill()
-                                        
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.blue)
-                                    }
+                                .onTapGesture {
+                                    HapticManager.shared.impact()
+                                    viewStore.send(.showJournalView(journal))
                                 }
-                                .overlay(.ultraThinMaterial)
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 24))
-                            .padding()
-                            .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 4)
-                            .onTapGesture {
-                                HapticManager.shared.impact()
-                                viewStore.send(.showJournalView(journal))
-                            }
                         }
                     }
                     .padding()
+                    .padding(.vertical, 40)
                 }
                 
                 writingActionButton
@@ -111,7 +39,15 @@ struct MainView: View {
                                 viewStore.send(.hideTabBar(true))
                             }
                     }
+                
+                VStack {
+                    toolbar
+                    Spacer()
+                }
             }
+            .background(
+                Color.backgroundPrimary.ignoresSafeArea()
+            )
             .fullScreenCover(store: store.scope(state: \.$journal, action: MainFeature.Action.journal)) { store in
                 JournalView(store: store)
             }
@@ -119,18 +55,95 @@ struct MainView: View {
                 viewStore.send(.fetchAll)
                 viewStore.send(.hideTabBar(false))
             }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("설정", systemImage: "gearshape") {
-                        viewStore.send(.showSettingsView)
-                    }
-                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
-                        NavigationStack {
-                            SettingsView(store: store)
-                        }
+            .toolbar(.hidden, for: .navigationBar)
+//            .toolbar {
+//                ToolbarItem(placement: .primaryAction) {
+//                    Button("설정", systemImage: "gearshape") {
+//                        viewStore.send(.showSettingsView)
+//                    }
+//                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
+//                        NavigationStack {
+//                            SettingsView(store: store)
+//                        }
+//                    }
+//                }
+//            }
+        }
+    }
+    
+    @ViewBuilder
+    private func mainCell(journal: Journal) -> some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack(spacing: 16) {
+                Group {
+                    if let image = journal.wrappedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Rectangle()
+                            .fill(Color.blue)
+                            .aspectRatio(1, contentMode: .fit)
                     }
                 }
+                .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 4)
+                
+                HStack(spacing: 24) {
+                    VStack {
+                        Text(String(format: "%d", journal.timestamp?.day ?? 0))
+                            .font(.pretendard(.bold, size: 28))
+                        Text(journal.timestamp?.dayOfWeek ?? "")
+                            .font(.pretendard(.semiBold, size: 16))
+                    }
+                    Divider()
+                        .background(Color.separator)
+                    Text(journal.content ?? "")
+                    Spacer()
+                }
+                .foregroundStyle(Color.textPrimary)
+                .padding(.horizontal, 12)
             }
+            .padding()
+            .background(
+                Color.backgroundCard
+                    .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 4)
+            )
+        }
+    }
+    
+    private var toolbar: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            HStack(alignment: .center) {
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Text(String(format: "%d년 %d월", viewStore.year, viewStore.month))
+                            .font(.pretendard(.bold, size: 24))
+                        Image(systemName: "chevron.down")
+                    }
+                }
+                .foregroundStyle(Color.textPrimary)
+                
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "calendar")
+                        .resizable()
+                        .frame(width: 20, height: 18)
+                        .padding(10)
+                        .background {
+                            Circle()
+                                .fill(Color.backgroundCard)
+                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+                        }
+                }
+            }
+            .padding(.top)
+            .padding(.horizontal)
+            .background(Color.backgroundPrimary)
         }
     }
     
@@ -146,10 +159,11 @@ struct MainView: View {
                     } label: {
                         ZStack {
                             Circle()
-                                .fill(Colors.button.color())
-                            Image(systemName: "pencil")
+                                .fill(Color.buttonFloating)
+                                .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 4)
+                            Image(systemName: "plus")
                                 .resizable()
-                                .foregroundStyle(Colors.tabBarItem.color())
+                                .foregroundStyle(Color.textOnFloatingButton)
                                 .frame(width: 24, height: 24)
                         }
                     }

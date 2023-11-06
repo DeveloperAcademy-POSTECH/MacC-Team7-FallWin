@@ -12,6 +12,8 @@ import ComposableArchitecture
 struct MainFeature: Reducer {
     struct State: Equatable {
         var journals: [Journal] = []
+        var year: Int = Date().year
+        var month: Int = Date().month
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?

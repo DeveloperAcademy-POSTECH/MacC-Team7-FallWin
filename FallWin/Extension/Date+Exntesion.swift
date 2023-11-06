@@ -60,4 +60,18 @@ extension Date {
         }
     }
     
+    var dayOfWeek: String {
+        let dayOfWeek = Calendar.current.component(.weekday, from: self)
+        switch dayOfWeek {
+        case 1: return "일"
+        case 2: return "월"
+        case 3: return "화"
+        case 4: return "수"
+        case 5: return "목"
+        case 6: return "금"
+        case 7: return "토"
+        default: return ""
+        }
+    }
+    
 }
