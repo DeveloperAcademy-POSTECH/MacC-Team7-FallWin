@@ -7,24 +7,48 @@
 
 import Foundation
 import ComposableArchitecture
+import SwiftUI
 
 struct MainTextFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String
-        var mainText: String?
+        var mainText: String
+        var isKeyboardShown: Bool
+        @PresentationState var drawingStyle: DrawingStyleFeature.State?
     }
     
     enum Action: Equatable {
-        case inputMainText(_ mainText: String?)
+        case inputMainText(_ mainText: String)
+        case showDrawingStyleView
+        case doneGenerating(Journal)
+        case drawingStyle(PresentationAction<DrawingStyleFeature.Action>)
+        case showKeyboard(_ isKeyboardShown: Bool)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        case let .inputMainText(mainText):
-            state.mainText = mainText
-            return .none
-            
-        default: return .none
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case let .inputMainText(mainText):
+                state.mainText = mainText
+                return .none
+                
+            case .showDrawingStyleView:
+                state.drawingStyle = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText)
+                return .none
+                
+            case .drawingStyle(.presented(.doneGenerating(let journal))):
+                return .send(.doneGenerating(journal))
+                
+            case let .showKeyboard(isKeyboardShown):
+                state.isKeyboardShown =  isKeyboardShown
+                return .none
+                
+            default: return .none
+            }
+        }
+        .ifLet(\.$drawingStyle, action: /Action.drawingStyle) {
+            DrawingStyleFeature()
         }
     }
 }

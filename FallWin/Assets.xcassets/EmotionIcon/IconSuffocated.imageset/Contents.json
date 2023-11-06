@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "IconSuffocated.png",
+      "filename" : "IconSuffocated~universal@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "IconSuffocated~universal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "IconSuffocated~universal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -23,6 +23,40 @@ struct Carousel: View {
     @GestureState private var dragOffset: CGFloat = 0
     
     var body: some View {
+        if #available(iOS 17, *) {
+            scrollView
+        } else {
+            lazyHStackView
+        }
+    }
+    
+    @available(iOS 17.0, *)
+    @ViewBuilder
+    private var scrollView: some View {
+        GeometryReader { proxy in
+            let pageWidth = proxy.size.width - (spacing + visibleSpace) * 2
+            
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 0) {
+                    ForEach(views.indices, id: \.self) { i in
+                        views[i].view
+                            .containerRelativeFrame(.horizontal)
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(phase.isIdentity ? 1.0 : 0.8)
+                                    .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
+                            }
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .scrollTargetBehavior(.viewAligned)
+            .scrollIndicators(.hidden)
+        }
+    }
+    
+    @ViewBuilder
+    private var lazyHStackView: some View {
         GeometryReader { proxy in
             let pageWidth = proxy.size.width - (spacing + visibleSpace) * 2
             let offsetX = (spacing + visibleSpace) + CGFloat(currentPage) * (-pageWidth * 0.9) + CGFloat(currentPage) * -spacing + dragOffset
@@ -31,8 +65,14 @@ struct Carousel: View {
                 ForEach(views.indices, id: \.self) { i in
                     let width = currentPage == i ? pageWidth : pageWidth * 0.9
                     let height = currentPage == i ? proxy.size.height : proxy.size.height * 0.9
-                    views[i].view
-                        .frame(width: width, height: height)
+                    
+                    if currentPage - 2 ..< currentPage + 3 ~= i {
+                        views[i].view
+                            .frame(width: width, height: height)
+
+                    } else {
+                        Spacer().frame(width: width, height: height)
+                    }
                 }
                 .contentShape(Rectangle())
             }
@@ -44,7 +84,7 @@ struct Carousel: View {
                         let progress = -offsetX / pageWidth
                         let increment = Int(progress.rounded())
                         
-                        withAnimation {
+                        withAnimation(.linear(duration: 0.2)) {
                             currentPage = max(min(currentPage + increment, views.count - 1), 0)
                         }
                     }

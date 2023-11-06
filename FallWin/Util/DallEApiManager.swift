@@ -44,12 +44,22 @@ extension DallEApiManager {
         return result.hasIssues == false
     }
     
-    func addDrawingStyle(withPrompt prompt: String, drawingStyle: String) -> String {
-        let drawingStyleTemplate: String = """
-        <<DRAWING STYLE>>
-        \(drawingStyle)
-        <</DRAWING STYLE>>
-        """
+    func addDrawingStyle(withPrompt prompt: String, drawingStyle: String, emotion: String) -> String {
+        var drawingStyleTemplate: String = ""
+        if drawingStyle != "" {
+            drawingStyleTemplate = """
+                Drawing Style: \(drawingStyle) depicting the abstract concept of \(emotion).
+                """
+        }
+        
+//        var emotionTemplate: String = ""
+//        if emotion != "" {
+//            emotionTemplate = """
+//                <<EMOTION>>
+//                \(emotion)
+//                <</EMOTION>>
+//                """
+//        }
         let dallEPrompt = prompt + "\n" + drawingStyleTemplate
         
         return dallEPrompt
@@ -69,7 +79,7 @@ extension DallEApiManager {
         let parameters: [String: Any] = [
             "prompt": prompt,
             "n": 1,
-            "size": "256x256",
+            "size": "1024x1024",
             "user": sessionID
         ]
         

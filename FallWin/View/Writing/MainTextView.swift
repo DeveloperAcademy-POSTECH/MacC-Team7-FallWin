@@ -10,36 +10,56 @@ import ComposableArchitecture
 
 struct MainTextView: View {
     var store: StoreOf<MainTextFeature>
-    @State var mainText: String = ""
-    @FocusState var focused
+    @FocusState var isFocused: Bool
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
-                VStack {
-                    Spacer()
-                        .frame(height: 30)
+                    .ignoresSafeArea()
+                VStack(spacing: 0) {
                     DateView()
-                    Spacer()
-                        .frame(height: 36)
-                    MessageView(titleText: "오늘 하루는 어땠나요?")
-                    Spacer()
-                        .frame(height: 15)
-                    TextEditor(text: $mainText)
-                        .font(.system(size: 18, weight: .medium))
+                        .padding(.top, 30)
+                    MessageMainTextView()
+                        .padding(.top, 36)
+                    TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0)}))
+                        .font(.pretendard(.medium, size: 18))
                         .foregroundColor(.textPrimary)
-                        .focused($focused)
-                        .padding(9)
+                        .scrollContentBackground(.hidden)
+                        .focused($isFocused)
+//                        .focused(viewStore.binding(get: \.isKeyboardShown, send: { .showKeyboard($0)}))
+                        .padding([.top, .bottom], 9)
+                        .padding([.leading, .trailing], 12)
                         .background() {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.backgroundPrimary)
-                                .shadow(radius: 12)
+                                .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
                         }
-                        
+                        .onAppear() {
+                            isFocused = true
+                        }
+                        .padding(.top, 12)
+                    Button {
+//                        viewStore.send(.inputMainText(mainText))
+                        viewStore.send(.showDrawingStyleView)
+                    } label: {
+                        Text("다음")
+                            .font(.pretendard(.semiBold, size: 18))
+                            .frame(width: UIScreen.main.bounds.width-40, height: 54)
+                            .background(viewStore.mainText == "" ? Color.buttonDisabled : Color.button)
+                            .cornerRadius(9)
+                            .foregroundColor(Color.white)
+                    }
+                    .disabled(viewStore.mainText == "")
+                    .padding([.top, .bottom], 15)
                 }
-                .padding()
+                .padding([.leading, .trailing], 20)
+                .padding(.bottom, 15)
             }
+            .navigationTitle(Text("일기 쓰기"))
+            .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
+                DrawingStyleView(store: store)
+            })
         }
     }
 }
@@ -47,13 +67,14 @@ struct MainTextView: View {
 struct MessageMainTextView: View {
     var body: some View {
         Text("오늘 하루는 어땠나요?")
-            .font(.system(size: 24, weight: .bold))
+            .font(.pretendard(.bold, size: 24))
             .foregroundStyle(.textPrimary)
+            .padding(.bottom, 15)
     }
 }
 
 #Preview {
-    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "행복한")) {
+    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤", isKeyboardShown: true), reducer: {
         MainTextFeature()
-    })
+    }))
 }

@@ -11,6 +11,8 @@ import ComposableArchitecture
 struct GalleryView: View {
     let store: StoreOf<GalleryFeature>
     
+    let dataInsertNotification = NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextDidSave)
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             GeometryReader { proxy in
@@ -24,11 +26,10 @@ struct GalleryView: View {
                             // OnPageChanged
                             
                         } _: { journal in
-                            Button {
-                                viewStore.send(.showJournalView(journal))
-                            } label: {
-                                journalCell(journal: journal)
-                            }
+                            journalCell(journal: journal)
+                                .onTapGesture {
+                                    viewStore.send(.showJournalView(journal))
+                                }
                         }
                         .aspectRatio(0.7, contentMode: .fit)
                         
@@ -38,15 +39,23 @@ struct GalleryView: View {
                 
                 writingActionButton
                     .padding()
+                    .navigationDestination(store: store.scope(state: \.$writing, action: GalleryFeature.Action.writing)) { store in
+                        WritingView(store: store)
+                            .onAppear {
+                                viewStore.send(.hideTabBar(true))
+                            }
+                    }
+            }
+            .onReceive(dataInsertNotification) { output in
+                viewStore.send(.fetchAll)
             }
             .onAppear {
                 viewStore.send(.fetchAll)
                 viewStore.send(.setCarouselIndex(viewStore.journals.count - 1))
+                viewStore.send(.hideTabBar(false))
             }
             .fullScreenCover(store: store.scope(state: \.$journal, action: GalleryFeature.Action.journal)) { store in
-                NavigationStack {
-                    JournalView(store: store)
-                }
+                JournalView(store: store)
             }
         }
         .padding(.bottom, CvasTabViewValue.tabBarHeight)
@@ -59,16 +68,19 @@ struct GalleryView: View {
                 HStack {
                     Spacer()
                     Button {
+                        viewStore.send(.showWritingView)
                         
                     } label: {
-                        Image(systemName: "pencil")
-                            .foregroundStyle(Colors.tabBarItem.color())
-                            .padding()
-                            .background(
-                                Circle()
-                                    .fill(Colors.button.color())
-                            )
+                        ZStack {
+                            Circle()
+                                .fill(Colors.button.color())
+                            Image(systemName: "pencil")
+                                .resizable()
+                                .foregroundStyle(Colors.tabBarItem.color())
+                                .frame(width: 24, height: 24)
+                        }
                     }
+                    .frame(width: 56, height: 56)
                 }
             }
         }
@@ -85,7 +97,7 @@ struct GalleryView: View {
                 Button(String(format: "%d년 %02d월", viewStore.date.year, viewStore.date.month)) {
                     
                 }
-                .font(.body.bold())
+                .font(.pretendard(.semiBold, size: 22))
                 
                 Button("Next Month", systemImage: "chevron.right") {
                     viewStore.send(.nextMonth)
@@ -99,19 +111,26 @@ struct GalleryView: View {
     @ViewBuilder
     func journalCell(journal: Journal) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ZStack {
-                if let image = journal.wrappedImage {
-                    Image(uiImage: image)
-                } else {
-                    Rectangle()
-                        .fill(.white)
-                }
+            if let image = journal.wrappedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .mask(
+                        RoundedRectangle(cornerRadius: 24)
+                            .aspectRatio(0.6, contentMode: .fit)
+                    )
+                    .drawingGroup()
+                    .shadow(color: .black.opacity(0.12), radius: 10)
+                    .aspectRatio(0.6, contentMode: .fit)
+            } else {
+                Rectangle()
+                    .fill(.white)
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: 24)
+                    )
+                    .shadow(color: .black.opacity(0.12), radius: 10)
+                    .aspectRatio(0.6, contentMode: .fit)
             }
-            .clipShape(
-                RoundedRectangle(cornerRadius: 24)
-            )
-            .shadow(color: .black.opacity(0.12), radius: 10)
-            .aspectRatio(0.6, contentMode: .fit)
         }
     }
 }

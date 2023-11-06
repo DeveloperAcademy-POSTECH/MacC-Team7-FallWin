@@ -38,6 +38,10 @@ enum Colors: String {
     case emotionLazy
     case emotionShy
     case emotionFrustrated
+    case emotionTough
+    case emotionReassuring
+    case emotionPeaceful
+    case emotionSurprised
     
     func color() -> Color {
         return Color(self.rawValue)

@@ -13,7 +13,8 @@ struct SurfView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Text("Hello, world!")
+            Text("(추후 개발 예정...)")
+                .font(.pretendard(.bold, size: 22))
         }
     }
 }
