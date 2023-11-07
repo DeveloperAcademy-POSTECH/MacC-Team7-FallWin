@@ -68,6 +68,9 @@ struct MainFeature: Reducer {
             case .writing(let action):
                 return handleWritingAction(state: &state, action: action)
                 
+            case .journal(let action):
+                return handleJournalAction(state: &state, action: action)
+                
             default: return .none
             }
         }
@@ -94,6 +97,8 @@ struct MainFeature: Reducer {
     
     private func handleJournalAction(state: inout State, action: PresentationAction<JournalFeature.Action>) -> Effect<Action> {
         switch action {
+        case .presented(.delete):
+            return .send(.fetchAll)
         default: return .none
         }
     }
