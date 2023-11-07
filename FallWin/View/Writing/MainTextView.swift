@@ -27,16 +27,25 @@ struct MainTextView: View {
                         .foregroundColor(.textPrimary)
                         .scrollContentBackground(.hidden)
                         .focused($isFocused)
-//                        .focused(viewStore.binding(get: \.isKeyboardShown, send: { .showKeyboard($0)}))
                         .padding([.top, .bottom], 9)
                         .padding([.leading, .trailing], 12)
                         .background() {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
-                        }
-                        .onAppear() {
-                            isFocused = true
+                                .overlay {
+                                    VStack {
+                                        Spacer()
+                                        HStack{
+                                            Spacer()
+                                            Text("\(viewStore.mainText.count)/1000")
+                                                .font(.system(size: 12))
+                                                .offset(y: -4)
+                                                .padding(.trailing, 8)
+                                        }
+                                        
+                                    }
+                                }
                         }
                         .padding(.top, 12)
                     Button {
