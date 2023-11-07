@@ -17,7 +17,7 @@ struct MainFeature: Reducer {
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
-        @PresentationState var settings: SettingsFeature.State?
+        @PresentationState var settings: OldSettingsFeature.State?
     }
     
     enum Action: Equatable {
@@ -30,7 +30,7 @@ struct MainFeature: Reducer {
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
-        case settings(PresentationAction<SettingsFeature.Action>)
+        case settings(PresentationAction<OldSettingsFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -81,7 +81,7 @@ struct MainFeature: Reducer {
             WritingFeature()
         }
         .ifLet(\.$settings, action: /Action.settings) {
-            SettingsFeature()
+            OldSettingsFeature()
         }
     }
     

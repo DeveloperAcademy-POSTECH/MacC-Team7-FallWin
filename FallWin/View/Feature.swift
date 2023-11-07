@@ -18,39 +18,26 @@ struct Feature: Reducer {
         var lock: Bool = false
         var showPasscodeView: Bool = true
         
-        @PresentationState var gallery: GalleryFeature.State?
-        @PresentationState var main: MainFeature.State?
-        @PresentationState var search: SearchFeature.State?
-        @PresentationState var surf: SurfFeature.State?
-        @PresentationState var profile: ProfileFeature.State?
+        @PresentationState var main: MainFeature.State? = .init()
+        @PresentationState var search: SearchFeature.State? = .init()
+        @PresentationState var settings: SettingsFeature.State? = .init()
     }
     
     enum Action: Equatable {
-        case initViews
         case tabSelect(Int)
         case hideTabBar(Bool)
         case setInvisibility(Bool)
         case setLock(Bool)
         case showPasscodeView(Bool)
         
-        case gallery(PresentationAction<GalleryFeature.Action>)
         case main(PresentationAction<MainFeature.Action>)
         case search(PresentationAction<SearchFeature.Action>)
-        case surf(PresentationAction<SurfFeature.Action>)
-        case profile(PresentationAction<ProfileFeature.Action>)
+        case settings(PresentationAction<SettingsFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .initViews:
-                state.gallery = .init()
-                state.main = .init()
-                state.search = .init()
-                state.surf = .init()
-                state.profile = .init()
-                return .none
-                
             case let .tabSelect(tab):
                 state.tabSelection = tab
                 return .none
@@ -73,17 +60,11 @@ struct Feature: Reducer {
                 state.showPasscodeView = show
                 return .none
                 
-            case let .gallery(action):
-                return handleGalleryAction(state: &state, action: action)
-                
             case let .main(action):
                 return handleMainAction(state: &state, action: action)
                 
             default: return .none
             }
-        }
-        .ifLet(\.$gallery, action: /Action.gallery) {
-            GalleryFeature()
         }
         .ifLet(\.$main, action: /Action.main) {
             MainFeature()
@@ -91,21 +72,8 @@ struct Feature: Reducer {
         .ifLet(\.$search, action: /Action.search) {
             SearchFeature()
         }
-        .ifLet(\.$surf, action: /Action.surf) {
-            SurfFeature()
-        }
-        .ifLet(\.$profile, action: /Action.profile) {
-            ProfileFeature()
-        }
-    }
-    
-    private func handleGalleryAction(state: inout State, action: PresentationAction<GalleryFeature.Action>) -> Effect<Action> {
-        switch action {
-        case .presented(.hideTabBar(let hide)):
-            return .send(.hideTabBar(hide))
-            
-        default:
-            return .none
+        .ifLet(\.$settings, action: /Action.settings) {
+            SettingsFeature()
         }
     }
     

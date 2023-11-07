@@ -40,6 +40,12 @@ struct ContentView: View {
                             }
                             .tag(1)
                         }
+                        
+                        IfLetStore(store.scope(state: \.$settings, action: Feature.Action.settings)) { store in
+                            NavigationStack {
+                                SettingsView(store: store)
+                            }
+                        }
                     }
                     .toolbarBackground(Color(hexCode: "ededed"), for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
@@ -51,9 +57,6 @@ struct ContentView: View {
                         .fill(.regularMaterial)
                         .ignoresSafeArea()
                 }
-            }
-            .onAppear {
-                viewStore.send(.initViews)
             }
             .onChange(of: scenePhase) { value in
                 if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
