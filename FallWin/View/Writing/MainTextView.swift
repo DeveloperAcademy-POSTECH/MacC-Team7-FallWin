@@ -31,7 +31,7 @@ struct MainTextView: View {
                         .padding([.top, .bottom], 9)
                         .padding([.leading, .trailing], 12)
                         .background() {
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
                         }
@@ -43,12 +43,7 @@ struct MainTextView: View {
 //                        viewStore.send(.inputMainText(mainText))
                         viewStore.send(.showDrawingStyleView)
                     } label: {
-                        Text("다음")
-                            .font(.pretendard(.semiBold, size: 18))
-                            .frame(width: UIScreen.main.bounds.width-40, height: 54)
-                            .background(viewStore.mainText == "" ? Color.buttonDisabled : Color.button)
-                            .cornerRadius(9)
-                            .foregroundColor(Color.white)
+                        ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.mainText == "" ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                     }
                     .disabled(viewStore.mainText == "")
                     .padding([.top, .bottom], 15)

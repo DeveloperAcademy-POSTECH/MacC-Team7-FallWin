@@ -114,16 +114,7 @@ struct GeneratedDiaryView: View {
                     Button {
                         viewStore.send(.doneGenerating)
                     } label: {
-                        HStack {
-                            Spacer()
-                            Text("다음")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Spacer()
-                        }
-                        .padding()
-                        .background(viewStore.image == nil ? Color.buttonDisabled : Color.button)
-                        .cornerRadius(9)
-                        .foregroundColor(Color.white)
+                        ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                     }
                     .disabled(viewStore.image == nil)
                     .padding(.top, 15)

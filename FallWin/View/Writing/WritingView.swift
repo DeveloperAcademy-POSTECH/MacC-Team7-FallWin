@@ -29,23 +29,14 @@ struct WritingView: View {
                         Button {
                             viewStore.send(.showMainTextView(nil))
                         } label: {
-                            Text("건너뛰기")
-                                .font(.pretendard(.medium, size: 18))
-                                .frame(height: 54)
-                                .background(Color.backgroundPrimary)
-                                .foregroundColor(Color.textSecondary)
+                            ConfirmButtonLabelView(text: "건너뛰기", backgroundColor: .backgroundPrimary, foregroundColor: .textSecondary, width: nil)
                         }
                         Spacer()
                         Button {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
                             
                         } label: {
-                            Text("다음")
-                                .font(.pretendard(.semiBold, size: 18))
-                                .frame(width: UIScreen.main.bounds.width * 0.6, height: 54)
-                                .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
-                                .cornerRadius(9)
-                                .foregroundColor(Color.white)
+                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                         }
                         .disabled(viewStore.selectedEmotion == nil)
                         .padding(.trailing, 20)

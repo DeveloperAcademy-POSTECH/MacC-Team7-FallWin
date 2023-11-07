@@ -45,12 +45,7 @@ struct YearMonthPickerView: View {
                 Button {
                     isCompleted = true
                 } label: {
-                    Text("확인")
-                        .font(.pretendard(.semiBold, size: 18))
-                        .foregroundStyle(.textOnButton)
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 60)
-                        .background(Color.button)
-                        .cornerRadius(8)
+                    ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
                 }
             }
         }

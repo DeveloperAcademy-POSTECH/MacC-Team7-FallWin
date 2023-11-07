@@ -44,16 +44,7 @@ struct DrawingStyleView: View {
                         Button {
                             viewStore.send(.showGeneratedDiaryView)
                         } label: {
-                            HStack {
-                                Spacer()
-                                Text("다음")
-                                    .font(.pretendard(.semiBold, size: 18))
-                                Spacer()
-                            }
-                            .padding()
-                            .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
-                            .cornerRadius(9)
-                            .foregroundColor(Color.white)
+                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                         }
                         .disabled(viewStore.selectedDrawingStyle == nil)
                         .padding(.top, 15)
