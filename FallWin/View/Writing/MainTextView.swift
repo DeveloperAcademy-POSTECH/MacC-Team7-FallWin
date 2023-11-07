@@ -19,7 +19,7 @@ struct MainTextView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     DateView()
-                        .padding(.top, 30)
+//                        .padding(.top, 30)
                     MessageMainTextView()
                         .padding(.top, 36)
                     TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0)}))
@@ -51,7 +51,7 @@ struct MainTextView: View {
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
             }
-            .navigationTitle(Text("일기 쓰기"))
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
                 DrawingStyleView(store: store)
             })

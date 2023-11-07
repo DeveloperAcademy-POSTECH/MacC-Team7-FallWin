@@ -19,8 +19,8 @@ struct WritingView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     DateView()
-                        .padding(.top, 30)
-                    MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
+//                        .padding(.top, -30)
+                    MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
                         .padding(.top, 36)
                     generateEmotionView()
                         .padding(.top, 16)
@@ -51,7 +51,7 @@ struct WritingView: View {
                     }
                 }
             }
-            .navigationTitle("일기 쓰기")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
                 MainTextView(store: store)
             })
@@ -156,14 +156,21 @@ struct WritingView: View {
 
 struct DateView: View {
     var date = Date()
+    @State var isPickerShown: Bool = false
     
     var body: some View {
         HStack {
-//            Text("<")
-            Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
-                .font(.pretendard(.semiBold, size: 20))
+            Text("\(date.month)월 \(date.day)일 (\(date.dayOfWeek))")
+                .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
-//            Text(">")
+            Image(systemName: "chevron.down")
+        }
+        .onTapGesture {
+            isPickerShown.toggle()
+        }
+        .sheet(isPresented: $isPickerShown, onDismiss: { print("picker dismissed") }) {
+            MonthDayYearPickerView(yearRange: 1900...2023)
+                .presentationDetents([.fraction(0.5)])
         }
     }
 }

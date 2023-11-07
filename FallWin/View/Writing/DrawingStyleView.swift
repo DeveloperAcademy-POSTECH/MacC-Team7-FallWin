@@ -18,7 +18,7 @@ struct DrawingStyleView: View {
                         .ignoresSafeArea()
                     VStack(spacing: 0) {
                         DateView()
-                            .padding(.top, 30)
+//                            .padding(.top, 30)
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
                         VStack {
@@ -57,7 +57,7 @@ struct DrawingStyleView: View {
                         }
                     }
                 }
-                .navigationTitle(Text("일기 쓰기"))
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
                     GeneratedDiaryView(store: store)
                 })
