@@ -73,6 +73,7 @@
 		9867B6362AE6524900C7359B /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B62D2AE6524900C7359B /* Pretendard-Medium.ttf */; };
 		9867B6372AE6524900C7359B /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B62E2AE6524900C7359B /* Pretendard-ExtraLight.ttf */; };
 		9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B6392AE6533A00C7359B /* Font+Extension.swift */; };
+		987086AB2AFA17020060E59C /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987086AA2AFA17020060E59C /* PickerView.swift */; };
 		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
 		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
@@ -154,6 +155,7 @@
 		9867B62E2AE6524900C7359B /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9867B6382AE652A400C7359B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9867B6392AE6533A00C7359B /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		987086AA2AFA17020060E59C /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				7927512A2AF359590023123C /* HapticManager.swift */,
 				79D8B1502AF946CE0020DFCC /* LineNoteView.swift */,
 				79D8B1522AF947E30020DFCC /* ViewGeometry.swift */,
+				987086AA2AFA17020060E59C /* PickerView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
 				791F14702ADD8CF900F8DDD2 /* SurfView+Feature.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
+				987086AB2AFA17020060E59C /* PickerView.swift in Sources */,
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
 			);
@@ -733,7 +737,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -770,7 +774,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
