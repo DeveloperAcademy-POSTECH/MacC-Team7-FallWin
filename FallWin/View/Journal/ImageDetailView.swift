@@ -13,7 +13,14 @@ struct ImageDetailView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            GeometryReader { proxy in
+                Image("IconFrustrated")
+                    .resizable()
+    //                .frame(width: proxy.size.width, height: proxy.size.height)
+                    .scaledToFit()
+                    .clipShape(Rectangle())
+                    .modifier(ImageModifier(contentSize: CGSize(width: proxy.size.width, height: proxy.size.height)))
+            }
         }
     }
 }

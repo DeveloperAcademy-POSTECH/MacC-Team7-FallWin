@@ -87,6 +87,7 @@
 		98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A822AE5308200FEE4D2 /* WritingPathState.swift */; };
 		98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */; };
 		98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */; };
+		A9D4C73B2AF8CAA30004CF04 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,6 +168,7 @@
 		98F70A822AE5308200FEE4D2 /* WritingPathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPathState.swift; sourceTree = "<group>"; };
 		98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedDiaryView.swift; sourceTree = "<group>"; };
 		98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedDiaryView+Feature.swift"; sourceTree = "<group>"; };
+		A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 				791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */,
 				7927512C2AF364DC0023123C /* ImageDetailView.swift */,
 				7927512E2AF364E60023123C /* ImageDetailView+Feature.swift */,
+				A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				791F146E2ADD8CF200F8DDD2 /* SearchView+Feature.swift in Sources */,
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
 				98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */,
+				A9D4C73B2AF8CAA30004CF04 /* ImageModifier.swift in Sources */,
 				9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */,
