@@ -196,7 +196,9 @@ struct GeneratedDiaryView: View {
                 print(error)
             }
         }
-        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
+        .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder

@@ -70,6 +70,9 @@ struct DrawingStyleView: View {
                 .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
                     GeneratedDiaryView(store: store)
                 })
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar(.visible, for: .navigationBar)
+                .toolbar(.hidden, for: .tabBar)
         }
     }
     

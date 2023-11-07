@@ -60,6 +60,9 @@ struct MainTextView: View {
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
                 DrawingStyleView(store: store)
             })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+            .toolbar(.hidden, for: .tabBar)
         }
     }
 }

@@ -58,6 +58,7 @@ struct MainView: View {
                 viewStore.send(.hideTabBar(false))
             }
             .toolbar(.hidden, for: .navigationBar)
+            .toolbar(.visible, for: .tabBar)
 //            .toolbar {
 //                ToolbarItem(placement: .primaryAction) {
 //                    Button("설정", systemImage: "gearshape") {
@@ -129,22 +130,23 @@ struct MainView: View {
                 
                 Spacer()
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .frame(width: 20, height: 18)
-                        .padding(10)
-                        .background {
-                            Circle()
-                                .fill(Color.backgroundCard)
-                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
-                        }
-                }
+//                Button {
+//                    
+//                } label: {
+//                    Image(systemName: "calendar")
+//                        .resizable()
+//                        .frame(width: 20, height: 18)
+//                        .padding(10)
+//                        .background {
+//                            Circle()
+//                                .fill(Color.backgroundCard)
+//                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+//                        }
+//                }
             }
             .padding(.top)
             .padding(.horizontal)
+            .padding(.bottom, 8)
             .background(Color.backgroundPrimary)
         }
     }
