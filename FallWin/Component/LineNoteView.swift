@@ -26,14 +26,17 @@ struct LineNoteView: View {
             }
             .frame(height: textViewSize.height + lineSpacing)
             
-            Text(text)
-                .font(.sejong(size: fontSize))
-                .lineSpacing(lineSpacing)
-                .background(ViewGeometry())
-                .onPreferenceChange(ViewSizeKey.self) { value in
-                    textViewSize = value
-                }
-                .padding(.bottom, 8)
+            HStack {
+                Text(text)
+                    .font(.sejong(size: fontSize))
+                    .lineSpacing(lineSpacing)
+                    .background(ViewGeometry())
+                    .onPreferenceChange(ViewSizeKey.self) { value in
+                        textViewSize = value
+                    }
+                    .padding(.bottom, 8)
+                Spacer()
+            }
         }
     }
 }

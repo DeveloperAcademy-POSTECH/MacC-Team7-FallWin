@@ -164,10 +164,7 @@ struct JournalView: View {
                         .background(.separator)
                 }
                 
-                HStack {
-                    LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 20)
-                    Spacer()
-                }
+                LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 20)
             }
             .padding()
             .background {
