@@ -38,7 +38,18 @@ struct JournalView: View {
             }
             .fullScreenCover(isPresented: viewStore.binding(get: \.showImageDetailView, send: JournalFeature.Action.showImageDetailView)) {
                 NavigationStack {
-                    ImageDetailView(image: viewStore.journal.wrappedImage)
+                    //                    ImageDetailView(image: viewStore.journal.wrappedImage)
+                    ImageZoomView(image: viewStore.journal.wrappedImage)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button {
+                                    viewStore.send(.showImageDetailView(false))
+                                } label: {
+                                    Label("닫기", systemImage: "xmark")
+                                }
+                                .labelStyle(.iconOnly)
+                            }
+                        }
                 }
             }
             .background(Color.backgroundPrimary.ignoresSafeArea())

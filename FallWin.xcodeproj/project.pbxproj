@@ -48,6 +48,8 @@
 		79D8B1532AF947E30020DFCC /* ViewGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1522AF947E30020DFCC /* ViewGeometry.swift */; };
 		79D8B1552AF95CF70020DFCC /* Journal+Mind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1542AF95CF70020DFCC /* Journal+Mind.swift */; };
 		79D8B1572AF95D0D0020DFCC /* Journal+DrawingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1562AF95D0D0020DFCC /* Journal+DrawingStyle.swift */; };
+		79D8B1592AFA148D0020DFCC /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1582AFA148D0020DFCC /* ImageZoomView.swift */; };
+		79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */; };
 		79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */; };
 		79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C12ADD23C200A86770 /* CvasTabView.swift */; };
 		79E5B2C82ADD4FD900A86770 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C72ADD4FD900A86770 /* GalleryView.swift */; };
@@ -131,6 +133,8 @@
 		79D8B1522AF947E30020DFCC /* ViewGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGeometry.swift; sourceTree = "<group>"; };
 		79D8B1542AF95CF70020DFCC /* Journal+Mind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+Mind.swift"; sourceTree = "<group>"; };
 		79D8B1562AF95D0D0020DFCC /* Journal+DrawingStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+DrawingStyle.swift"; sourceTree = "<group>"; };
+		79D8B1582AFA148D0020DFCC /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
+		79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		79E5B2C12ADD23C200A86770 /* CvasTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvasTabView.swift; sourceTree = "<group>"; };
 		79E5B2C72ADD4FD900A86770 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */,
 				7927512C2AF364DC0023123C /* ImageDetailView.swift */,
 				A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */,
+				79D8B1582AFA148D0020DFCC /* ImageZoomView.swift */,
+				79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
@@ -565,6 +571,7 @@
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
+				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				79E5B2CE2ADD4FF000A86770 /* ProfileView.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
@@ -584,6 +591,7 @@
 				7927512B2AF359590023123C /* HapticManager.swift in Sources */,
 				79D8B1532AF947E30020DFCC /* ViewGeometry.swift in Sources */,
 				791F146C2ADD8CEA00F8DDD2 /* GalleryView+Feature.swift in Sources */,
+				79D8B1592AFA148D0020DFCC /* ImageZoomView.swift in Sources */,
 				79D8B1572AF95D0D0020DFCC /* Journal+DrawingStyle.swift in Sources */,
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
