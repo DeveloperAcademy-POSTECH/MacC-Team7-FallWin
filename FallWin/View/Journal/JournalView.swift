@@ -36,6 +36,11 @@ struct JournalView: View {
                         .ignoresSafeArea()
                 }
             }
+            .fullScreenCover(isPresented: viewStore.binding(get: \.showImageDetailView, send: JournalFeature.Action.showImageDetailView)) {
+                NavigationStack {
+                    ImageDetailView(image: viewStore.journal.wrappedImage)
+                }
+            }
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .onChange(of: viewStore.dismiss) { value in
                 dismiss()
@@ -107,6 +112,9 @@ struct JournalView: View {
                     }
                 }
                 .shadow(color: .shadow.opacity(0.14), radius: 6, y: 3)
+                .onTapGesture {
+                    viewStore.send(.showImageDetailView(true))
+                }
                 
                 if let timestamp = viewStore.journal.timestamp {
                     Text(String(format: "%d/%02d/%02d(\(timestamp.dayOfWeek))", timestamp.year, timestamp.month, timestamp.day))

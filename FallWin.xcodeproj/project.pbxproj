@@ -26,7 +26,6 @@
 		792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */; };
 		7927512B2AF359590023123C /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927512A2AF359590023123C /* HapticManager.swift */; };
 		7927512D2AF364DC0023123C /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927512C2AF364DC0023123C /* ImageDetailView.swift */; };
-		7927512F2AF364E60023123C /* ImageDetailView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927512E2AF364E60023123C /* ImageDetailView+Feature.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
 		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
@@ -109,7 +108,6 @@
 		792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftKeychainWrapper+Extension.swift"; sourceTree = "<group>"; };
 		7927512A2AF359590023123C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		7927512C2AF364DC0023123C /* ImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
-		7927512E2AF364E60023123C /* ImageDetailView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageDetailView+Feature.swift"; sourceTree = "<group>"; };
 		79407D4F2AD7E68D006C7571 /* FallWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79407D522AD7E68D006C7571 /* FallWinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallWinApp.swift; sourceTree = "<group>"; };
 		79407D542AD7E68D006C7571 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				791F14782AE0D8A400F8DDD2 /* JournalView.swift */,
 				791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */,
 				7927512C2AF364DC0023123C /* ImageDetailView.swift */,
-				7927512E2AF364E60023123C /* ImageDetailView+Feature.swift */,
 				A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */,
 			);
 			path = Journal;
@@ -580,7 +577,6 @@
 				791F146A2ADD736B00F8DDD2 /* TabBarLabelStyle.swift in Sources */,
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
-				7927512F2AF364E60023123C /* ImageDetailView+Feature.swift in Sources */,
 				98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */,
 				7927512D2AF364DC0023123C /* ImageDetailView.swift in Sources */,
 				98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */,
@@ -737,7 +733,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = V59QA8T54G;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -774,7 +770,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = V59QA8T54G;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;

@@ -9,24 +9,33 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ImageDetailView: View {
-    let store: StoreOf<ImageDetailFeature>
+    var image: UIImage?
+    
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            GeometryReader { proxy in
-                Image("IconFrustrated")
+        GeometryReader { proxy in
+            if let image = image {
+                Image(uiImage: image)
                     .resizable()
-    //                .frame(width: proxy.size.width, height: proxy.size.height)
                     .scaledToFit()
                     .clipShape(Rectangle())
                     .modifier(ImageModifier(contentSize: CGSize(width: proxy.size.width, height: proxy.size.height)))
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("닫기", systemImage: "xmark")
+                }
+                .labelStyle(.iconOnly)
             }
         }
     }
 }
 
 #Preview {
-    ImageDetailView(store: Store(initialState: ImageDetailFeature.State(), reducer: {
-        ImageDetailFeature()
-    }))
+    ImageDetailView()
 }
