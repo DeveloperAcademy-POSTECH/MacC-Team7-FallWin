@@ -27,7 +27,6 @@ struct MainTextView: View {
                         .foregroundColor(.textPrimary)
                         .scrollContentBackground(.hidden)
                         .focused($isFocused)
-//                        .focused(viewStore.binding(get: \.isKeyboardShown, send: { .showKeyboard($0)}))
                         .padding([.top, .bottom], 9)
                         .padding([.leading, .trailing], 12)
                         .background() {
@@ -39,17 +38,15 @@ struct MainTextView: View {
                                         Spacer()
                                         HStack{
                                             Spacer()
-                                            Text("1000") // 글자 수 표시
+                                            Text("\(viewStore.mainText.count)/1000")
                                                 .font(.system(size: 12))
-                                                .offset(y: -4) // 수직으로 위로 이동
-                                                .padding(.trailing, 8) // 오른쪽 패딩 추가
+                                                .offset(y: -4)
+                                                .padding(.trailing, 8)
                                         }
                                         
                                     }
                                 }
                         }
-                    
-                    
                         .padding(.top, 12)
                     Button {
 //                        viewStore.send(.inputMainText(mainText))
