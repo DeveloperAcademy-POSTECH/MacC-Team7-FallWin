@@ -27,15 +27,22 @@ struct OhwaAlertImpl<Content>:OhwaAlert where Content:View{
                 .frame(maxWidth:UIScreen.main.bounds.width - 90 ,minHeight: 169)
                 .overlay(
                     VStack(spacing:0){
+                        if secondaryButton == nil {
+                            Divider()
+                        }
                         
                         HStack(){
-                            primaryButton
-                                .padding([.leading,.bottom])
-                            if secondaryButton != nil{
-//                                Divider()
-                                secondaryButton
-                                    .padding([.trailing,.bottom])
+                            if secondaryButton == nil {
+                                primaryButton
+                            } else {
+                                primaryButton
+                                    .padding([.leading,.bottom,.trailing])
+                                if secondaryButton != nil{
+                                    secondaryButton
+                                        .padding([.trailing,.bottom])
+                                }
                             }
+
                         }
                         .frame(height:60)
                         .font(.system(size: 16,weight: .bold))
