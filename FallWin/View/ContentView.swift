@@ -45,6 +45,10 @@ struct ContentView: View {
                             NavigationStack {
                                 SettingsView(store: store)
                             }
+                            .tabItem {
+                                Text("Settings")
+                                Image(systemName: "gearshape.fill")
+                            }
                         }
                     }
                     .toolbarBackground(Color(hexCode: "ededed"), for: .tabBar)

@@ -15,7 +15,7 @@ struct OldSettingsView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Form {
+            List {
                 Section {
                     Toggle("햅틱 피드백 사용", isOn: viewStore.binding(get: \.haptic, send: OldSettingsFeature.Action.setHaptic))
                 } header: {
@@ -44,7 +44,7 @@ struct OldSettingsView: View {
                     .foregroundStyle(.blue)
                 }
             }
-            .formStyle(GroupedFormStyle())
+            .listStyle(.plain)
             .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: OldSettingsFeature.Action.showPasscodeView), content: {
                 PasscodeView(initialMessage: "설정할 비밀번호를 입력하세요.", dismissable: true, enableBiometric: false, authenticateOnLaunch: false) { typed, _ in
                     if viewStore.passcode.isEmpty {

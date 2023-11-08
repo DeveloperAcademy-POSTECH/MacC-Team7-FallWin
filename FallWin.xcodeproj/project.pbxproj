@@ -49,6 +49,16 @@
 		79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */; };
 		79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15C2AFA22510020DFCC /* SettingsView.swift */; };
 		79D8B15F2AFA225A0020DFCC /* SettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15E2AFA225A0020DFCC /* SettingsView+Feature.swift */; };
+		79D8B1612AFA2A910020DFCC /* LockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1602AFA2A910020DFCC /* LockSettingView.swift */; };
+		79D8B1632AFA2A9F0020DFCC /* LockSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */; };
+		79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */; };
+		79D8B16B2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */; };
+		79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16C2AFB505A0020DFCC /* PolicyView.swift */; };
+		79D8B16F2AFB50660020DFCC /* PolicyView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */; };
+		79D8B1712AFB52AB0020DFCC /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1702AFB52AB0020DFCC /* FeedbackView.swift */; };
+		79D8B1732AFB52FF0020DFCC /* FeedbackView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1722AFB52FF0020DFCC /* FeedbackView+Feature.swift */; };
+		79D8B1772AFB57780020DFCC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1762AFB57780020DFCC /* WebViewController.swift */; };
+		79D8B1792AFB692E0020DFCC /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1782AFB692E0020DFCC /* WebView.swift */; };
 		79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */; };
 		79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C12ADD23C200A86770 /* CvasTabView.swift */; };
 		79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C92ADD4FE200A86770 /* SearchView.swift */; };
@@ -130,6 +140,16 @@
 		79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		79D8B15C2AFA22510020DFCC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79D8B15E2AFA225A0020DFCC /* SettingsView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Feature.swift"; sourceTree = "<group>"; };
+		79D8B1602AFA2A910020DFCC /* LockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockSettingView.swift; sourceTree = "<group>"; };
+		79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockSettingView+Feature.swift"; sourceTree = "<group>"; };
+		79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSettingView.swift; sourceTree = "<group>"; };
+		79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackupSettingView+Feature.swift"; sourceTree = "<group>"; };
+		79D8B16C2AFB505A0020DFCC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
+		79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolicyView+Feature.swift"; sourceTree = "<group>"; };
+		79D8B1702AFB52AB0020DFCC /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		79D8B1722AFB52FF0020DFCC /* FeedbackView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedbackView+Feature.swift"; sourceTree = "<group>"; };
+		79D8B1762AFB57780020DFCC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		79D8B1782AFB692E0020DFCC /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		79E5B2C12ADD23C200A86770 /* CvasTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvasTabView.swift; sourceTree = "<group>"; };
 		79E5B2C92ADD4FE200A86770 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -218,6 +238,14 @@
 				7927511D2AF233060023123C /* OldSettingsView+Feature.swift */,
 				79D8B15C2AFA22510020DFCC /* SettingsView.swift */,
 				79D8B15E2AFA225A0020DFCC /* SettingsView+Feature.swift */,
+				79D8B1602AFA2A910020DFCC /* LockSettingView.swift */,
+				79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */,
+				79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */,
+				79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */,
+				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
+				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
+				79D8B1702AFB52AB0020DFCC /* FeedbackView.swift */,
+				79D8B1722AFB52FF0020DFCC /* FeedbackView+Feature.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -294,6 +322,8 @@
 				7927512A2AF359590023123C /* HapticManager.swift */,
 				79D8B1502AF946CE0020DFCC /* LineNoteView.swift */,
 				79D8B1522AF947E30020DFCC /* ViewGeometry.swift */,
+				79D8B1762AFB57780020DFCC /* WebViewController.swift */,
+				79D8B1782AFB692E0020DFCC /* WebView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -515,12 +545,15 @@
 				9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */,
 				79D8B1552AF95CF70020DFCC /* Journal+Mind.swift in Sources */,
 				79AF69452ADCC2820064E410 /* DataManager.swift in Sources */,
+				79D8B1732AFB52FF0020DFCC /* FeedbackView+Feature.swift in Sources */,
 				79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */,
 				791F146E2ADD8CF200F8DDD2 /* SearchView+Feature.swift in Sources */,
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
 				98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */,
+				79D8B1632AFA2A9F0020DFCC /* LockSettingView+Feature.swift in Sources */,
 				A9D4C73B2AF8CAA30004CF04 /* ImageModifier.swift in Sources */,
 				9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */,
+				79D8B16F2AFB50660020DFCC /* PolicyView+Feature.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */,
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
@@ -529,17 +562,22 @@
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
+				79D8B1712AFB52AB0020DFCC /* FeedbackView.swift in Sources */,
 				79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */,
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
+				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				79D8B15F2AFA225A0020DFCC /* SettingsView+Feature.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
+				79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,
+				79D8B1772AFB57780020DFCC /* WebViewController.swift in Sources */,
+				79D8B1612AFA2A910020DFCC /* LockSettingView.swift in Sources */,
 				79E5B2C22ADD23C200A86770 /* CvasTabView.swift in Sources */,
 				791F14792AE0D8A400F8DDD2 /* JournalView.swift in Sources */,
 				792751142AF21AAB0023123C /* MainView+Feature.swift in Sources */,
@@ -547,6 +585,7 @@
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
 				98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */,
+				79D8B1792AFB692E0020DFCC /* WebView.swift in Sources */,
 				7927512D2AF364DC0023123C /* ImageDetailView.swift in Sources */,
 				98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */,
 				98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */,
@@ -568,6 +607,7 @@
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
+				79D8B16B2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
