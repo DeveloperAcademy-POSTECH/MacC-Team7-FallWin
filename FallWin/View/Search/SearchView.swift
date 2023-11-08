@@ -66,16 +66,22 @@ struct SearchView: View {
                     LazyVGrid(columns: columns, spacing: 4) {
                         
                         ForEach((viewStore.searchResults), id: \.self) { journal in
-                            if let image = journal.wrappedImage {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .cornerRadius(4)
-                                    .frame(width: 115, height: 115)
-                                    .padding(4)
-                            } else {
-                                
+                            ZStack {
+                                if let image = journal.wrappedImage {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(4)
+                                        .frame(width: 115, height: 115)
+                                        .padding(4)
+                                } else {
+                                    
+                                }
                             }
+                            .onTapGesture {
+                                viewStore.send(.showJournalView(journal))
+                            }
+                            
                             
                         }
                     }

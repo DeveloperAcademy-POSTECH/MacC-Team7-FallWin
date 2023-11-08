@@ -38,10 +38,18 @@ struct MainTextView: View {
                                         Spacer()
                                         HStack{
                                             Spacer()
-                                            Text("\(viewStore.mainText.count)/1000")
-                                                .font(.system(size: 12))
-                                                .offset(y: -4)
-                                                .padding(.trailing, 8)
+                                            HStack(spacing: 0) {
+                                                Text("\(viewStore.mainText.count)")
+                                                    .font(.system(size: 12))
+                                                    .offset(y: -4)
+                                                    .foregroundStyle(.gray)
+                                                
+                                                Text(" / 1000")
+                                                    .font(.system(size: 12))
+                                                    .offset(y: -4)
+                                                    .padding(.trailing, 8)
+                                            }
+                                            
                                         }
                                         
                                     }
