@@ -25,7 +25,7 @@ struct ContentView: View {
                             }
                             .tabItem {
                                 Text("Main")
-                                viewStore.tabSelection == 0 ? Image("MainEnabled") : Image("MainDisabled")
+                                viewStore.tabSelection == 0 ? Image("MainDefault") : Image("MainDisabled")
                             }
                             .tag(0)
                         }
@@ -35,8 +35,8 @@ struct ContentView: View {
                                 SearchView(store: store)
                             }
                             .tabItem {
-                                Text("Feed")
-                                viewStore.tabSelection == 1 ? Image("FeedEnabled") : Image("FeedDisabled")
+                                Text("Album")
+                                viewStore.tabSelection == 1 ? Image("AlbumDefault") : Image("AlbumDisabled")
                             }
                             .tag(1)
                         }
@@ -47,11 +47,11 @@ struct ContentView: View {
                             }
                             .tabItem {
                                 Text("Settings")
-                                Image(systemName: "gearshape.fill")
+                                viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
                             }
                         }
                     }
-                    .toolbarBackground(Color(hexCode: "ededed"), for: .tabBar)
+                    .toolbarBackground(Color.backgroundPrimary, for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarColorScheme(.light, for: .tabBar)
                 }
