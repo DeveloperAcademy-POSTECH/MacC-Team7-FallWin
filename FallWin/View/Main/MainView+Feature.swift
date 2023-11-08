@@ -83,6 +83,10 @@ struct MainFeature: Reducer {
             case .journal(let action):
                 return handleJournalAction(state: &state, action: action)
                 
+//            case .writing(.presented(.cancelWriting)):
+//                state.writing = nil
+//                return .none
+                
             default: return .none
             }
         }
@@ -102,6 +106,10 @@ struct MainFeature: Reducer {
         case .presented(.doneGenerating(let journal)):
             state.writing = nil
             return .send(.doneGenerating(journal))
+        
+        case .presented(.cancelWriting):
+            state.writing = nil
+            return .none
             
         default: return .none
         }

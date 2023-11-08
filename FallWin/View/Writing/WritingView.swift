@@ -18,7 +18,7 @@ struct WritingView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    DateView()
+//                    DateView()
 //                        .padding(.top, -30)
                     MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
                         .padding(.top, 36)
@@ -48,6 +48,18 @@ struct WritingView: View {
                         Color.backgroundPrimary
                             .ignoresSafeArea()
                             .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                    }
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    DateView()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewStore.send(.cancelWriting)
+                    } label: {
+                        Image(systemName: "xmark")
                     }
                 }
             }
@@ -173,6 +185,18 @@ struct DateView: View {
                 .presentationDetents([.fraction(0.5)])
         }
     }
+}
+
+struct DismissButton: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+            }
+        }
 }
 
 struct MessageView: View {

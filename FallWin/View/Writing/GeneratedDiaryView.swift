@@ -16,18 +16,26 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "oilPainting": "<<Oil painting>>",
-        "sketch": "<<Sketch>>, <<Black and White>>",
-        "renoir": "<<painting of Renoir>>",
+        "oilPainting": "oil painting",
+        "sketch": "sketch, black and white",
+        "renoir": "painting of Renoir",
         "noDrawingStyle": "",
-        "chagall": "Modernism, <<painting of Chagall>>",
-        "anime": "<<Anime>>",
-        "vanGogh": "Impressionism, <<painting of Van Gogh>>",
-        "kandinsky": "<<painting of Kandinsky>>",
-        "gauguin": "<<painting of Gauguin>>",
-        "picasso": "<<painting of Picasso>>",
-        "rembrandt": "<<painting of Rembrandt>>",
-        "henriRousseau": "<<painting of Henri Rousseau>>"
+        "chagall": "modernism, painting of Chagall",
+        "anime": "anime",
+        "vanGogh": "impressionism, painting of Van Gogh",
+        "kandinsky": "painting of Kandinsky",
+        "gauguin": "painting of Gauguin",
+        "picasso": "painting of Picasso",
+        "rembrandt": "painting of Rembrandt",
+        "henriRousseau": "painting of Henri Rousseau",
+        "henriMatisse": "painting of Henri Matisse",
+        "egonSchiele": "painting of Egon Schiele",
+        "webtoon": "webtoon",
+        "dcComics": "DC comics",
+        "ghibli": "studio Ghibli",
+        "film": "film Stills",
+        "illustration": "children's book illustration",
+        "cg": "extremely detailed CG unity 8k wallpaper"
     ]
     
     //    let drawingStyleToEnglish: [String: String] = [
@@ -91,7 +99,7 @@ struct GeneratedDiaryView: View {
                         Color.backgroundPrimary
                             .ignoresSafeArea()
                         VStack(spacing: 0) {
-                            DateView()
+//                            DateView()
                             MessageView(titleText: "하루와 가장 잘 어울리는 그림을 선택하세요")
                                 .padding(.top, 40)
                             imageView()
@@ -114,6 +122,19 @@ struct GeneratedDiaryView: View {
                         }
                     }
                 }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        DateView()
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            viewStore.send(.cancelWriting)
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
             } else {
                 ZStack {
                     LottieImageGenView(jsonName: "LottieImageGen")

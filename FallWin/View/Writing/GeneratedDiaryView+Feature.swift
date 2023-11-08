@@ -33,6 +33,7 @@ struct GeneratedDiaryFeature: Reducer {
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
         case setScale(_ scale: Double)
+        case cancelWriting
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -77,6 +78,9 @@ struct GeneratedDiaryFeature: Reducer {
             
         case let .setScale(scale):
             state.scale = scale
+            return .none
+            
+        case .cancelWriting:
             return .none
             
         default: return .none

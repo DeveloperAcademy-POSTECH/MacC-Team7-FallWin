@@ -18,7 +18,7 @@ struct MainTextView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    DateView()
+//                    DateView()
 //                        .padding(.top, 30)
                     MessageMainTextView()
                         .padding(.top, 36)
@@ -50,6 +50,18 @@ struct MainTextView: View {
                 }
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    DateView()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewStore.send(.cancelWriting)
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
