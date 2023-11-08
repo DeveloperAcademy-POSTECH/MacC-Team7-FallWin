@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "scale" : "1x",
+      "filename" : "AlbumDisabled~universal@1x.png",
       "idiom" : "universal",
-      "filename" : "SettingsDefault~universal@1x.png"
+      "scale" : "1x"
     },
     {
-      "filename" : "SettingsDefault~universal@2x.png",
+      "filename" : "AlbumDisabled~universal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SettingsDefault~universal@3x.png",
+      "filename" : "AlbumDisabled~universal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
