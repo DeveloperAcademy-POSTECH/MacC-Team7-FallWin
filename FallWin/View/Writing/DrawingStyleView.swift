@@ -42,7 +42,12 @@ struct DrawingStyleView: View {
                             .padding(.top, 16)
                             .padding(.horizontal)
                         Button {
-                            viewStore.send(.showGeneratedDiaryView)
+                            if DrawingCountManager.shared.remainingCount <= 0 {
+                                viewStore.send(.showCountAlert(true))
+                            } else {
+                                viewStore.send(.showGeneratedDiaryView)
+                            }
+                            
                         } label: {
                             HStack {
                                 Spacer()
@@ -63,6 +68,13 @@ struct DrawingStyleView: View {
                             Color.backgroundPrimary
                                 .ignoresSafeArea()
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                        }
+                        .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
+                            Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                        } primaryButton: {
+                            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                                viewStore.send(.showCountAlert(false))
+                            }
                         }
                     }
                 }
