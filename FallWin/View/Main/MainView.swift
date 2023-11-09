@@ -15,6 +15,7 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 ScrollView {
+                    Text( viewStore.pickedDateValue.description)
                     LazyVStack {
                         ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
@@ -62,18 +63,6 @@ struct MainView: View {
                 viewStore.send(.hideTabBar(false))
             }
             .toolbar(.hidden, for: .navigationBar)
-//            .toolbar {
-//                ToolbarItem(placement: .primaryAction) {
-//                    Button("설정", systemImage: "gearshape") {
-//                        viewStore.send(.showSettingsView)
-//                    }
-//                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
-//                        NavigationStack {
-//                            SettingsView(store: store)
-//                        }
-//                    }
-//                }
-//            }
         }
     }
     

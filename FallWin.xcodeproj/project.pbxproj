@@ -77,6 +77,7 @@
 		987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987086AC2AFA22150060E59C /* ButtonLabelView.swift */; };
 		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
 		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
+		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
 		98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -160,6 +161,7 @@
 		987086AC2AFA22150060E59C /* ButtonLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabelView.swift; sourceTree = "<group>"; };
 		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		98A2BC282AFCD688003C9835 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
 		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */,
 				98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */,
 				98202FAB2AE933D50089CF79 /* KarloApiManager.swift */,
+				98A2BC282AFCD688003C9835 /* PickerManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				987086AB2AFA17020060E59C /* PickerView.swift in Sources */,
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
+				98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,36 +38,6 @@ struct GeneratedDiaryView: View {
         "cg": "extremely detailed CG unity 8k wallpaper"
     ]
     
-    //    let drawingStyleToEnglish: [String: String] = [
-    //        "oilPainting": "<<Oil painting>>",
-    //        "sketch": "<<Sketch>>, <<Black and White>>",
-    //        "renoir": "<<style of Renoir>>",
-    //        "noDrawingStyle": "",
-    //        "chagall": "Modernism, <<style of Chagall>>",
-    //        "anime": "<<Anime>>",
-    //        "vanGogh": "Impressionism, <<style of Van Gogh>>",
-    //        "kandinsky": "<<style of Kandinsky>>",
-    //        "gauguin": "<<style of Gauguin>>",
-    //        "picasso": "<<style of Picasso>>",
-    //        "rembrandt": "<<style of Rembrandt>>",
-    //        "henriRousseau": "<<style of Henri Rousseau>>"
-    //    ]
-    
-    //    let drawingStyleToEnglish: [String: String] = [
-    //        "oilPainting": "<<Oil painting>>",
-    //        "sketch": "<<Sketch>>, <<Black and White>>",
-    //        "renoir": "<<Renoir>>",
-    //        "noDrawingStyle": "",
-    //        "chagall": "Modernism, <<by Chagall>>",
-    //        "anime": "<<Anime>>",
-    //        "vanGogh": "Impressionism, <<by Van Gogh>>",
-    //        "kandinsky": "<<by Kandinsky>>",
-    //        "gauguin": "<<by Gauguin>>",
-    //        "picasso": "<<by Picasso>>",
-    //        "rembrandt": "<<by Rembrandt>>",
-    //        "henriRousseau": "<<by Henri Rousseau>>"
-    //    ]
-    
     let emotionToEnglish: [String: String] = [
         "happy": "Happy",
         "nervous": "Nervous",

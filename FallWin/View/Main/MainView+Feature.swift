@@ -16,10 +16,12 @@ struct MainFeature: Reducer {
         var month: Int = Date().month
         var isPickerShown: Bool = false
         var selectedMonthInPicker: Date = Date()
+        var pickedDateValue: Int = PickerManager.shared.initDateValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
         @PresentationState var settings: SettingsFeature.State?
+        
     }
     
     enum Action: Equatable {

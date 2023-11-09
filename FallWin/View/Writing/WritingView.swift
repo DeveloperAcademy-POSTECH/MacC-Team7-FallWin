@@ -116,22 +116,6 @@ struct WritingView: View {
     
     @ViewBuilder
     func generateEmotionCardView(emotion: (String, Color, Image, String)) -> some View {
-//        let emotionTexts: [String : String] = [
-//            "happy" : "행복한",
-//            "nervous" : "불안한",
-//            "grateful" : "감사한",
-//            "sad" : "슬픈",
-//            "joyful" : "신나는",
-//            "lonely" : "외로운",
-//            "proud" : "뿌듯함",
-//            "suffocated" : "답답함",
-//            "touched" : "감동받은",
-//            "shy" : "부끄러운",
-//            "exciting" : "기대되는",
-//            "lazy" : "귀찮은",
-//            "annoyed" : "짜증나는",
-//            "frustrated" : "당황한"
-//        ]
         
         WithViewStore(store, observe: {$0}) { viewStore in
             HStack {

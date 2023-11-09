@@ -27,7 +27,6 @@ struct MainTextView: View {
                         .foregroundColor(.textPrimary)
                         .scrollContentBackground(.hidden)
                         .focused($isFocused)
-//                        .focused(viewStore.binding(get: \.isKeyboardShown, send: { .showKeyboard($0)}))
                         .padding([.top, .bottom], 9)
                         .padding([.leading, .trailing], 12)
                         .background() {
@@ -40,7 +39,6 @@ struct MainTextView: View {
                         }
                         .padding(.top, 12)
                     Button {
-//                        viewStore.send(.inputMainText(mainText))
                         viewStore.send(.showDrawingStyleView)
                     } label: {
                         ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.mainText == "" ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
