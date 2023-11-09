@@ -21,6 +21,23 @@ struct DrawingStyleView: View {
                             .padding(.top, 30)
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
+                        VStack {
+                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
+                                .font(.pretendard(.semiBold, size: 18))
+                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
+                            Spacer()
+                            Text("prior_guidance_scale: \(viewStore.priorScale)")
+                                .font(.pretendard(.semiBold, size: 18))
+                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
+                            Spacer()
+                            Text("num_inference_steps: \(viewStore.steps)")
+                                .font(.pretendard(.semiBold, size: 18))
+                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
+                            Spacer()
+                            Text("guidance_scale: \(viewStore.scale)")
+                                .font(.pretendard(.semiBold, size: 18))
+                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
+                        }
                         generateDrawingStyleView()
                             .padding(.top, 16)
                             .padding(.horizontal)
@@ -53,21 +70,39 @@ struct DrawingStyleView: View {
                 .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
                     GeneratedDiaryView(store: store)
                 })
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar(.visible, for: .navigationBar)
+                .toolbar(.hidden, for: .tabBar)
         }
     }
     
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
         
-        let drawingStyles: [(String, Color, Image)] = [
-            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
-            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
-            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
-            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
-            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
-            ("네온", Color(hexCode: "#191919"), Image("Neon")),
-            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
-            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
+//        let drawingStyles: [(String, Color, Image)] = [
+//            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
+//            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
+//            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
+//            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
+//            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
+//            ("네온", Color(hexCode: "#191919"), Image("Neon")),
+//            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
+//            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
+//        ]
+        
+        let drawingStyles: [(String, Color, Image, String)] = [
+            ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화"),
+            ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치"),
+            ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르"),
+            ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함"),
+            ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈"),
+            ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
+            ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐"),
+            ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키"),
+            ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱"),
+            ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소"),
+            ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트"),
+            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -93,7 +128,7 @@ struct DrawingStyleView: View {
     }
     
     @ViewBuilder
-    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image)) -> some View {
+    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String)) -> some View {
         WithViewStore(store, observe: {$0}) { viewStore in
             VStack(spacing: 16) {
                 drawingStyle.2
@@ -107,7 +142,7 @@ struct DrawingStyleView: View {
                             .fill(Color.backgroundPrimary)
                             .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
-                Text(drawingStyle.0)
+                Text(drawingStyle.3)
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)
             }

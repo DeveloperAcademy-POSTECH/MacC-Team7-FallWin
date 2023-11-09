@@ -15,7 +15,7 @@ struct DallEApiTestView: View {
     @State private var drawingStyle: String = ""
     @State private var emotion: String = ""
     @State private var dallEInputPrompt: String = ""
-    private var apiKey: String = Bundle.main.apiKey
+    private var apiKey: String = Bundle.main.dallEAPIKey
     
     var body: some View {
         VStack(alignment: .leading){

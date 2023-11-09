@@ -18,22 +18,6 @@ extension ChatGPTApiManager {
     
     func generatePromptForChat(_ prompt: String) -> String {
         let template: String = """
-        <<YOUR ROLE>>
-
-        You are the DALL-E2 Prompt engineer from now on.
-
-        You can summarize the contents of <INPUT TEXT> according to the form.
-
-        <</YOUR ROLE>>
-
-        <<GOAL>>
-
-        1) The image that Dall-E2 draws should not contain text.
-
-        2) The summary results should always be translated into English.
-
-        <</GOAL>>
-
         <<INPUT TEXT>>
 
         "\(prompt)"
@@ -52,7 +36,7 @@ extension ChatGPTApiManager {
 
         <</FORM>>
 
-        <<BEST EXAMPLES>>
+        <<EXAMPLES>>
         <<BEST EXAMPLE 1>>
 
         INPUT TEXT: 오늘은 하루 종일 대학교에서 보냈어. 아침에 일어나서 바쁜 아침을 시작했어. 강의에 늦지 않으려고 서둘러 간단한 아침 식사를 하고, 학교로 출발했어. 강의 중에는 교수님의 열정적인 강의를 듣는 동안 재미있게 시간을 보낼 수 있었어.
@@ -109,11 +93,72 @@ extension ChatGPTApiManager {
         - time of day: From Afternoon to Night
 
         <</BEST EXAMPLE 3>>
-        <</BEST EXAMPLES>>
+        <</EXAMPLES>>
 
-        Make prompt for Dall-E 2 image generator referring to <<YOUR ROLE>>, <<GOAL>>, <<INPUT TEXT>>, <<FORM>> and <<EXAMPLE>>.
+        Make prompt for Dall-E 2 image generator referring to <<INPUT TEXT>>, <<FORM>> and <<EXAMPLES>>.
 
-        Generated image must consists of only image. The output must be simple and brief and must contain keywords in input text. Output must be english prompt without other text.
+        The output must be simple and brief. The output must contain the context and meaning of the input text. The output must be english prompt.
+        """
+        
+        return template
+    }
+    
+    func generatePromptForChat2(_ prompt: String, emotion: String, drawingStyle: String) -> String {
+        let template: String = """
+        Make comma seperated english prompt(keyword#1, keyword#2, keyword#3, ..., keyword#n, <<MOOD>>, [[<<DRAWING STYLE>>]]) for AI Image generator referring to below <<INPUT TEXT>>, <<MOOD>>, <<DRAWING STYLE>>.
+
+        The output must be 'english' prompt.
+        The output must be simple and brief.
+        The output must be comma seperated.
+        The output must contain the context and meaning of <<INPUT TEXT>>.
+        The drawing style mush be in double brackets.
+        
+        <<INPUT TEXT>>
+        \(prompt)
+        <</INPUT TEXT>>
+        
+        <<MOOD>>
+        \(emotion)
+        <</MOOD>>
+        
+        <<DRAWING STYLE>>
+        \(drawingStyle)
+        <</DRAWING STYLE>>
+        """
+        
+        return template
+    }
+
+    func generatePromptForChat3(_ prompt: String) -> String {
+        
+        let template: String = """
+        Make one to four drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
+
+        The output must be only comma seperated noun phrases.
+        The output must contain upto four noun phrases.
+        The output must be english.
+        Each noun phrase should contain enough modifiers.
+        If they are all noun phrase containing only emotion, convert the phrase into representative object.
+        
+        <<INPUT TEXT>>
+        \(prompt)
+        <</INPUT TEXT>>
+        """
+        
+        return template
+    }
+
+    func generatePromptForChat4(_ prompt: String) -> String {
+        let template: String = """
+        Make noun phrases that best express smooth english translation of <<INPUT TEXT>> very well.
+
+        The output must be only comma seperated noun phrases.
+        The output must be english.
+        Each noun phrase should contain enough modifiers(like pose, action, perspective).
+        
+        <<INPUT TEXT>>
+        \(prompt)
+        <</INPUT TEXT>>
         """
         
         return template
@@ -161,13 +206,90 @@ extension ChatGPTApiManager {
         let parameters: [String: Any] = [
             "model": "gpt-3.5-turbo",
             "messages": [
+                [
+                    "role": "user",
+                    "content": generatePromptForChat(prompt)
+                ]
+            ]
+        ]
+        
+        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
+        
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = data
+        
+        let (responseData, response) = try await URLSession.shared.data(for: request)
+        print("response: \(response)")
+        let result = try JSONDecoder().decode(ChatCreationResponse.self, from: responseData)
+        
+        return result
+    }
+    
+    func createChat2(prompt: String, emotion: String, drawingStyle: String, apiKey: String) async throws -> ChatCreationResponse {
+        guard try await validatePrompt(generatePromptForChat2(prompt, emotion: emotion, drawingStyle: drawingStyle), apiKey: apiKey) else {
+            print("----------------Invalid Prompt----------------")
+            throw ImageError.invalidPrompt
+        }
+        
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+            print("------------------bad URL------------------")
+            throw ImageError.badURL
+        }
+        
+        let parameters: [String: Any] = [
+            "model": "gpt-3.5-turbo",
+            "messages": [
 //                [
 //                    "role": "system",
 //                    "content": "You are Dall-E version 2 prompt engineer."
 //                ],
                 [
                     "role": "user",
-                    "content": generatePromptForChat(prompt)
+                    "content": generatePromptForChat2(prompt, emotion: emotion, drawingStyle: drawingStyle)
+                ]
+            ]
+        ]
+        
+        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
+        
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = data
+        
+        let (responseData, response) = try await URLSession.shared.data(for: request)
+        print("response: \(response)")
+        let result = try JSONDecoder().decode(ChatCreationResponse.self, from: responseData)
+        
+        return result
+    }
+    
+    func createChat3(prompt: String, apiKey: String) async throws -> ChatCreationResponse {
+        let output = generatePromptForChat3(prompt)
+        guard try await validatePrompt(output, apiKey: apiKey) else {
+            print("----------------Invalid Prompt----------------")
+            throw ImageError.invalidPrompt
+        }
+        
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+            print("------------------bad URL------------------")
+            throw ImageError.badURL
+        }
+        
+        let parameters: [String: Any] = [
+            "model": "gpt-3.5-turbo",
+            "messages": [
+//                [
+//                    "role": "system",
+//                    "content": "Pick some noun phrases that can be drawn."
+//                ],
+                [
+                    "role": "user",
+                    "content": output
                 ]
             ]
         ]

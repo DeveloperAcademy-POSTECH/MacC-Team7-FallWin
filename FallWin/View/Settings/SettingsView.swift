@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  FallWin
 //
-//  Created by 최명근 on 11/1/23.
+//  Created by 최명근 on 11/7/23.
 //
 
 import SwiftUI
@@ -11,68 +11,94 @@ import ComposableArchitecture
 struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
     
-    @Environment(\.dismiss) var dismiss
-    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Form {
-                Section {
-                    Toggle("햅틱 피드백 사용", isOn: viewStore.binding(get: \.haptic, send: SettingsFeature.Action.setHaptic))
-                } header: {
-                    Text("환경")
+            List {
+                Section("잠금") {
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$lockSetting, action: SettingsFeature.Action.lockSetting)) { store in
+                            LockSettingView(store: store)
+                        }
+                    } label: {
+                        Text("화면 잠금")
+                            .font(.pretendard(size: 18))
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
                 }
                 
-                Section {
-                    Toggle("앱 잠금", isOn: viewStore.binding(get: \.lock, send: SettingsFeature.Action.setLock))
-                    
-                    if let biometricString = viewStore.biometricString {
-                        Toggle(biometricString, isOn: viewStore.binding(get: \.biometric, send: SettingsFeature.Action.setBiometric))
-                            .disabled(!viewStore.lock)
+                Section("데이터 관리") {
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$backupSetting, action: SettingsFeature.Action.backupSetting)) { store in
+                            BackupSettingView(store: store)
+                        }
+                        
+                    } label: {
+                        Text("iCloud 백업/ 복원")
+                            .font(.pretendard(size: 18))
+                            .padding(.vertical, 8)
                     }
-                    
-                } header: {
-                    Text("보안")
-                }
-                .onAppear {
-                    viewStore.send(.initBiometricString)
+                    .listRowBackground(Color.backgroundPrimary)
                 }
                 
-                Section {
-                    Link(destination: URL(string: "https://mgdgc.notion.site/6c94fdf60c3f413db4d5d0bbd6b751cb?pvs=4")!) {
-                        Text("개인정보처리방침")
+                Section("애플리케이션 정보") {
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$policy, action: SettingsFeature.Action.policy)) { store in
+                            PolicyView(store: store)
+                        }
+                        
+                    } label: {
+                        Text("이용약관")
+                            .font(.pretendard(size: 18))
+                            .padding(.vertical, 8)
                     }
-                    .foregroundStyle(.blue)
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                            .toolbar(.hidden, for: .tabBar)
+                        
+                    } label: {
+                        Text("소통 창구")
+                            .font(.pretendard(size: 18))
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
+                            FeedbackView(store: store)
+                        }
+                        
+                    } label: {
+                        Text("피드백 남기기")
+                            .font(.pretendard(size: 18))
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                                .toolbar(.hidden, for: .tabBar)
+                        
+                    } label: {
+                        HStack {
+                            Text("오화에 대하여")
+                            Spacer()
+                            Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
+                                .foregroundStyle(.textSecondary)
+                        }
+                        .font(.pretendard(size: 18))
+                        .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
                 }
+                
             }
-            .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: SettingsFeature.Action.showPasscodeView), content: {
-                PasscodeView(initialMessage: "설정할 비밀번호를 입력하세요.", dismissable: true, enableBiometric: false, authenticateOnLaunch: false) { typed, _ in
-                    if viewStore.passcode.isEmpty {
-                        if let typed = typed {
-                            viewStore.send(.setFirstPasscode(typed))
-                            return .retype("입력한 비밀번호를 확인해 주세요.")
-                        } else {
-                            return .dismiss
-                        }
-                    } else {
-                        if viewStore.passcode == typed {
-                            viewStore.send(.setPasscode(viewStore.passcode))
-                            viewStore.send(.setFirstPasscode(""))
-                            return .dismiss
-                        } else {
-                            viewStore.send(.setFirstPasscode(""))
-                            return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
-                        }
-                    }
-                }
-            })
+            .listStyle(.plain)
+            .background(Color.backgroundPrimary.ignoresSafeArea())
             .navigationTitle("설정")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("닫기") {
-                        dismiss()
-                    }
-                }
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

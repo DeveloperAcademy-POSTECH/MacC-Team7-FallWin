@@ -15,6 +15,7 @@ struct JournalFeature: Reducer {
         var invisible: Bool = false
         var lock: Bool = false
         var showPasscodeView: Bool = false
+        var showImageDetailView: Bool = false
         var dismiss: Bool = false
     }
     
@@ -22,6 +23,7 @@ struct JournalFeature: Reducer {
         case setInvisibility(Bool)
         case setLock(Bool)
         case showPasscodeView(Bool)
+        case showImageDetailView(Bool)
         
         case delete
         case dismiss
@@ -53,6 +55,10 @@ struct JournalFeature: Reducer {
             withTransaction(transaction) {
                 state.showPasscodeView = show
             }
+            return .none
+            
+        case let .showImageDetailView(show):
+            state.showImageDetailView = show
             return .none
             
         case .dismiss:
