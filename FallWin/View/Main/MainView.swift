@@ -14,22 +14,31 @@ struct MainView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                ScrollView {
-                    Text( viewStore.pickedDateValue.description)
-                    LazyVStack {
-                        ForEach(viewStore.journals.indices, id: \.self) { i in
-                            let journal = viewStore.journals[i]
-                            
-                            mainCell(journal: journal)
-                                .padding()
-                                .onTapGesture {
-                                    HapticManager.shared.impact()
-                                    viewStore.send(.showJournalView(journal))
-                                }
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        //                    Text( viewStore.pickedDateValue.description)
+                        LazyVStack {
+                            ForEach(viewStore.journals.indices, id: \.self) { i in
+                                let journal = viewStore.journals[i]
+                                
+                                mainCell(journal: journal)
+                                    .padding()
+                                    .onTapGesture {
+                                        HapticManager.shared.impact()
+                                        viewStore.send(.showJournalView(journal))
+                                    }
+                                    .id(DateTagValue(date: journal.timestamp ?? Date()))
+                            }
+                        }
+                        .padding()
+                        .padding(.vertical, 40)
+                        .onChange(of: viewStore.pickedDateTagValue.tagValue) { value in
+                            print("tagValue: \(value)")
+                            withAnimation(.spring) {
+                                proxy.scrollTo(value, anchor: .top)
+                            }
                         }
                     }
-                    .padding()
-                    .padding(.vertical, 40)
                 }
                 
                 writingActionButton
@@ -50,8 +59,8 @@ struct MainView: View {
                 
                 VStack {
                     toolbar
-                        .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.showPickerSheet), onDismiss: { print("picker dismissed") }) {
-                            YearMonthPickerView(yearRange: 1900...2023)
+                        .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), onDismiss: { print("picker dismissed") }) {
+                            YearMonthPickerView(yearRange: 1900...2023, isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate))
                                 .presentationDetents([.fraction(0.5)])
                         }
                     Spacer()
@@ -71,6 +80,9 @@ struct MainView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
+            .onChange(of: viewStore.isPickerShown) { value in
+                print(value)
+            }
         }
     }
     
@@ -122,7 +134,7 @@ struct MainView: View {
                     viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {
-                        Text(String(format: "%d년 %d월", viewStore.year, viewStore.month))
+                        Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
                             .font(.pretendard(.bold, size: 24))
                         Image(systemName: "chevron.down")
                     }
@@ -151,19 +163,19 @@ struct MainView: View {
                     viewStore.send(.getRemainingCount)
                 }
                 
-//                Button {
-//                    
-//                } label: {
-//                    Image(systemName: "calendar")
-//                        .resizable()
-//                        .frame(width: 20, height: 18)
-//                        .padding(10)
-//                        .background {
-//                            Circle()
-//                                .fill(Color.backgroundCard)
-//                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
-//                        }
-//                }
+                //                Button {
+                //
+                //                } label: {
+                //                    Image(systemName: "calendar")
+                //                        .resizable()
+                //                        .frame(width: 20, height: 18)
+                //                        .padding(10)
+                //                        .background {
+                //                            Circle()
+                //                                .fill(Color.backgroundCard)
+                //                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+                //                        }
+                //                }
             }
             .padding(.top)
             .padding(.horizontal)
