@@ -16,7 +16,7 @@ struct SettingsFeature: Reducer {
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
         @PresentationState var backupSetting: BackupSettingFeature.State? = .init()
         @PresentationState var policy: PolicyFeature.State? = .init()
-        @PresentationState var feedback: FeedbackFeature.State? = .init()
+//        @PresentationState var feedback: FeedbackFeature.State? = .init()
     }
     
     enum Action: Equatable {
@@ -24,7 +24,7 @@ struct SettingsFeature: Reducer {
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
         case backupSetting(PresentationAction<BackupSettingFeature.Action>)
         case policy(PresentationAction<PolicyFeature.Action>)
-        case feedback(PresentationAction<FeedbackFeature.Action>)
+//        case feedback(PresentationAction<FeedbackFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -49,8 +49,8 @@ struct SettingsFeature: Reducer {
         .ifLet(\.$policy, action: /Action.policy) {
             PolicyFeature()
         }
-        .ifLet(\.$feedback, action: /Action.feedback) {
-            FeedbackFeature()
-        }
+//        .ifLet(\.$feedback, action: /Action.feedback) {
+//            FeedbackFeature()
+//        }
     }
 }
