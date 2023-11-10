@@ -16,49 +16,27 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "oilPainting": "<<Oil painting>>",
-        "sketch": "<<Sketch>>, <<Black and White>>",
-        "renoir": "<<painting of Renoir>>",
+        "oilPainting": "oil painting",
+        "sketch": "sketch, black and white",
+        "renoir": "painting of Renoir",
         "noDrawingStyle": "",
-        "chagall": "Modernism, <<painting of Chagall>>",
-        "anime": "<<Anime>>",
-        "vanGogh": "Impressionism, <<painting of Van Gogh>>",
-        "kandinsky": "<<painting of Kandinsky>>",
-        "gauguin": "<<painting of Gauguin>>",
-        "picasso": "<<painting of Picasso>>",
-        "rembrandt": "<<painting of Rembrandt>>",
-        "henriRousseau": "<<painting of Henri Rousseau>>"
+        "chagall": "modernism, painting of Chagall",
+        "anime": "anime",
+        "vanGogh": "impressionism, painting of Van Gogh",
+        "kandinsky": "painting of Kandinsky",
+        "gauguin": "painting of Gauguin",
+        "picasso": "painting of Picasso",
+        "rembrandt": "painting of Rembrandt",
+        "henriRousseau": "painting of Henri Rousseau",
+        "henriMatisse": "painting of Henri Matisse",
+        "egonSchiele": "painting of Egon Schiele",
+        "webtoon": "webtoon",
+        "dcComics": "DC comics",
+        "ghibli": "studio Ghibli",
+        "film": "film Stills",
+        "illustration": "children's book illustration",
+        "cg": "extremely detailed CG unity 8k wallpaper"
     ]
-    
-//    let drawingStyleToEnglish: [String: String] = [
-//        "oilPainting": "<<Oil painting>>",
-//        "sketch": "<<Sketch>>, <<Black and White>>",
-//        "renoir": "<<style of Renoir>>",
-//        "noDrawingStyle": "",
-//        "chagall": "Modernism, <<style of Chagall>>",
-//        "anime": "<<Anime>>",
-//        "vanGogh": "Impressionism, <<style of Van Gogh>>",
-//        "kandinsky": "<<style of Kandinsky>>",
-//        "gauguin": "<<style of Gauguin>>",
-//        "picasso": "<<style of Picasso>>",
-//        "rembrandt": "<<style of Rembrandt>>",
-//        "henriRousseau": "<<style of Henri Rousseau>>"
-//    ]
-    
-//    let drawingStyleToEnglish: [String: String] = [
-//        "oilPainting": "<<Oil painting>>",
-//        "sketch": "<<Sketch>>, <<Black and White>>",
-//        "renoir": "<<Renoir>>",
-//        "noDrawingStyle": "",
-//        "chagall": "Modernism, <<by Chagall>>",
-//        "anime": "<<Anime>>",
-//        "vanGogh": "Impressionism, <<by Van Gogh>>",
-//        "kandinsky": "<<by Kandinsky>>",
-//        "gauguin": "<<by Gauguin>>",
-//        "picasso": "<<by Picasso>>",
-//        "rembrandt": "<<by Rembrandt>>",
-//        "henriRousseau": "<<by Henri Rousseau>>"
-//    ]
     
     let emotionToEnglish: [String: String] = [
         "happy": "Happy",
@@ -87,54 +65,46 @@ struct GeneratedDiaryView: View {
         ZStack {
             if viewStore.imageSet.count > 0 {
                 VStack {
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 32) {
-                            ForEach(viewStore.imageSet, id: \.self) { image in
-                                if let image = image {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .shadow(color: viewStore.image == image ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.image == image ?  8 : 4)
-                                        .onTapGesture {
-                                            if viewStore.image == image {
-                                                viewStore.send(.setImage(nil))
-                                            } else {
-                                                viewStore.send(.setImage(image))
-                                            }
-                                        }
-                                } else {
-                                    Color.white
-                                        .scaledToFit()
-                                }
-                            }
-                        }
-                        .padding()
-                        .padding(.bottom, 32)
-                    }
-                    Button {
-                        viewStore.send(.doneGenerating)
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("다음")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Spacer()
-                        }
-                        .padding()
-                        .background(viewStore.image == nil ? Color.buttonDisabled : Color.button)
-                        .cornerRadius(9)
-                        .foregroundColor(Color.white)
-                    }
-                    .disabled(viewStore.image == nil)
-                    .padding(.top, 15)
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 16)
-                    .background{
+                    ZStack {
                         Color.backgroundPrimary
                             .ignoresSafeArea()
-                            .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                        VStack(spacing: 0) {
+//                            DateView()
+                            MessageView(titleText: "하루와 가장 잘 어울리는 그림을 선택하세요")
+                                .padding(.top, 40)
+                            imageView()
+                                .padding(.top, 16)
+                                .padding(.horizontal)
+                            Button {
+                                viewStore.send(.doneGenerating)
+                            } label: {
+                                ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                            }
+                            .disabled(viewStore.image == nil)
+                            .padding(.top, 15)
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 16)
+                            .background{
+                                Color.backgroundPrimary
+                                    .ignoresSafeArea()
+                                    .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                            }
+                        }
                     }
                 }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        DateView()
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            viewStore.send(.cancelWriting)
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
             } else {
                 ZStack {
                     LottieImageGenView(jsonName: "LottieImageGen")
@@ -202,10 +172,50 @@ struct GeneratedDiaryView: View {
     }
     
     @ViewBuilder
-    func generateDiaryView() -> some View {
-        //        VStack {
-        //            Image
-        //        }
+    func imageView() -> some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 32) {
+                    ForEach(viewStore.imageSet, id: \.self) { image in
+                        imageCardView(image: image)
+                            .opacity((viewStore.image == nil || viewStore.image == image) ? 1 : 0.5)
+                            .onTapGesture {
+                                if viewStore.image == image {
+                                    viewStore.send(.setImage(nil))
+                                } else {
+                                    viewStore.send(.setImage(image))
+                                }
+                            }
+                    }
+                }
+                .padding()
+                .padding(.bottom, 32)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func imageCardView(image: UIImage?) -> some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack {
+                Group {
+                    if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Color.white
+                            .scaledToFit()
+                    }
+                }
+                .padding(.bottom, 30)
+            }
+            .padding()
+            .background(
+                Color.backgroundCard
+                    .shadow(color: viewStore.image == image ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.image == image ?  8 : 4)
+            )
+        }
     }
 }
 

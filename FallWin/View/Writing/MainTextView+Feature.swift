@@ -21,8 +21,11 @@ struct MainTextFeature: Reducer {
         case inputMainText(_ mainText: String)
         case showDrawingStyleView
         case doneGenerating(Journal)
+        case cancelWriting
+        
         case drawingStyle(PresentationAction<DrawingStyleFeature.Action>)
         case showKeyboard(_ isKeyboardShown: Bool)
+        
     }
     
     
@@ -37,12 +40,18 @@ struct MainTextFeature: Reducer {
                 state.drawingStyle = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText)
                 return .none
                 
+            case .cancelWriting:
+                return .none
+                
             case .drawingStyle(.presented(.doneGenerating(let journal))):
                 return .send(.doneGenerating(journal))
                 
             case let .showKeyboard(isKeyboardShown):
                 state.isKeyboardShown =  isKeyboardShown
                 return .none
+                
+            case .drawingStyle(.presented(.cancelWriting)):
+                return .send(.cancelWriting)
                 
             default: return .none
             }

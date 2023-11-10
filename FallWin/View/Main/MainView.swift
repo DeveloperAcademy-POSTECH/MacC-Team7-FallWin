@@ -15,6 +15,7 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 ScrollView {
+                    Text( viewStore.pickedDateValue.description)
                     LazyVStack {
                         ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
@@ -49,6 +50,10 @@ struct MainView: View {
                 
                 VStack {
                     toolbar
+                        .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.showPickerSheet), onDismiss: { print("picker dismissed") }) {
+                            YearMonthPickerView(yearRange: 1900...2023)
+                                .presentationDetents([.fraction(0.5)])
+                        }
                     Spacer()
                 }
             }
@@ -113,7 +118,8 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             HStack(alignment: .center) {
                 Button {
-                    
+                    print("picker clicked")
+                    viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {
                         Text(String(format: "%d년 %d월", viewStore.year, viewStore.month))

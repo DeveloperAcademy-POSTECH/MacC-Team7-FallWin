@@ -17,8 +17,6 @@ struct DrawingStyleView: View {
                     Color.backgroundPrimary
                         .ignoresSafeArea()
                     VStack(spacing: 0) {
-                        DateView()
-                            .padding(.top, 30)
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
                         VStack {
@@ -49,16 +47,7 @@ struct DrawingStyleView: View {
                             }
                             
                         } label: {
-                            HStack {
-                                Spacer()
-                                Text("다음")
-                                    .font(.pretendard(.semiBold, size: 18))
-                                Spacer()
-                            }
-                            .padding()
-                            .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
-                            .cornerRadius(9)
-                            .foregroundColor(Color.white)
+                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                         }
                         .disabled(viewStore.selectedDrawingStyle == nil)
                         .padding(.top, 15)
@@ -78,7 +67,19 @@ struct DrawingStyleView: View {
                         }
                     }
                 }
-                .navigationTitle(Text("일기 쓰기"))
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        DateView()
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            viewStore.send(.cancelWriting)
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
                     GeneratedDiaryView(store: store)
                 })
@@ -90,17 +91,6 @@ struct DrawingStyleView: View {
     
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
-        
-//        let drawingStyles: [(String, Color, Image)] = [
-//            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
-//            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
-//            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
-//            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
-//            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
-//            ("네온", Color(hexCode: "#191919"), Image("Neon")),
-//            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
-//            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
-//        ]
         
         let drawingStyles: [(String, Color, Image, String)] = [
             ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화"),
@@ -114,7 +104,15 @@ struct DrawingStyleView: View {
             ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱"),
             ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소"),
             ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트"),
-            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소")
+            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소"),
+            ("henriMatisse", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 마티스"),
+            ("egonSchiele", Color(hexCode: "#191919"), Image("SalvadorDali"), "에곤 쉴레"),
+            ("webtoon", Color(hexCode: "#191919"), Image("SalvadorDali"), "웹툰"),
+            ("dcComics", Color(hexCode: "#191919"), Image("SalvadorDali"), "DC 코믹스"),
+            ("ghibli", Color(hexCode: "#191919"), Image("SalvadorDali"), "지브리"),
+            ("film", Color(hexCode: "#191919"), Image("SalvadorDali"), "필름"),
+            ("illustration", Color(hexCode: "#191919"), Image("SalvadorDali"), "일러스트"),
+            ("cg", Color(hexCode: "#191919"), Image("SalvadorDali"), "CG"),
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
