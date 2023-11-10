@@ -15,7 +15,7 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 ScrollView {
-                    Text( viewStore.pickedDateValue.description)
+//                    Text( viewStore.pickedDateValue.description)
                     LazyVStack {
                         ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]

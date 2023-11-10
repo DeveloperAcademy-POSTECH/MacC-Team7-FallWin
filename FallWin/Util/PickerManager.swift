@@ -14,18 +14,18 @@ final class PickerManager {
     private init() {}
 }
 
-extension PickerManager {
-    
-    func initDateValue(date: Date) -> Int {
-        let year = date.year
-        let month = date.month
-        let day = date.day
-        let hour = date.hour
-        let minute = date.minute
-        let second = date.second
-        
-        return year * 1e10 + month * 1e8 + day * 1e6 + hour * 1e4 + minute * 1e2 + second
-    }
-    
-    
-}
+//extension PickerManager {
+//    
+//    func initDateValue(date: Date) -> Int {
+//        let year: Int = date.year
+//        let month: Int = date.month
+//        let day: Int = date.day
+//        let hour: Int = date.hour
+//        let minute: Int = date.minute
+//        let second: Int = date.second
+//        
+//        return year * 1e10 + month * 1e8 + day * 1e6 + hour * 1e4 + minute * 1e2 + second
+//    }
+//    
+//    
+//}

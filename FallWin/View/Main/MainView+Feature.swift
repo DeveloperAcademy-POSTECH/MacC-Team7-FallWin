@@ -16,7 +16,7 @@ struct MainFeature: Reducer {
         var month: Int = Date().month
         var isPickerShown: Bool = false
         var selectedMonthInPicker: Date = Date()
-        var pickedDateValue: Int = PickerManager.shared.initDateValue(date: Date())
+//        var pickedDateValue: Int = Date().year
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
