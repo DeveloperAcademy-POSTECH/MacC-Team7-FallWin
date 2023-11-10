@@ -12,6 +12,7 @@ import SwiftUI
 struct WritingFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String?
+        var isPickerShown: Bool = false
         @PresentationState var mainText: MainTextFeature.State?
     }
     
@@ -19,6 +20,9 @@ struct WritingFeature: Reducer {
         case emotionSelection(_ selectedEmotion: String?)
         case showMainTextView(_ selectedEmotion: String?)
         case doneGenerating(Journal)
+        case showPickerSheet
+        case cancelWriting
+        
         case mainText(PresentationAction<MainTextFeature.Action>)
     }
     
@@ -33,8 +37,18 @@ struct WritingFeature: Reducer {
                 state.mainText = .init(selectedEmotion: emotion ?? "", mainText: "", isKeyboardShown: true)
                 return .none
                 
+            case .showPickerSheet:
+                state.isPickerShown.toggle()
+                return .none
+                
+            case .cancelWriting:
+                return .none
+                
             case .mainText(.presented(.doneGenerating(let journal))):
                 return .send(.doneGenerating(journal))
+                
+            case .mainText(.presented(.cancelWriting)):
+                return .send(.cancelWriting)
                 
             default: return .none
             }

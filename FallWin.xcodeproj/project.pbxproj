@@ -87,8 +87,11 @@
 		9867B6362AE6524900C7359B /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B62D2AE6524900C7359B /* Pretendard-Medium.ttf */; };
 		9867B6372AE6524900C7359B /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B62E2AE6524900C7359B /* Pretendard-ExtraLight.ttf */; };
 		9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B6392AE6533A00C7359B /* Font+Extension.swift */; };
+		987086AB2AFA17020060E59C /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987086AA2AFA17020060E59C /* PickerView.swift */; };
+		987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987086AC2AFA22150060E59C /* ButtonLabelView.swift */; };
 		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
 		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
+		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
 		98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -183,8 +186,11 @@
 		9867B62E2AE6524900C7359B /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9867B6382AE652A400C7359B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9867B6392AE6533A00C7359B /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		987086AA2AFA17020060E59C /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		987086AC2AFA22150060E59C /* ButtonLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabelView.swift; sourceTree = "<group>"; };
 		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		98A2BC282AFCD688003C9835 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
 		98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTApiManager.swift; sourceTree = "<group>"; };
@@ -341,6 +347,8 @@
 				7927512A2AF359590023123C /* HapticManager.swift */,
 				79D8B1502AF946CE0020DFCC /* LineNoteView.swift */,
 				79D8B1522AF947E30020DFCC /* ViewGeometry.swift */,
+				987086AA2AFA17020060E59C /* PickerView.swift */,
+				987086AC2AFA22150060E59C /* ButtonLabelView.swift */,
 				79D8B1762AFB57780020DFCC /* WebViewController.swift */,
 				79D8B1782AFB692E0020DFCC /* WebView.swift */,
 			);
@@ -383,6 +391,7 @@
 				98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */,
 				98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */,
 				98202FAB2AE933D50089CF79 /* KarloApiManager.swift */,
+				98A2BC282AFCD688003C9835 /* PickerManager.swift */,
 				79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */,
 			);
 			path = Util;
@@ -617,6 +626,7 @@
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
+				987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,
 				79D8B1772AFB57780020DFCC /* WebViewController.swift in Sources */,
 				79D8B1612AFA2A910020DFCC /* LockSettingView.swift in Sources */,
@@ -649,8 +659,10 @@
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
 				79EE3CA92AFCBA4D005BD2FD /* OhwaAlertImpl.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
+				987086AB2AFA17020060E59C /* PickerView.swift in Sources */,
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
+				98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */,
 				79D8B16B2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,10 +14,10 @@ struct DrawingStyleFeature: Reducer {
         var mainText: String
         var selectedDrawingStyle: String?
         var showCountAlert: Bool = false
-        var priorSteps: Double = 25.0
+        var priorSteps: Double = 50.0
         var priorScale: Double = 5.0
-        var steps: Double = 25.0
-        var scale: Double = 5.0
+        var steps: Double = 20.0
+        var scale: Double = 12.5
         @PresentationState var generatedDiary: GeneratedDiaryFeature.State?
     }
     
@@ -30,6 +30,7 @@ struct DrawingStyleFeature: Reducer {
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
         case setScale(_ scale: Double)
+        case cancelWriting
         
         case generatedDiary(PresentationAction<GeneratedDiaryFeature.Action>)
     }
@@ -67,8 +68,14 @@ struct DrawingStyleFeature: Reducer {
                 state.scale = scale
                 return .none
                 
+            case .cancelWriting:
+                return .none
+                
             case .generatedDiary(.presented(.doneImage(let journal))):
                 return .send(.doneGenerating(journal))
+                
+            case .generatedDiary(.presented(.cancelWriting)):
+                return .send(.cancelWriting)
                 
             default: return .none
             }
