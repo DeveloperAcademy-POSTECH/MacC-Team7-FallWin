@@ -13,6 +13,7 @@ struct DrawingStyleFeature: Reducer {
         var selectedEmotion: String
         var mainText: String
         var selectedDrawingStyle: String?
+        var showCountAlert: Bool = false
         var priorSteps: Double = 50.0
         var priorScale: Double = 5.0
         var steps: Double = 20.0
@@ -24,6 +25,7 @@ struct DrawingStyleFeature: Reducer {
         case selectDrawingStyle(_ selectedDrawingStyle: String?)
         case showGeneratedDiaryView
         case doneGenerating(Journal)
+        case showCountAlert(Bool)
         case setPriorSteps(_ priorSteps: Double)
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
@@ -44,6 +46,10 @@ struct DrawingStyleFeature: Reducer {
                 if let selectedDrawingStyle = state.selectedDrawingStyle {
                     state.generatedDiary = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText, selectedDrawingStyle: selectedDrawingStyle, priorSteps: state.priorSteps, priorScale: state.priorScale, steps: state.steps, scale: state.scale)
                 }
+                return .none
+                
+            case let .showCountAlert(show):
+                state.showCountAlert = show
                 return .none
                 
             case let .setPriorSteps(priorSteps):

@@ -33,9 +33,27 @@ struct MainTextView: View {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
-                        }
-                        .onAppear() {
-                            isFocused = true
+                                .overlay {
+                                    VStack {
+                                        Spacer()
+                                        HStack{
+                                            Spacer()
+                                            HStack(spacing: 0) {
+                                                Text("\(viewStore.mainText.count)")
+                                                    .font(.system(size: 12))
+                                                    .offset(y: -4)
+                                                    .foregroundStyle(.gray)
+                                                
+                                                Text(" / 1000")
+                                                    .font(.system(size: 12))
+                                                    .offset(y: -4)
+                                                    .padding(.trailing, 8)
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                }
                         }
                         .padding(.top, 12)
                     Button {
@@ -65,6 +83,9 @@ struct MainTextView: View {
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
                 DrawingStyleView(store: store)
             })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+            .toolbar(.hidden, for: .tabBar)
         }
     }
 }

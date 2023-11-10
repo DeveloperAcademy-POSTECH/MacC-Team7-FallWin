@@ -27,6 +27,7 @@ struct GeneratedDiaryFeature: Reducer {
         case selectDrawingStyle(_ selectedDrawingStyle: String)
         case setImage(UIImage?)
         case setImages([UIImage?])
+        case reduceCount
         case doneGenerating
         case doneImage(Journal)
         case setPriorSteps(_ priorSteps: Double)
@@ -48,6 +49,10 @@ struct GeneratedDiaryFeature: Reducer {
             
         case let .setImages(imageSet):
             state.imageSet = imageSet
+            return .send(.reduceCount)
+            
+        case .reduceCount:
+            DrawingCountManager.shared.reduceCount()
             return .none
             
         case .doneGenerating:

@@ -16,12 +16,13 @@ struct MainFeature: Reducer {
         var month: Int = Date().month
         var isPickerShown: Bool = false
         var selectedMonthInPicker: Date = Date()
-//        var pickedDateValue: Int = Date().year
+        var showCountAlert: Bool = false
+        var remainingCount: Int = 0
+        var pickedDateValue: Int = PickerManager.shared.initDateValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
-        @PresentationState var settings: SettingsFeature.State?
-        
+        @PresentationState var settings: OldSettingsFeature.State?
     }
     
     enum Action: Equatable {
@@ -33,10 +34,12 @@ struct MainFeature: Reducer {
         case showSettingsView
         case showPickerSheet
         case setMonthInPicker(Date)
+        case showCountAlert(Bool)
+        case getRemainingCount
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
-        case settings(PresentationAction<SettingsFeature.Action>)
+        case settings(PresentationAction<OldSettingsFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -79,6 +82,14 @@ struct MainFeature: Reducer {
                 state.selectedMonthInPicker = date
                 return .none
                 
+            case let .showCountAlert(show):
+                state.showCountAlert = show
+                return .none
+                
+            case .getRemainingCount:
+                state.remainingCount = DrawingCountManager.shared.remainingCount
+                return .none
+                
             case .writing(let action):
                 return handleWritingAction(state: &state, action: action)
                 
@@ -99,7 +110,7 @@ struct MainFeature: Reducer {
             WritingFeature()
         }
         .ifLet(\.$settings, action: /Action.settings) {
-            SettingsFeature()
+            OldSettingsFeature()
         }
     }
     

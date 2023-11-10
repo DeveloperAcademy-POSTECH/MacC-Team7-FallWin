@@ -18,7 +18,7 @@ struct SearchView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ScrollView() {
+            ScrollView {
                 if viewStore.searchTerm.isEmpty {
                     LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
                         ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key < $1.key }), id: \.key) { key, searchResults in
@@ -66,23 +66,29 @@ struct SearchView: View {
                     LazyVGrid(columns: columns, spacing: 4) {
                         
                         ForEach((viewStore.searchResults), id: \.self) { journal in
-                            if let image = journal.wrappedImage {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .cornerRadius(4)
-                                    .frame(width: 115, height: 115)
-                                    .padding(4)
-                            } else {
-                                
+                            ZStack {
+                                if let image = journal.wrappedImage {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(4)
+                                        .frame(width: 115, height: 115)
+                                        .padding(4)
+                                } else {
+                                    
+                                }
                             }
+                            .onTapGesture {
+                                viewStore.send(.showJournalView(journal))
+                            }
+                            
                             
                         }
                     }
                     .padding(.horizontal, 12)
                 }
             }
-            .padding(.bottom, CvasTabViewValue.tabBarHeight)
+            .background(Color.backgroundPrimary.ignoresSafeArea())
             .fullScreenCover(store: store.scope(state: \.$journal, action: SearchFeature.Action.journal)) { store in
                 NavigationStack {
                     JournalView(store: store)

@@ -67,6 +67,9 @@ struct WritingView: View {
             .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
                 MainTextView(store: store)
             })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+            .toolbar(.hidden, for: .tabBar)
         }
     }
     

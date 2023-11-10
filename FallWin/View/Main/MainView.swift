@@ -15,7 +15,7 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 ScrollView {
-//                    Text( viewStore.pickedDateValue.description)
+                    Text( viewStore.pickedDateValue.description)
                     LazyVStack {
                         ForEach(viewStore.journals.indices, id: \.self) { i in
                             let journal = viewStore.journals[i]
@@ -40,6 +40,13 @@ struct MainView: View {
                                 viewStore.send(.hideTabBar(true))
                             }
                     }
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
+                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showCountAlert(false))
+                        }
+                    }
                 
                 VStack {
                     toolbar
@@ -63,6 +70,19 @@ struct MainView: View {
                 viewStore.send(.hideTabBar(false))
             }
             .toolbar(.hidden, for: .navigationBar)
+            .toolbar(.visible, for: .tabBar)
+//            .toolbar {
+//                ToolbarItem(placement: .primaryAction) {
+//                    Button("설정", systemImage: "gearshape") {
+//                        viewStore.send(.showSettingsView)
+//                    }
+//                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
+//                        NavigationStack {
+//                            SettingsView(store: store)
+//                        }
+//                    }
+//                }
+//            }
         }
     }
     
@@ -126,19 +146,40 @@ struct MainView: View {
                 Button {
                     
                 } label: {
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .frame(width: 20, height: 18)
-                        .padding(10)
-                        .background {
-                            Circle()
-                                .fill(Color.backgroundCard)
-                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
-                        }
+                    HStack {
+                        Image(systemName: "film")
+                            .resizable()
+                            .frame(width: 20, height: 18)
+                        Text("\(viewStore.remainingCount)")
+                    }
+                    .padding(10)
+                    .background {
+                        Capsule()
+                            .fill(Color.backgroundCard)
+                            .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+                    }
                 }
+                .onAppear {
+                    viewStore.send(.getRemainingCount)
+                }
+                
+//                Button {
+//                    
+//                } label: {
+//                    Image(systemName: "calendar")
+//                        .resizable()
+//                        .frame(width: 20, height: 18)
+//                        .padding(10)
+//                        .background {
+//                            Circle()
+//                                .fill(Color.backgroundCard)
+//                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+//                        }
+//                }
             }
             .padding(.top)
             .padding(.horizontal)
+            .padding(.bottom, 8)
             .background(Color.backgroundPrimary)
         }
     }
@@ -150,7 +191,11 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
-                        viewStore.send(.showWritingView)
+                        if DrawingCountManager.shared.remainingCount <= 0 {
+                            viewStore.send(.showCountAlert(true))
+                        } else {
+                            viewStore.send(.showWritingView)
+                        }
                         
                     } label: {
                         ZStack {
