@@ -82,6 +82,13 @@
 		79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C92ADD4FE200A86770 /* SearchView.swift */; };
 		79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D02ADD501200A86770 /* ComposableArchitecture */; };
 		79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D32ADD502100A86770 /* Alamofire */; };
+		79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */; };
+		79EE3CA92AFCBA4D005BD2FD /* OhwaAlertImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */; };
+		79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */; };
+		79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */; };
+		79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */; };
+		79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */; };
+		79EE3CB32AFCBA8C005BD2FD /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CB02AFCBA8C005BD2FD /* View+Extension.swift */; };
 		9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31D2AE01F2600FD0E30 /* MainTextView.swift */; };
 		9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */; };
 		98202FA42AE69FA90089CF79 /* LottieImageGen.json in Resources */ = {isa = PBXBuildFile; fileRef = 98202FA32AE69FA90089CF79 /* LottieImageGen.json */; };
@@ -179,6 +186,13 @@
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		79E5B2C12ADD23C200A86770 /* CvasTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvasTabView.swift; sourceTree = "<group>"; };
 		79E5B2C92ADD4FE200A86770 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCountManager.swift; sourceTree = "<group>"; };
+		79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlertImpl.swift; sourceTree = "<group>"; };
+		79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlertButton.swift; sourceTree = "<group>"; };
+		79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlert.swift; sourceTree = "<group>"; };
+		79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		79EE3CB02AFCBA8C005BD2FD /* View+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		9814C31D2AE01F2600FD0E30 /* MainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextView.swift; sourceTree = "<group>"; };
 		9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTextView+Feature.swift"; sourceTree = "<group>"; };
 		98202FA32AE69FA90089CF79 /* LottieImageGen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieImageGen.json; sourceTree = "<group>"; };
@@ -342,6 +356,7 @@
 				79AF69422ADCC1360064E410 /* Data */,
 				663755772AF7ED1C00117085 /* Protocol */,
 				79407D602AD7EC43006C7571 /* Extension */,
+				79EE3CAB2AFCBA5B005BD2FD /* Protocol */,
 				79407D612AD7EC50006C7571 /* Component */,
 				79407D622AD7EC58006C7571 /* View */,
 			);
@@ -359,6 +374,9 @@
 		79407D602AD7EC43006C7571 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */,
+				79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */,
+				79EE3CB02AFCBA8C005BD2FD /* View+Extension.swift */,
 				79407D632AD7EC80006C7571 /* Date+Exntesion.swift */,
 				79407D652AD7EC9E006C7571 /* String+Extension.swift */,
 				98DA96FF2ADFA715000DDAFA /* Bundle+Extension.swift */,
@@ -377,7 +395,7 @@
 		79407D612AD7EC50006C7571 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				663755722AF7EBD100117085 /* Alert */,
+				79EE3CA62AFCBA4D005BD2FD /* Alert */,
 				79407D672AD7ED11006C7571 /* Colors.swift */,
 				79AF69392ADAD6CA0064E410 /* Carousel.swift */,
 				79E5B2C12ADD23C200A86770 /* CvasTabView.swift */,
@@ -431,6 +449,7 @@
 				98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */,
 				98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */,
 				98202FAB2AE933D50089CF79 /* KarloApiManager.swift */,
+				79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -442,6 +461,23 @@
 				791F146D2ADD8CF200F8DDD2 /* SearchView+Feature.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		79EE3CA62AFCBA4D005BD2FD /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */,
+				79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		79EE3CAB2AFCBA5B005BD2FD /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		98202FA02AE69F790089CF79 /* Font */ = {
@@ -621,12 +657,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
+				79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */,
 				98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */,
 				9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */,
 				79D8B1552AF95CF70020DFCC /* Journal+Mind.swift in Sources */,
 				79AF69452ADCC2820064E410 /* DataManager.swift in Sources */,
 				663755712AF7E53100117085 /* UIViewController+Extension.swift in Sources */,
 				79D8B1732AFB52FF0020DFCC /* FeedbackView+Feature.swift in Sources */,
+				79EE3CB32AFCBA8C005BD2FD /* View+Extension.swift in Sources */,
 				79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */,
 				791F146E2ADD8CF200F8DDD2 /* SearchView+Feature.swift in Sources */,
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
@@ -644,11 +682,14 @@
 				7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
+				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
+				79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				79D8B1712AFB52AB0020DFCC /* FeedbackView.swift in Sources */,
 				79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */,
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
 				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
+				79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				79D8B15F2AFA225A0020DFCC /* SettingsView+Feature.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
@@ -681,6 +722,7 @@
 				79D8B1572AF95D0D0020DFCC /* Journal+DrawingStyle.swift in Sources */,
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
+				79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */,
@@ -691,6 +733,7 @@
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
 				7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */,
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
+				79EE3CA92AFCBA4D005BD2FD /* OhwaAlertImpl.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,

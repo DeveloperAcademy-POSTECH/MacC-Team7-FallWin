@@ -14,6 +14,8 @@ struct MainFeature: Reducer {
         var journals: [Journal] = []
         var year: Int = Date().year
         var month: Int = Date().month
+        var showCountAlert: Bool = false
+        var remainingCount: Int = 0
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
@@ -27,6 +29,8 @@ struct MainFeature: Reducer {
         case showJournalView(Journal)
         case showWritingView
         case showSettingsView
+        case showCountAlert(Bool)
+        case getRemainingCount
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -63,6 +67,14 @@ struct MainFeature: Reducer {
                 
             case .showSettingsView:
                 state.settings = .init()
+                return .none
+                
+            case let .showCountAlert(show):
+                state.showCountAlert = show
+                return .none
+                
+            case .getRemainingCount:
+                state.remainingCount = DrawingCountManager.shared.remainingCount
                 return .none
                 
             case .writing(let action):

@@ -39,6 +39,13 @@ struct MainView: View {
                                 viewStore.send(.hideTabBar(true))
                             }
                     }
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
+                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showCountAlert(false))
+                        }
+                    }
                 
                 VStack {
                     toolbar
@@ -130,6 +137,26 @@ struct MainView: View {
                 
                 Spacer()
                 
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Image(systemName: "film")
+                            .resizable()
+                            .frame(width: 20, height: 18)
+                        Text("\(viewStore.remainingCount)")
+                    }
+                    .padding(10)
+                    .background {
+                        Capsule()
+                            .fill(Color.backgroundCard)
+                            .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
+                    }
+                }
+                .onAppear {
+                    viewStore.send(.getRemainingCount)
+                }
+                
 //                Button {
 //                    
 //                } label: {
@@ -158,7 +185,11 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
-                        viewStore.send(.showWritingView)
+                        if DrawingCountManager.shared.remainingCount <= 0 {
+                            viewStore.send(.showCountAlert(true))
+                        } else {
+                            viewStore.send(.showWritingView)
+                        }
                         
                     } label: {
                         ZStack {
