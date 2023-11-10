@@ -73,8 +73,6 @@
 		79D8B16B2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */; };
 		79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16C2AFB505A0020DFCC /* PolicyView.swift */; };
 		79D8B16F2AFB50660020DFCC /* PolicyView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */; };
-		79D8B1712AFB52AB0020DFCC /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1702AFB52AB0020DFCC /* FeedbackView.swift */; };
-		79D8B1732AFB52FF0020DFCC /* FeedbackView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1722AFB52FF0020DFCC /* FeedbackView+Feature.swift */; };
 		79D8B1772AFB57780020DFCC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1762AFB57780020DFCC /* WebViewController.swift */; };
 		79D8B1792AFB692E0020DFCC /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1782AFB692E0020DFCC /* WebView.swift */; };
 		79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */; };
@@ -182,8 +180,6 @@
 		79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackupSettingView+Feature.swift"; sourceTree = "<group>"; };
 		79D8B16C2AFB505A0020DFCC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
 		79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolicyView+Feature.swift"; sourceTree = "<group>"; };
-		79D8B1702AFB52AB0020DFCC /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
-		79D8B1722AFB52FF0020DFCC /* FeedbackView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedbackView+Feature.swift"; sourceTree = "<group>"; };
 		79D8B1762AFB57780020DFCC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		79D8B1782AFB692E0020DFCC /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -325,8 +321,6 @@
 				79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */,
 				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
 				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
-				79D8B1702AFB52AB0020DFCC /* FeedbackView.swift */,
-				79D8B1722AFB52FF0020DFCC /* FeedbackView+Feature.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -694,7 +688,6 @@
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
 				79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
-				79D8B1712AFB52AB0020DFCC /* FeedbackView.swift in Sources */,
 				79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */,
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
 				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
