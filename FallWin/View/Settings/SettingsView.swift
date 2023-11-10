@@ -81,7 +81,7 @@ struct SettingsView: View {
                     
                     NavigationLink {
                         WebView(url: "https://instagram.com/ohwa_todaysart")
-                                .toolbar(.hidden, for: .tabBar)
+                            .toolbar(.hidden, for: .tabBar)
                         
                     } label: {
                         HStack {
@@ -95,7 +95,6 @@ struct SettingsView: View {
                     }
                     .listRowBackground(Color.backgroundPrimary)
                 }
-                
             }
             .listStyle(.plain)
             .background(Color.backgroundPrimary.ignoresSafeArea())

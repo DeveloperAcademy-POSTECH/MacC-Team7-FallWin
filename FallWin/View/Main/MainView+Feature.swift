@@ -14,6 +14,11 @@ struct MainFeature: Reducer {
         var journals: [Journal] = []
         var year: Int = Date().year
         var month: Int = Date().month
+        var isPickerShown: Bool = false
+        var selectedMonthInPicker: Date = Date()
+        var showCountAlert: Bool = false
+        var remainingCount: Int = 0
+        var pickedDateValue: Int = PickerManager.shared.initDateValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
@@ -27,6 +32,10 @@ struct MainFeature: Reducer {
         case showJournalView(Journal)
         case showWritingView
         case showSettingsView
+        case showPickerSheet
+        case setMonthInPicker(Date)
+        case showCountAlert(Bool)
+        case getRemainingCount
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -65,11 +74,31 @@ struct MainFeature: Reducer {
                 state.settings = .init()
                 return .none
                 
+            case .showPickerSheet:
+                state.isPickerShown.toggle()
+                return .none
+                
+            case let .setMonthInPicker(date):
+                state.selectedMonthInPicker = date
+                return .none
+                
+            case let .showCountAlert(show):
+                state.showCountAlert = show
+                return .none
+                
+            case .getRemainingCount:
+                state.remainingCount = DrawingCountManager.shared.remainingCount
+                return .none
+                
             case .writing(let action):
                 return handleWritingAction(state: &state, action: action)
                 
             case .journal(let action):
                 return handleJournalAction(state: &state, action: action)
+                
+//            case .writing(.presented(.cancelWriting)):
+//                state.writing = nil
+//                return .none
                 
             default: return .none
             }
@@ -90,6 +119,10 @@ struct MainFeature: Reducer {
         case .presented(.doneGenerating(let journal)):
             state.writing = nil
             return .send(.doneGenerating(journal))
+        
+        case .presented(.cancelWriting):
+            state.writing = nil
+            return .none
             
         default: return .none
         }

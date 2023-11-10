@@ -18,8 +18,8 @@ struct MainTextView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    DateView()
-                        .padding(.top, 30)
+//                    DateView()
+//                        .padding(.top, 30)
                     MessageMainTextView()
                         .padding(.top, 36)
                     TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0)}))
@@ -30,7 +30,7 @@ struct MainTextView: View {
                         .padding([.top, .bottom], 9)
                         .padding([.leading, .trailing], 12)
                         .background() {
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
                                 .overlay {
@@ -57,15 +57,9 @@ struct MainTextView: View {
                         }
                         .padding(.top, 12)
                     Button {
-//                        viewStore.send(.inputMainText(mainText))
                         viewStore.send(.showDrawingStyleView)
                     } label: {
-                        Text("다음")
-                            .font(.pretendard(.semiBold, size: 18))
-                            .frame(width: UIScreen.main.bounds.width-40, height: 54)
-                            .background(viewStore.mainText == "" ? Color.buttonDisabled : Color.button)
-                            .cornerRadius(9)
-                            .foregroundColor(Color.white)
+                        ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.mainText == "" ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                     }
                     .disabled(viewStore.mainText == "")
                     .padding([.top, .bottom], 15)
@@ -73,7 +67,19 @@ struct MainTextView: View {
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
             }
-            .navigationTitle(Text("일기 쓰기"))
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    DateView()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewStore.send(.cancelWriting)
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(store: store.scope(state: \.$drawingStyle, action: MainTextFeature.Action.drawingStyle), destination: { store in
                 DrawingStyleView(store: store)
             })

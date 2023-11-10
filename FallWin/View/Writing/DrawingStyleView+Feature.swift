@@ -13,10 +13,11 @@ struct DrawingStyleFeature: Reducer {
         var selectedEmotion: String
         var mainText: String
         var selectedDrawingStyle: String?
-        var priorSteps: Double = 25.0
+        var showCountAlert: Bool = false
+        var priorSteps: Double = 50.0
         var priorScale: Double = 5.0
-        var steps: Double = 25.0
-        var scale: Double = 5.0
+        var steps: Double = 20.0
+        var scale: Double = 12.5
         @PresentationState var generatedDiary: GeneratedDiaryFeature.State?
     }
     
@@ -24,10 +25,12 @@ struct DrawingStyleFeature: Reducer {
         case selectDrawingStyle(_ selectedDrawingStyle: String?)
         case showGeneratedDiaryView
         case doneGenerating(Journal)
+        case showCountAlert(Bool)
         case setPriorSteps(_ priorSteps: Double)
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
         case setScale(_ scale: Double)
+        case cancelWriting
         
         case generatedDiary(PresentationAction<GeneratedDiaryFeature.Action>)
     }
@@ -43,6 +46,10 @@ struct DrawingStyleFeature: Reducer {
                 if let selectedDrawingStyle = state.selectedDrawingStyle {
                     state.generatedDiary = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText, selectedDrawingStyle: selectedDrawingStyle, priorSteps: state.priorSteps, priorScale: state.priorScale, steps: state.steps, scale: state.scale)
                 }
+                return .none
+                
+            case let .showCountAlert(show):
+                state.showCountAlert = show
                 return .none
                 
             case let .setPriorSteps(priorSteps):
@@ -61,8 +68,14 @@ struct DrawingStyleFeature: Reducer {
                 state.scale = scale
                 return .none
                 
+            case .cancelWriting:
+                return .none
+                
             case .generatedDiary(.presented(.doneImage(let journal))):
                 return .send(.doneGenerating(journal))
+                
+            case .generatedDiary(.presented(.cancelWriting)):
+                return .send(.cancelWriting)
                 
             default: return .none
             }
