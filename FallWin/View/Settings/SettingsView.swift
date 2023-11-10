@@ -66,9 +66,11 @@ struct SettingsView: View {
                     .listRowBackground(Color.backgroundPrimary)
                     
                     NavigationLink {
-                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
-                            FeedbackView(store: store)
-                        }
+//                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
+//                            FeedbackView(store: store)
+//                        }
+                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                            .toolbar(.hidden, for: .tabBar)
                         
                     } label: {
                         Text("피드백 남기기")

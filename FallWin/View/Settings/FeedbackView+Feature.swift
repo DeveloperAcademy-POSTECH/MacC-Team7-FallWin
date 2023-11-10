@@ -1,25 +1,33 @@
 //
-//  FeedbackView+Feature.swift
+//  MainTextView+Feature.swift
 //  FallWin
 //
-//  Created by 최명근 on 11/8/23.
+//  Created by HAN GIBAEK on 10/20/23.
 //
 
 import Foundation
 import ComposableArchitecture
+import SwiftUI
 
 struct FeedbackFeature: Reducer {
     struct State: Equatable {
-        
+        var feedbackText: String
     }
     
     enum Action: Equatable {
-        
+        case inputFeedbackText(_ mainText: String)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        default: return .none
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case let .inputFeedbackText(feedbackText):
+                state.feedbackText = feedbackText
+                return .none
+                
+            default: return .none
+            }
         }
     }
 }
