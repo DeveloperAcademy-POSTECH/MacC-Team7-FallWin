@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-struct OhwaAlertImpl<Content>:OhwaAlert where Content:View{
+struct OhwaAlertImpl<Content>:OhwaAlert where Content:View {
+    let title: String?
     let content: Content
     let primaryButton: OhwaAlertButton
     let secondaryButton: OhwaAlertButton?
     
-    init(content: () -> Content, primaryButton: () ->  OhwaAlertButton, secondaryButton: (() -> OhwaAlertButton)? = nil){
+    init(title: String? = nil, content: () -> Content, primaryButton: () ->  OhwaAlertButton, secondaryButton: (() -> OhwaAlertButton)? = nil) {
+        self.title = title
         self.content = content()
         self.primaryButton = primaryButton()
         self.secondaryButton = secondaryButton?()
@@ -22,29 +24,34 @@ struct OhwaAlertImpl<Content>:OhwaAlert where Content:View{
         ZStack{
             Color.black.opacity(0.3).ignoresSafeArea()
             
-            content
-                .padding(.bottom, 60)
-                .frame(maxWidth:UIScreen.main.bounds.width - 90 ,minHeight: 169)
-                .overlay(
-                    VStack(spacing:0){
-                        
-                        HStack(){
-                            primaryButton
-                                .padding([.leading,.bottom])
-                            if secondaryButton != nil{
-//                                Divider()
-                                secondaryButton
-                                    .padding([.trailing,.bottom])
-                            }
-                        }
-                        .frame(height:60)
-                        .font(.system(size: 16,weight: .bold))
-                    }
-                    , alignment: .bottom)
-                .background(
-                    Color(hexCode: "#FEFEFA")
-                ).cornerRadius(10)
+            VStack(spacing: 0) {
+                if let title = title {
+                    Text(title)
+                        .font(.pretendard(.bold, size: 20))
+                        .foregroundStyle(Color.textPrimary)
+                        .padding(.bottom, 12)
+                }
                 
+                content
+                    .foregroundStyle(Color.textPrimary)
+                    .padding()
+                    .padding(.bottom, 12)
+                
+                HStack {
+                    primaryButton
+                    if secondaryButton != nil{
+                        secondaryButton
+                    }
+                }
+                .frame(maxHeight: 45)
+                .padding([.leading, .trailing, .bottom])
+            }
+            .padding(16)
+            .background {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.backgroundPrimary)
+            }
+            .padding(32)
         }
     }
 }

@@ -71,18 +71,6 @@ struct MainView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
-//            .toolbar {
-//                ToolbarItem(placement: .primaryAction) {
-//                    Button("설정", systemImage: "gearshape") {
-//                        viewStore.send(.showSettingsView)
-//                    }
-//                    .sheet(store: store.scope(state: \.$settings, action: MainFeature.Action.settings)) { store in
-//                        NavigationStack {
-//                            SettingsView(store: store)
-//                        }
-//                    }
-//                }
-//            }
         }
     }
     
