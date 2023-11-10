@@ -49,6 +49,7 @@ struct ContentView: View {
                                 Text("Settings")
                                 viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
                             }
+                            .tag(2)
                         }
                     }
                     .toolbarBackground(Color.backgroundPrimary, for: .tabBar)
