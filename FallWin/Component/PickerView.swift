@@ -56,9 +56,6 @@ struct YearMonthPickerView: View {
                 Button {
                     pickedDateTagValue.year = pickedYear
                     pickedDateTagValue.month = pickedMonth
-                    print("before: \(pickedDateTagValue.tagValue)")
-                    pickedDateTagValue.reCalculate()
-                    print("after: \(pickedDateTagValue.tagValue)")
                     isPickerShown = false
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)

@@ -23,19 +23,20 @@ struct MainView: View {
                                 
                                 mainCell(journal: journal)
                                     .padding()
+                                    .id(DateTagValue(date: journal.timestamp ?? Date()).tagValue)
                                     .onTapGesture {
                                         HapticManager.shared.impact()
                                         viewStore.send(.showJournalView(journal))
                                     }
-                                    .id(DateTagValue(date: journal.timestamp ?? Date()))
                             }
                         }
                         .padding()
                         .padding(.vertical, 40)
-                        .onChange(of: viewStore.pickedDateTagValue.tagValue) { value in
-                            print("tagValue: \(value)")
+                        .onChange(of: viewStore.pickedDateTagValue) { _ in
+                            let lastTagValue = PickerManager.shared.getLastTagValue(journals: viewStore.journals, dateTagValue: viewStore.pickedDateTagValue)
+                            viewStore.send(.updateTagValue(lastTagValue))
                             withAnimation(.spring) {
-                                proxy.scrollTo(value, anchor: .top)
+                                proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .top)
                             }
                         }
                     }

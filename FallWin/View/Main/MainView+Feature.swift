@@ -34,6 +34,7 @@ struct MainFeature: Reducer {
         case showPickerSheet
         case hidePickerSheet
         case pickDate(DateTagValue)
+        case updateTagValue(Int)
         case showCountAlert(Bool)
         case getRemainingCount
         
@@ -86,6 +87,9 @@ struct MainFeature: Reducer {
                 state.pickedDateTagValue = dateTagValue
                 return .none
                 
+            case let .updateTagValue(tagValue):
+                state.pickedDateTagValue.tagValue = tagValue
+                return .none
                 
             case let .showCountAlert(show):
                 state.showCountAlert = show

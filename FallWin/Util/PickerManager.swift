@@ -29,6 +29,47 @@ extension PickerManager {
         
         return date + time
     }
+    
+    func getTagValuePeriod(year: Int, month: Int) -> [Int] {
+        if month == 12 {
+            let minYear: Int = year * Int(1e10)
+            let maxYear: Int = (year + 1) * Int(1e10)
+            let minMonth: Int = month * Int(1e8)
+            let maxMonth: Int = 1 * Int(1e8)
+            let day: Int = 1 * Int(1e6)
+            
+            let minTagValue = minYear + minMonth + day
+            let maxTagValue = maxYear + maxMonth + day
+            
+            return [minTagValue, maxTagValue]
+            
+        } else {
+            let year: Int = year * Int(1e10)
+            let minMonth: Int = month * Int(1e8)
+            let maxMonth: Int = (month + 1) * Int(1e8)
+            let day: Int = 1 * Int(1e6)
+            
+            let minTagValue = year + minMonth + day
+            let maxTagValue = year + maxMonth + day
+            
+            return [minTagValue, maxTagValue]
+        }
+    }
+    
+    func getLastTagValue(journals: [Journal], dateTagValue: DateTagValue) -> Int {
+        let tagValues = journals.map{ self.getDateTagValue(date: $0.timestamp ?? Date()) }
+        
+        let tagValuePeriod = self.getTagValuePeriod(year: dateTagValue.year, month: dateTagValue.month)
+        
+//        print(tagValues.filter({ tagValuePeriod[0] <= $0 && $0 <= tagValuePeriod[1] }))
+        
+        if let lastTagValue = tagValues.filter({ tagValuePeriod[0] <= $0 && $0 <= tagValuePeriod[1] }).first {
+            return lastTagValue
+        } else {
+            return dateTagValue.tagValue
+        }
+        
+    }
 }
 
 struct DateTagValue: Identifiable, Equatable, Hashable {
@@ -73,5 +114,15 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
         
         self.tagValue = date + time
     }
+    
+//    mutating func updateTagValue(journals: [Journal]) {
+//        let tagValues = journals.map{ PickerManager.shared.getDateTagValue(date: $0.timestamp ?? Date()) }
+//        
+//        let tagValuePeriod = PickerManager.shared.getTagValuePeriod(year: self.year, month: self.month)
+//        
+//        let lastTagValue = tagValues.filter{ tagValuePeriod[0] <= $0 && $0 <= tagValuePeriod[1] }
+//        
+//        self.tagValue = lastTagValue.last ?? self.tagValue
+//    }
 }
 
