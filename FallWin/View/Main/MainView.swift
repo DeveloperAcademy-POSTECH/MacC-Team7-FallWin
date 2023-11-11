@@ -28,15 +28,19 @@ struct MainView: View {
                                         HapticManager.shared.impact()
                                         viewStore.send(.showJournalView(journal))
                                     }
+                                    .onAppear {
+                                        if let timestamp = journal.timestamp {
+                                            viewStore.send(.updateYear(timestamp.year ))
+                                            viewStore.send(.updateMonth(timestamp.month))
+                                        }
+                                    }
                             }
                         }
                         .padding()
                         .padding(.vertical, 40)
-                        .onChange(of: viewStore.pickedDateTagValue) { _ in
-                            let lastTagValue = PickerManager.shared.getLastTagValue(journals: viewStore.journals, dateTagValue: viewStore.pickedDateTagValue)
-                            viewStore.send(.updateTagValue(lastTagValue))
+                        .onChange(of: viewStore.pickedDateTagValue.tagValue) { value in
                             withAnimation(.spring) {
-                                proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .top)
+                                proxy.scrollTo(value, anchor: .top)
                             }
                         }
                     }
@@ -61,7 +65,7 @@ struct MainView: View {
                 VStack {
                     toolbar
                         .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), onDismiss: { print("picker dismissed") }) {
-                            YearMonthPickerView(yearRange: 1900...2023, isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate))
+                            YearMonthPickerView(yearRange: 1900...2023, isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
                     Spacer()

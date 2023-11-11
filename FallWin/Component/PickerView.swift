@@ -18,13 +18,15 @@ struct YearMonthPickerView: View {
     @State var pickedMonth: Int = Date().month
     @Binding var isPickerShown: Bool
     @Binding var pickedDateTagValue: DateTagValue
+    @Binding var journals: [Journal]
     
     var years: [Int]
     
-    init(yearRange: ClosedRange<Int>, isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>) {
+    init(yearRange: ClosedRange<Int>, isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>, journals: Binding<[Journal]>) {
         self.years = Array(yearRange)
         self._isPickerShown = isPickerShown
         self._pickedDateTagValue = pickedDateTagValue
+        self._journals = journals
         
         self.pickedYear = pickedDateTagValue.wrappedValue.year
         self.pickedMonth = pickedDateTagValue.wrappedValue.month
@@ -56,6 +58,7 @@ struct YearMonthPickerView: View {
                 Button {
                     pickedDateTagValue.year = pickedYear
                     pickedDateTagValue.month = pickedMonth
+                    pickedDateTagValue.updateTagValue(journals: journals)
                     isPickerShown = false
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
@@ -141,6 +144,6 @@ struct MonthDayYearPickerView: View {
 }
 
 #Preview {
-    YearMonthPickerView(yearRange: 1990...2023, isPickerShown: .constant(true), pickedDateTagValue: .constant(DateTagValue(date: Date())))
+    YearMonthPickerView(yearRange: 1990...2023, isPickerShown: .constant(true), pickedDateTagValue: .constant(DateTagValue(date: Date())), journals: .constant([Journal()]))
 //    MonthDayYearPickerView(yearRange: 1990...2023)
 }

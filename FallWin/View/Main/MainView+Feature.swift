@@ -34,7 +34,10 @@ struct MainFeature: Reducer {
         case showPickerSheet
         case hidePickerSheet
         case pickDate(DateTagValue)
+        case updateYear(Int)
+        case updateMonth(Int)
         case updateTagValue(Int)
+        case bindJournal
         case showCountAlert(Bool)
         case getRemainingCount
         
@@ -87,8 +90,20 @@ struct MainFeature: Reducer {
                 state.pickedDateTagValue = dateTagValue
                 return .none
                 
+            case let .updateYear(year):
+                state.pickedDateTagValue.year = year
+                return .none
+                
+            case let .updateMonth(month):
+                state.pickedDateTagValue.month = month
+                return .none
+                
             case let .updateTagValue(tagValue):
                 state.pickedDateTagValue.tagValue = tagValue
+                return .none
+                
+            // PickerView에서 journals를 읽기 위한 바인딩용 action. set 작업은 하지 않음.
+            case .bindJournal:
                 return .none
                 
             case let .showCountAlert(show):
