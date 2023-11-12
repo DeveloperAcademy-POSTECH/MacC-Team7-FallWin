@@ -17,5 +17,17 @@
 		<string>UhBee Se_hyun.ttf</string>
 		<string>UhBee Se_hyun Bold.ttf</string>
 	</array>
+    <key>NSUbiquitousContainers</key>
+        <dict>
+            <key>iCloud.com.mgchoi.ohwa</key>
+            <dict>
+                <key>NSUbiquitousContainerIsDocumentScopePublic</key>
+                <true/>
+                <key>NSUbiquitousContainerSupportedFolderLevels</key>
+                <string>Any</string>
+                <key>NSUbiquitousContainerName</key>
+                <string>PICDA</string>
+            </dict>
+        </dict>
 </dict>
 </plist>
