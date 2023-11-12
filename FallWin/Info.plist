@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.com.mgchoi.ohwa</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>PICDA</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Black.ttf</string>
@@ -17,17 +29,5 @@
 		<string>UhBee Se_hyun.ttf</string>
 		<string>UhBee Se_hyun Bold.ttf</string>
 	</array>
-    <key>NSUbiquitousContainers</key>
-        <dict>
-            <key>iCloud.com.mgchoi.ohwa</key>
-            <dict>
-                <key>NSUbiquitousContainerIsDocumentScopePublic</key>
-                <true/>
-                <key>NSUbiquitousContainerSupportedFolderLevels</key>
-                <string>Any</string>
-                <key>NSUbiquitousContainerName</key>
-                <string>PICDA</string>
-            </dict>
-        </dict>
 </dict>
 </plist>

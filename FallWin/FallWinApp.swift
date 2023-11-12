@@ -33,6 +33,8 @@ struct FallWinApp: App {
             KeychainWrapper.standard.removeAllKeys()
             UserDefaults.standard.set(true, forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled)
         }
+        
+        ICloudBackupManager()?.test()
     }
     
     @State private var locked: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)
@@ -43,15 +45,6 @@ struct FallWinApp: App {
                 ContentView(store: Store(initialState: Feature.State(), reducer: {
                     Feature()
                 }))
-                .onAppear {
-                    DispatchQueue.global().async {
-                        if let manager = ICloudBackupManager() {
-                            manager.test()
-                        } else {
-                            print("cannot connect to icloud manager")
-                        }
-                    }
-                }
             } else {
                 PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
                     if typed == KeychainWrapper.standard[.password] || biometric ?? false {

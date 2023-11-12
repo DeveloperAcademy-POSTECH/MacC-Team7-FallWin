@@ -70,7 +70,6 @@ final class ICloudBackupManager {
         self.iCloudUrl = iCloudUrl
         self.iCloudBackupFolderUrl = iCloudUrl.appending(path: BACKUP_DIRECTORY)
         if !FileManager.default.fileExists(atPath: self.iCloudBackupFolderUrl.path()) {
-            print("backups mkdir")
             do {
                 try FileManager.default.createDirectory(at: self.iCloudBackupFolderUrl, withIntermediateDirectories: true, attributes: nil)
             } catch {
@@ -78,14 +77,6 @@ final class ICloudBackupManager {
                 return nil
             }
         }
-        
-        do {
-            let textUrl = iCloudBackupFolderUrl.appendingPathComponent("temp", conformingTo: .text)
-            print(try String(contentsOf: textUrl, encoding: .utf8))
-        } catch {
-            print(error)
-        }
-        
     }
     
     /// 백업 폴더의 위치를 반환합니다.
@@ -98,11 +89,11 @@ final class ICloudBackupManager {
     /// (예: {document}/backups/{backupName}/{backupName}.pcdarchive
     private func getBackupFileUrl(backupName: String) -> URL {
         return getBackupUrl(backupName: backupName)
-            .appending(path: "\(backupName).\(BACKUP_FILE_EXTENSION)")
+            .appending(path: BACKUP_FILE_NAME)
     }
     
     private func getICloudBackupFileUrl() -> URL {
-        return iCloudBackupFolderUrl.appendingPathComponent(BACKUP_FILE_NAME, conformingTo: .zip)
+        return iCloudBackupFolderUrl.appending(path: "\(BACKUP_FILE_NAME)")
     }
     
     var hasICloudBackup: Bool {
@@ -187,7 +178,7 @@ extension ICloudBackupManager {
             onFinish(.failure(error))
             return
         }
-        if let onProcess = onProcess { onProcess(.fetch) }
+        if let onProcess = onProcess { onProcess(.pack) }
         
         // MARK: Upload
         let upload = uploadBackup(backupName)
@@ -250,8 +241,16 @@ extension ICloudBackupManager {
         
         // 임시 일기 파일 저장할 디렉토리
         // 임시 일기 파일 생성 날짜
-        let backupName = "backup-\(Date().fullString)"
+        let backupName = "backup-\(Date().fullStringWithoutSpaces)"
         let backupUrl = getBackupUrl(backupName: backupName)
+        if !FileManager.default.fileExists(atPath: backupUrl.path()) {
+            do {
+                try FileManager.default.createDirectory(at: backupUrl, withIntermediateDirectories: true)
+            } catch {
+                print(#function, error)
+                return .failure("백업 폴더를 만들 수 없습니다.")
+            }
+        }
         
         // 임시 일기 파일 생성
         do {
@@ -291,7 +290,7 @@ extension ICloudBackupManager {
     
     private func uploadBackup(_ backupName: String) -> LocalBackupResult {
         do {
-            try FileManager.default.moveItem(at: getBackupFileUrl(backupName: backupName), to: getICloudBackupFileUrl())
+            try FileManager.default.copyItem(at: getBackupFileUrl(backupName: backupName), to: getICloudBackupFileUrl())
         } catch {
             print(#function, error)
             return .failure("백업 파일을 iCloud에 작성할 수 없습니다.")
@@ -419,7 +418,7 @@ extension ICloudBackupManager {
             return .failure("데이터를 해석하는데 실패했습니다.")
         }
         
-        if let journals = fetchJournals() {
+        if fetchJournals() != nil {
             for rawJournal in rawJournals {
                 Journal.insert(rawJournal)
             }

@@ -30,6 +30,7 @@
 		791F14792AE0D8A400F8DDD2 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F14782AE0D8A400F8DDD2 /* JournalView.swift */; };
 		791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */; };
 		791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */; };
+		792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792444082B00D04E00E28FFE /* SettingsView+Feature.swift */; };
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Feature.swift */; };
 		7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511B2AF232FD0023123C /* OldSettingsView.swift */; };
@@ -68,11 +69,9 @@
 		79D8B1592AFA148D0020DFCC /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1582AFA148D0020DFCC /* ImageZoomView.swift */; };
 		79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */; };
 		79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15C2AFA22510020DFCC /* SettingsView.swift */; };
-		79D8B15F2AFA225A0020DFCC /* SettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B15E2AFA225A0020DFCC /* SettingsView+Feature.swift */; };
 		79D8B1612AFA2A910020DFCC /* LockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1602AFA2A910020DFCC /* LockSettingView.swift */; };
 		79D8B1632AFA2A9F0020DFCC /* LockSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */; };
 		79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */; };
-		79D8B16B2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */; };
 		79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16C2AFB505A0020DFCC /* PolicyView.swift */; };
 		79D8B16F2AFB50660020DFCC /* PolicyView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */; };
 		79D8B1772AFB57780020DFCC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8B1762AFB57780020DFCC /* WebViewController.swift */; };
@@ -141,6 +140,7 @@
 		791F14782AE0D8A400F8DDD2 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalView+Feature.swift"; sourceTree = "<group>"; };
 		791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		792444082B00D04E00E28FFE /* SettingsView+Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsView+Feature.swift"; sourceTree = "<group>"; };
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Feature.swift"; sourceTree = "<group>"; };
 		7927511B2AF232FD0023123C /* OldSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSettingsView.swift; sourceTree = "<group>"; };
@@ -179,11 +179,9 @@
 		79D8B1582AFA148D0020DFCC /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
 		79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		79D8B15C2AFA22510020DFCC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		79D8B15E2AFA225A0020DFCC /* SettingsView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Feature.swift"; sourceTree = "<group>"; };
 		79D8B1602AFA2A910020DFCC /* LockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockSettingView.swift; sourceTree = "<group>"; };
 		79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockSettingView+Feature.swift"; sourceTree = "<group>"; };
 		79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSettingView.swift; sourceTree = "<group>"; };
-		79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackupSettingView+Feature.swift"; sourceTree = "<group>"; };
 		79D8B16C2AFB505A0020DFCC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
 		79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolicyView+Feature.swift"; sourceTree = "<group>"; };
 		79D8B1762AFB57780020DFCC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -312,11 +310,10 @@
 				7927511B2AF232FD0023123C /* OldSettingsView.swift */,
 				7927511D2AF233060023123C /* OldSettingsView+Feature.swift */,
 				79D8B15C2AFA22510020DFCC /* SettingsView.swift */,
-				79D8B15E2AFA225A0020DFCC /* SettingsView+Feature.swift */,
+				792444082B00D04E00E28FFE /* SettingsView+Feature.swift */,
 				79D8B1602AFA2A910020DFCC /* LockSettingView.swift */,
 				79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */,
 				79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */,
-				79D8B16A2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift */,
 				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
 				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
 			);
@@ -673,6 +670,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */,
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
 				79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */,
 				98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */,
@@ -702,14 +700,12 @@
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
 				79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
-				79D8B1712AFB52AB0020DFCC /* FeedbackView.swift in Sources */,
 				79A5667A2AFE058E00524A57 /* ICloudBackupManager.swift in Sources */,
 				79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */,
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
 				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
 				79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
-				79D8B15F2AFA225A0020DFCC /* SettingsView+Feature.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
 				79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
@@ -757,7 +753,6 @@
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
 				98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */,
-				79D8B16B2AFB4F1E0020DFCC /* BackupSettingView+Feature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,7 +887,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = V59QA8T54G;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -912,7 +907,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.semin.ohwa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -932,7 +927,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = V59QA8T54G;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -952,7 +947,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.semin.ohwa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
