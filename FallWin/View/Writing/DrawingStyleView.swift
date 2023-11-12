@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct DrawingStyleView: View {
     var store: StoreOf<DrawingStyleFeature>
@@ -39,12 +40,15 @@ struct DrawingStyleView: View {
                         generateDrawingStyleView()
                             .padding(.top, 16)
                             .padding(.horizontal)
+                        //TODO: 함께 해결해야 할 부분
                         Button {
                             if DrawingCountManager.shared.remainingCount <= 0 {
                                 viewStore.send(.showCountAlert(true))
                             } else {
                                 viewStore.send(.showGeneratedDiaryView)
                             }
+                            Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
+                            print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
                             
                         } label: {
                             ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
@@ -74,6 +78,8 @@ struct DrawingStyleView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             viewStore.send(.cancelWriting)
+                            Tracking.logEvent(Tracking.Event.A2_3_2__일기작성_화풍선택_닫기.rawValue)
+                            print("@Log : A2_3_2__일기작성_화풍선택_닫기")
                         } label: {
                             Image(systemName: "xmark")
                         }
@@ -96,28 +102,28 @@ struct DrawingStyleView: View {
     
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
-        
-        let drawingStyles: [(String, Color, Image, String)] = [
-            ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화"),
-            ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치"),
-            ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르"),
-            ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함"),
-            ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈"),
-            ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
-            ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐"),
-            ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키"),
-            ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱"),
-            ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소"),
-            ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트"),
-            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소"),
-            ("henriMatisse", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 마티스"),
-            ("egonSchiele", Color(hexCode: "#191919"), Image("SalvadorDali"), "에곤 쉴레"),
-            ("webtoon", Color(hexCode: "#191919"), Image("SalvadorDali"), "웹툰"),
-            ("dcComics", Color(hexCode: "#191919"), Image("SalvadorDali"), "DC 코믹스"),
-            ("ghibli", Color(hexCode: "#191919"), Image("SalvadorDali"), "지브리"),
-            ("film", Color(hexCode: "#191919"), Image("SalvadorDali"), "필름"),
-            ("illustration", Color(hexCode: "#191919"), Image("SalvadorDali"), "일러스트"),
-            ("cg", Color(hexCode: "#191919"), Image("SalvadorDali"), "CG"),
+        //TODO: 함께 해결해야 할 부분
+        let drawingStyles: [(String, Color, Image, String,String)] = [
+            ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화","case A2_3_4_1__일기작성_화풍선택_유화"),
+            ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치", "case A2_3_4_2__일기작성_화풍선택_스케치"),
+            ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르", "case A2_3_4_3__일기작성_화풍선택_르누아르"),
+            ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함", "case A2_3_4_4__일기작성_화풍선택_화풍선택안함 "),
+            ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈", "case A2_3_4_5__일기작성_화풍선택_샤갈"),
+            ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션", "case A2_3_4_6__일기작성_화풍선택_애니메이션"),
+            ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐", "case A2_3_4_7__일기작성_화풍선택_반고흐"),
+            ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키", "case A2_3_4_8__일기작성_화풍선택_칸딘스키"),
+            ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱", "case A2_3_4_9__일기작성_화풍선택_고갱"),
+            ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소", "case A2_3_4_10__일기작성_화풍선택_피카소"),
+            ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트", "case A2_3_4_11__일기작성_화풍선택_렘브란트"),
+            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소", "case A2_3_4_12__일기작성_화풍선택_앙리루소"),
+            ("henriMatisse", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 마티스", "case A2_3_4_13__일기작성_화풍선택_앙리마티스"),
+            ("egonSchiele", Color(hexCode: "#191919"), Image("SalvadorDali"), "에곤 쉴레", "case A2_3_4_14__일기작성_화풍선택_에곤쉴레"),
+            ("webtoon", Color(hexCode: "#191919"), Image("SalvadorDali"), "웹툰", "case A2_3_4_15__일기작성_화풍선택_웹툰"),
+            ("dcComics", Color(hexCode: "#191919"), Image("SalvadorDali"), "DC 코믹스", "case A2_3_4_16__일기작성_화풍선택_DC코믹스"),
+            ("ghibli", Color(hexCode: "#191919"), Image("SalvadorDali"), "지브리", "case A2_3_4_17__일기작성_화풍선택_지브리"),
+            ("film", Color(hexCode: "#191919"), Image("SalvadorDali"), "필름", "case A2_3_4_18__일기작성_화풍선택_필름"),
+            ("illustration", Color(hexCode: "#191919"), Image("SalvadorDali"), "일러스트", "case A2_3_4_19__일기작성_화풍선택_일러스트"),
+            ("cg", Color(hexCode: "#191919"), Image("SalvadorDali"), "CG", "case A2_3_4_20__일기작성_화풍선택_CG")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -143,7 +149,8 @@ struct DrawingStyleView: View {
     }
     
     @ViewBuilder
-    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String)) -> some View {
+    //TODO: 함께 해결해야 할 부분
+    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String, String)) -> some View {
         WithViewStore(store, observe: {$0}) { viewStore in
             VStack(spacing: 16) {
                 drawingStyle.2

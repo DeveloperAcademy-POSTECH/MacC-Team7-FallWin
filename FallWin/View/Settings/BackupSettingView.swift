@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct BackupSettingView: View {
     @State var isclickedBackup: Bool = false
@@ -61,6 +62,8 @@ struct BackupSettingView: View {
 
                 }
                 isclickedBackup.toggle()
+                Tracking.logEvent(Tracking.Event.A5_2_1_설정뷰_iCloud백업_백업.rawValue)
+                print("@Log : A5_2_1_설정뷰_iCloud백업_백업")
             }, label: {
                 Text("iCloud 백업")
                     .font(.pretendard(.semiBold, size: 18))
@@ -79,6 +82,8 @@ struct BackupSettingView: View {
             
             Button(action: {
                 isclickedRestore.toggle()
+                Tracking.logEvent(Tracking.Event.A5_2_2_설정뷰_iCloud백업_복원.rawValue)
+                print("@Log : A5_2_2_설정뷰_iCloud백업_복원")
             }, label: {
                 Text("iCloud 복원")
                     .font(.pretendard(.semiBold, size: 18))

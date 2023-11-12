@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct MainTextView: View {
     var store: StoreOf<MainTextFeature>
@@ -58,6 +59,8 @@ struct MainTextView: View {
                         .padding(.top, 12)
                     Button {
                         viewStore.send(.showDrawingStyleView)
+                        Tracking.logEvent(Tracking.Event.A2_2_3__일기작성_글작성_다음버튼.rawValue)
+                        print("@Log : A2_2_3__일기작성_글작성_다음버튼")
                     } label: {
                         ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.mainText == "" ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                     }
@@ -74,6 +77,8 @@ struct MainTextView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewStore.send(.cancelWriting)
+                        Tracking.logEvent(Tracking.Event.A2_2_2__일기작성_글작성_닫기.rawValue)
+                        print("A2_2_2__일기작성_글작성_닫기")
                     } label: {
                         Image(systemName: "xmark")
                     }

@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct GeneratedDiaryView: View {
     let store: StoreOf<GeneratedDiaryFeature>
@@ -77,6 +78,8 @@ struct GeneratedDiaryView: View {
                                 .padding(.horizontal)
                             Button {
                                 viewStore.send(.doneGenerating)
+                                Tracking.logEvent(Tracking.Event.A2_5_4__일기작성_그림선택_일기마무리버튼.rawValue)
+                                print("@Log : A2_5_4__일기작성_그림선택_일기마무리버튼")
                             } label: {
                                 ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             }
@@ -99,6 +102,8 @@ struct GeneratedDiaryView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             viewStore.send(.cancelWriting)
+                            Tracking.logEvent(Tracking.Event.A2_5_2__일기작성_그림선택_닫기.rawValue)
+                            print("@Log : A2_5_2__일기작성_그림선택_닫기")
                         } label: {
                             Image(systemName: "xmark")
                         }

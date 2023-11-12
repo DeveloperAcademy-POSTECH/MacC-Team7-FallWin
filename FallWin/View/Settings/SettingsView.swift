@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
@@ -62,6 +63,10 @@ struct SettingsView: View {
                             .padding(.vertical, 8)
                     }
                     .listRowBackground(Color.backgroundPrimary)
+                    .onTapGesture {
+                        Tracking.logEvent(Tracking.Event.A5_3_1_설정뷰_소통창구.rawValue)
+                        print("@Log : A5_3_1_설정뷰_소통창구")
+                    }
                     
                     NavigationLink {
 //                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
@@ -99,6 +104,10 @@ struct SettingsView: View {
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
+            print("@Log : V5__설정뷰")
+           }
     }
 }
 

@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import CoreData
+import FirebaseAnalytics
 
 struct SearchView: View {
     let store: StoreOf<SearchFeature>
@@ -107,7 +108,15 @@ struct SearchView: View {
                 Text("피드")
             )
             .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("찾고 싶은 추억을 입력해보세요"))
+            .onTapGesture {
+                Tracking.logEvent(Tracking.Event.A4_1__검색뷰_피드검색.rawValue)
+                print("@Log : A4_1__검색뷰_피드검색")
+            }
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V4__검색뷰.rawValue)
+            print("@Log : V4__검색뷰")
+           }
         
     }
     
