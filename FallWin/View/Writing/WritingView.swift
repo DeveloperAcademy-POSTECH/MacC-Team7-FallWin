@@ -18,9 +18,9 @@ struct WritingView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    DateView()
-                        .padding(.top, 30)
-                    MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "오늘 느낀 감정을 선택해보세요")
+//                    DateView()
+//                        .padding(.top, -30)
+                    MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
                         .padding(.top, 36)
                     generateEmotionView()
                         .padding(.top, 16)
@@ -29,23 +29,14 @@ struct WritingView: View {
                         Button {
                             viewStore.send(.showMainTextView(nil))
                         } label: {
-                            Text("건너뛰기")
-                                .font(.pretendard(.medium, size: 18))
-                                .frame(height: 54)
-                                .background(Color.backgroundPrimary)
-                                .foregroundColor(Color.textSecondary)
+                            ConfirmButtonLabelView(text: "건너뛰기", backgroundColor: .backgroundPrimary, foregroundColor: .textSecondary, width: nil)
                         }
                         Spacer()
                         Button {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
                             
                         } label: {
-                            Text("다음")
-                                .font(.pretendard(.semiBold, size: 18))
-                                .frame(width: UIScreen.main.bounds.width * 0.6, height: 54)
-                                .background(viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button)
-                                .cornerRadius(9)
-                                .foregroundColor(Color.white)
+                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                         }
                         .disabled(viewStore.selectedEmotion == nil)
                         .padding(.trailing, 20)
@@ -60,7 +51,19 @@ struct WritingView: View {
                     }
                 }
             }
-            .navigationTitle("일기 쓰기")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    DateView()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewStore.send(.cancelWriting)
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(store: store.scope(state: \.$mainText, action: WritingFeature.Action.mainText), destination: { store in
                 MainTextView(store: store)
             })
@@ -116,22 +119,6 @@ struct WritingView: View {
     
     @ViewBuilder
     func generateEmotionCardView(emotion: (String, Color, Image, String)) -> some View {
-//        let emotionTexts: [String : String] = [
-//            "happy" : "행복한",
-//            "nervous" : "불안한",
-//            "grateful" : "감사한",
-//            "sad" : "슬픈",
-//            "joyful" : "신나는",
-//            "lonely" : "외로운",
-//            "proud" : "뿌듯함",
-//            "suffocated" : "답답함",
-//            "touched" : "감동받은",
-//            "shy" : "부끄러운",
-//            "exciting" : "기대되는",
-//            "lazy" : "귀찮은",
-//            "annoyed" : "짜증나는",
-//            "frustrated" : "당황한"
-//        ]
         
         WithViewStore(store, observe: {$0}) { viewStore in
             HStack {
@@ -168,16 +155,35 @@ struct WritingView: View {
 
 struct DateView: View {
     var date = Date()
+    @State var isPickerShown: Bool = false
     
     var body: some View {
         HStack {
-//            Text("<")
-            Text(String(format: "%d년 %d월 %d일", date.year, date.month, date.day))
-                .font(.pretendard(.semiBold, size: 20))
+            Text("\(date.month)월 \(date.day)일 (\(date.dayOfWeek))")
+                .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
-//            Text(">")
+            Image(systemName: "chevron.down")
+        }
+        .onTapGesture {
+            isPickerShown.toggle()
+        }
+        .sheet(isPresented: $isPickerShown, onDismiss: { print("picker dismissed") }) {
+            MonthDayYearPickerView(yearRange: 1900...2023)
+                .presentationDetents([.fraction(0.5)])
         }
     }
+}
+
+struct DismissButton: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+            }
+        }
 }
 
 struct MessageView: View {
