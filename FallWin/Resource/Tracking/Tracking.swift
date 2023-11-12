@@ -15,13 +15,13 @@ struct Tracking {
     private init() { }
     
     enum Screen: String {
-        case V1__메인뷰
+        case V1__메인뷰 //
         
-        case V2_1__일기작성_감정선택뷰
-        case V2_2__일기작성_글작성뷰
-        case V2_3__일기작성_화풍선택뷰
-        case V2_4__일기작성_대기뷰
-        case V2_5__일기작성_결과선택뷰
+        case V2_1__일기작성_감정선택뷰//
+        case V2_2__일기작성_글작성뷰//
+        case V2_3__일기작성_화풍선택뷰//
+        case V2_4__일기작성_대기뷰 //
+        case V2_5__일기작성_결과선택뷰 //
         case V2_6__일기작성_그림확대뷰
         
         case V3__상세페이지뷰
@@ -113,13 +113,15 @@ struct Tracking {
       - Screen의 경우
             - view의 body에             
                  .onAppear {
-                 Tracking.logScreenView(screenName: Tracking.Screen.wrtingSelectEmotionView)
+                 Tracking.logScreenView(screenName: Tracking.Screen.wrtingSelectEmotionView.rawValue)
+                print("@Log : wrtingSelectEmotionView")
                     }
      를 달아주세요
      - Event의 경우
         - 버튼이나 컴포넌트 등에
                  .onTapGesture {
                      Tracking.logEvent(Tracking.Event.touchOnboardingStart)
+                    print("@Log : wrtingSelectEmotionView")
                     }
      */
 }

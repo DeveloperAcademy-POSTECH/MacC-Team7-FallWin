@@ -87,6 +87,11 @@ struct MainTextView: View {
             .toolbar(.visible, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
         }
+        .onAppear {
+        Tracking.logScreenView(screenName: Tracking.Screen.V2_2__일기작성_글작성뷰.rawValue)
+        print("@Log : V2_2__일기작성_글작성뷰")
+           }
+       
     }
 }
 

@@ -87,6 +87,11 @@ struct DrawingStyleView: View {
                 .toolbar(.visible, for: .navigationBar)
                 .toolbar(.hidden, for: .tabBar)
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V2_3__일기작성_화풍선택뷰.rawValue)
+            print("@Log : V2_3__일기작성_화풍선택뷰")
+               }
+        
     }
     
     @ViewBuilder

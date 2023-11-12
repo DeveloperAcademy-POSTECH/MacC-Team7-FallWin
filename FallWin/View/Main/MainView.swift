@@ -72,6 +72,10 @@ struct MainView: View {
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V1__메인뷰.rawValue)
+            print("@Log : V1__메인뷰.rawValue")
+           }
     }
     
     @ViewBuilder

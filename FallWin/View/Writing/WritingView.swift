@@ -70,6 +70,10 @@ struct WritingView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(.visible, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
+            .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V2_1__일기작성_감정선택뷰.rawValue)
+            print("@Log : V2_1__일기작성_감정선택뷰")
+               }
         }
     }
     

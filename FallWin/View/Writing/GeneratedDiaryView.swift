@@ -105,6 +105,10 @@ struct GeneratedDiaryView: View {
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    Tracking.logScreenView(screenName: Tracking.Screen.V2_5__일기작성_결과선택뷰.rawValue)
+                    print("@Log : wrtingSelectEmotionView")
+                   }
             } else {
                 ZStack {
                     LottieImageGenView(jsonName: "LottieImageGen")
@@ -122,6 +126,11 @@ struct GeneratedDiaryView: View {
                         Spacer()
                     }
                 }
+                .onAppear {
+                    Tracking.logScreenView(screenName: Tracking.Screen.V2_4__일기작성_대기뷰.rawValue)
+                    print("@Log : wrtingSelectEmotionView")
+                   }
+                
             }
             
         }
