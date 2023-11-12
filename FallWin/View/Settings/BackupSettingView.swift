@@ -89,7 +89,7 @@ struct BackupSettingView: View {
             } message: {
                 Text(errorMessage)
             }
-
+            
             
             if let message = iCloudWorkMessage {
                 ZStack {
@@ -114,77 +114,86 @@ struct BackupSettingView: View {
     }
     
     private func backup() {
-        if let backupManager = backupManager {
-            backupManager.backup { procedure in
-                switch procedure {
-                case .fetch:
-                    iCloudWorkMessage = "데이터 수집"
-                case .pack:
-                    iCloudWorkMessage = "데이터 압축"
-                case .upload:
-                    iCloudWorkMessage = "업로드"
-                case .register:
-                    iCloudWorkMessage = "백업 등록"
-                case .clean:
-                    iCloudWorkMessage = "임시 파일 삭제"
+        DispatchQueue.global().async {
+            if let backupManager = backupManager {
+                backupManager.backup { procedure in
+                    DispatchQueue.main.async {
+                        switch procedure {
+                        case .fetch:
+                            iCloudWorkMessage = "데이터 수집"
+                        case .pack:
+                            iCloudWorkMessage = "데이터 압축"
+                        case .upload:
+                            iCloudWorkMessage = "업로드"
+                        case .register:
+                            iCloudWorkMessage = "백업 등록"
+                        case .clean:
+                            iCloudWorkMessage = "임시 파일 삭제"
+                        }
+                    }
+                    print(procedure)
+                    
+                } onFinish: { result in
+                    switch result {
+                    case .success:
+                        print("backup success")
+                        isclickedBackup = true
+                        break
+                    case .failure(let error):
+                        print(error)
+                        errorMessage = error
+                        errorOccured = true
+                        backupManager.cleanLocalBackupFolder()
+                        break
+                    }
+                    iCloudWorkMessage = nil
                 }
-                print(procedure)
-                
-            } onFinish: { result in
-                switch result {
-                case .success:
-                    print("backup success")
-                    isclickedBackup = true
-                    break
-                case .failure(let error):
-                    print(error)
-                    errorMessage = error
-                    errorOccured = true
-                    backupManager.cleanLocalBackupFolder()
-                    break
-                }
-                iCloudWorkMessage = nil
+            } else {
+                errorMessage = "설정에서 iCloud에 로그인한 후 '픽다'가 접근할 수 있도록 허용하십시오."
+                errorOccured = true
             }
-        } else {
-            errorMessage = "설정에서 iCloud에 로그인한 후 '픽다'가 접근할 수 있도록 허용하십시오."
-            errorOccured = true
         }
     }
     
     private func restore() {
-        if let backupManager = backupManager {
-            backupManager.restore { procedure in
-                switch procedure {
-                case .fetch:
-                    iCloudWorkMessage = "다운로드"
-                case .unpack:
-                    iCloudWorkMessage = "압축 해제"
-                case .data:
-                    iCloudWorkMessage = "데이터 복원"
-                case .image:
-                    iCloudWorkMessage = "이미지 복원"
-                case .clean:
-                    iCloudWorkMessage = "임시 파일 삭제"
+        DispatchQueue.global().async {
+            if let backupManager = backupManager {
+                backupManager.restore { procedure in
+                    DispatchQueue.main.async {
+                        switch procedure {
+                        case .fetch:
+                            iCloudWorkMessage = "다운로드"
+                        case .unpack:
+                            iCloudWorkMessage = "압축 해제"
+                        case .data:
+                            iCloudWorkMessage = "데이터 복원"
+                        case .image:
+                            iCloudWorkMessage = "이미지 복원"
+                        case .clean:
+                            iCloudWorkMessage = "임시 파일 삭제"
+                        }
+                    }
+                    print(procedure)
+                    
+                } onFinish: { result in
+                    switch result {
+                    case .success:
+                        print("backup success")
+                        isclickedRestore = true
+                        break
+                    case .failure(let error):
+                        print(error)
+                        errorMessage = error
+                        errorOccured = true
+                        break
+                    }
+                    iCloudWorkMessage = nil
+                    backupManager.cleanTempFolder()
                 }
-                
-            } onFinish: { result in
-                switch result {
-                case .success:
-                    print("backup success")
-                    isclickedRestore = true
-                    break
-                case .failure(let error):
-                    print(error)
-                    errorMessage = error
-                    errorOccured = true
-                    break
-                }
-                iCloudWorkMessage = nil
-                backupManager.cleanTempFolder()
+            } else {
+                errorMessage = "설정에서 iCloud에 로그인한 후 '픽다'가 접근할 수 있도록 허용하십시오."
+                errorOccured = true
             }
-        } else {
-            errorMessage = "설정에서 iCloud에 로그인한 후 '픽다'가 접근할 수 있도록 허용하십시오."
-            errorOccured = true
         }
     }
 }

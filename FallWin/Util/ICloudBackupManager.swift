@@ -342,6 +342,8 @@ extension ICloudBackupManager {
     }
     
     func restore(onProcess: ((RestoreProcedures) -> Void)? = nil, onFinish: @escaping (BackupResult) -> Void) {
+        deletePrevData()
+        
         // Clean
         cleanTempFolder()
         if let onProcess = onProcess { onProcess(.clean) }
