@@ -14,7 +14,6 @@ struct SettingsFeature: Reducer {
         var appBuild: String = "1"
         
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
-        @PresentationState var backupSetting: BackupSettingFeature.State? = .init()
         @PresentationState var policy: PolicyFeature.State? = .init()
 //        @PresentationState var feedback: FeedbackFeature.State? = .init()
     }
@@ -22,7 +21,6 @@ struct SettingsFeature: Reducer {
     enum Action: Equatable {
         case fetchAppInfo
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
-        case backupSetting(PresentationAction<BackupSettingFeature.Action>)
         case policy(PresentationAction<PolicyFeature.Action>)
 //        case feedback(PresentationAction<FeedbackFeature.Action>)
     }
@@ -42,9 +40,6 @@ struct SettingsFeature: Reducer {
         }
         .ifLet(\.$lockSetting, action: /Action.lockSetting) {
             LockSettingFeature()
-        }
-        .ifLet(\.$backupSetting, action: /Action.backupSetting) {
-            BackupSettingFeature()
         }
         .ifLet(\.$policy, action: /Action.policy) {
             PolicyFeature()

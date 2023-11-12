@@ -54,53 +54,52 @@ struct PolicyView: View {
     }
 }
 
+struct License: Identifiable {
+    var name: String
+    var license: LicenseType
+    var url: String
+    
+    var id: String {
+        name
+    }
+    
+    func getLicenseTypeString() -> String {
+        switch self.license {
+        case .MIT: return "MIT"
+        case .Apache2: return "Apache 2.0"
+        case .etc(let string): return string
+        }
+    }
+    
+    enum LicenseType {
+        case MIT
+        case Apache2
+        case etc(String)
+    }
+}
+
 struct LicenseView: View {
+    private let licenses: [License] = [
+        License(name: "Swift Composable Architecture", license: .MIT, url: "https://github.com/pointfreeco/swift-composable-architecture"),
+        License(name: "SwiftKeychainWrapper", license: .MIT, url: "https://github.com/jrendel/SwiftKeychainWrapper"),
+        License(name: "Alamofire", license: .MIT, url: "https://github.com/Alamofire/Alamofire"),
+        License(name: "lottie-ios", license: .Apache2, url: "https://github.com/airbnb/lottie-ios"),
+        License(name: "ZIPFoundation", license: .MIT, url: "https://github.com/weichsel/ZIPFoundation"),
+        License(name: "Karlo", license: .etc("CreativeML Open RAIL-M license"), url: "https://github.com/kakaobrain/karlo")
+    ]
+    
     var body: some View {
         List {
-            NavigationLink {
-                WebView(url: "https://github.com/pointfreeco/swift-composable-architecture")
-                    .toolbar(.hidden, for: .tabBar)
-                
-            } label: {
-                cell("Swift Composable Architecture", license: "MIT", url: "https://github.com/pointfreeco/swift-composable-architecture")
+            ForEach(licenses) { license in
+                NavigationLink {
+                    WebView(url: license.url)
+                        .toolbar(.hidden, for: .tabBar)
+                    
+                } label: {
+                    cell(license.name, license: license.getLicenseTypeString(), url: license.url)
+                }
+                .listRowBackground(Color.backgroundPrimary)
             }
-            .listRowBackground(Color.backgroundPrimary)
-            
-            NavigationLink {
-                WebView(url: "https://github.com/jrendel/SwiftKeychainWrapper")
-                    .toolbar(.hidden, for: .tabBar)
-                
-            } label: {
-                cell("SwiftKeychainWrapper", license: "MIT", url: "https://github.com/jrendel/SwiftKeychainWrapper")
-            }
-            .listRowBackground(Color.backgroundPrimary)
-            
-            NavigationLink {
-                WebView(url: "https://github.com/Alamofire/Alamofire")
-                    .toolbar(.hidden, for: .tabBar)
-                
-            } label: {
-                cell("Alamofire", license: "MIT", url: "https://github.com/Alamofire/Alamofire")
-            }
-            .listRowBackground(Color.backgroundPrimary)
-            
-            NavigationLink {
-                WebView(url: "https://github.com/airbnb/lottie-ios")
-                    .toolbar(.hidden, for: .tabBar)
-                
-            } label: {
-                cell("lottie-ios", license: "Apache 2.0", url: "https://github.com/airbnb/lottie-ios")
-            }
-            .listRowBackground(Color.backgroundPrimary)
-            
-            NavigationLink {
-                WebView(url: "https://github.com/kakaobrain/karlo")
-                    .toolbar(.hidden, for: .tabBar)
-                
-            } label: {
-                cell("Karlo", license: "CreativeML Open RAIL-M license", url: "https://github.com/kakaobrain/karlo")
-            }
-            .listRowBackground(Color.backgroundPrimary)
         }
         .listStyle(.plain)
         .background(Color.backgroundPrimary.ignoresSafeArea())

@@ -29,9 +29,7 @@ struct SettingsView: View {
                 
                 Section("데이터 관리") {
                     NavigationLink {
-                        IfLetStore(store.scope(state: \.$backupSetting, action: SettingsFeature.Action.backupSetting)) { store in
-                            BackupSettingView(store: store)
-                        }
+                        BackupSettingView()
                         
                     } label: {
                         Text("iCloud 백업/ 복원")

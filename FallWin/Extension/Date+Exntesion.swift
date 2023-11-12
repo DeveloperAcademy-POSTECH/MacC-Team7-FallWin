@@ -54,6 +54,10 @@ extension Date {
         return "\(dateString) \(timeString)"
     }
     
+    var fullStringWithoutSpaces: String {
+        return "\(dateString)-\(timeInMillis)"
+    }
+    
     var timeInMillis: Int64 {
         get {
             return Int64((self.timeIntervalSince1970 * 1000.0).rounded())

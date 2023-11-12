@@ -16,7 +16,6 @@ final class DataManager {
 
 // MARK: - Image
 extension DataManager {
-    
     func saveImage(_ image: UIImage) -> String? {
         let name = UUID().uuidString
         guard let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {

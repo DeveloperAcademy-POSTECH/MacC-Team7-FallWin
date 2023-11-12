@@ -33,6 +33,8 @@ struct FallWinApp: App {
             KeychainWrapper.standard.removeAllKeys()
             UserDefaults.standard.set(true, forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled)
         }
+        
+        ICloudBackupManager()?.test()
     }
     
     @State private var locked: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)
