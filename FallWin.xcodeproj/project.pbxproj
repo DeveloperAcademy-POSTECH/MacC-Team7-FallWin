@@ -31,6 +31,7 @@
 		791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */; };
 		791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */; };
 		792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792444082B00D04E00E28FFE /* SettingsView+Feature.swift */; };
+		7924440B2B00F13000E28FFE /* DataSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7924440A2B00F13000E28FFE /* DataSettingsView.swift */; };
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Feature.swift */; };
 		7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511B2AF232FD0023123C /* OldSettingsView.swift */; };
@@ -141,6 +142,7 @@
 		791F147A2AE0D8AF00F8DDD2 /* JournalView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalView+Feature.swift"; sourceTree = "<group>"; };
 		791F147C2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		792444082B00D04E00E28FFE /* SettingsView+Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsView+Feature.swift"; sourceTree = "<group>"; };
+		7924440A2B00F13000E28FFE /* DataSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsView.swift; sourceTree = "<group>"; };
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Feature.swift"; sourceTree = "<group>"; };
 		7927511B2AF232FD0023123C /* OldSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSettingsView.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				79D8B1602AFA2A910020DFCC /* LockSettingView.swift */,
 				79D8B1622AFA2A9F0020DFCC /* LockSettingView+Feature.swift */,
 				79D8B1682AFB4F140020DFCC /* BackupSettingView.swift */,
+				7924440A2B00F13000E28FFE /* DataSettingsView.swift */,
 				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
 				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
 			);
@@ -741,6 +744,7 @@
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */,
 				663755792AF7ED3600117085 /* OhwaAlert.swift in Sources */,
+				7924440B2B00F13000E28FFE /* DataSettingsView.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
 				792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */,
 				7927511E2AF233060023123C /* OldSettingsView+Feature.swift in Sources */,

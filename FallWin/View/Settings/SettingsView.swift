@@ -37,6 +37,16 @@ struct SettingsView: View {
                             .padding(.vertical, 8)
                     }
                     .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        DataSettingsView()
+                        
+                    } label: {
+                        Text("데이터 관리")
+                            .font(.pretendard(size: 18))
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
                 }
                 
                 Section("애플리케이션 정보") {

@@ -243,7 +243,7 @@ extension ICloudBackupManager {
         
         // 임시 일기 파일 저장할 디렉토리
         // 임시 일기 파일 생성 날짜
-        let backupName = "backup-\(Date().fullStringWithoutSpaces)"
+        let backupName = "backup-\(Date().timeInMillis)"
         let backupUrl = getBackupUrl(backupName: backupName)
         if !FileManager.default.fileExists(atPath: backupUrl.path()) {
             do {
@@ -270,7 +270,9 @@ extension ICloudBackupManager {
                 if let image = journal.image {
                     let fileUrl = documentUrl.appendingPathComponent(image, conformingTo: .jpeg)
                     let backupUrl = backupUrl.appendingPathComponent(image, conformingTo: .jpeg)
-                    try FileManager.default.copyItem(atPath: fileUrl.path(), toPath: backupUrl.path())
+                    if !FileManager.default.fileExists(atPath: backupUrl.path()) {
+                        try FileManager.default.copyItem(atPath: fileUrl.path(), toPath: backupUrl.path())
+                    }
                 }
             }
         } catch {
@@ -296,6 +298,7 @@ extension ICloudBackupManager {
     private func uploadBackup(_ backupName: String) -> LocalBackupResult {
         do {
             if FileManager.default.fileExists(atPath: getICloudBackupFileUrl().path) {
+                print("iCloud backup file removed")
                 try FileManager.default.removeItem(at: getICloudBackupFileUrl())
             }
             try FileManager.default.copyItem(at: getBackupFileUrl(backupName: backupName), to: getICloudBackupFileUrl())
@@ -394,6 +397,29 @@ extension ICloudBackupManager {
         onFinish(.success)
     }
     
+    func deletePrevData() {
+        do {
+            for file in try FileManager.default.contentsOfDirectory(atPath: documentUrl.path()) {
+                if file.hasSuffix("jpg") || file.hasSuffix("jpeg") {
+                    try FileManager.default.removeItem(at: documentUrl.appending(path: file))
+                }
+            }
+        } catch {
+            print(error)
+        }
+        
+        let context = PersistenceController.shared.container.viewContext
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Journal")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try context.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            print(error)
+        }
+    }
+    
     private func fetch() -> LocalRestoreResult {
         do {
             let destination = tempFolderUrl.appending(path: BACKUP_FILE_NAME)
@@ -430,9 +456,11 @@ extension ICloudBackupManager {
             return .failure("데이터를 해석하는데 실패했습니다.")
         }
         
-        if fetchJournals() != nil {
+        if let journals = fetchJournals() {
             for rawJournal in rawJournals {
-                Journal.insert(rawJournal)
+                if !journals.contains(where: { $0.id == rawJournal.id }) {
+                    Journal.insert(rawJournal)
+                }
             }
         } else {
             Journal.insert(rawJournals)
