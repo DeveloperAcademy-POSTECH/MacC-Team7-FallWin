@@ -23,8 +23,8 @@ final class ICloudBackupManager {
     private let iCloudUrl: URL
     private let iCloudBackupFolderUrl: URL
     private let BACKUP_FILE_EXTENSION = "pcdarchive"
-    private let BACKUP_FILE_NAME = "icloud_backup.pcdarchive"
-    private let BACKUP_DATA_FILE_NAME = "journals"
+    private let BACKUP_FILE_NAME = "icloud_backup.zip"
+    private let BACKUP_DATA_FILE_NAME = "journals.txt"
     private let BACKUP_DATE_KEY = "last_backup"
     private let BACKUP_DIRECTORY = "backups"
     private let TEMP_DIRECTORY = "temp"
@@ -123,13 +123,11 @@ final class ICloudBackupManager {
             print(error)
         }
         
-        print("------- ContentsOfDirectory::Temp::exists -------")
-        print(FileManager.default.fileExists(atPath: iCloudBackupFolderUrl.appendingPathComponent("temp", conformingTo: .text).path()))
-        
         print("------- ContentsOfDirectory::Temp -------")
         do {
-            let textUrl = iCloudBackupFolderUrl.appendingPathComponent("temp", conformingTo: .text)
-            print(try String(contentsOf: textUrl, encoding: .utf8))
+            for file in try FileManager.default.contentsOfDirectory(atPath: tempFolderUrl.path()) {
+                print(file)
+            }
         } catch {
             print(error)
         }
@@ -155,6 +153,10 @@ extension ICloudBackupManager {
     }
     
     func backup(onProcess: ((BackupProcedures) -> Void)? = nil, onFinish: @escaping (BackupResult) -> Void) {
+        // Clean
+        cleanLocalBackupFolder()
+        if let onProcess = onProcess { onProcess(.clean) }
+        
         // MARK: Fetch
         let journals = fetchJournals()
         guard let journals = journals else {
@@ -279,7 +281,10 @@ extension ICloudBackupManager {
         // 백업 파일 압축
         do {
             let destination = backupUrl.appending(path: BACKUP_FILE_NAME)
-            try FileManager().zipItem(at: backupUrl, to: destination)
+            if FileManager.default.fileExists(atPath: destination.path()) {
+                try FileManager.default.removeItem(at: destination)
+            }
+            try FileManager().zipItem(at: backupUrl, to: destination, shouldKeepParent: false)
         } catch {
             print(#function, error)
             return .failure("백업 데이터를 압축하는데 실패했습니다.")
@@ -290,6 +295,9 @@ extension ICloudBackupManager {
     
     private func uploadBackup(_ backupName: String) -> LocalBackupResult {
         do {
+            if FileManager.default.fileExists(atPath: getICloudBackupFileUrl().path) {
+                try FileManager.default.removeItem(at: getICloudBackupFileUrl())
+            }
             try FileManager.default.copyItem(at: getBackupFileUrl(backupName: backupName), to: getICloudBackupFileUrl())
         } catch {
             print(#function, error)
@@ -299,7 +307,7 @@ extension ICloudBackupManager {
         return .iCloud(Date())
     }
     
-    private func cleanLocalBackupFolder() {
+    func cleanLocalBackupFolder() {
         do {
             for file in try FileManager.default.contentsOfDirectory(atPath: backupFolderUrl.path()) {
                 let item = backupFolderUrl.appendingPathComponent(file)
@@ -331,6 +339,10 @@ extension ICloudBackupManager {
     }
     
     func restore(onProcess: ((RestoreProcedures) -> Void)? = nil, onFinish: @escaping (BackupResult) -> Void) {
+        // Clean
+        cleanTempFolder()
+        if let onProcess = onProcess { onProcess(.clean) }
+        
         // Fetch
         let fetch = fetch()
         switch fetch {
@@ -396,7 +408,7 @@ extension ICloudBackupManager {
     private func unpack() -> LocalRestoreResult {
         let backupFileUrl = tempFolderUrl.appending(path: BACKUP_FILE_NAME)
         do {
-            try FileManager().unzipItem(at: backupFileUrl, to: tempFolderUrl)
+            try FileManager().unzipItem(at: backupFileUrl, to: tempFolderUrl.appending(path: "contents"))
         } catch {
             print(#function, error)
             return .failure("백업 파일을 해제할 수 없습니다.")
@@ -407,7 +419,7 @@ extension ICloudBackupManager {
     private func restoreData() -> LocalRestoreResult {
         let rawJournals: [RawJournal]
         do {
-            let backupFileUrl = tempFolderUrl.appending(path: BACKUP_DATA_FILE_NAME)
+            let backupFileUrl = tempFolderUrl.appending(path: "contents").appendingPathComponent(BACKUP_DATA_FILE_NAME, conformingTo: .text)
             guard let data = try String(contentsOf: backupFileUrl, encoding: .utf8).data(using: .utf8) else {
                 print("nil data")
                 return .failure("데이터를 해석하는데 실패했습니다.")
@@ -431,12 +443,14 @@ extension ICloudBackupManager {
     
     private func restoreImages() -> LocalRestoreResult {
         do {
-            let files = try FileManager.default.contentsOfDirectory(atPath: tempFolderUrl.path())
+            let files = try FileManager.default.contentsOfDirectory(atPath: tempFolderUrl.appending(path: "contents").path())
             for file in files {
                 if file.hasSuffix("jpg") || file.hasSuffix("jpeg") {
-                    let imageFile = tempFolderUrl.appending(path: file)
+                    let imageFile = tempFolderUrl.appending(path: "contents").appending(path: file)
                     let destination = documentUrl.appending(path: file)
-                    try FileManager.default.copyItem(at: imageFile, to: destination)
+                    if !FileManager.default.fileExists(atPath: destination.path()) {
+                        try FileManager.default.copyItem(at: imageFile, to: destination)
+                    }
                 }
             }
         } catch {
@@ -446,7 +460,7 @@ extension ICloudBackupManager {
         return .success
     }
     
-    private func cleanTempFolder() {
+    func cleanTempFolder() {
         do {
             for file in try FileManager.default.contentsOfDirectory(atPath: tempFolderUrl.path()) {
                 let item = tempFolderUrl.appendingPathComponent(file)
