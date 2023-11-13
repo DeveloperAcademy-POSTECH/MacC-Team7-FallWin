@@ -161,9 +161,6 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
-//                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
-//                            FeedbackView(store: store)
-//                        }
                         WebView(url: "https://forms.gle/DxFtstGew7zctnWm9")
                             .toolbar(.hidden, for: .tabBar)
                         
@@ -193,11 +190,12 @@ struct SettingsView: View {
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
+                print("@Log : V5__설정뷰")
+                viewStore.send(.fetchAppInfo)
+            }
         }
-        .onAppear {
-            Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
-            print("@Log : V5__설정뷰")
-           }
     }
 }
 
