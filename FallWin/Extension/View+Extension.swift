@@ -91,4 +91,52 @@ extension View{
             }
         }
     }
+    
+    func iCloudBackupAlert(isPresented:Binding<Bool>, dismiss: DismissAction) -> some View{
+        return alert(isPresented: isPresented){
+            OhwaAlertImpl{
+                VStack(spacing:12){
+                    Text("iCloud 백업")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.textPrimary)
+                        .multilineTextAlignment(.center)
+                    Text("iCloud 백업이 완료되었습니다.")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.textSecondary)
+                        .multilineTextAlignment(.center)
+                }.foregroundColor(Color.black)
+                    .padding(.top, 40)
+                    .padding(.bottom, 30)
+                    .padding(.horizontal,10)
+            } primaryButton:{
+                OhwaAlertButton(label:Text("완료").foregroundColor(.textSecondary)){
+                    isPresented.wrappedValue = false
+                }
+            }
+        }
+    }
+    
+    func iCloudRestoreAlert(isPresented:Binding<Bool>, dismiss: DismissAction) -> some View{
+        return alert(isPresented: isPresented){
+            OhwaAlertImpl{
+                VStack(spacing:12){
+                    Text("iCloud 복원")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.textPrimary)
+                        .multilineTextAlignment(.center)
+                    Text("iCloud 복원이 완료되었습니다.")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.textSecondary)
+                        .multilineTextAlignment(.center)
+                }.foregroundColor(Color.black)
+                    .padding(.top, 40)
+                    .padding(.bottom, 30)
+                    .padding(.horizontal,10)
+            } primaryButton:{
+                OhwaAlertButton(label:Text("완료").foregroundColor(.textSecondary)){
+                    isPresented.wrappedValue = false
+                }
+            }
+        }
+    }
 }

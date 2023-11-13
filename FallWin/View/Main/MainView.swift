@@ -38,8 +38,8 @@ struct MainView: View {
                         .padding()
                         .padding(.vertical, 40)
                         .onChange(of: viewStore.pickedDateTagValue.tagValue) { value in
-                            withAnimation(.spring) {
-                                proxy.scrollTo(value, anchor: .top)
+                            withAnimation(.default) {
+                                proxy.scrollTo(value, anchor: .center)
                             }
                         }
                     }

@@ -35,7 +35,7 @@ final class DrawingCountManager {
     }
     
     var remainingCount: Int {
-        drawingCount.count
+        DrawingCountManager.debug ? 1 : drawingCount.count
     }
     
     func reduceCount() -> Int {
