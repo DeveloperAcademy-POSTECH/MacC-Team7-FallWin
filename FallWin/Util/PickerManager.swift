@@ -85,6 +85,7 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
     var second: Int
 
     var tagValue: Int
+    var isChanged: Bool = false
     
     init(date: Date) {
         let tagValue = PickerManager.shared.getDateTagValue(date: date)

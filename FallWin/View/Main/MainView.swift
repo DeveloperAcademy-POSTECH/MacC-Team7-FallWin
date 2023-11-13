@@ -31,15 +31,17 @@ struct MainView: View {
                                         if let timestamp = journal.timestamp {
                                             viewStore.send(.updateYear(timestamp.year ))
                                             viewStore.send(.updateMonth(timestamp.month))
+                                            let newTagValue = PickerManager.shared.getDateTagValue(date: journal.timestamp ?? Date())
+                                            viewStore.send(.updateTagValue(newTagValue))
                                         }
                                     }
                             }
                         }
                         .padding()
                         .padding(.vertical, 40)
-                        .onChange(of: viewStore.pickedDateTagValue.tagValue) { value in
+                        .onChange(of: viewStore.pickedDateTagValue.isChanged) { _ in
                             withAnimation(.default) {
-                                proxy.scrollTo(value, anchor: .center)
+                                proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .center)
                             }
                         }
                     }
