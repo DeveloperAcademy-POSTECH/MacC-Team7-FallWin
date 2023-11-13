@@ -111,7 +111,7 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
     var dayOfWeek: String
 
     var tagValue: Int
-    var isChanged: Bool = false
+    var isScrolling: Bool = false
     
     init(date: Date) {
         let tagValue = PickerManager.shared.getDateTagValue(date: date)

@@ -29,24 +29,27 @@ struct MainView: View {
                                     }
                                     .onAppear {
                                         if let timestamp = journal.timestamp {
-                                            
-                                            viewStore.send(.updateYear(timestamp.year ))
-                                            viewStore.send(.updateMonth(timestamp.month))
-                                            let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
-                                            viewStore.send(.updateTagValue(newTagValue))
+                                            if !viewStore.pickedDateTagValue.isScrolling {
+                                                viewStore.send(.updateYear(timestamp.year ))
+                                                viewStore.send(.updateMonth(timestamp.month))
+                                                let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
+                                                viewStore.send(.updateTagValue(newTagValue))
+                                            }
                                         }
                                     }
                             }
                         }
                         .padding()
                         .padding(.vertical, 40)
-                        .onChange(of: viewStore.pickedDateTagValue.isChanged) { _ in
-                            withAnimation(.default) {
-                                proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .center)
+                        .onChange(of: viewStore.pickedDateTagValue.isScrolling) { value in
+                            if value {
+                                withAnimation(.easeInOut(duration: 0.5)) {
+                                    proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .center)
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(500))) {
+                                    viewStore.send(.updateScrolling)
+                                }
                             }
-                        }
-                        .onChange(of: viewStore.pickedDateTagValue.month) { value in
-                            print("month: \(value)")
                         }
                     }
                 }
@@ -90,9 +93,6 @@ struct MainView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
-            .onChange(of: viewStore.isPickerShown) { value in
-                print(value)
-            }
         }
     }
     
@@ -255,4 +255,9 @@ struct MainView: View {
             MainFeature()
         }))
     }
+}
+
+extension ScrollViewProxy {
+    
+    
 }

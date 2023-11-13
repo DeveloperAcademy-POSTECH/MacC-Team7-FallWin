@@ -20,10 +20,7 @@ struct YearMonthPickerView: View {
     @Binding var pickedDateTagValue: DateTagValue
     @Binding var journals: [Journal]
     
-    var years: [Int]
-    
     init(yearRange: ClosedRange<Int>, isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>, journals: Binding<[Journal]>) {
-        self.years = Array(yearRange)
         self._isPickerShown = isPickerShown
         self._pickedDateTagValue = pickedDateTagValue
         self._journals = journals
@@ -42,13 +39,13 @@ struct YearMonthPickerView: View {
                 HStack(spacing: 0) {
                     Spacer()
                     Picker("Year", selection: $pickedYear) {
-                        ForEach(years, id: \.self) { year in
+                        ForEach(1900...Date().year, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
                     Picker("Month", selection: $pickedMonth) {
-                        ForEach(1...12, id: \.self) { month in
+                        ForEach(1...maxMonthsInYear(year: pickedYear), id: \.self) { month in
                             Text(String(describing: month) + "월").tag(month)
                         }
                     }
@@ -59,7 +56,7 @@ struct YearMonthPickerView: View {
                     pickedDateTagValue.year = pickedYear
                     pickedDateTagValue.month = pickedMonth
                     pickedDateTagValue.updateTagValue(journals: journals)
-                    pickedDateTagValue.isChanged.toggle()
+                    pickedDateTagValue.isScrolling.toggle()
                     isPickerShown = false
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
@@ -69,6 +66,14 @@ struct YearMonthPickerView: View {
         .onAppear {
             pickedYear = $pickedDateTagValue.wrappedValue.year
             pickedMonth = $pickedDateTagValue.wrappedValue.month
+        }
+    }
+    
+    func maxMonthsInYear(year: Int) -> Int {
+        if year == Date().year {
+            return Date().month
+        } else {
+            return 12
         }
     }
 }
@@ -101,7 +106,7 @@ struct MonthDayYearPickerView: View {
                 HStack(spacing: 0) {
                     Spacer()
                     Picker("Year", selection: $selectedYear) {
-                        ForEach(1900...pickedDateTagValue.year, id: \.self) { year in
+                        ForEach(1900...Date().year, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }

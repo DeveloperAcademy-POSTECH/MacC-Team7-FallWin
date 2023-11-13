@@ -34,7 +34,6 @@ struct WritingView: View {
                         Spacer()
                         Button {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
-                            print("in 'WritingView': \(viewStore.pickedDateTagValue)\n")
                         } label: {
                             ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                         }

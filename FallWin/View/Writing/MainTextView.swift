@@ -58,7 +58,6 @@ struct MainTextView: View {
                         .padding(.top, 12)
                     Button {
                         viewStore.send(.showDrawingStyleView)
-                        print("in 'MainTextView': \(viewStore.pickedDateTagValue)\n")
                     } label: {
                         ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.mainText == "" ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                     }

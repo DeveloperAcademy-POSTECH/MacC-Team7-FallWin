@@ -37,6 +37,7 @@ struct MainFeature: Reducer {
         case updateYear(Int)
         case updateMonth(Int)
         case updateTagValue(Int)
+        case updateScrolling
         case bindJournal
         case showCountAlert(Bool)
         case getRemainingCount
@@ -100,6 +101,10 @@ struct MainFeature: Reducer {
                 
             case let .updateTagValue(tagValue):
                 state.pickedDateTagValue.tagValue = tagValue
+                return .none
+                
+            case .updateScrolling:
+                state.pickedDateTagValue.isScrolling.toggle()
                 return .none
                 
             // PickerView에서 journals를 읽기 위한 바인딩용 action. set 작업은 하지 않음.

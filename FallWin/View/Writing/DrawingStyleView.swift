@@ -44,7 +44,6 @@ struct DrawingStyleView: View {
                                 viewStore.send(.showCountAlert(true))
                             } else {
                                 viewStore.send(.showGeneratedDiaryView)
-                                print("in 'GeneratedDiaryView': \(viewStore.pickedDateTagValue)\n")
                             }
                             
                         } label: {
