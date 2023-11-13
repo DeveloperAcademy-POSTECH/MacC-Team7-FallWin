@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		660AAF8A2B026AC100B494E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 660AAF892B026AC100B494E9 /* GoogleService-Info.plist */; };
 		6637556F2AF7E3A300117085 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637556E2AF7E3A300117085 /* View+Alert.swift */; };
 		663755712AF7E53100117085 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663755702AF7E53100117085 /* UIViewController+Extension.swift */; };
 		663755792AF7ED3600117085 /* OhwaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663755782AF7ED3600117085 /* OhwaAlert.swift */; };
@@ -16,7 +17,6 @@
 		665837692AF80B7600A5833E /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 665837682AF80B7600A5833E /* FirebaseAnalyticsSwift */; };
 		6658376B2AF80B7600A5833E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 6658376A2AF80B7600A5833E /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		6658376D2AF80B7600A5833E /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 6658376C2AF80B7600A5833E /* FirebaseAppCheck */; };
-		6658376F2AF810EC00A5833E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6658376E2AF810EC00A5833E /* GoogleService-Info.plist */; };
 		665837712AF8110600A5833E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 665837702AF8110600A5833E /* FirebaseAnalytics */; };
 		665837732AF8110600A5833E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 665837722AF8110600A5833E /* FirebaseAnalyticsOnDeviceConversion */; };
 		665837752AF8110600A5833E /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 665837742AF8110600A5833E /* FirebaseAnalyticsSwift */; };
@@ -127,12 +127,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		660AAF892B026AC100B494E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6637556E2AF7E3A300117085 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		663755702AF7E53100117085 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		663755782AF7ED3600117085 /* OhwaAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhwaAlert.swift; sourceTree = "<group>"; };
 		6637557C2AF7F0A700117085 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		66392A992B020CEB004C8381 /* FallWinRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FallWinRelease.entitlements; sourceTree = "<group>"; };
-		6658376E2AF810EC00A5833E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6658377B2AF8CB0A00A5833E /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		791F14672ADD726600F8DDD2 /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
 		791F14692ADD736B00F8DDD2 /* TabBarLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarLabelStyle.swift; sourceTree = "<group>"; };
@@ -345,7 +345,7 @@
 			children = (
 				66392A992B020CEB004C8381 /* FallWinRelease.entitlements */,
 				79A5667B2AFE06BF00524A57 /* FallWin.entitlements */,
-				6658376E2AF810EC00A5833E /* GoogleService-Info.plist */,
+				660AAF892B026AC100B494E9 /* GoogleService-Info.plist */,
 				9867B6382AE652A400C7359B /* Info.plist */,
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
@@ -651,11 +651,11 @@
 				9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */,
 				9867B6352AE6524900C7359B /* Pretendard-Thin.ttf in Resources */,
 				79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */,
+				660AAF8A2B026AC100B494E9 /* GoogleService-Info.plist in Resources */,
 				9867B6362AE6524900C7359B /* Pretendard-Medium.ttf in Resources */,
 				98202FA42AE69FA90089CF79 /* LottieImageGen.json in Resources */,
 				9867B6302AE6524900C7359B /* Pretendard-Black.ttf in Resources */,
 				9867B6322AE6524900C7359B /* Pretendard-Bold.ttf in Resources */,
-				6658376F2AF810EC00A5833E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
