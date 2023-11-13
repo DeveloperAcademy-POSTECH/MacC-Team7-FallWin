@@ -34,7 +34,7 @@ struct WritingView: View {
                         Spacer()
                         Button {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
-                            
+                            print("in 'WritingView': \(viewStore.pickedDateTagValue)\n")
                         } label: {
                             ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                         }
@@ -53,7 +53,7 @@ struct WritingView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    DateView()
+                    DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: WritingFeature.Action.pickDate))
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -154,12 +154,13 @@ struct WritingView: View {
 }
 
 struct DateView: View {
-    var date = Date()
     @State var isPickerShown: Bool = false
+    
+    @Binding var pickedDateTagValue: DateTagValue
     
     var body: some View {
         HStack {
-            Text("\(date.month)월 \(date.day)일 (\(date.dayOfWeek))")
+            Text("\(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일 (\(pickedDateTagValue.dayOfWeek))")
                 .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
             Image(systemName: "chevron.down")
@@ -167,8 +168,8 @@ struct DateView: View {
         .onTapGesture {
             isPickerShown.toggle()
         }
-        .sheet(isPresented: $isPickerShown, onDismiss: { print("picker dismissed") }) {
-            MonthDayYearPickerView(yearRange: 1900...2023)
+        .sheet(isPresented: $isPickerShown, onDismiss: {  }) {
+            MonthDayYearPickerView(yearRange: 1900...2023, dateTagValue: $pickedDateTagValue, isPickerShown: $isPickerShown)
                 .presentationDetents([.fraction(0.5)])
         }
     }

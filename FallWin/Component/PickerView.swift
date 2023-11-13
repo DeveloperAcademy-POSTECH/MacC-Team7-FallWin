@@ -76,17 +76,22 @@ struct YearMonthPickerView: View {
 struct MonthDayYearPickerView: View {
     
     var years: [Int]
-    let months: [String] = ["January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"]
     
     @State var selectedYear: Int = Date().year
     @State var selectedMonth: Int = Date().month
     @State var selectedDay: Int = Date().day
     
-    @State var isCompleted: Bool = false
+    @Binding var pickedDateTagValue: DateTagValue
+    @Binding var isPickerShown: Bool
     
-    init(yearRange: ClosedRange<Int>) {
+    init(yearRange: ClosedRange<Int>, dateTagValue: Binding<DateTagValue>, isPickerShown: Binding<Bool>) {
         self.years = Array(yearRange)
+        self._pickedDateTagValue = dateTagValue
+        self._isPickerShown = isPickerShown
+        
+        self.selectedYear = dateTagValue.wrappedValue.year
+        self.selectedMonth = dateTagValue.wrappedValue.month
+        self.selectedDay = dateTagValue.wrappedValue.day
     }
     
     var body: some View {
@@ -98,18 +103,20 @@ struct MonthDayYearPickerView: View {
                     .foregroundColor(.textPrimary)
                 HStack(spacing: 0) {
                     Spacer()
-                    Picker("Month", selection: $selectedMonth) {
-                        ForEach(1...12, id: \.self) { month in
-                            Text("\(months[month-1])").tag(month)
-                        }
-                    }
-                    .pickerStyle(.wheel)
                     Picker("Year", selection: $selectedYear) {
                         ForEach(years, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
+                    
+                    Picker("Month", selection: $selectedMonth) {
+                        ForEach(1...12, id: \.self) { month in
+                            Text(String(describing: month) + "월").tag(month)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    
                     Picker("Day", selection: $selectedDay) {
                         ForEach(1...(maxDaysInMonth(year: selectedYear, month: selectedMonth) ?? 0), id: \.self) { day in
                             Text(String(describing: day) + "일").tag(day)
@@ -119,11 +126,19 @@ struct MonthDayYearPickerView: View {
                     Spacer()
                 }
                 Button {
-                    isCompleted = true
+                    pickedDateTagValue.month = selectedMonth
+                    pickedDateTagValue.year = selectedYear
+                    pickedDateTagValue.day = selectedDay
+                    isPickerShown.toggle()
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
                 }
             }
+        }
+        .onAppear {
+            self.selectedYear = pickedDateTagValue.year
+            self.selectedMonth = pickedDateTagValue.month
+            self.selectedDay = pickedDateTagValue.day
         }
     }
     

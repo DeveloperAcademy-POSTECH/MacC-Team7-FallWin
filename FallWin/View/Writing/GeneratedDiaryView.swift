@@ -94,7 +94,7 @@ struct GeneratedDiaryView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        DateView()
+                        DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: GeneratedDiaryFeature.Action.pickDate))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {

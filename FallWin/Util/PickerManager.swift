@@ -72,6 +72,30 @@ extension PickerManager {
 //    }
 }
 
+extension PickerManager {
+    
+    func getDateFromDateTagValue(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int, dayOfWeek: String) -> Date? {
+        
+        var weekday = 1
+        switch dayOfWeek {
+        case "일": weekday = 1
+        case "월": weekday = 2
+        case "화": weekday = 3
+        case "수": weekday = 4
+        case "목": weekday = 5
+        case "금": weekday = 6
+        case "토": weekday = 7
+        default: weekday = 1
+        }
+
+        let dateComponents = DateComponents(year: year, month: month, day: day, hour: hour, minute: minute, second: second, weekday: weekday)
+        let date = Calendar.current.date(from: dateComponents) // "Feb 22, 2222 at 12:00 AM"
+        
+        return date
+    }
+}
+
+
 struct DateTagValue: Identifiable, Equatable, Hashable {
     
     var id: Int
@@ -83,6 +107,8 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
     var hour: Int
     var minute: Int
     var second: Int
+    
+    var dayOfWeek: String
 
     var tagValue: Int
     var isChanged: Bool = false
@@ -97,6 +123,8 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
         self.hour = date.hour
         self.minute = date.minute
         self.second = date.second
+        
+        self.dayOfWeek = date.dayOfWeek
         
         self.tagValue = tagValue
         self.id = tagValue

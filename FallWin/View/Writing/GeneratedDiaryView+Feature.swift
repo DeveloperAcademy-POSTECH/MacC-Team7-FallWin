@@ -20,6 +20,7 @@ struct GeneratedDiaryFeature: Reducer {
         var priorScale: Double = 5.0
         var steps: Double = 25.0
         var scale: Double = 5.0
+        var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
     }
     
     
@@ -34,6 +35,7 @@ struct GeneratedDiaryFeature: Reducer {
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
         case setScale(_ scale: Double)
+        case pickDate(DateTagValue)
         case cancelWriting
     }
     
@@ -64,7 +66,9 @@ struct GeneratedDiaryFeature: Reducer {
                 journal.setImage(image)
             }
             journal.drawingStyle = DrawingStyle(rawName: state.selectedDrawingStyle).rawValue
-            journal.timestamp = Date()
+            if let date = PickerManager.shared.getDateFromDateTagValue(year: state.pickedDateTagValue.year, month: state.pickedDateTagValue.month, day: state.pickedDateTagValue.day, hour: state.pickedDateTagValue.hour, minute: state.pickedDateTagValue.minute, second: state.pickedDateTagValue.second, dayOfWeek: state.pickedDateTagValue.dayOfWeek) {
+                journal.timestamp = date
+            }
             context.insert(journal)
             PersistenceController.shared.saveContext()
             return .send(.doneImage(journal))
@@ -83,6 +87,10 @@ struct GeneratedDiaryFeature: Reducer {
             
         case let .setScale(scale):
             state.scale = scale
+            return .none
+            
+        case let .pickDate(dateTagValue):
+            state.pickedDateTagValue = dateTagValue
             return .none
             
         case .cancelWriting:

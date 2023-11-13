@@ -12,12 +12,15 @@ import SwiftUI
 struct WritingFeature: Reducer {
     struct State: Equatable {
         var selectedEmotion: String?
+        var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         var isPickerShown: Bool = false
+
         @PresentationState var mainText: MainTextFeature.State?
     }
     
     enum Action: Equatable {
         case emotionSelection(_ selectedEmotion: String?)
+        case pickDate(DateTagValue)
         case showMainTextView(_ selectedEmotion: String?)
         case doneGenerating(Journal)
         case showPickerSheet
@@ -33,8 +36,12 @@ struct WritingFeature: Reducer {
                 state.selectedEmotion = selectedEmotion
                 return .none
                 
+            case let .pickDate(dateTagValue):
+                state.pickedDateTagValue = dateTagValue
+                return .none
+                
             case let .showMainTextView(emotion):
-                state.mainText = .init(selectedEmotion: emotion ?? "", mainText: "", isKeyboardShown: true)
+                state.mainText = .init(selectedEmotion: emotion ?? "", mainText: "", pickedDateTagValue: state.pickedDateTagValue, isKeyboardShown: true)
                 return .none
                 
             case .showPickerSheet:
@@ -49,6 +56,9 @@ struct WritingFeature: Reducer {
                 
             case .mainText(.presented(.cancelWriting)):
                 return .send(.cancelWriting)
+                
+            case .mainText(.presented(.pickDate(let dateTagValue))):
+                return .send(.pickDate(dateTagValue))
                 
             default: return .none
             }

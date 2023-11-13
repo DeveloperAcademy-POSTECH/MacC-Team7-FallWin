@@ -140,7 +140,6 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             HStack(alignment: .center) {
                 Button {
-                    print("picker clicked")
                     viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {

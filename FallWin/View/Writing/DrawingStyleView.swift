@@ -44,6 +44,7 @@ struct DrawingStyleView: View {
                                 viewStore.send(.showCountAlert(true))
                             } else {
                                 viewStore.send(.showGeneratedDiaryView)
+                                print("in 'GeneratedDiaryView': \(viewStore.pickedDateTagValue)\n")
                             }
                             
                         } label: {
@@ -69,7 +70,7 @@ struct DrawingStyleView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        DateView()
+                        DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: DrawingStyleFeature.Action.pickDate))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
