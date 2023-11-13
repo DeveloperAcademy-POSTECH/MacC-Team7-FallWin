@@ -29,9 +29,10 @@ struct MainView: View {
                                     }
                                     .onAppear {
                                         if let timestamp = journal.timestamp {
+                                            
                                             viewStore.send(.updateYear(timestamp.year ))
                                             viewStore.send(.updateMonth(timestamp.month))
-                                            let newTagValue = PickerManager.shared.getDateTagValue(date: journal.timestamp ?? Date())
+                                            let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
                                             viewStore.send(.updateTagValue(newTagValue))
                                         }
                                     }
@@ -43,6 +44,9 @@ struct MainView: View {
                             withAnimation(.default) {
                                 proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .center)
                             }
+                        }
+                        .onChange(of: viewStore.pickedDateTagValue.month) { value in
+                            print("month: \(value)")
                         }
                     }
                 }
@@ -65,7 +69,7 @@ struct MainView: View {
                 
                 VStack {
                     toolbar
-                        .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), onDismiss: { print("picker dismissed") }) {
+                        .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), onDismiss: {  }) {
                             YearMonthPickerView(yearRange: 1900...2023, isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
