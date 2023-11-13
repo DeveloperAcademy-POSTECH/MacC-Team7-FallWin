@@ -27,20 +27,20 @@ struct WritingView: View {
                         Spacer()
                         Button {
                             //TODO: 이부분 소통해서 다시 진행할 것
-                            //다음버튼을 눌렀을때, 해당하는 감정 요소의 트랙킹이 되도록 
-                            viewStore.send(.showMainTextView(nil))
+                            //다음버튼을 눌렀을때, 해당하는 감정 요소의 트랙킹이 되도록
                             Tracking.logEvent(Tracking.Event.A2_1_3__일기작성_감정선택_건너뛰기.rawValue)
                             print("@Log : A2_1_3__일기작성_감정선택_건너뛰기")
+                            viewStore.send(.showMainTextView(nil))
                             
                         } label: {
                             ConfirmButtonLabelView(text: "건너뛰기", backgroundColor: .backgroundPrimary, foregroundColor: .textSecondary, width: nil)
                         }
                         Spacer()
                         Button {
-                            viewStore.send(.showMainTextView(viewStore.selectedEmotion))
                             Tracking.logEvent(Tracking.Event.A2_1_4__일기작성_감정선택_다음.rawValue)
                             print("@Log : A2_1_4__일기작성_감정선택_다음")
                             Tracking.logEvent(emotionLabeling)
+                            viewStore.send(.showMainTextView(viewStore.selectedEmotion))
                             
                         } label: {
                             ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
@@ -63,9 +63,9 @@ struct WritingView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewStore.send(.cancelWriting)
                         Tracking.logEvent(Tracking.Event.A2_1_2__일기작성_감정선택_닫기.rawValue)
                         print("@Log : A2_1_2__일기작성_감정선택_닫기")
+                        viewStore.send(.cancelWriting)
                     } label: {
                         Image(systemName: "xmark")
                     }
@@ -81,7 +81,7 @@ struct WritingView: View {
             .onAppear {
                 Tracking.logScreenView(screenName: Tracking.Screen.V2_1__일기작성_감정선택뷰.rawValue)
                 print("@Log : V2_1__일기작성_감정선택뷰")
-               }
+            }
         }
     }
     
@@ -158,10 +158,10 @@ struct WritingView: View {
                     }
                     .aspectRatio(1, contentMode: .fill)
                     .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0), radius: 6) // 더 퍼지게
-
+                
             }
             .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
-//            .padding(8)
+            //            .padding(8)
         }
     }
 }
@@ -192,12 +192,12 @@ struct DismissButton: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark")
-            }
+        Button {
+            dismiss()
+        } label: {
+            Image(systemName: "xmark")
         }
+    }
 }
 
 struct MessageView: View {

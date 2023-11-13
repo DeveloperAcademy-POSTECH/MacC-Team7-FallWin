@@ -122,7 +122,7 @@ struct SearchView: View {
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V4__검색뷰.rawValue)
             print("@Log : V4__검색뷰")
-           }
+        }
         
     }
     

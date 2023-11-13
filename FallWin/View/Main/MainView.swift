@@ -168,9 +168,9 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             HStack(alignment: .center) {
                 Button {
-                    viewStore.send(.showPickerSheet)
                     Tracking.logEvent(Tracking.Event.A1_1__메인_날짜선택.rawValue)
                     print("@Log : A1_1__메인_날짜선택")
+                    viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {
                         Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
