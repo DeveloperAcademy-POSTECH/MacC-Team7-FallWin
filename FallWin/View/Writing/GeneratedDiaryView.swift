@@ -110,7 +110,7 @@ struct GeneratedDiaryView: View {
                     LottieImageGenView(jsonName: "LottieImageGen")
                     VStack {
                         Spacer()
-                        Text("폴윈의 하루를\n그림으로 그리고 있어요")
+                        Text("\(UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA")의 하루를\n그림으로 그리고 있어요")
                             .font(.pretendard(.bold, size: 28))
                             .foregroundStyle(Color.textPrimary)
                             .multilineTextAlignment(.center)

@@ -10,8 +10,17 @@ import ComposableArchitecture
 
 struct SettingsFeature: Reducer {
     struct State: Equatable {
+        // App Info
         var appVersion: String = "1.0.0"
         var appBuild: String = "1"
+        
+        // Profile
+        var nickname: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
+        var gender: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.gender) ?? "none"
+        var remainingDrawingCount: Int = DrawingCountManager.shared.remainingCount
+        var showNicknameAlert: Bool = false
+        var tempNickname: String = ""
+        var showCountInfo: Bool = false
         
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
         @PresentationState var policy: PolicyFeature.State? = .init()
@@ -20,6 +29,10 @@ struct SettingsFeature: Reducer {
     
     enum Action: Equatable {
         case fetchAppInfo
+        case setNickname(String)
+        case showNicknameAlert(Bool)
+        case setTempNickname(String)
+        case showCountInfo(Bool)
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
         case policy(PresentationAction<PolicyFeature.Action>)
 //        case feedback(PresentationAction<FeedbackFeature.Action>)
@@ -33,6 +46,24 @@ struct SettingsFeature: Reducer {
                     state.appVersion = version
                     state.appBuild = build
                 }
+                state.remainingDrawingCount = DrawingCountManager.shared.remainingCount
+                return .none
+                
+            case let .setNickname(nickname):
+                UserDefaults.standard.set(nickname, forKey: UserDefaultsKey.User.nickname)
+                state.nickname = nickname
+                return .none
+                
+            case let .showNicknameAlert(show):
+                state.showNicknameAlert = show
+                return .none
+                
+            case let .setTempNickname(nickname):
+                state.tempNickname = nickname
+                return .none
+                
+            case let .showCountInfo(show):
+                state.showCountInfo = show
                 return .none
                 
             default: return .none

@@ -24,10 +24,10 @@ struct BackupSettingView: View {
                 VStack(alignment: .leading){
                     Text("- 픽다는 사용자가 작성한 일기 데이터를 저장하지 않아요.")
                         .font(.pretendard(.medium, size: 16))
-                        .foregroundStyle(.textTeritary)
+                        .foregroundStyle(.textTertiary)
                     Text("- 데이터를 안전하게 보관하려면 iCloud에 주기적으로 백업해주세요.")
                         .font(.pretendard(.medium, size: 16))
-                        .foregroundStyle(.textTeritary)
+                        .foregroundStyle(.textTertiary)
                 }
                 .padding(.top, 24)
                 
