@@ -20,10 +20,7 @@ struct YearMonthPickerView: View {
     @Binding var pickedDateTagValue: DateTagValue
     @Binding var journals: [Journal]
     
-    var years: [Int]
-    
     init(yearRange: ClosedRange<Int>, isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>, journals: Binding<[Journal]>) {
-        self.years = Array(yearRange)
         self._isPickerShown = isPickerShown
         self._pickedDateTagValue = pickedDateTagValue
         self._journals = journals
@@ -42,13 +39,13 @@ struct YearMonthPickerView: View {
                 HStack(spacing: 0) {
                     Spacer()
                     Picker("Year", selection: $pickedYear) {
-                        ForEach(years, id: \.self) { year in
+                        ForEach(1900...Date().year, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
                     Picker("Month", selection: $pickedMonth) {
-                        ForEach(1...12, id: \.self) { month in
+                        ForEach(1...maxMonthsInYear(year: pickedYear), id: \.self) { month in
                             Text(String(describing: month) + "월").tag(month)
                         }
                     }
@@ -59,6 +56,7 @@ struct YearMonthPickerView: View {
                     pickedDateTagValue.year = pickedYear
                     pickedDateTagValue.month = pickedMonth
                     pickedDateTagValue.updateTagValue(journals: journals)
+                    pickedDateTagValue.isScrolling.toggle()
                     isPickerShown = false
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
@@ -70,22 +68,32 @@ struct YearMonthPickerView: View {
             pickedMonth = $pickedDateTagValue.wrappedValue.month
         }
     }
+    
+    func maxMonthsInYear(year: Int) -> Int {
+        if year == Date().year {
+            return Date().month
+        } else {
+            return 12
+        }
+    }
 }
 
 struct MonthDayYearPickerView: View {
-    
-    var years: [Int]
-    let months: [String] = ["January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"]
     
     @State var selectedYear: Int = Date().year
     @State var selectedMonth: Int = Date().month
     @State var selectedDay: Int = Date().day
     
-    @State var isCompleted: Bool = false
+    @Binding var pickedDateTagValue: DateTagValue
+    @Binding var isPickerShown: Bool
     
-    init(yearRange: ClosedRange<Int>) {
-        self.years = Array(yearRange)
+    init(dateTagValue: Binding<DateTagValue>, isPickerShown: Binding<Bool>) {
+        self._pickedDateTagValue = dateTagValue
+        self._isPickerShown = isPickerShown
+        
+        self.selectedYear = dateTagValue.wrappedValue.year
+        self.selectedMonth = dateTagValue.wrappedValue.month
+        self.selectedDay = dateTagValue.wrappedValue.day
     }
     
     var body: some View {
@@ -97,18 +105,20 @@ struct MonthDayYearPickerView: View {
                     .foregroundColor(.textPrimary)
                 HStack(spacing: 0) {
                     Spacer()
-                    Picker("Month", selection: $selectedMonth) {
-                        ForEach(1...12, id: \.self) { month in
-                            Text("\(months[month-1])").tag(month)
-                        }
-                    }
-                    .pickerStyle(.wheel)
                     Picker("Year", selection: $selectedYear) {
-                        ForEach(years, id: \.self) { year in
+                        ForEach(1900...Date().year, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
+                    
+                    Picker("Month", selection: $selectedMonth) {
+                        ForEach(1...maxMonthsInYear(year: selectedYear), id: \.self) { month in
+                            Text(String(describing: month) + "월").tag(month)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    
                     Picker("Day", selection: $selectedDay) {
                         ForEach(1...(maxDaysInMonth(year: selectedYear, month: selectedMonth) ?? 0), id: \.self) { day in
                             Text(String(describing: day) + "일").tag(day)
@@ -118,28 +128,48 @@ struct MonthDayYearPickerView: View {
                     Spacer()
                 }
                 Button {
-                    isCompleted = true
+                    pickedDateTagValue.month = selectedMonth
+                    pickedDateTagValue.year = selectedYear
+                    pickedDateTagValue.day = selectedDay
+                    isPickerShown.toggle()
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
                 }
             }
         }
+        .onAppear {
+            self.selectedYear = pickedDateTagValue.year
+            self.selectedMonth = pickedDateTagValue.month
+            self.selectedDay = pickedDateTagValue.day
+        }
+    }
+    
+    func maxMonthsInYear(year: Int) -> Int {
+        if year == Date().year {
+            return Date().month
+        } else {
+            return 12
+        }
     }
     
     func maxDaysInMonth(year: Int, month: Int) -> Int? {
-        let calendar = Calendar.current
-        var dateComponents = DateComponents()
-        dateComponents.year = year
-        dateComponents.month = month
-        dateComponents.day = 1 // Set to the 1st day of the selected month
-        
-        if let date = calendar.date(from: dateComponents) {
-            if let range = calendar.range(of: .day, in: .month, for: date) {
-                return range.count
+        if year == Date().year && month == Date().month {
+            return Date().day
+        } else {
+            let calendar = Calendar.current
+            var dateComponents = DateComponents()
+            dateComponents.year = year
+            dateComponents.month = month
+            dateComponents.day = 1 // Set to the 1st day of the selected month
+            
+            if let date = calendar.date(from: dateComponents) {
+                if let range = calendar.range(of: .day, in: .month, for: date) {
+                    return range.count
+                }
             }
+            
+            return nil // Failed to determine the maximum number of days
         }
-        
-        return nil // Failed to determine the maximum number of days
     }
 }
 

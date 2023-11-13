@@ -84,7 +84,7 @@ struct MainTextView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    DateView()
+                    DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainTextFeature.Action.pickDate))
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

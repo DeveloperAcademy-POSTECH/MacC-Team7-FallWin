@@ -18,6 +18,7 @@ struct DrawingStyleFeature: Reducer {
         var priorScale: Double = 5.0
         var steps: Double = 20.0
         var scale: Double = 12.5
+        var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         @PresentationState var generatedDiary: GeneratedDiaryFeature.State?
     }
     
@@ -30,6 +31,7 @@ struct DrawingStyleFeature: Reducer {
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
         case setScale(_ scale: Double)
+        case pickDate(DateTagValue)
         case cancelWriting
         
         case generatedDiary(PresentationAction<GeneratedDiaryFeature.Action>)
@@ -44,7 +46,7 @@ struct DrawingStyleFeature: Reducer {
                 
             case .showGeneratedDiaryView:
                 if let selectedDrawingStyle = state.selectedDrawingStyle {
-                    state.generatedDiary = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText, selectedDrawingStyle: selectedDrawingStyle, priorSteps: state.priorSteps, priorScale: state.priorScale, steps: state.steps, scale: state.scale)
+                    state.generatedDiary = .init(selectedEmotion: state.selectedEmotion, mainText: state.mainText, selectedDrawingStyle: selectedDrawingStyle, priorSteps: state.priorSteps, priorScale: state.priorScale, steps: state.steps, scale: state.scale, pickedDateTagValue: state.pickedDateTagValue)
                 }
                 return .none
                 
@@ -68,6 +70,10 @@ struct DrawingStyleFeature: Reducer {
                 state.scale = scale
                 return .none
                 
+            case let .pickDate(dateTagValue):
+                state.pickedDateTagValue = dateTagValue
+                return .none
+                
             case .cancelWriting:
                 return .none
                 
@@ -76,6 +82,9 @@ struct DrawingStyleFeature: Reducer {
                 
             case .generatedDiary(.presented(.cancelWriting)):
                 return .send(.cancelWriting)
+                
+            case .generatedDiary(.presented(.pickDate(let dateTagValue))):
+                return .send(.pickDate(dateTagValue))
                 
             default: return .none
             }

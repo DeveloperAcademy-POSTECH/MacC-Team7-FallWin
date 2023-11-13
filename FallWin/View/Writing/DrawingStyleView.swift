@@ -69,7 +69,7 @@ struct DrawingStyleView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        DateView()
+                        DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: DrawingStyleFeature.Action.pickDate))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
