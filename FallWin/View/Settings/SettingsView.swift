@@ -57,7 +57,7 @@ struct SettingsView: View {
                         }
                         
                         Rectangle()
-                            .fill(Color(hexCode: "#E9E4E3"))
+                            .fill(Color(hexCode: "#E9E4E3").opacity(0.4))
                             .frame(height: 8)
                             .padding(.top, 16)
                             .padding(.horizontal, -20)
@@ -75,7 +75,7 @@ struct SettingsView: View {
                         viewStore.send(.showNicknameAlert(false))
                     }
                 } secondaryButton: {
-                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: viewStore.tempNickname.isEmpty ? .buttonDisabled : .button) {
+                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: .button) {
                         if !viewStore.tempNickname.isEmpty {
                             viewStore.send(.setNickname(viewStore.tempNickname))
                             viewStore.send(.setTempNickname(""))

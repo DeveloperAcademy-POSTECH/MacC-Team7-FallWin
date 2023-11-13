@@ -24,7 +24,7 @@ struct ContentView: View {
                                 MainView(store: store)
                             }
                             .tabItem {
-                                Text("Main")
+                                Text("피드")
                                 viewStore.tabSelection == 0 ? Image("MainDefault") : Image("MainDisabled")
                             }
                             .tag(0)
@@ -35,7 +35,7 @@ struct ContentView: View {
                                 SearchView(store: store)
                             }
                             .tabItem {
-                                Text("Album")
+                                Text("앨범")
                                 viewStore.tabSelection == 1 ? Image("AlbumDefault") : Image("AlbumDisabled")
                             }
                             .tag(1)
@@ -46,7 +46,7 @@ struct ContentView: View {
                                 SettingsView(store: store)
                             }
                             .tabItem {
-                                Text("Settings")
+                                Text("더보기")
                                 viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
                             }
                             .tag(2)

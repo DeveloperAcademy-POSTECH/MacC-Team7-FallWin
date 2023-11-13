@@ -103,9 +103,21 @@ struct JournalView: View {
                 
                 ToolbarItem(placement: .secondaryAction) {
                     Button("삭제", systemImage: "trash", role: .destructive) {
-                        viewStore.send(.delete)
-                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
-                        print("@Log : A3_3__상세페이지_일기삭제")
+                        viewStore.send(.showDeleteAlert(true))
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showDeleteAlert, send: JournalFeature.Action.showDeleteAlert), title: "일기를 삭제할까요?") {
+                        Text("일기를 삭제하면 다시 복구할 수 없습니다.")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("취소"), color: .clear) {
+                            viewStore.send(.showDeleteAlert(false))
+                        }
+                    } secondaryButton: {
+                        OhwaAlertButton(label: Text("삭제하기").foregroundColor(.textOnButton), color: .button) {
+                            Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+                            print("@Log : A3_3__상세페이지_일기삭제")
+                            viewStore.send(.delete)
+                            viewStore.send(.showDeleteAlert(false))
+                        }
                     }
                 }
             }

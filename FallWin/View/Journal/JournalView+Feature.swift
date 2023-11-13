@@ -17,6 +17,7 @@ struct JournalFeature: Reducer {
         var showPasscodeView: Bool = false
         var showImageDetailView: Bool = false
         var showShareSheet: Bool = false
+        var showDeleteAlert: Bool = false
         var shareItem: ShareImageWrapper? = nil
         var dismiss: Bool = false
     }
@@ -27,6 +28,7 @@ struct JournalFeature: Reducer {
         case showPasscodeView(Bool)
         case showImageDetailView(Bool)
         case showShareSheet(Bool)
+        case showDeleteAlert(Bool)
         case shareItem(ShareImageWrapper?)
         
         case delete
@@ -67,6 +69,10 @@ struct JournalFeature: Reducer {
             
         case let .showShareSheet(show):
             state.showShareSheet = show
+            return .none
+            
+        case let .showDeleteAlert(show):
+            state.showDeleteAlert = show
             return .none
             
         case let .shareItem(item):

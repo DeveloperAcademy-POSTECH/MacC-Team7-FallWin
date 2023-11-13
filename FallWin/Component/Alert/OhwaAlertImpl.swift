@@ -25,26 +25,31 @@ struct OhwaAlertImpl<Content>:OhwaAlert where Content:View {
             Color.black.opacity(0.3).ignoresSafeArea()
             
             VStack(spacing: 0) {
-                if let title = title {
-                    Text(title)
-                        .font(.pretendard(.bold, size: 20))
+                Group {
+                    if let title = title {
+                        Text(title)
+                            .font(.pretendard(.bold, size: 20))
+                            .foregroundStyle(Color.textPrimary)
+                            .padding(.bottom, 12)
+                    }
+                    
+                    content
+                        .font(.pretendard(.medium, size: 16))
                         .foregroundStyle(Color.textPrimary)
-                        .padding(.bottom, 12)
+                        .padding(.bottom, 32)
                 }
-                
-                content
-                    .foregroundStyle(Color.textPrimary)
-                    .padding()
-                    .padding(.bottom, 12)
+                .padding(.top, 8)
                 
                 HStack {
                     primaryButton
+                        .font(.pretendard(.semiBold, size: 14))
                     if secondaryButton != nil{
                         secondaryButton
+                            .font(.pretendard(.semiBold, size: 14))
                     }
                 }
                 .frame(maxHeight: 45)
-                .padding([.leading, .trailing, .bottom])
+                .padding(.bottom, 4)
             }
             .padding(16)
             .background {
