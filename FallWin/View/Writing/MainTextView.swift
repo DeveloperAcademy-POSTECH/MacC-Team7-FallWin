@@ -28,6 +28,7 @@ struct MainTextView: View {
                         .scrollContentBackground(.hidden)
                         .focused($isFocused)
                         .padding([.top, .bottom], 9)
+                        .padding(.bottom, 15)
                         .padding([.leading, .trailing], 12)
                         .background() {
                             RoundedRectangle(cornerRadius: 4)
@@ -39,10 +40,19 @@ struct MainTextView: View {
                                         HStack{
                                             Spacer()
                                             HStack(spacing: 0) {
-                                                Text("\(viewStore.mainText.count)")
-                                                    .font(.system(size: 12))
-                                                    .offset(y: -4)
-                                                    .foregroundStyle(.gray)
+                                                if viewStore.mainText.count > 1000 {
+                                                    Text("\(viewStore.mainText.count)")
+                                                        .font(.system(size: 12))
+                                                        .offset(y: -4)
+                                                        .foregroundStyle(.red)
+                                                }else {
+                                                    Text("\(viewStore.mainText.count)")
+                                                        .font(.system(size: 12))
+                                                        .offset(y: -4)
+                                                        .foregroundStyle(.gray)
+                                                }
+                                                
+                                                
                                                 
                                                 Text(" / 1000")
                                                     .font(.system(size: 12))
@@ -59,9 +69,14 @@ struct MainTextView: View {
                     Button {
                         viewStore.send(.showDrawingStyleView)
                     } label: {
-                        ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.mainText == "" ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                        ConfirmButtonLabelView(
+                            text: "다음",
+                            backgroundColor: (viewStore.mainText == "" || viewStore.mainText.count > 1000) ? Color.buttonDisabled : Color.button,
+                            foregroundColor: .textOnButton
+                        )
                     }
-                    .disabled(viewStore.mainText == "")
+                    .disabled(viewStore.mainText == "" || viewStore.mainText.count > 1000)
+//                    .disabled(viewStore.mainText.count > 60)
                     .padding([.top, .bottom], 15)
                 }
                 .padding([.leading, .trailing], 20)
@@ -100,7 +115,7 @@ struct MessageMainTextView: View {
 }
 
 #Preview {
-    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤", isKeyboardShown: true), reducer: {
+    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤", isKeyboardShown: true), reducer: {
         MainTextFeature()
     }))
 }
