@@ -24,7 +24,7 @@ extension KarloApiManager {
     
     func addEmotionDrawingStyle(prompt: String, emotion: String, drawingStyle: String) -> String {
         
-        return prompt + (emotion == "" ? "" : ", \(emotion)") + (drawingStyle == "" ? "" : ", \(drawingStyle)")
+        return (drawingStyle == "" ? "" : "\(drawingStyle), ") + prompt + (emotion == "" ? "" : " with \(emotion) mood")
     }
     
     func generateImage(prompt: String, negativePrompt: String, priorSteps: Double, priorScale: Double, steps: Double, scale: Double, apiKey: String) async throws  -> KarloImageGenerationResponse {
@@ -38,7 +38,7 @@ extension KarloApiManager {
         let parameters: [String: Any] = [
             "prompt": prompt,
             "negative_prompt": negativePrompt,
-            "samples": 8,
+            "samples": 4,
             "prior_num_inference_steps": Int(priorSteps),
             "prior_guidance_scale": priorScale,
             "num_inference_steps": Int(steps),

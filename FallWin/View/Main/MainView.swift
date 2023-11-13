@@ -28,6 +28,7 @@ struct MainView: View {
                                         viewStore.send(.showJournalView(journal))
                                     }
                                     .onAppear {
+                                        print("timestamp: \(journal.timestamp)")
                                         if let timestamp = journal.timestamp {
                                             if !viewStore.pickedDateTagValue.isScrolling {
                                                 viewStore.send(.updateYear(timestamp.year ))
@@ -73,7 +74,7 @@ struct MainView: View {
                 VStack {
                     toolbar
                         .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), onDismiss: {  }) {
-                            YearMonthPickerView(yearRange: 1900...2023, isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
+                            YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
                     Spacer()

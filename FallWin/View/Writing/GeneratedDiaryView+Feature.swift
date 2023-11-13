@@ -66,7 +66,7 @@ struct GeneratedDiaryFeature: Reducer {
                 journal.setImage(image)
             }
             journal.drawingStyle = DrawingStyle(rawName: state.selectedDrawingStyle).rawValue
-            if let date = PickerManager.shared.getDateFromDateTagValue(year: state.pickedDateTagValue.year, month: state.pickedDateTagValue.month, day: state.pickedDateTagValue.day, hour: state.pickedDateTagValue.hour, minute: state.pickedDateTagValue.minute, second: state.pickedDateTagValue.second, dayOfWeek: state.pickedDateTagValue.dayOfWeek) {
+            if let date = PickerManager.shared.getDateFromDateTagValue(dateTagValue: state.pickedDateTagValue) {
                 journal.timestamp = date
             }
             context.insert(journal)
