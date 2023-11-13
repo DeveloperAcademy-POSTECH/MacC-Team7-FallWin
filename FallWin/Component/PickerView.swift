@@ -140,16 +140,16 @@ struct MonthDayYearPickerView: View {
     }
     
     func maxMonthsInYear(year: Int) -> Int {
-        if year == pickedDateTagValue.year {
-            return pickedDateTagValue.month
+        if year == Date().year {
+            return Date().month
         } else {
             return 12
         }
     }
     
     func maxDaysInMonth(year: Int, month: Int) -> Int? {
-        if year == pickedDateTagValue.year && month == pickedDateTagValue.month {
-            return pickedDateTagValue.day
+        if year == Date().year && month == Date().month {
+            return Date().day
         } else {
             let calendar = Calendar.current
             var dateComponents = DateComponents()
