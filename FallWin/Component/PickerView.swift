@@ -75,8 +75,6 @@ struct YearMonthPickerView: View {
 
 struct MonthDayYearPickerView: View {
     
-    var years: [Int]
-    
     @State var selectedYear: Int = Date().year
     @State var selectedMonth: Int = Date().month
     @State var selectedDay: Int = Date().day
@@ -84,8 +82,7 @@ struct MonthDayYearPickerView: View {
     @Binding var pickedDateTagValue: DateTagValue
     @Binding var isPickerShown: Bool
     
-    init(yearRange: ClosedRange<Int>, dateTagValue: Binding<DateTagValue>, isPickerShown: Binding<Bool>) {
-        self.years = Array(yearRange)
+    init(dateTagValue: Binding<DateTagValue>, isPickerShown: Binding<Bool>) {
         self._pickedDateTagValue = dateTagValue
         self._isPickerShown = isPickerShown
         
@@ -104,14 +101,14 @@ struct MonthDayYearPickerView: View {
                 HStack(spacing: 0) {
                     Spacer()
                     Picker("Year", selection: $selectedYear) {
-                        ForEach(years, id: \.self) { year in
+                        ForEach(1900...pickedDateTagValue.year, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
                     
                     Picker("Month", selection: $selectedMonth) {
-                        ForEach(1...12, id: \.self) { month in
+                        ForEach(1...maxMonthsInYear(year: selectedYear), id: \.self) { month in
                             Text(String(describing: month) + "월").tag(month)
                         }
                     }
@@ -142,20 +139,32 @@ struct MonthDayYearPickerView: View {
         }
     }
     
-    func maxDaysInMonth(year: Int, month: Int) -> Int? {
-        let calendar = Calendar.current
-        var dateComponents = DateComponents()
-        dateComponents.year = year
-        dateComponents.month = month
-        dateComponents.day = 1 // Set to the 1st day of the selected month
-        
-        if let date = calendar.date(from: dateComponents) {
-            if let range = calendar.range(of: .day, in: .month, for: date) {
-                return range.count
-            }
+    func maxMonthsInYear(year: Int) -> Int {
+        if year == pickedDateTagValue.year {
+            return pickedDateTagValue.month
+        } else {
+            return 12
         }
-        
-        return nil // Failed to determine the maximum number of days
+    }
+    
+    func maxDaysInMonth(year: Int, month: Int) -> Int? {
+        if year == pickedDateTagValue.year && month == pickedDateTagValue.month {
+            return pickedDateTagValue.day
+        } else {
+            let calendar = Calendar.current
+            var dateComponents = DateComponents()
+            dateComponents.year = year
+            dateComponents.month = month
+            dateComponents.day = 1 // Set to the 1st day of the selected month
+            
+            if let date = calendar.date(from: dateComponents) {
+                if let range = calendar.range(of: .day, in: .month, for: date) {
+                    return range.count
+                }
+            }
+            
+            return nil // Failed to determine the maximum number of days
+        }
     }
 }
 

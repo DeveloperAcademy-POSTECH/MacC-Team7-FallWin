@@ -169,7 +169,7 @@ struct DateView: View {
             isPickerShown.toggle()
         }
         .sheet(isPresented: $isPickerShown, onDismiss: {  }) {
-            MonthDayYearPickerView(yearRange: 1900...2023, dateTagValue: $pickedDateTagValue, isPickerShown: $isPickerShown)
+            MonthDayYearPickerView(dateTagValue: $pickedDateTagValue, isPickerShown: $isPickerShown)
                 .presentationDetents([.fraction(0.5)])
         }
     }
