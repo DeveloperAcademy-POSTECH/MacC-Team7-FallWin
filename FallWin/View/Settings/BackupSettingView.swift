@@ -36,7 +36,7 @@ struct BackupSettingView: View {
                 HStack(spacing: 0) {
                     Text("최근 백업: ")
                     if let lastBackup = backupManager?.lastICloudBackup {
-                        Text(String(format: "%d년 %02d월 %02일 %02d:%02d", lastBackup.year, lastBackup.month, lastBackup.day, lastBackup.hour, lastBackup.minute))
+                        Text(lastBackup.fullString)
                     } else {
                         Text("없음")
                     }
