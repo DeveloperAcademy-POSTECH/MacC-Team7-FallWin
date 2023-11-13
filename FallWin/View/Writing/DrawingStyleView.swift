@@ -19,23 +19,23 @@ struct DrawingStyleView: View {
                     VStack(spacing: 0) {
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
-                        VStack {
-                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
-                            Spacer()
-                            Text("prior_guidance_scale: \(viewStore.priorScale)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
-                            Spacer()
-                            Text("num_inference_steps: \(viewStore.steps)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
-                            Spacer()
-                            Text("guidance_scale: \(viewStore.scale)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
-                        }
+//                        VStack {
+//                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
+//                            Spacer()
+//                            Text("prior_guidance_scale: \(viewStore.priorScale)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
+//                            Spacer()
+//                            Text("num_inference_steps: \(viewStore.steps)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
+//                            Spacer()
+//                            Text("guidance_scale: \(viewStore.scale)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
+//                        }
                         generateDrawingStyleView()
                             .padding(.top, 16)
                             .padding(.horizontal)
@@ -93,31 +93,20 @@ struct DrawingStyleView: View {
     func generateDrawingStyleView() -> some View {
         
         let drawingStyles: [(String, Color, Image, String)] = [
-            ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화"),
-            ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치"),
-            ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르"),
-            ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함"),
-            ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈"),
-            ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
-            ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐"),
-            ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키"),
-            ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱"),
-            ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소"),
-            ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트"),
-            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소"),
-            ("henriMatisse", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 마티스"),
-            ("egonSchiele", Color(hexCode: "#191919"), Image("SalvadorDali"), "에곤 쉴레"),
-            ("webtoon", Color(hexCode: "#191919"), Image("SalvadorDali"), "웹툰"),
-            ("dcComics", Color(hexCode: "#191919"), Image("SalvadorDali"), "DC 코믹스"),
-            ("ghibli", Color(hexCode: "#191919"), Image("SalvadorDali"), "지브리"),
-            ("film", Color(hexCode: "#191919"), Image("SalvadorDali"), "필름"),
-            ("illustration", Color(hexCode: "#191919"), Image("SalvadorDali"), "일러스트"),
-            ("cg", Color(hexCode: "#191919"), Image("SalvadorDali"), "CG"),
+            ("Childlike crayon", Color(hexCode: "#191919"), Image("WaterColor"), "크레용"),
+            ("Oil Painting", Color(hexCode: "#191919"), Image("Sketch"), "유화"),
+            ("Water Color", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "수채화"),
+            ("Sketch", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "스케치"),
+            ("Anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
+            ("Pixel Art", Color(hexCode: "#191919"), Image("VanGogh"), "픽셀아트"),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("SalvadorDali"), "빈센트 반 고흐"),
+            ("Monet", Color(hexCode: "#191919"), Image("SalvadorDali"), "클로드 모네"),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("SalvadorDali"), "살바도르 달리")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
                     ForEach(drawingStyles, id: \.0) { style in
                         generateDrawingStyleCardView(drawingStyle: style)
                             .onTapGesture(perform: {
@@ -155,6 +144,7 @@ struct DrawingStyleView: View {
                 Text(drawingStyle.3)
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.center)
             }
             .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))
         }

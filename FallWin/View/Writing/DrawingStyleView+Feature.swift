@@ -14,10 +14,10 @@ struct DrawingStyleFeature: Reducer {
         var mainText: String
         var selectedDrawingStyle: String?
         var showCountAlert: Bool = false
-        var priorSteps: Double = 25.0
-        var priorScale: Double = 5.0
-        var steps: Double = 20.0
-        var scale: Double = 12.5
+        var priorSteps: Double = 70.0
+        var priorScale: Double = 10.0
+        var steps: Double = 50.0
+        var scale: Double = 10.0
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         @PresentationState var generatedDiary: GeneratedDiaryFeature.State?
     }

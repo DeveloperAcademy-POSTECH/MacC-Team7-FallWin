@@ -132,13 +132,12 @@ extension ChatGPTApiManager {
     func generatePromptForChat3(_ prompt: String) -> String {
         
         let template: String = """
-        Make one to four drawable noun phrases that best express most important subjects of smooth english translation of <<INPUT TEXT>>.
-
-        The output must be only comma seperated noun phrases.
-        The output must contain upto four noun phrases.
-        The output must be english.
-        Each noun phrase should contain enough modifiers.
-        If they are all noun phrase containing only emotion, convert the phrase into representative object.
+        Please summarize <<INPUT TEXT>> in english according to the guidelines provided below for Dall-E Prompt:
+        <<GUIDELINES>>
+        1. Limit your summary upto five noun phrases.
+        2. Your summary should focus on tangible subjects, avoiding abstract concepts.
+        3. Include concrete, visual subjects such as a person, object, or location.
+        4. Provide your summary in the form of comma-separated noun phrases or words. <</GUIDELINES>>
         
         <<INPUT TEXT>>
         \(prompt)
@@ -270,6 +269,7 @@ extension ChatGPTApiManager {
     
     func createChat3(prompt: String, apiKey: String) async throws -> ChatCreationResponse {
         let output = generatePromptForChat3(prompt)
+        print("createChat3")
         guard try await validatePrompt(output, apiKey: apiKey) else {
             print("----------------Invalid Prompt----------------")
             throw ImageError.invalidPrompt
