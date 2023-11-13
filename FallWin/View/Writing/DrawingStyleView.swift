@@ -11,6 +11,7 @@ import FirebaseAnalytics
 
 struct DrawingStyleView: View {
     var store: StoreOf<DrawingStyleFeature>
+    @State var styleLabeling: Tracking.Event.RawValue = "nil"
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -49,6 +50,7 @@ struct DrawingStyleView: View {
                             }
                             Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
                             print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
+                            Tracking.logEvent(styleLabeling)
                             
                         } label: {
                             ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
@@ -103,16 +105,16 @@ struct DrawingStyleView: View {
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
         
-        let drawingStyles: [(String, Color, Image, String, String)] = [
-            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용", "A2_3_4_1__일기작성_화풍선택_크레용"),
-            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화", "A2_3_4_2__일기작성_화풍선택_유화"),
-            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화", "A2_3_4_3__일기작성_화풍선택_수채화"),
-            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치", "A2_3_4_4__일기작성_화풍선택_스케치"),
-            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션","A2_3_4_5__일기작성_화풍선택_애니메이션"),
-            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트","A2_3_4_6__일기작성_화풍선택_픽셀아트"),
-            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "반 고흐", "A2_3_4_7__일기작성_화풍선택_반고흐"),
-            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "모네","A2_3_4_8__일기작성_화풍선택_모네"),
-            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "달리","A2_3_4_9__일기작성_화풍선택_달리")
+        let drawingStyles: [(String, Color, Image, String, Tracking.Event.RawValue)] = [
+            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용", Tracking.Event.A2_3_4_1__일기작성_화풍선택_크레용.rawValue),
+            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화", Tracking.Event.A2_3_4_2__일기작성_화풍선택_유화.rawValue),
+            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화", Tracking.Event.A2_3_4_3__일기작성_화풍선택_수채화.rawValue),
+            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치", Tracking.Event.A2_3_4_4__일기작성_화풍선택_스케치.rawValue),
+            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션",Tracking.Event.A2_3_4_5__일기작성_화풍선택_애니메이션.rawValue),
+            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트",Tracking.Event.A2_3_4_6__일기작성_화풍선택_픽셀아트.rawValue),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "반 고흐", Tracking.Event.A2_3_4_7__일기작성_화풍선택_반고흐.rawValue),
+            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "모네",Tracking.Event.A2_3_4_8__일기작성_화풍선택_모네.rawValue),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "달리",Tracking.Event.A2_3_4_9__일기작성_화풍선택_달리.rawValue)
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -125,6 +127,9 @@ struct DrawingStyleView: View {
                                     viewStore.send(.selectDrawingStyle(nil))
                                 } else {
                                     viewStore.send(.selectDrawingStyle(style.0))
+                                    styleLabeling = style.4
+                                    print("@Log_styleLabeling : \(styleLabeling)")
+                                    
                                 }
                             })
                             .padding(12)
@@ -138,7 +143,7 @@ struct DrawingStyleView: View {
     
     @ViewBuilder
     //TODO: 함께 해결해야 할 부분
-    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String, String)) -> some View {
+    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String, Tracking.Event.RawValue)) -> some View {
         WithViewStore(store, observe: {$0}) { viewStore in
             VStack(spacing: 16) {
                 drawingStyle.2

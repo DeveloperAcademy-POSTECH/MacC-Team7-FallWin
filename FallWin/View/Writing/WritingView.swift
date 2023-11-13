@@ -88,25 +88,25 @@ struct WritingView: View {
     @ViewBuilder
     func generateEmotionView() -> some View {
         //TODO: 이부분 소통해서 다시 진행할 것
-        let emotions: [(String, Color, Image, String, String)] = [
-            ("happy", Color.emotionHappy, Image("IconHappy"), "행복한", "A2_1_5_1__일기작성_감정선택_행복한"),
-            ("proud", Color.emotionProud, Image("IconProud"), "뿌듯한", "A2_1_5_2__일기작성_감정선택_뿌듯한"),
-            ("touched", Color.emotionTouched, Image("IconTouched"), "감동받은", "A2_1_5_3__일기작성_감정선택_감동받은"),
-            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed"), "짜증나는", "A2_1_5_4__일기작성_감정선택_짜증나는"),
-            ("sad", Color.emotionSad, Image("IconSad"), "슬픈", "A2_1_5_5__일기작성_감정선택_슬픈"),
-            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), "답답한", "A2_1_5_6__일기작성_감정선택_답답한"),
-            ("lazy", Color.emotionLazy, Image("IconLazy"), "귀찮은", "A2_1_5_7__일기작성_감정선택_귀찮은"),
-            ("grateful", Color.emotionGrateful, Image("IconGrateful"), "감사한", "A2_1_5_8__일기작성_감정선택_감사한"),
-            ("joyful", Color.emotionJoyful, Image("IconJoyful"), "신나는", "A2_1_5_9__일기작성_감정선택_신나는"),
-            ("exciting", Color.emotionExciting, Image("IconExciting"), "기대되는", "A2_1_5_10__일기작성_감정선택_기대되는"),
-            ("nervous", Color.emotionNervous, Image("IconNervous"), "불안한","A2_1_5_11__일기작성_감정선택_불안한"),
-            ("lonely", Color.emotionLonely, Image("IconLonely"), "외로운", "A2_1_5_12__일기작성_감정선택_외로운"),
-            ("shy", Color.emotionShy, Image("IconShy"), "부끄러운", "A2_1_5_13__일기작성_감정선택_부끄러운"),
-            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), "당황한", "A2_1_5_14__일기작성_감정선택_당황한"),
-            ("tough", Color.emotionTough, Image("IconTough"), "힘든", "A2_1_5_15__일기작성_감정선택_힘든"),
-            ("peaceful", Color.emotionPeaceful, Image("IconPeaceful"), "평온한", "A2_1_5_16__일기작성_감정선택_평온한"),
-            ("surprised", Color.emotionSurprised, Image("IconSurprised"), "놀란", "A2_1_5_17__일기작성_감정선택_놀란"),
-            ("reassuring", Color.emotionReassuring, Image("IconReassuring"), "안심되는", "A2_1_5_18__일기작성_감정선택_안심되는")
+        let emotions: [(String, Color, Image, String, Tracking.Event.RawValue)] = [
+            ("happy", Color.emotionHappy, Image("IconHappy"), "행복한", Tracking.Event.A2_1_5_1__일기작성_감정선택_행복한.rawValue),
+            ("proud", Color.emotionProud, Image("IconProud"), "뿌듯한", Tracking.Event.A2_1_5_2__일기작성_감정선택_뿌듯한.rawValue),
+            ("touched", Color.emotionTouched, Image("IconTouched"), "감동받은", Tracking.Event.A2_1_5_3__일기작성_감정선택_감동받은.rawValue),
+            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed"), "짜증나는", Tracking.Event.A2_1_5_4__일기작성_감정선택_짜증나는.rawValue),
+            ("sad", Color.emotionSad, Image("IconSad"), "슬픈", Tracking.Event.A2_1_5_5__일기작성_감정선택_슬픈.rawValue),
+            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), "답답한", Tracking.Event.A2_1_5_6__일기작성_감정선택_답답한.rawValue),
+            ("lazy", Color.emotionLazy, Image("IconLazy"), "귀찮은", Tracking.Event.A2_1_5_7__일기작성_감정선택_귀찮은.rawValue),
+            ("grateful", Color.emotionGrateful, Image("IconGrateful"), "감사한", Tracking.Event.A2_1_5_8__일기작성_감정선택_감사한.rawValue),
+            ("joyful", Color.emotionJoyful, Image("IconJoyful"), "신나는", Tracking.Event.A2_1_5_9__일기작성_감정선택_신나는.rawValue),
+            ("exciting", Color.emotionExciting, Image("IconExciting"), "기대되는", Tracking.Event.A2_1_5_10__일기작성_감정선택_기대되는.rawValue),
+            ("nervous", Color.emotionNervous, Image("IconNervous"), "불안한",Tracking.Event.A2_1_5_11__일기작성_감정선택_불안한.rawValue),
+            ("lonely", Color.emotionLonely, Image("IconLonely"), "외로운", Tracking.Event.A2_1_5_12__일기작성_감정선택_외로운.rawValue),
+            ("shy", Color.emotionShy, Image("IconShy"), "부끄러운", Tracking.Event.A2_1_5_13__일기작성_감정선택_부끄러운.rawValue),
+            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), "당황한", Tracking.Event.A2_1_5_14__일기작성_감정선택_당황한.rawValue),
+            ("tough", Color.emotionTough, Image("IconTough"), "힘든", Tracking.Event.A2_1_5_15__일기작성_감정선택_힘든.rawValue),
+            ("peaceful", Color.emotionPeaceful, Image("IconPeaceful"), "평온한", Tracking.Event.A2_1_5_16__일기작성_감정선택_평온한.rawValue),
+            ("surprised", Color.emotionSurprised, Image("IconSurprised"), "놀란", Tracking.Event.A2_1_5_17__일기작성_감정선택_놀란.rawValue),
+            ("reassuring", Color.emotionReassuring, Image("IconReassuring"), "안심되는", Tracking.Event.A2_1_5_18__일기작성_감정선택_안심되는.rawValue)
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -133,7 +133,7 @@ struct WritingView: View {
     
     @ViewBuilder
     //TODO: 이부분 소통해서 다시 진행할 것
-    func generateEmotionCardView(emotion: (String, Color, Image, String, String)) -> some View {
+    func generateEmotionCardView(emotion: (String, Color, Image, String, Tracking.Event.RawValue)) -> some View {
         
         WithViewStore(store, observe: {$0}) { viewStore in
             HStack {

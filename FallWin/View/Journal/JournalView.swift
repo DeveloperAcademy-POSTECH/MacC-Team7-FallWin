@@ -100,6 +100,8 @@ struct JournalView: View {
                 ToolbarItem(placement: .secondaryAction) {
                     Button("삭제", systemImage: "trash", role: .destructive) {
                         viewStore.send(.delete)
+                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+                        print("@Log : A3_3__상세페이지_일기삭제")
                     }
                 }
             }
@@ -222,6 +224,9 @@ struct JournalView: View {
                             viewStore.send(.shareItem(ShareImageWrapper(id: UUID(), image: image)))
                         }
                     }
+                    Tracking.logEvent(Tracking.Event.A3_1__상세페이지_공유하기.rawValue)
+                    print("@Log : A3_1__상세페이지_공유하기")
+                    
                 } label: {
                     HStack {
                         Spacer()
