@@ -118,7 +118,6 @@ struct DrawingStyleView: View {
                             })
                             .padding(12)
                     }
-                    .aspectRatio(1.0, contentMode: .fit)
                 }
                 .padding(4)
                 .padding(.bottom, 32)
@@ -142,7 +141,7 @@ struct DrawingStyleView: View {
                             .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
                 Text(drawingStyle.3)
-                    .font(.pretendard(.medium, size: 18))
+                    .font(viewStore.selectedDrawingStyle == drawingStyle.0 ? .pretendard(.bold, size: 18) : .pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
             }
