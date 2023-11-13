@@ -13,19 +13,22 @@ struct ConfirmButtonLabelView: View {
     let backgroundColor: Color
     let foregroundColor: Color
     let width: CGFloat?
+    let isPrimary: Bool
     
-    init(text: String, backgroundColor: Color, foregroundColor: Color) {
+    init(text: String, backgroundColor: Color, foregroundColor: Color, isPrimary: Bool = false) {
         self.text = text
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
         self.width = UIScreen.main.bounds.width - 40
+        self.isPrimary = isPrimary
     }
     
-    init(text: String, backgroundColor: Color, foregroundColor: Color, width: CGFloat?) {
+    init(text: String, backgroundColor: Color, foregroundColor: Color, width: CGFloat?, isPrimary: Bool = false) {
         self.text = text
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
         self.width = width
+        self.isPrimary = isPrimary
     }
     
     var body: some View {

@@ -20,12 +20,11 @@ struct MainView: View {
                         EmptyPlaceholderView()
                     } else {
                         ScrollView {
-                            LazyVStack {
+                            LazyVStack(spacing: 28) {
                                 ForEach(viewStore.journals.indices, id: \.self) { i in
                                     let journal = viewStore.journals[i]
                                     
                                     mainCell(journal: journal)
-                                        .padding()
                                         .id(DateTagValue(date: journal.timestamp ?? Date()).tagValue)
                                         .onTapGesture {
                                             HapticManager.shared.impact()
@@ -44,8 +43,9 @@ struct MainView: View {
                                         }
                                 }
                             }
-                            .padding()
-                            .padding(.vertical, 40)
+                            .padding(.top)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 60)
                             .onChange(of: viewStore.pickedDateTagValue.isScrolling) { value in
                                 if value {
                                     withAnimation(.easeInOut(duration: 0.5)) {
@@ -142,6 +142,7 @@ struct MainView: View {
                     Divider()
                         .background(Color.separator)
                     Text(journal.content ?? "")
+                        .lineLimit(2)
                     Spacer()
                 }
                 .foregroundStyle(Color.textPrimary)
@@ -208,7 +209,7 @@ struct MainView: View {
                 //                }
             }
             .padding(.top)
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             .padding(.bottom, 8)
             .background(Color.backgroundPrimary)
         }

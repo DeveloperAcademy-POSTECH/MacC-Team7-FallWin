@@ -20,6 +20,8 @@ struct SearchView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
+                Color.backgroundPrimary.ignoresSafeArea()
+                
                 if viewStore.searchResults.isEmpty {
                     EmptyPlaceholderView()
                 } else {
@@ -95,7 +97,6 @@ struct SearchView: View {
                     }
                 }
             }
-            .background(Color.backgroundPrimary.ignoresSafeArea())
             .fullScreenCover(store: store.scope(state: \.$journal, action: SearchFeature.Action.journal)) { store in
                 NavigationStack {
                     JournalView(store: store)
