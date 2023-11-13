@@ -16,47 +16,51 @@ struct MainView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 ScrollViewReader { proxy in
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(viewStore.journals.indices, id: \.self) { i in
-                                let journal = viewStore.journals[i]
-                                
-                                mainCell(journal: journal)
-                                    .padding()
-                                    .id(DateTagValue(date: journal.timestamp ?? Date()).tagValue)
-                                    .onTapGesture {
-                                        HapticManager.shared.impact()
-                                        viewStore.send(.showJournalView(journal))
-                                    }
-                                    .onAppear {
-                                        print("timestamp: \(journal.timestamp)")
-                                        if let timestamp = journal.timestamp {
-                                            if !viewStore.pickedDateTagValue.isScrolling {
-                                                viewStore.send(.updateYear(timestamp.year ))
-                                                viewStore.send(.updateMonth(timestamp.month))
-                                                let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
-                                                viewStore.send(.updateTagValue(newTagValue))
+                    if viewStore.journals.isEmpty {
+                        EmptyPlaceholderView()
+                    } else {
+                        ScrollView {
+                            LazyVStack(spacing: 28) {
+                                ForEach(viewStore.journals.indices, id: \.self) { i in
+                                    let journal = viewStore.journals[i]
+                                    
+                                    mainCell(journal: journal)
+                                        .id(DateTagValue(date: journal.timestamp ?? Date()).tagValue)
+                                        .onTapGesture {
+                                            HapticManager.shared.impact()
+                                            viewStore.send(.showJournalView(journal))
+                                        }
+                                        .onAppear {
+                                            print("timestamp: \(journal.timestamp)")
+                                            if let timestamp = journal.timestamp {
+                                                if !viewStore.pickedDateTagValue.isScrolling {
+                                                    viewStore.send(.updateYear(timestamp.year ))
+                                                    viewStore.send(.updateMonth(timestamp.month))
+                                                    let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
+                                                    viewStore.send(.updateTagValue(newTagValue))
+                                                }
                                             }
                                         }
+                                }
+                            }
+                            .padding(.top)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 60)
+                            .onChange(of: viewStore.pickedDateTagValue.isScrolling) { value in
+                                if value {
+                                    withAnimation(.easeInOut(duration: 0.5)) {
+                                        proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .center)
                                     }
-                            }
-                        }
-                        .padding()
-                        .padding(.vertical, 40)
-                        .onChange(of: viewStore.pickedDateTagValue.isScrolling) { value in
-                            if value {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    proxy.scrollTo(viewStore.pickedDateTagValue.tagValue, anchor: .center)
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(500))) {
-                                    viewStore.send(.updateScrolling)
+                                    DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(500))) {
+                                        viewStore.send(.updateScrolling)
+                                    }
                                 }
                             }
+                            .onTapGesture {
+                                Tracking.logEvent(Tracking.Event.A1_2__메인_일기아이템.rawValue)
+                                print("@Log : A1_2__메인_일기아이템")
+                            }
                         }
-                        .onTapGesture {
-                            Tracking.logEvent(Tracking.Event.A1_2__메인_일기아이템.rawValue)
-                           print("@Log : A1_2__메인_일기아이템")
-                           }
                     }
                 }
                 
@@ -71,7 +75,7 @@ struct MainView: View {
                     .onTapGesture {
                         Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
                         print("@Log : A1_3__메인_새일기쓰기")
-                       }
+                    }
                     .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
                         Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
                     } primaryButton: {
@@ -108,7 +112,7 @@ struct MainView: View {
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V1__메인뷰.rawValue)
             print("@Log : V1__메인뷰")
-           }
+        }
     }
     
     @ViewBuilder
@@ -138,6 +142,7 @@ struct MainView: View {
                     Divider()
                         .background(Color.separator)
                     Text(journal.content ?? "")
+                        .lineLimit(2)
                     Spacer()
                 }
                 .foregroundStyle(Color.textPrimary)
@@ -157,7 +162,7 @@ struct MainView: View {
                 Button {
                     viewStore.send(.showPickerSheet)
                     Tracking.logEvent(Tracking.Event.A1_1__메인_날짜선택.rawValue)
-                   print("@Log : A1_1__메인_날짜선택")
+                    print("@Log : A1_1__메인_날짜선택")
                 } label: {
                     HStack {
                         Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
@@ -166,7 +171,6 @@ struct MainView: View {
                     }
                 }
                 .foregroundStyle(Color.textPrimary)
-
                 
                 Spacer()
                 
@@ -205,11 +209,11 @@ struct MainView: View {
                 //                }
             }
             .padding(.top)
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             .padding(.bottom, 8)
             .background(Color.backgroundPrimary)
         }
-
+        
     }
     
     private var writingActionButton: some View {

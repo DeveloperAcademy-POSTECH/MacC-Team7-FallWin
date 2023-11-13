@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		660AAF8A2B026AC100B494E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 660AAF892B026AC100B494E9 /* GoogleService-Info.plist */; };
 		6637556F2AF7E3A300117085 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637556E2AF7E3A300117085 /* View+Alert.swift */; };
 		663755712AF7E53100117085 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663755702AF7E53100117085 /* UIViewController+Extension.swift */; };
 		663755792AF7ED3600117085 /* OhwaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663755782AF7ED3600117085 /* OhwaAlert.swift */; };
@@ -34,6 +33,7 @@
 		7924440B2B00F13000E28FFE /* DataSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7924440A2B00F13000E28FFE /* DataSettingsView.swift */; };
 		7924440D2B01FE1000E28FFE /* View+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7924440C2B01FE1000E28FFE /* View+Render.swift */; };
 		7924440F2B02195300E28FFE /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7924440E2B02195300E28FFE /* ActivityView.swift */; };
+		792444112B02700000E28FFE /* EmptyPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792444102B02700000E28FFE /* EmptyPlaceholderView.swift */; };
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Feature.swift */; };
 		7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511B2AF232FD0023123C /* OldSettingsView.swift */; };
@@ -96,6 +96,7 @@
 		98202FA72AE6A0360089CF79 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 98202FA62AE6A0360089CF79 /* Lottie */; };
 		98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98202FA92AE6A0800089CF79 /* LottieImageGenView.swift */; };
 		98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98202FAB2AE933D50089CF79 /* KarloApiManager.swift */; };
+		98439ECE2B0282BB00B7669F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98439ECD2B0282BB00B7669F /* GoogleService-Info.plist */; };
 		9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6262AE6524800C7359B /* Pretendard-Regular.ttf */; };
 		9867B6302AE6524900C7359B /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6272AE6524800C7359B /* Pretendard-Black.ttf */; };
 		9867B6312AE6524900C7359B /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6282AE6524900C7359B /* Pretendard-Light.ttf */; };
@@ -127,7 +128,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		660AAF892B026AC100B494E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6637556E2AF7E3A300117085 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		663755702AF7E53100117085 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		663755782AF7ED3600117085 /* OhwaAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhwaAlert.swift; sourceTree = "<group>"; };
@@ -145,6 +145,7 @@
 		7924440A2B00F13000E28FFE /* DataSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsView.swift; sourceTree = "<group>"; };
 		7924440C2B01FE1000E28FFE /* View+Render.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Render.swift"; sourceTree = "<group>"; };
 		7924440E2B02195300E28FFE /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		792444102B02700000E28FFE /* EmptyPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPlaceholderView.swift; sourceTree = "<group>"; };
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Feature.swift"; sourceTree = "<group>"; };
 		7927511B2AF232FD0023123C /* OldSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSettingsView.swift; sourceTree = "<group>"; };
@@ -204,6 +205,7 @@
 		98202FA32AE69FA90089CF79 /* LottieImageGen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieImageGen.json; sourceTree = "<group>"; };
 		98202FA92AE6A0800089CF79 /* LottieImageGenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieImageGenView.swift; sourceTree = "<group>"; };
 		98202FAB2AE933D50089CF79 /* KarloApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarloApiManager.swift; sourceTree = "<group>"; };
+		98439ECD2B0282BB00B7669F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9867B6262AE6524800C7359B /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9867B6272AE6524800C7359B /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
 		9867B6282AE6524900C7359B /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.ttf"; sourceTree = "<group>"; };
@@ -345,12 +347,12 @@
 			children = (
 				66392A992B020CEB004C8381 /* FallWinRelease.entitlements */,
 				79A5667B2AFE06BF00524A57 /* FallWin.entitlements */,
-				660AAF892B026AC100B494E9 /* GoogleService-Info.plist */,
 				9867B6382AE652A400C7359B /* Info.plist */,
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
 				79ADA5FD2AE55280007A56EC /* Secret.plist */,
+				98439ECD2B0282BB00B7669F /* GoogleService-Info.plist */,
 				79407D582AD7E68E006C7571 /* Preview Content */,
 				9867B6252AE6521800C7359B /* Resource */,
 				79AF69432ADCC2390064E410 /* Util */,
@@ -413,6 +415,7 @@
 				79D8B1762AFB57780020DFCC /* WebViewController.swift */,
 				79D8B1782AFB692E0020DFCC /* WebView.swift */,
 				7924440E2B02195300E28FFE /* ActivityView.swift */,
+				792444102B02700000E28FFE /* EmptyPlaceholderView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -651,7 +654,7 @@
 				9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */,
 				9867B6352AE6524900C7359B /* Pretendard-Thin.ttf in Resources */,
 				79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */,
-				660AAF8A2B026AC100B494E9 /* GoogleService-Info.plist in Resources */,
+				98439ECE2B0282BB00B7669F /* GoogleService-Info.plist in Resources */,
 				9867B6362AE6524900C7359B /* Pretendard-Medium.ttf in Resources */,
 				98202FA42AE69FA90089CF79 /* LottieImageGen.json in Resources */,
 				9867B6302AE6524900C7359B /* Pretendard-Black.ttf in Resources */,
@@ -708,6 +711,7 @@
 				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
+				792444112B02700000E28FFE /* EmptyPlaceholderView.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				7924440F2B02195300E28FFE /* ActivityView.swift in Sources */,
 				987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */,
@@ -905,7 +909,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.semsem.ohwa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -945,7 +949,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.semsem.ohwa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

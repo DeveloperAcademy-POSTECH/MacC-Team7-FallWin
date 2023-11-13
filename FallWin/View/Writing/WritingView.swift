@@ -11,21 +11,18 @@ import FirebaseAnalytics
 
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
-    //    @State var navPath: NavigationPath = .init()
-    @State var emotionLabeling: Tracking.Event.RawValue = "nil"
+    @State var emotionLabeling: String = "nil"
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
+                
                 VStack(spacing: 0) {
-//                    DateView()
-//                        .padding(.top, -30)
-                    MessageView(titleText: "오늘은 어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
+                    MessageView(titleText: "어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
                         .padding(.top, 36)
                     generateEmotionView()
-                        .padding(.top, 16)
                     HStack {
                         Spacer()
                         Button {
@@ -53,7 +50,6 @@ struct WritingView: View {
                     }
                     .padding(.top, 15)
                     .padding(.bottom, 16)
-//                    .padding([.leading, .trailing], 20)
                     .background{
                         Color.backgroundPrimary
                             .ignoresSafeArea()
@@ -115,9 +111,10 @@ struct WritingView: View {
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 32) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 0) {
                     ForEach(emotions, id: \.0) { emotion in
                         generateEmotionCardView(emotion: emotion)
+                            .padding(8)
                             .onTapGesture {
                                 if viewStore.selectedEmotion == emotion.0 {
                                     viewStore.send(.emotionSelection(nil))
@@ -130,7 +127,6 @@ struct WritingView: View {
                     }
                 }
                 .padding()
-                .padding(.bottom, 32)
             }
         }
     }
@@ -142,19 +138,17 @@ struct WritingView: View {
         WithViewStore(store, observe: {$0}) { viewStore in
             HStack {
                 Spacer()
-                VStack(spacing: 24) {
+                VStack(spacing: 4) {
                     emotion.2
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-//                        .frame(width: 40)
                     Text(emotion.3)
                         .font(viewStore.selectedEmotion == emotion.0 ? .pretendard(.bold, size: 16) : .pretendard(.medium, size: 16))
                         .foregroundColor(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.textPrimary)
-                        .frame(width: 60)
                 }
                 Spacer()
             }
-            .padding()
+            .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(viewStore.selectedEmotion == emotion.0 ? emotion.1 : Color.clear, lineWidth: viewStore.selectedEmotion == emotion.0 ? 2 : 0) // line width 조금 더 늘려보기
@@ -167,7 +161,7 @@ struct WritingView: View {
 
             }
             .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
-            .padding(8)
+//            .padding(8)
         }
     }
 }
@@ -235,9 +229,11 @@ struct TestView: View {
     }
 }
 
-//
-//#Preview {
-//    WritingView(store: Store(initialState: WritingFeature.State()) {
-//        WritingFeature()
-//    })
-//}
+
+#Preview {
+    NavigationStack {
+        WritingView(store: Store(initialState: WritingFeature.State()) {
+            WritingFeature()
+        })
+    }
+}

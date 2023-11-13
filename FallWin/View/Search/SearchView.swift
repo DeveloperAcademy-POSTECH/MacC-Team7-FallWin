@@ -19,77 +19,84 @@ struct SearchView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ScrollView {
-                if viewStore.searchTerm.isEmpty {
-                    LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
-                        ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key < $1.key }), id: \.key) { key, searchResults in
-                            if !searchResults.isEmpty {
-                                Section(header: HStack {
-                                    Text(key)
-                                        .font(.pretendard(.semiBold, size: 20))
-                                    Spacer()
-                                }
-                                    .padding(.horizontal, 12)
-                                    .padding(.top, 12)
-                                    .padding(.bottom, 6)
-                                    .background {
-                                        Rectangle()
-                                            .fill(.backgroundPrimary)
-                                    }
-                                ){
-                                    ForEach(searchResults, id: \.self) { journal in
-                                        ZStack {
-                                            if let image = journal.wrappedImage {
-                                                Image(uiImage: image)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .cornerRadius(4)
-                                                    .frame(width: 115, height: 115)
-                                                    .padding(4)
-                                            } else {
-                                                Color(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1))
-                                                    .cornerRadius(4)
-                                                    .frame(width: 110, height: 110)
-                                                    .padding(.vertical, 1.5)
-                                                
-                                            }
+            ZStack {
+                Color.backgroundPrimary.ignoresSafeArea()
+                
+                if viewStore.searchResults.isEmpty {
+                    EmptyPlaceholderView()
+                } else {
+                    ScrollView {
+                        if viewStore.searchTerm.isEmpty {
+                            LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
+                                ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key < $1.key }), id: \.key) { key, searchResults in
+                                    if !searchResults.isEmpty {
+                                        Section(header: HStack {
+                                            Text(key)
+                                                .font(.pretendard(.semiBold, size: 20))
+                                            Spacer()
                                         }
-                                        .onTapGesture {
-                                            viewStore.send(.showJournalView(journal))
+                                            .padding(.horizontal, 12)
+                                            .padding(.top, 12)
+                                            .padding(.bottom, 6)
+                                            .background {
+                                                Rectangle()
+                                                    .fill(.backgroundPrimary)
+                                            }
+                                        ){
+                                            ForEach(searchResults, id: \.self) { journal in
+                                                ZStack {
+                                                    if let image = journal.wrappedImage {
+                                                        Image(uiImage: image)
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .cornerRadius(4)
+                                                            .frame(width: 115, height: 115)
+                                                            .padding(4)
+                                                    } else {
+                                                        Color(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1))
+                                                            .cornerRadius(4)
+                                                            .frame(width: 110, height: 110)
+                                                            .padding(.vertical, 1.5)
+                                                        
+                                                    }
+                                                }
+                                                .onTapGesture {
+                                                    viewStore.send(.showJournalView(journal))
+                                                }
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
-                    }
-                    .padding(.horizontal, 12)
-                }else {
-                    LazyVGrid(columns: columns, spacing: 4) {
-                        
-                        ForEach((viewStore.searchResults), id: \.self) { journal in
-                            ZStack {
-                                if let image = journal.wrappedImage {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .cornerRadius(4)
-                                        .frame(width: 115, height: 115)
-                                        .padding(4)
-                                } else {
+                            .padding(.horizontal, 12)
+                        } else {
+                            LazyVGrid(columns: columns, spacing: 4) {
+                                
+                                ForEach((viewStore.searchResults), id: \.self) { journal in
+                                    ZStack {
+                                        if let image = journal.wrappedImage {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .cornerRadius(4)
+                                                .frame(width: 115, height: 115)
+                                                .padding(4)
+                                        } else {
+                                            
+                                        }
+                                    }
+                                    .onTapGesture {
+                                        viewStore.send(.showJournalView(journal))
+                                    }
+                                    
                                     
                                 }
                             }
-                            .onTapGesture {
-                                viewStore.send(.showJournalView(journal))
-                            }
-                            
-                            
+                            .padding(.horizontal, 12)
                         }
                     }
-                    .padding(.horizontal, 12)
                 }
             }
-            .background(Color.backgroundPrimary.ignoresSafeArea())
             .fullScreenCover(store: store.scope(state: \.$journal, action: SearchFeature.Action.journal)) { store in
                 NavigationStack {
                     JournalView(store: store)
