@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCfB1fsQC3BTxOxu_QlIovjK_vNqX1VY1U</string>
+	<string>AIzaSyBBcqZymjUJB0nUof4au5cjMRVz9qQSX4w</string>
 	<key>GCM_SENDER_ID</key>
-	<string>825957392944</string>
+	<string>575557985154</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mgchoi.ohwa</string>
 	<key>PROJECT_ID</key>
-	<string>picda-452b8</string>
+	<string>picda-649ac</string>
 	<key>STORAGE_BUCKET</key>
-	<string>picda-452b8.appspot.com</string>
+	<string>picda-649ac.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:825957392944:ios:77881fad27344e4d68c3f5</string>
+	<string>1:575557985154:ios:a89ff08c9f525fe75c259b</string>
 </dict>
 </plist>

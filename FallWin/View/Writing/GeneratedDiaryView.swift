@@ -66,9 +66,9 @@ struct GeneratedDiaryView: View {
                                 .padding(.top, 16)
                                 .padding(.horizontal, 8)
                             Button {
-                                viewStore.send(.doneGenerating)
                                 Tracking.logEvent(Tracking.Event.A2_5_4__일기작성_그림선택_일기마무리버튼.rawValue)
                                 print("@Log : A2_5_4__일기작성_그림선택_일기마무리버튼")
+                                viewStore.send(.doneGenerating)
                             } label: {
                                 ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             }

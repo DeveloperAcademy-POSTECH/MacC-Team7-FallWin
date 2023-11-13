@@ -887,7 +887,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111400;
+				CURRENT_PROJECT_VERSION = 23111401;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
@@ -928,7 +928,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWinRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111400;
+				CURRENT_PROJECT_VERSION = 23111401;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
@@ -1015,7 +1015,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 1.4.0;
 			};
 		};
 		79E5B2D22ADD502100A86770 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
