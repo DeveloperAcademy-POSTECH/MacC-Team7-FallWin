@@ -116,7 +116,7 @@ struct GeneratedDiaryView: View {
         }
         .task {
             do {
-                repeat {
+//                repeat {
                     print(dallEAPIKey)
                     let chatResponse = try await ChatGPTApiManager.shared.createChat3(prompt: viewStore.mainText,  apiKey: dallEAPIKey)
                     
@@ -155,7 +155,7 @@ struct GeneratedDiaryView: View {
                         }
                         viewStore.send(.setImages(images))
                     }
-                } while viewStore.imageSet
+//                } while viewStore.imageSet
             } catch {
                 print(error)
             }
