@@ -99,9 +99,9 @@ struct DrawingStyleView: View {
             ("Sketch", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "스케치"),
             ("Anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
             ("Pixel Art", Color(hexCode: "#191919"), Image("VanGogh"), "픽셀아트"),
-            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("SalvadorDali"), "빈센트 반 고흐"),
-            ("Monet", Color(hexCode: "#191919"), Image("SalvadorDali"), "클로드 모네"),
-            ("Salvador Dali", Color(hexCode: "#191919"), Image("SalvadorDali"), "살바도르 달리")
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("SalvadorDali"), "반 고흐"),
+            ("Monet", Color(hexCode: "#191919"), Image("SalvadorDali"), "모네"),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("SalvadorDali"), "달리")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
