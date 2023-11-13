@@ -19,23 +19,23 @@ struct DrawingStyleView: View {
                     VStack(spacing: 0) {
                         MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
-                        VStack {
-                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
-                            Spacer()
-                            Text("prior_guidance_scale: \(viewStore.priorScale)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
-                            Spacer()
-                            Text("num_inference_steps: \(viewStore.steps)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
-                            Spacer()
-                            Text("guidance_scale: \(viewStore.scale)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
-                        }
+//                        VStack {
+//                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
+//                            Spacer()
+//                            Text("prior_guidance_scale: \(viewStore.priorScale)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
+//                            Spacer()
+//                            Text("num_inference_steps: \(viewStore.steps)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
+//                            Spacer()
+//                            Text("guidance_scale: \(viewStore.scale)")
+//                                .font(.pretendard(.semiBold, size: 18))
+//                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
+//                        }
                         generateDrawingStyleView()
                             .padding(.top, 16)
                             .padding(.horizontal)
@@ -117,7 +117,7 @@ struct DrawingStyleView: View {
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
                     ForEach(drawingStyles, id: \.0) { style in
                         generateDrawingStyleCardView(drawingStyle: style)
                             .onTapGesture(perform: {
@@ -129,7 +129,6 @@ struct DrawingStyleView: View {
                             })
                             .padding(12)
                     }
-                    .aspectRatio(1.0, contentMode: .fit)
                 }
                 .padding(4)
                 .padding(.bottom, 32)
@@ -153,7 +152,7 @@ struct DrawingStyleView: View {
                             .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
                 Text(drawingStyle.3)
-                    .font(.pretendard(.medium, size: 18))
+                    .font(viewStore.selectedDrawingStyle == drawingStyle.0 ? .pretendard(.bold, size: 18) : .pretendard(.medium, size: 18))
                     .foregroundStyle(.textPrimary)
             }
             .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))

@@ -895,11 +895,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = 662HVTXJ55;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "픽다";
+				INFOPLIST_KEY_CFBundleDisplayName = PICDA;
 				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "일기를 백업합니다.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "앱 잠금 해제";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진을 저장합니다.";
@@ -935,11 +935,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = 662HVTXJ55;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "픽다";
+				INFOPLIST_KEY_CFBundleDisplayName = PICDA;
 				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "일기를 백업합니다.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "앱 잠금 해제";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진을 저장합니다.";
