@@ -91,6 +91,14 @@ struct MainView: View {
                             YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
+                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "남은 필름") {
+                            Text("일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모되어요.\n필름은 매일 \(DrawingCountManager.INITIAL_COUNT)개로 리셋되니, 필름이 떨어지지 않게 유의하세요!")
+                                .multilineTextAlignment(.center)
+                        } primaryButton: {
+                            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                                viewStore.send(.showCountInfo(false))
+                            }
+                        }
                     Spacer()
                 }
             }
@@ -175,7 +183,7 @@ struct MainView: View {
                 Spacer()
                 
                 Button {
-                    
+                    viewStore.send(.showCountInfo(true))
                 } label: {
                     HStack {
                         Image(systemName: "film")
@@ -193,20 +201,6 @@ struct MainView: View {
                 .onAppear {
                     viewStore.send(.getRemainingCount)
                 }
-                
-                //                Button {
-                //
-                //                } label: {
-                //                    Image(systemName: "calendar")
-                //                        .resizable()
-                //                        .frame(width: 20, height: 18)
-                //                        .padding(10)
-                //                        .background {
-                //                            Circle()
-                //                                .fill(Color.backgroundCard)
-                //                                .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
-                //                        }
-                //                }
             }
             .padding(.top)
             .padding(.horizontal, 20)
