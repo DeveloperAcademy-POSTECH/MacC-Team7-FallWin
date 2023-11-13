@@ -109,7 +109,7 @@ struct BackupSettingView: View {
                 .onTapGesture { }
             }
         }
-        .navigationTitle("화면 잠금")
+        .navigationTitle("iCloud")
         .navigationBarTitleDisplayMode(.inline)
     }
     
