@@ -11,13 +11,15 @@ import FirebaseAnalytics
 
 struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
+    @State private var nickname = ""
+    @State private var profileNickname = ""
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             List {
                 Section("프로필") {
                     HStack {
-                        Text(viewStore.nickname)
+                        Text(profileNickname.isEmpty ? "PICDA" : profileNickname)
                             .font(.pretendard(.bold, size: 18))
                             .foregroundColor(.textPrimary)
                         Spacer()
@@ -67,19 +69,36 @@ struct SettingsView: View {
                     .listRowBackground(Color.backgroundPrimary)
                 }
                 .listSectionSeparator(.hidden)
+//                .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "닉네임 변경") {
+//                    TextField("닉네임", text: viewStore.binding(get: \.tempNickname, send: SettingsFeature.Action.setTempNickname))
+//                } primaryButton: {
+//                    OhwaAlertButton(label: Text("취소"), color: .clear) {
+//                        viewStore.send(.setTempNickname(""))
+//                        viewStore.send(.showNicknameAlert(false))
+//                    }
+//                } secondaryButton: {
+//                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: viewStore.tempNickname.isEmpty ? .buttonDisabled : .button) {
+//                        if !viewStore.tempNickname.isEmpty {
+//                            viewStore.send(.setNickname(viewStore.tempNickname))
+//                            viewStore.send(.setTempNickname(""))
+//                            viewStore.send(.showNicknameAlert(false))
+//                        }
+//                    }
+//                }
                 .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "닉네임 변경") {
-                    TextField("닉네임", text: viewStore.binding(get: \.tempNickname, send: SettingsFeature.Action.setTempNickname))
+                    TextField("닉네임", text: $nickname)
                 } primaryButton: {
                     OhwaAlertButton(label: Text("취소"), color: .clear) {
                         viewStore.send(.setTempNickname(""))
                         viewStore.send(.showNicknameAlert(false))
                     }
                 } secondaryButton: {
-                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: viewStore.tempNickname.isEmpty ? .buttonDisabled : .button) {
-                        if !viewStore.tempNickname.isEmpty {
-                            viewStore.send(.setNickname(viewStore.tempNickname))
-                            viewStore.send(.setTempNickname(""))
+                    OhwaAlertButton(label: Text("변경").foregroundColor(.textOnButton), color: .button) {
+                        if !nickname.isEmpty {
+                            viewStore.send(.setNickname(nickname))
+                            profileNickname = nickname
                             viewStore.send(.showNicknameAlert(false))
+                            print("profileNickname : \(viewStore.nickname)")
                         }
                     }
                 }
@@ -193,13 +212,16 @@ struct SettingsView: View {
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
+            
         }
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
             print("@Log : V5__설정뷰")
            }
     }
+    
 }
+
 
 #Preview {
     NavigationStack {
