@@ -127,10 +127,9 @@
 /* Begin PBXFileReference section */
 		6637556E2AF7E3A300117085 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		663755702AF7E53100117085 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		663755752AF7ECD200117085 /* OhwaAlertImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhwaAlertImpl.swift; sourceTree = "<group>"; };
 		663755782AF7ED3600117085 /* OhwaAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhwaAlert.swift; sourceTree = "<group>"; };
-		6637557A2AF7EF6C00117085 /* OhwaAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhwaAlertButton.swift; sourceTree = "<group>"; };
 		6637557C2AF7F0A700117085 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		66392A992B020CEB004C8381 /* FallWinRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FallWinRelease.entitlements; sourceTree = "<group>"; };
 		6658376E2AF810EC00A5833E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6658377B2AF8CB0A00A5833E /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		791F14672ADD726600F8DDD2 /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
@@ -274,15 +273,6 @@
 			path = Tracking;
 			sourceTree = "<group>";
 		};
-		66B82DB02AFE0D53004ED078 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				663755752AF7ECD200117085 /* OhwaAlertImpl.swift */,
-				6637557A2AF7EF6C00117085 /* OhwaAlertButton.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		791F14772AE0D88F00F8DDD2 /* Journal */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +338,7 @@
 		79407D512AD7E68D006C7571 /* FallWin */ = {
 			isa = PBXGroup;
 			children = (
+				66392A992B020CEB004C8381 /* FallWinRelease.entitlements */,
 				79A5667B2AFE06BF00524A57 /* FallWin.entitlements */,
 				6658376E2AF810EC00A5833E /* GoogleService-Info.plist */,
 				9867B6382AE652A400C7359B /* Info.plist */,
@@ -557,15 +548,6 @@
 				98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */,
 			);
 			path = Writing;
-			sourceTree = "<group>";
-		};
-		A9D4C7962AFE0EC00004CF04 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				663755752AF7ECD200117085 /* OhwaAlertImpl.swift */,
-				6637557A2AF7EF6C00117085 /* OhwaAlertButton.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -895,7 +877,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 386W4DPD42;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -915,7 +897,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.semin.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -931,11 +913,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = FallWin/FallWin.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FallWin/FallWinRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23102402;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 386W4DPD42;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -955,7 +937,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seminlee.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

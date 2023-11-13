@@ -47,7 +47,7 @@ struct MainView: View {
                     }
                     .onTapGesture {
                         Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
-                       print("@Log : A1_3__메인_새일기쓰기")
+                        print("@Log : A1_3__메인_새일기쓰기")
                        }
                     .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
                         Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")

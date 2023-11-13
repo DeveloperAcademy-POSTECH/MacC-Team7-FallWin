@@ -37,7 +37,6 @@ struct Tracking {
         case A1_2__메인_일기아이템
         case A1_3__메인_새일기쓰기
         
-        case A2_1_1__일기작성_감정선택_뒤로가기
         case A2_1_2__일기작성_감정선택_닫기
         case A2_1_3__일기작성_감정선택_건너뛰기
         case A2_1_4__일기작성_감정선택_다음
@@ -62,11 +61,9 @@ struct Tracking {
         case A2_1_5_17__일기작성_감정선택_놀란
         case A2_1_5_18__일기작성_감정선택_안심되는
         
-        case A2_2_1__일기작성_글작성_뒤로가기
         case A2_2_2__일기작성_글작성_닫기
         case A2_2_3__일기작성_글작성_다음버튼
         
-        case A2_3_1__일기작성_화풍선택_뒤로가기
         case A2_3_2__일기작성_화풍선택_닫기
         case A2_3_3__일기작성_화풍선택_다음버튼
         case A2_3_4__일기작성_화풍선택_화풍
@@ -92,7 +89,6 @@ struct Tracking {
         case A2_3_4_19__일기작성_화풍선택_일러스트
         case A2_3_4_20__일기작성_화풍선택_CG
         
-        case A2_5_1__일기작성_그림선택_뒤로가기
         case A2_5_2__일기작성_그림선택_닫기
         case A2_5_3__일기작성_그림선택_그림확대
         case A2_5_4__일기작성_그림선택_일기마무리버튼
@@ -121,7 +117,7 @@ struct Tracking {
     }
 
     static func logScreenView(screenName: String, className: String? = nil) {
-        logEvent(AnalyticsEventScreenView,
+        Analytics.logEvent(AnalyticsEventScreenView,
                  parameters: [AnalyticsParameterScreenName: screenName,
                               AnalyticsParameterScreenClass: className ?? screenName])
     }

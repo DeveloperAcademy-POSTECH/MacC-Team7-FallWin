@@ -12,6 +12,7 @@ import FirebaseAnalytics
 struct WritingView: View {
     var store: StoreOf<WritingFeature>
     //    @State var navPath: NavigationPath = .init()
+    @State var emotionLabeling: String = "nil"
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -42,6 +43,7 @@ struct WritingView: View {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
                             Tracking.logEvent(Tracking.Event.A2_1_4__일기작성_감정선택_다음.rawValue)
                             print("@Log : A2_1_4__일기작성_감정선택_다음")
+                            Tracking.logEvent(emotionLabeling)
                             
                         } label: {
                             ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
@@ -121,6 +123,8 @@ struct WritingView: View {
                                     viewStore.send(.emotionSelection(nil))
                                 } else {
                                     viewStore.send(.emotionSelection(emotion.0))
+                                    emotionLabeling = emotion.4
+                                    print("@Log_emotionLabeling : \(emotionLabeling)")
                                 }
                             }
                     }
@@ -230,9 +234,9 @@ struct TestView: View {
     }
 }
 
-
-#Preview {
-    WritingView(store: Store(initialState: WritingFeature.State()) {
-        WritingFeature()
-    })
-}
+//
+//#Preview {
+//    WritingView(store: Store(initialState: WritingFeature.State()) {
+//        WritingFeature()
+//    })
+//}
