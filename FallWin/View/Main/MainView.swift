@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct MainView: View {
     let store: StoreOf<MainFeature>
@@ -52,6 +53,10 @@ struct MainView: View {
                                 }
                             }
                         }
+                        .onTapGesture {
+                            Tracking.logEvent(Tracking.Event.A1_2__메인_일기아이템.rawValue)
+                           print("@Log : A1_2__메인_일기아이템")
+                           }
                     }
                 }
                 
@@ -63,6 +68,10 @@ struct MainView: View {
                                 viewStore.send(.hideTabBar(true))
                             }
                     }
+                    .onTapGesture {
+                        Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
+                        print("@Log : A1_3__메인_새일기쓰기")
+                       }
                     .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
                         Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
                     } primaryButton: {
@@ -70,6 +79,7 @@ struct MainView: View {
                             viewStore.send(.showCountAlert(false))
                         }
                     }
+                
                 
                 VStack {
                     toolbar
@@ -95,6 +105,10 @@ struct MainView: View {
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V1__메인뷰.rawValue)
+            print("@Log : V1__메인뷰")
+           }
     }
     
     @ViewBuilder
@@ -142,6 +156,8 @@ struct MainView: View {
             HStack(alignment: .center) {
                 Button {
                     viewStore.send(.showPickerSheet)
+                    Tracking.logEvent(Tracking.Event.A1_1__메인_날짜선택.rawValue)
+                   print("@Log : A1_1__메인_날짜선택")
                 } label: {
                     HStack {
                         Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
@@ -150,6 +166,7 @@ struct MainView: View {
                     }
                 }
                 .foregroundStyle(Color.textPrimary)
+
                 
                 Spacer()
                 
@@ -192,6 +209,7 @@ struct MainView: View {
             .padding(.bottom, 8)
             .background(Color.backgroundPrimary)
         }
+
     }
     
     private var writingActionButton: some View {

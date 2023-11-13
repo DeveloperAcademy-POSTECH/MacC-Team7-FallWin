@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftKeychainWrapper
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct JournalView: View {
     let store: StoreOf<JournalFeature>
@@ -107,6 +108,10 @@ struct JournalView: View {
                     .presentationDetents([.fraction(0.8)])
             }
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V3__상세페이지뷰.rawValue)
+            print("@Log : V3__상세페이지뷰")
+           }
     }
     
     private var journalDrawing: some View {

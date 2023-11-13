@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct LockSettingView: View {
     let store: StoreOf<LockSettingFeature>
@@ -20,6 +21,10 @@ struct LockSettingView: View {
                             .font(.pretendard(size: 18))
                             .padding(.vertical, 8)
                     }
+                    .onTapGesture(perform: {
+                        Tracking.logEvent(Tracking.Event.A5_1_1_설정뷰_화면잠금_비밀번호설정과해제.rawValue)
+                        print("@Log : A5_1_1_설정뷰_화면잠금_비밀번호설정과해제")
+                    })
                     .listRowBackground(Color.backgroundPrimary)
                     
                     if let biometricString = viewStore.biometricString {

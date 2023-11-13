@@ -35,14 +35,13 @@ struct Tracking {
     enum Event: String {
         case A1_1__메인_날짜선택
         case A1_2__메인_일기아이템
-        case A1_3__메인_일기추가버튼
+        case A1_3__메인_새일기쓰기
         
-        case A2_1_1__일기작성_감정선택_뒤로가기
         case A2_1_2__일기작성_감정선택_닫기
         case A2_1_3__일기작성_감정선택_건너뛰기
         case A2_1_4__일기작성_감정선택_다음
         case A2_1_5__일기작성_감정선택_감정
-        //감정별로 라벨링을 할 수 있을지 잘 몰라서 일단 다 써놓을게요
+        
         case A2_1_5_1__일기작성_감정선택_행복한
         case A2_1_5_2__일기작성_감정선택_뿌듯한
         case A2_1_5_3__일기작성_감정선택_감동받은
@@ -62,37 +61,53 @@ struct Tracking {
         case A2_1_5_17__일기작성_감정선택_놀란
         case A2_1_5_18__일기작성_감정선택_안심되는
         
-        case A2_2_1__일기작성_글작성_뒤로가기
         case A2_2_2__일기작성_글작성_닫기
         case A2_2_3__일기작성_글작성_다음버튼
-        case A2_2_4__일기작성_글작성_글작성
         
-        case A2_3_1__일기작성_화풍선택_뒤로가기
         case A2_3_2__일기작성_화풍선택_닫기
-        case A2_3_3__일기작성_화풍선택_그림그리러가기
+        case A2_3_3__일기작성_화풍선택_다음버튼
         case A2_3_4__일기작성_화풍선택_화풍
-        //화풍별로 라벨링을 할 수 있을지 잘 몰라서 일단 다 써놓을게요
         
-        case A2_4_1__일기작성_그림선택_뒤로가기
-        case A2_4_2__일기작성_그림선택_닫기
-        case A2_4_3__일기작성_그림선택_그림확대
-        case A2_4_4__일기작성_그림선택_그림마무리버튼
+        case A2_3_4_1__일기작성_화풍선택_유화
+        case A2_3_4_2__일기작성_화풍선택_스케치
+        case A2_3_4_3__일기작성_화풍선택_르누아르
+        case A2_3_4_4__일기작성_화풍선택_화풍선택안함
+        case A2_3_4_5__일기작성_화풍선택_샤갈
+        case A2_3_4_6__일기작성_화풍선택_애니메이션
+        case A2_3_4_7__일기작성_화풍선택_반고흐
+        case A2_3_4_8__일기작성_화풍선택_칸딘스키
+        case A2_3_4_9__일기작성_화풍선택_고갱
+        case A2_3_4_10__일기작성_화풍선택_피카소
+        case A2_3_4_11__일기작성_화풍선택_렘브란트
+        case A2_3_4_12__일기작성_화풍선택_앙리루소
+        case A2_3_4_13__일기작성_화풍선택_앙리마티스
+        case A2_3_4_14__일기작성_화풍선택_에곤쉴레
+        case A2_3_4_15__일기작성_화풍선택_웹툰
+        case A2_3_4_16__일기작성_화풍선택_DC코믹스
+        case A2_3_4_17__일기작성_화풍선택_지브리
+        case A2_3_4_18__일기작성_화풍선택_필름
+        case A2_3_4_19__일기작성_화풍선택_일러스트
+        case A2_3_4_20__일기작성_화풍선택_CG
         
-        case A2_5_1__일기작성_그림확대_닫기
-        case A2_5_2__일기작성_그림확대_그림선택
+        case A2_5_2__일기작성_그림선택_닫기
+        case A2_5_3__일기작성_그림선택_그림확대
+        case A2_5_4__일기작성_그림선택_일기마무리버튼
+        
+        case A2_6_1__일기작성_그림확대_닫기
+        case A2_6_2__일기작성_그림확대_그림선택
         
         case A3_1__상세페이지_공유하기
         case A3_2__상세페이지_수정하기
         case A3_3__상세페이지_일기삭제
         
         case A4_1__검색뷰_피드검색
+        case A4_2__검색뷰_새일기쓰기
         
         case A5_1_1_설정뷰_화면잠금_비밀번호설정과해제
-        case A5_1_1_설정뷰_화면잠금_생체인증
+        case A5_1_2_설정뷰_화면잠금_생체인증
         case A5_2_1_설정뷰_iCloud백업_백업
         case A5_2_2_설정뷰_iCloud백업_복원
         case A5_3_1_설정뷰_소통창구
-        case A5_4_1_설정뷰_피드백남기기_피드백보내기
 
     }
 
@@ -102,7 +117,7 @@ struct Tracking {
     }
 
     static func logScreenView(screenName: String, className: String? = nil) {
-        logEvent(AnalyticsEventScreenView,
+        Analytics.logEvent(AnalyticsEventScreenView,
                  parameters: [AnalyticsParameterScreenName: screenName,
                               AnalyticsParameterScreenClass: className ?? screenName])
     }
@@ -112,13 +127,15 @@ struct Tracking {
       - Screen의 경우
             - view의 body에             
                  .onAppear {
-                 Tracking.logScreenView(screenName: Tracking.Screen.wrtingSelectEmotionView)
+                 Tracking.logScreenView(screenName: Tracking.Screen.wrtingSelectEmotionView.rawValue)
+                print("@Log : wrtingSelectEmotionView")
                     }
      를 달아주세요
      - Event의 경우
         - 버튼이나 컴포넌트 등에
                  .onTapGesture {
-                     Tracking.logEvent(Tracking.Event.touchOnboardingStart)
+                     Tracking.logEvent(Tracking.Event.touchOnboardingStart.rawValue)
+                    print("@Log : wrtingSelectEmotionView")
                     }
      */
 }
