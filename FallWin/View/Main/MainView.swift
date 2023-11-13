@@ -16,7 +16,6 @@ struct MainView: View {
             ZStack {
                 ScrollViewReader { proxy in
                     ScrollView {
-                        //                    Text( viewStore.pickedDateValue.description)
                         LazyVStack {
                             ForEach(viewStore.journals.indices, id: \.self) { i in
                                 let journal = viewStore.journals[i]
