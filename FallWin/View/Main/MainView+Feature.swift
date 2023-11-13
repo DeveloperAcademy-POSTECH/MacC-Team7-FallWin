@@ -16,6 +16,7 @@ struct MainFeature: Reducer {
         var month: Int = Date().month
         var isPickerShown: Bool = false
         var showCountAlert: Bool = false
+        var showCountInfo: Bool = false
         var remainingCount: Int = 0
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
@@ -40,6 +41,7 @@ struct MainFeature: Reducer {
         case updateScrolling
         case bindJournal
         case showCountAlert(Bool)
+        case showCountInfo(Bool)
         case getRemainingCount
         
         case journal(PresentationAction<JournalFeature.Action>)
@@ -113,6 +115,10 @@ struct MainFeature: Reducer {
                 
             case let .showCountAlert(show):
                 state.showCountAlert = show
+                return .none
+                
+            case let .showCountInfo(show):
+                state.showCountInfo = show
                 return .none
                 
             case .getRemainingCount:

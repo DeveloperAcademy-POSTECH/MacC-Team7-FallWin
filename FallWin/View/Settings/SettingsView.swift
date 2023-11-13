@@ -57,7 +57,7 @@ struct SettingsView: View {
                         }
                         
                         Rectangle()
-                            .fill(Color(hexCode: "#E9E4E3"))
+                            .fill(Color(hexCode: "#E9E4E3").opacity(0.4))
                             .frame(height: 8)
                             .padding(.top, 16)
                             .padding(.horizontal, -20)
@@ -67,25 +67,23 @@ struct SettingsView: View {
                     .listRowBackground(Color.backgroundPrimary)
                 }
                 .listSectionSeparator(.hidden)
-                .alert("닉네임 변경", isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), actions: {
-                    
-                })
-//                .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "닉네임 변경") {
-//                    TextField("닉네임", text: viewStore.binding(get: \.tempNickname, send: SettingsFeature.Action.setTempNickname))
-//                } primaryButton: {
-//                    OhwaAlertButton(label: Text("취소"), color: .clear) {
-//                        viewStore.send(.setTempNickname(""))
-//                        viewStore.send(.showNicknameAlert(false))
-//                    }
-//                } secondaryButton: {
-//                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), tempNickname: viewStore.tempNickname) {
-//                        if !viewStore.tempNickname.isEmpty {
-//                            viewStore.send(.setNickname(viewStore.tempNickname))
-//                            viewStore.send(.setTempNickname(""))
-//                            viewStore.send(.showNicknameAlert(false))
-//                        }
-//                    }
-//                }
+
+                .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "닉네임 변경") {
+                    TextField("닉네임", text: viewStore.binding(get: \.tempNickname, send: SettingsFeature.Action.setTempNickname))
+                } primaryButton: {
+                    OhwaAlertButton(label: Text("취소"), color: .clear) {
+                        viewStore.send(.setTempNickname(""))
+                        viewStore.send(.showNicknameAlert(false))
+                    }
+                } secondaryButton: {
+                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: .button) {
+                        if !viewStore.tempNickname.isEmpty {
+                            viewStore.send(.setNickname(viewStore.tempNickname))
+                            viewStore.send(.setTempNickname(""))
+                            viewStore.send(.showNicknameAlert(false))
+                        }
+                    }
+                }
                 .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo), title: "남은 필름") {
                     Text("일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모되어요.\n필름은 매일 \(DrawingCountManager.INITIAL_COUNT)개로 리셋되니, 필름이 떨어지지 않게 유의하세요!")
                         .multilineTextAlignment(.center)
@@ -148,7 +146,7 @@ struct SettingsView: View {
                     .listRowBackground(Color.backgroundPrimary)
                     
                     NavigationLink {
-                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                        WebView(url: "https://instagram.com/picd_a?igshid=eHViMWpyenVmcDNp")
                             .toolbar(.hidden, for: .tabBar)
                         
                     } label: {
@@ -164,10 +162,7 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
-//                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
-//                            FeedbackView(store: store)
-//                        }
-                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                        WebView(url: "https://forms.gle/DxFtstGew7zctnWm9")
                             .toolbar(.hidden, for: .tabBar)
                         
                     } label: {
@@ -178,21 +173,16 @@ struct SettingsView: View {
                     }
                     .listRowBackground(Color.backgroundPrimary)
                     
-                    NavigationLink {
-                        WebView(url: "https://instagram.com/ohwa_todaysart")
-                            .toolbar(.hidden, for: .tabBar)
-                        
-                    } label: {
-                        HStack {
-                            Text("픽다에 대하여")
-                            Spacer()
-                            Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
-                                .foregroundStyle(.textSecondary)
-                        }
-                        .font(.pretendard(size: 18))
-                        .foregroundColor(.textPrimary)
-                        .padding(.vertical, 8)
+                    HStack {
+                        Text("픽다에 대하여")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                        Spacer()
+                        Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
+                            .font(.pretendard(size: 18))
+                            .foregroundStyle(.textSecondary)
                     }
+                    .padding(.vertical, 8)
                     .listRowBackground(Color.backgroundPrimary)
                 }
             }
@@ -201,52 +191,53 @@ struct SettingsView: View {
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onAppear {
-            Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
-            print("@Log : V5__설정뷰")
-           }
-    }
-    
-    @ViewBuilder
-    func nicknameSettingHStack() -> Alert {
-        HStack {
-            nicknameSettingView(buttonType: .cancel)
-            nicknameSettingView(buttonType: .update)
-        }
-    }
-    
-    @ViewBuilder
-    func nicknameSettingView(buttonType: NicknameButtonType) -> some View {
-        
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            if buttonType == .cancel {
-                Button {
-                    viewStore.send(.setTempNickname(""))
-                    viewStore.send(.showNicknameAlert(false))
-                } label: {
-                    Text("취소")
-                }
-                .background(Color.clear)
-                .cornerRadius(4)
-            } else {
-                Button {
-                    if !viewStore.tempNickname.isEmpty {
-                        viewStore.send(.setNickname(viewStore.tempNickname))
-                        viewStore.send(.setTempNickname(""))
-                        viewStore.send(.showNicknameAlert(false))
-                    }
-                } label: {
-                    Text("변경")
-                        .foregroundStyle(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding()
-                }
-                .background(viewStore.tempNickname.isEmpty ? .buttonDisabled : .button)
-                .cornerRadius(4)
+            .onAppear {
+                Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
+                print("@Log : V5__설정뷰")
+                viewStore.send(.fetchAppInfo)
             }
         }
     }
+    
+//    @ViewBuilder
+//    func nicknameSettingHStack() -> Alert {
+//        HStack {
+//            nicknameSettingView(buttonType: .cancel)
+//            nicknameSettingView(buttonType: .update)
+//        }
+//    }
+//    
+//    @ViewBuilder
+//    func nicknameSettingView(buttonType: NicknameButtonType) -> some View {
+//        
+//        WithViewStore(store, observe: { $0 }) { viewStore in
+//            if buttonType == .cancel {
+//                Button {
+//                    viewStore.send(.setTempNickname(""))
+//                    viewStore.send(.showNicknameAlert(false))
+//                } label: {
+//                    Text("취소")
+//                }
+//                .background(Color.clear)
+//                .cornerRadius(4)
+//            } else {
+//                Button {
+//                    if !viewStore.tempNickname.isEmpty {
+//                        viewStore.send(.setNickname(viewStore.tempNickname))
+//                        viewStore.send(.setTempNickname(""))
+//                        viewStore.send(.showNicknameAlert(false))
+//                    }
+//                } label: {
+//                    Text("변경")
+//                        .foregroundStyle(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton)
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                        .padding()
+//                }
+//                .background(viewStore.tempNickname.isEmpty ? .buttonDisabled : .button)
+//                .cornerRadius(4)
+//            }
+//        }
+//    }
 }
 
 #Preview {

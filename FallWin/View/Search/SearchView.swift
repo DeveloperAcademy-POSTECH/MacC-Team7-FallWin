@@ -35,7 +35,6 @@ struct SearchView: View {
                                                 .font(.pretendard(.semiBold, size: 20))
                                             Spacer()
                                         }
-                                            .padding(.horizontal, 12)
                                             .padding(.top, 12)
                                             .padding(.bottom, 6)
                                             .background {
@@ -112,7 +111,7 @@ struct SearchView: View {
                 viewStore.send(.filterData(newValue))
             }
             .navigationTitle(
-                Text("피드")
+                Text("앨범")
             )
             .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("찾고 싶은 추억을 입력해보세요"))
             .onTapGesture {

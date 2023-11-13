@@ -25,7 +25,7 @@ struct JournalView: View {
                         
                         journalContent
                     }
-                    .padding()
+                    .padding(20)
                 }
                 .refreshable {
                     dismiss()
@@ -51,9 +51,6 @@ struct JournalView: View {
                             }
                         }
                 }
-            }
-            .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { item in
-                ActivityView(image: item)
             }
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .onChange(of: viewStore.dismiss) { value in
@@ -93,20 +90,39 @@ struct JournalView: View {
                 
                 ToolbarItem(placement: .primaryAction) {
                     Button("공유", systemImage: "square.and.arrow.up") {
-                        viewStore.send(.showShareSheet(true))
+                        Tracking.logEvent(Tracking.Event.A3_1__상세페이지_공유하기.rawValue)
+                        print("@Log : A3_1__상세페이지_공유하기")
+                        
+                        DispatchQueue.main.async {
+                            if let image = shareView(image: viewStore.journal.wrappedImage).render() {
+                                viewStore.send(.shareItem(ShareImageWrapper(id: UUID(), image: image)))
+                            }
+                        }
                     }
                 }
                 
                 ToolbarItem(placement: .secondaryAction) {
                     Button("삭제", systemImage: "trash", role: .destructive) {
-                        viewStore.send(.delete)
-                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
-                        print("@Log : A3_3__상세페이지_일기삭제")
+                        viewStore.send(.showDeleteAlert(true))
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showDeleteAlert, send: JournalFeature.Action.showDeleteAlert), title: "일기를 삭제할까요?") {
+                        Text("일기를 삭제하면 다시 복구할 수 없습니다.")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("취소"), color: .clear) {
+                            viewStore.send(.showDeleteAlert(false))
+                        }
+                    } secondaryButton: {
+                        OhwaAlertButton(label: Text("삭제하기").foregroundColor(.textOnButton), color: .button) {
+                            Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+                            print("@Log : A3_3__상세페이지_일기삭제")
+                            viewStore.send(.delete)
+                            viewStore.send(.showDeleteAlert(false))
+                        }
                     }
                 }
             }
-            .sheet(isPresented: viewStore.binding(get: \.showShareSheet, send: JournalFeature.Action.showShareSheet)) {
-                shareSheetView
+            .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { image in
+                shareSheetView(image: image.image)
                     .presentationDetents([.fraction(0.8)])
             }
         }
@@ -141,7 +157,9 @@ struct JournalView: View {
                         .padding(.bottom, 8)
                 }
             }
-            .padding()
+            .padding(.horizontal, 16)
+            .padding(.top, 24)
+            .padding(.bottom)
             .background {
                 Rectangle()
                     .fill(.backgroundCard)
@@ -161,13 +179,15 @@ struct JournalView: View {
                         Spacer()
                         VStack {
                             Text("오늘의 기분")
-                            HStack(spacing: 0) {
+                                .font(.sejong(size: 16))
+                            Spacer()
+                            HStack(spacing: 8) {
                                 Image(icon)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 36, height: 36)
+                                    .frame(width: 24, height: 24)
                                 Text(string)
-                                    .font(.pretendard(.medium, size: 16))
+                                    .font(.sejong(size: 18))
                             }
                         }
                         Spacer()
@@ -180,11 +200,17 @@ struct JournalView: View {
                         Spacer()
                         VStack {
                             Text("오늘의 그림")
+                                .font(.sejong(size: 16))
+                            Spacer()
                             Text(string)
+                                .font(.sejong(size: 18))
                         }
                         Spacer()
                     }
                 }
+                .foregroundStyle(.textPrimary)
+                .padding(8)
+                .frame(maxHeight: 112)
                 
                 if mind != .none || drawingStyle != .none {
                     Divider()
@@ -192,6 +218,7 @@ struct JournalView: View {
                 }
                 
                 LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 20)
+                    .foregroundStyle(.textPrimary)
             }
             .padding()
             .background {
@@ -202,7 +229,8 @@ struct JournalView: View {
         }
     }
     
-    private var shareSheetView: some View {
+    @ViewBuilder
+    private func shareSheetView(image: UIImage) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
                 Capsule()
@@ -213,21 +241,13 @@ struct JournalView: View {
                     .padding(.top, 20)
                 Spacer()
                 ZStack {
-                    shareView
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
                 }
                 .padding()
                 Spacer()
-                Button {
-                    viewStore.send(.showShareSheet(false))
-                    DispatchQueue.main.async {
-                        if let image = _shareView.frame(width: 720).render() {
-                            viewStore.send(.shareItem(ShareImageWrapper(id: UUID(), image: image)))
-                        }
-                    }
-                    Tracking.logEvent(Tracking.Event.A3_1__상세페이지_공유하기.rawValue)
-                    print("@Log : A3_1__상세페이지_공유하기")
-                    
-                } label: {
+                ShareLink(item: Image(uiImage: image), preview: SharePreview("그림 일기", image: Image(uiImage: image))) {
                     HStack {
                         Spacer()
                         Text("오늘의 일기 공유")
@@ -244,50 +264,8 @@ struct JournalView: View {
         }
     }
     
-    private var shareView: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack(spacing: 0) {
-                Group {
-                    if let image = viewStore.journal.wrappedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                    } else {
-                        Rectangle()
-                            .fill(.blue)
-                            .aspectRatio(1, contentMode: .fit)
-                    }
-                }
-                .padding(22)
-                .overlay {
-                    Image("templatesTop")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
-                ZStack {
-                    Image("templatesBottom")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    Text(String(viewStore.journal.timestamp?.journalShareString ?? ""))
-                        .font(.uhbeeSehyun(.regular, size: 22))
-                }
-                .padding(.top, -20)
-            }
-            .overlay {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Image("sharesheetBottomIcon")
-                            .shadow(color: .shadow.opacity(0.14), radius: 4, y: 2)
-                    }
-                }
-                .padding(6)
-            }
-        }
-    }
-    
-    private var _shareView: some View {
+    @ViewBuilder
+    private func shareView(image: UIImage?) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
                 Group {
@@ -321,12 +299,13 @@ struct JournalView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Image("sharesheetBottomIcon")
+                        Image("shareSheetBottomIcon")
                             .shadow(color: .shadow.opacity(0.14), radius: 4, y: 2)
                     }
                 }
-                .padding(6)
+                .padding(12)
             }
+            .frame(width: 720)
         }
     }
 }
@@ -342,7 +321,7 @@ struct JournalView: View {
     context.insert(journal)
     
     return NavigationStack {
-        JournalView(store: Store(initialState: JournalFeature.State(journal: journal, showShareSheet: false), reducer: {
+        JournalView(store: Store(initialState: JournalFeature.State(journal: journal, showShareSheet: true), reducer: {
             JournalFeature()
         }))
     }

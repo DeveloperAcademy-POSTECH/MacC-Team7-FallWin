@@ -19,7 +19,7 @@ struct DrawingStyleView: View {
                     Color.backgroundPrimary
                         .ignoresSafeArea()
                     VStack(spacing: 0) {
-                        MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
+                        MessageView(titleText: "어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
                             .padding(.top, 24)
 //                        VStack {
 //                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
@@ -41,21 +41,39 @@ struct DrawingStyleView: View {
                         generateDrawingStyleView()
                             .padding(.top, 16)
                             .padding(.horizontal)
-                        //TODO: 함께 해결해야 할 부분
-                        Button {
-                            if DrawingCountManager.shared.remainingCount <= 0 {
-                                viewStore.send(.showCountAlert(true))
-                            } else {
-                                viewStore.send(.showGeneratedDiaryView)
+                        VStack(spacing: 12) {
+                            Text("그림을 그리면 필름이 차감돼요")
+                                .font(.pretendard(.regular, size: 14))
+                                .foregroundColor(.textTertiary)
+                            Button {
+                                if DrawingCountManager.shared.remainingCount <= 0 {
+                                    viewStore.send(.showCountAlert(true))
+                                } else {
+                                    viewStore.send(.showGeneratedDiaryView)
+                                }
+                                Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
+                                print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
+                                Tracking.logEvent(styleLabeling)
+                                
+                            } label: {
+                                //                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                                HStack(spacing: 8) {
+                                    Spacer()
+                                    Image(systemName: "film")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 16)
+                                    Text("그림 그리기")
+                                        .font(.pretendard(.semiBold, size: 18))
+                                    Spacer()
+                                }
+                                .foregroundColor(.textOnButton)
+                                .frame(height: 54)
+                                .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
+                                .cornerRadius(8)
                             }
-                            Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
-                            print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
-                            Tracking.logEvent(styleLabeling)
-                            
-                        } label: {
-                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                            .disabled(viewStore.selectedDrawingStyle == nil)
                         }
-                        .disabled(viewStore.selectedDrawingStyle == nil)
                         .padding(.top, 15)
                         .padding(.horizontal, 24)
                         .padding(.bottom, 16)
@@ -119,7 +137,7 @@ struct DrawingStyleView: View {
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 12) {
                     ForEach(drawingStyles, id: \.0) { style in
                         generateDrawingStyleCardView(drawingStyle: style)
                             .onTapGesture(perform: {
@@ -132,10 +150,9 @@ struct DrawingStyleView: View {
                                     
                                 }
                             })
-                            .padding(12)
+                            .padding(8)
                     }
                 }
-                .padding(4)
                 .padding(.bottom, 32)
             }
         }
@@ -158,7 +175,7 @@ struct DrawingStyleView: View {
                             .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
                 Text(drawingStyle.3)
-                    .font(viewStore.selectedDrawingStyle == drawingStyle.0 ? .pretendard(.bold, size: 18) : .pretendard(.medium, size: 18))
+                    .font(viewStore.selectedDrawingStyle == drawingStyle.0 ? .pretendard(.bold, size: 16) : .pretendard(.medium, size: 16))
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
             }
@@ -168,7 +185,9 @@ struct DrawingStyleView: View {
 }
 
 #Preview {
-    DrawingStyleView(store: Store(initialState: DrawingStyleFeature.State(selectedEmotion: "행복한", mainText: "행복한 하루였다")) {
-        DrawingStyleFeature()
-    })
+    NavigationStack {
+        DrawingStyleView(store: Store(initialState: DrawingStyleFeature.State(selectedEmotion: "행복한", mainText: "행복한 하루였다")) {
+            DrawingStyleFeature()
+        })
+    }
 }

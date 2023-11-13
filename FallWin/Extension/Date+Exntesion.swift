@@ -59,7 +59,7 @@ extension Date {
     }
     
     var journalShareString: String {
-        return "\(year).\(String(format: "%02d", month))\(String(format: "%02d", day)). \(dayOfWeek)요일"
+        return "\(year).\(String(format: "%02d", month)).\(String(format: "%02d", day)). \(dayOfWeek)요일"
     }
     
     var timeInMillis: Int64 {
