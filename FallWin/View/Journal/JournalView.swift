@@ -52,9 +52,6 @@ struct JournalView: View {
                         }
                 }
             }
-            .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { item in
-                ActivityView(image: item)
-            }
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .onChange(of: viewStore.dismiss) { value in
                 dismiss()
@@ -93,7 +90,14 @@ struct JournalView: View {
                 
                 ToolbarItem(placement: .primaryAction) {
                     Button("공유", systemImage: "square.and.arrow.up") {
-                        viewStore.send(.showShareSheet(true))
+                        Tracking.logEvent(Tracking.Event.A3_1__상세페이지_공유하기.rawValue)
+                        print("@Log : A3_1__상세페이지_공유하기")
+                        
+                        DispatchQueue.main.async {
+                            if let image = shareView(image: viewStore.journal.wrappedImage).render() {
+                                viewStore.send(.shareItem(ShareImageWrapper(id: UUID(), image: image)))
+                            }
+                        }
                     }
                 }
                 
@@ -105,8 +109,8 @@ struct JournalView: View {
                     }
                 }
             }
-            .sheet(isPresented: viewStore.binding(get: \.showShareSheet, send: JournalFeature.Action.showShareSheet)) {
-                shareSheetView
+            .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { image in
+                shareSheetView(image: image.image)
                     .presentationDetents([.fraction(0.8)])
             }
         }
@@ -213,7 +217,8 @@ struct JournalView: View {
         }
     }
     
-    private var shareSheetView: some View {
+    @ViewBuilder
+    private func shareSheetView(image: UIImage) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
                 Capsule()
@@ -224,21 +229,13 @@ struct JournalView: View {
                     .padding(.top, 20)
                 Spacer()
                 ZStack {
-                    shareView
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
                 }
                 .padding()
                 Spacer()
-                Button {
-                    viewStore.send(.showShareSheet(false))
-                    DispatchQueue.main.async {
-                        if let image = _shareView.frame(width: 720).render() {
-                            viewStore.send(.shareItem(ShareImageWrapper(id: UUID(), image: image)))
-                        }
-                    }
-                    Tracking.logEvent(Tracking.Event.A3_1__상세페이지_공유하기.rawValue)
-                    print("@Log : A3_1__상세페이지_공유하기")
-                    
-                } label: {
+                ShareLink(item: Image(uiImage: image), preview: SharePreview("그림 일기", image: Image(uiImage: image))) {
                     HStack {
                         Spacer()
                         Text("오늘의 일기 공유")
@@ -255,50 +252,8 @@ struct JournalView: View {
         }
     }
     
-    private var shareView: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack(spacing: 0) {
-                Group {
-                    if let image = viewStore.journal.wrappedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                    } else {
-                        Rectangle()
-                            .fill(.blue)
-                            .aspectRatio(1, contentMode: .fit)
-                    }
-                }
-                .padding(22)
-                .overlay {
-                    Image("templatesTop")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
-                ZStack {
-                    Image("templatesBottom")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    Text(String(viewStore.journal.timestamp?.journalShareString ?? ""))
-                        .font(.uhbeeSehyun(.regular, size: 22))
-                }
-                .padding(.top, -20)
-            }
-            .overlay {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Image("sharesheetBottomIcon")
-                            .shadow(color: .shadow.opacity(0.14), radius: 4, y: 2)
-                    }
-                }
-                .padding(6)
-            }
-        }
-    }
-    
-    private var _shareView: some View {
+    @ViewBuilder
+    private func shareView(image: UIImage?) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
                 Group {
@@ -332,12 +287,13 @@ struct JournalView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Image("sharesheetBottomIcon")
+                        Image("shareSheetBottomIcon")
                             .shadow(color: .shadow.opacity(0.14), radius: 4, y: 2)
                     }
                 }
-                .padding(6)
+                .padding(12)
             }
+            .frame(width: 720)
         }
     }
 }
@@ -353,7 +309,7 @@ struct JournalView: View {
     context.insert(journal)
     
     return NavigationStack {
-        JournalView(store: Store(initialState: JournalFeature.State(journal: journal, showShareSheet: false), reducer: {
+        JournalView(store: Store(initialState: JournalFeature.State(journal: journal, showShareSheet: true), reducer: {
             JournalFeature()
         }))
     }

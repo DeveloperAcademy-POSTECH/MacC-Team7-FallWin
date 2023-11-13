@@ -5,19 +5,19 @@
   },
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "sharesheetBottomIcon~universal@1x.png",
-      "scale" : "1x"
+      "filename" : "shareSheetBottomIcon~universal@1x.png",
+      "scale" : "1x",
+      "idiom" : "universal"
     },
     {
-      "filename" : "sharesheetBottomIcon~universal@2x.png",
+      "filename" : "shareSheetBottomIcon~universal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
       "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "sharesheetBottomIcon~universal@3x.png"
+      "filename" : "shareSheetBottomIcon~universal@3x.png"
     }
   ]
 }
