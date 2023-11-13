@@ -176,7 +176,7 @@ struct SettingsView: View {
                         
                     } label: {
                         HStack {
-                            Text("오화에 대하여")
+                            Text("픽다에 대하여")
                             Spacer()
                             Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
                                 .foregroundStyle(.textSecondary)
