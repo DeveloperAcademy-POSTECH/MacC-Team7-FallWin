@@ -13,6 +13,7 @@ enum DateElementInPicker {
     case day
 }
 
+
 struct YearMonthPickerView: View {
     @State var pickedYear: Int = Date().year
     @State var pickedMonth: Int = Date().month
@@ -20,13 +21,17 @@ struct YearMonthPickerView: View {
     @Binding var pickedDateTagValue: DateTagValue
     @Binding var journals: [Journal]
     
-    init(yearRange: ClosedRange<Int>, isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>, journals: Binding<[Journal]>) {
+    private var checkDateValid: ((Date) -> Date)? = nil
+    
+    init(isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>, journals: Binding<[Journal]>, checkDateValid: ((Date) -> Date)? = nil) {
         self._isPickerShown = isPickerShown
         self._pickedDateTagValue = pickedDateTagValue
         self._journals = journals
         
         self.pickedYear = pickedDateTagValue.wrappedValue.year
         self.pickedMonth = pickedDateTagValue.wrappedValue.month
+        
+        self.checkDateValid = checkDateValid
     }
     
     var body: some View {
@@ -74,6 +79,27 @@ struct YearMonthPickerView: View {
             return Date().month
         } else {
             return 12
+        }
+    }
+    
+    func getLastTimestamp(year: Int, month: Int, elementType: DateElementInPicker) -> Int {
+        
+        let years = journals.map( { DateTagValue(date: $0.timestamp ?? Date()).year } )
+        let months = journals.map( { DateTagValue(date: $0.timestamp ?? Date()).month } )
+        
+        switch elementType {
+        case .year:
+            if years.contains(year) && months.contains(month) {
+                return year
+            } else {
+                return pickedYear
+            }
+        default:
+            if years.contains(year) && months.contains(month) {
+                return month
+            } else {
+                return pickedMonth
+            }
         }
     }
 }
@@ -174,6 +200,6 @@ struct MonthDayYearPickerView: View {
 }
 
 #Preview {
-    YearMonthPickerView(yearRange: 1990...2023, isPickerShown: .constant(true), pickedDateTagValue: .constant(DateTagValue(date: Date())), journals: .constant([Journal()]))
+    YearMonthPickerView(isPickerShown: .constant(true), pickedDateTagValue: .constant(DateTagValue(date: Date())), journals: .constant([Journal()]))
 //    MonthDayYearPickerView(yearRange: 1990...2023)
 }
