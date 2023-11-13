@@ -25,7 +25,7 @@ struct JournalView: View {
                         
                         journalContent
                     }
-                    .padding()
+                    .padding(20)
                 }
                 .refreshable {
                     dismiss()
@@ -141,7 +141,9 @@ struct JournalView: View {
                         .padding(.bottom, 8)
                 }
             }
-            .padding()
+            .padding(.horizontal, 16)
+            .padding(.top, 24)
+            .padding(.bottom)
             .background {
                 Rectangle()
                     .fill(.backgroundCard)
@@ -161,13 +163,15 @@ struct JournalView: View {
                         Spacer()
                         VStack {
                             Text("오늘의 기분")
-                            HStack(spacing: 0) {
+                                .font(.sejong(size: 16))
+                            Spacer()
+                            HStack(spacing: 8) {
                                 Image(icon)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 36, height: 36)
+                                    .frame(width: 24, height: 24)
                                 Text(string)
-                                    .font(.pretendard(.medium, size: 16))
+                                    .font(.sejong(size: 18))
                             }
                         }
                         Spacer()
@@ -180,11 +184,17 @@ struct JournalView: View {
                         Spacer()
                         VStack {
                             Text("오늘의 그림")
+                                .font(.sejong(size: 16))
+                            Spacer()
                             Text(string)
+                                .font(.sejong(size: 18))
                         }
                         Spacer()
                     }
                 }
+                .foregroundStyle(.textPrimary)
+                .padding(8)
+                .frame(maxHeight: 112)
                 
                 if mind != .none || drawingStyle != .none {
                     Divider()
@@ -192,6 +202,7 @@ struct JournalView: View {
                 }
                 
                 LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 20)
+                    .foregroundStyle(.textPrimary)
             }
             .padding()
             .background {

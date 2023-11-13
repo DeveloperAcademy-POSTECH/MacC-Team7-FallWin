@@ -19,10 +19,8 @@ struct MainTextView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-//                    DateView()
-//                        .padding(.top, 30)
                     MessageMainTextView()
-                        .padding(.top, 36)
+                        .padding(.top, 24)
                     TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0)}))
                         .font(.pretendard(.medium, size: 18))
                         .foregroundColor(.textPrimary)
@@ -31,38 +29,44 @@ struct MainTextView: View {
                         .padding([.top, .bottom], 9)
                         .padding(.bottom, 15)
                         .padding([.leading, .trailing], 12)
-                        .background() {
-                            RoundedRectangle(cornerRadius: 4)
+                        .background {
+                            RoundedRectangle(cornerRadius: 8)
                                 .fill(Color.backgroundPrimary)
                                 .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
                                 .overlay {
                                     VStack {
+                                        if viewStore.mainText.isEmpty {
+                                            HStack {
+                                                Text("그림으로 담고 싶은 이야기를 작성해보세요.")
+                                                    .font(.pretendard(.regular, size: 18))
+                                                    .multilineTextAlignment(.leading)
+                                                    .foregroundStyle(.textTertiary)
+                                                Spacer()
+                                            }
+                                            .padding(.top, 17)
+                                            .padding(.horizontal, 16)
+                                        }
                                         Spacer()
-                                        HStack{
+                                        HStack(spacing: 0) {
                                             Spacer()
-                                            HStack(spacing: 0) {
+                                            Group {
                                                 if viewStore.mainText.count > 1000 {
                                                     Text("\(viewStore.mainText.count)")
-                                                        .font(.system(size: 12))
-                                                        .offset(y: -4)
                                                         .foregroundStyle(.red)
                                                 }else {
                                                     Text("\(viewStore.mainText.count)")
-                                                        .font(.system(size: 12))
-                                                        .offset(y: -4)
-                                                        .foregroundStyle(.gray)
+                                                        .foregroundStyle(.textSecondary)
                                                 }
-                                                
-                                                
-                                                
-                                                Text(" / 1000")
-                                                    .font(.system(size: 12))
-                                                    .offset(y: -4)
-                                                    .padding(.trailing, 8)
                                             }
+                                            .font(.pretendard(.medium, size: 14))
                                             
+                                            Text(" / \(1000)")
+                                                .font(.pretendard(.regular, size: 14))
+                                                .foregroundStyle(.textTertiary)
+                                                .padding(.trailing, 8)
                                         }
-                                        
+                                        .padding(.bottom, 12)
+                                        .padding(.trailing, 8)
                                     }
                                 }
                         }
@@ -80,7 +84,8 @@ struct MainTextView: View {
                     }
                     .disabled(viewStore.mainText == "" || viewStore.mainText.count > 1000)
 //                    .disabled(viewStore.mainText.count > 60)
-                    .padding([.top, .bottom], 15)
+                    .padding(.top, 15)
+                    .padding(.bottom, 16)
                 }
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
@@ -117,15 +122,17 @@ struct MainTextView: View {
 
 struct MessageMainTextView: View {
     var body: some View {
-        Text("오늘 하루는 어땠나요?")
+        Text("어떤 하루였나요?")
             .font(.pretendard(.bold, size: 24))
             .foregroundStyle(.textPrimary)
-            .padding(.bottom, 15)
+            .padding(.bottom, 24)
     }
 }
 
 #Preview {
-    MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤", isKeyboardShown: true), reducer: {
-        MainTextFeature()
-    }))
+    NavigationStack {
+        MainTextView(store: Store(initialState: MainTextFeature.State(selectedEmotion: "", mainText: "", isKeyboardShown: true), reducer: {
+            MainTextFeature()
+        }))
+    }
 }

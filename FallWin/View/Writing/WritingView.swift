@@ -21,7 +21,7 @@ struct WritingView: View {
                 
                 VStack(spacing: 0) {
                     MessageView(titleText: "어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
-                        .padding(.top, 36)
+                        .padding(.top, 24)
                     generateEmotionView()
                     HStack {
                         Spacer()

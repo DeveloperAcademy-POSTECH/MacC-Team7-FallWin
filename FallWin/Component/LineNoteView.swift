@@ -37,6 +37,7 @@ struct LineNoteView: View {
                     .padding(.bottom, 8)
                 Spacer()
             }
+            .padding(.horizontal, 4)
         }
     }
 }

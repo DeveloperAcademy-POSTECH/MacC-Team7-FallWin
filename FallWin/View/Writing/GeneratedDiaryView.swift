@@ -64,7 +64,7 @@ struct GeneratedDiaryView: View {
                                 .padding(.top, 40)
                             imageView()
                                 .padding(.top, 16)
-                                .padding(.horizontal)
+                                .padding(.horizontal, 8)
                             Button {
                                 viewStore.send(.doneGenerating)
                                 Tracking.logEvent(Tracking.Event.A2_5_4__일기작성_그림선택_일기마무리버튼.rawValue)
@@ -211,9 +211,10 @@ struct GeneratedDiaryView: View {
                             .scaledToFit()
                     }
                 }
-                .padding(.bottom, 30)
+                .padding(.top, 4)
+                .padding(.bottom, 40)
             }
-            .padding()
+            .padding(10)
             .background(
                 Color.backgroundCard
                     .shadow(color: viewStore.image == image ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.image == image ?  8 : 4)
@@ -222,6 +223,3 @@ struct GeneratedDiaryView: View {
     }
 }
 
-//#Preview {
-//    GeneratedDiaryView()
-//}
