@@ -26,17 +26,31 @@ enum DrawingStyle: Int64 {
     case picasso = 9
     case rembrandt = 10
     case henriRousseau = 11
+    case waterColor = 12
+    case crayon = 13
+    case pixelArt = 14
+    case monet = 15
+    case dali = 16
 }
 
 extension DrawingStyle {
     init(rawName: String) {
         switch rawName {
         case "oilPainting": self = .oilPainting
+        case "Oil Painting": self = .oilPainting
         case "sketch": self = .sketch
+        case "Sketch": self = .sketch
+        case "anime": self = .anime
+        case "Anime": self = .anime
+        case "vanGogh": self = .vanGogh
+        case "Vincent Van Gogh": self = .vanGogh
+        case "Childlike crayon": self = .crayon
+        case "Water Color": self = .waterColor
+        case "Pixel Art": self = .pixelArt
+        case "Monet": self = .monet
+        case "Salvador Dali": self = .dali
         case "renoir": self = .renoir
         case "chagall": self = .chagall
-        case "anime": self = .anime
-        case "vanGogh": self = .vanGogh
         case "kandinsky": self = .kandinsky
         case "gauguin": self = .gauguin
         case "picasso": self = .picasso
@@ -71,6 +85,16 @@ extension DrawingStyle {
             return "램브란트"
         case .henriRousseau:
             return "앙리루소"
+        case .waterColor:
+            return "수채화"
+        case .crayon:
+            return "크레용"
+        case .pixelArt:
+            return "픽셀아트"
+        case .monet:
+            return "클로드 모네"
+        case .dali:
+            return "살바도르 달리"
         default: return "화풍 없음"
         }
     }

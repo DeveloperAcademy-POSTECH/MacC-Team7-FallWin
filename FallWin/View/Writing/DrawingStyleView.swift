@@ -93,15 +93,15 @@ struct DrawingStyleView: View {
     func generateDrawingStyleView() -> some View {
         
         let drawingStyles: [(String, Color, Image, String)] = [
-            ("Childlike crayon", Color(hexCode: "#191919"), Image("WaterColor"), "크레용"),
-            ("Oil Painting", Color(hexCode: "#191919"), Image("Sketch"), "유화"),
-            ("Water Color", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "수채화"),
-            ("Sketch", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "스케치"),
-            ("Anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
-            ("Pixel Art", Color(hexCode: "#191919"), Image("VanGogh"), "픽셀아트"),
-            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("SalvadorDali"), "빈센트 반 고흐"),
-            ("Monet", Color(hexCode: "#191919"), Image("SalvadorDali"), "클로드 모네"),
-            ("Salvador Dali", Color(hexCode: "#191919"), Image("SalvadorDali"), "살바도르 달리")
+            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용"),
+            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화"),
+            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화"),
+            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치"),
+            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션"),
+            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트"),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "빈센트 반 고흐"),
+            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "클로드 모네"),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "살바도르 달리")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
