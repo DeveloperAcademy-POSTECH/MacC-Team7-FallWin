@@ -39,7 +39,6 @@ struct JournalView: View {
             }
             .fullScreenCover(isPresented: viewStore.binding(get: \.showImageDetailView, send: JournalFeature.Action.showImageDetailView)) {
                 NavigationStack {
-                    //                    ImageDetailView(image: viewStore.journal.wrappedImage)
                     ImageZoomView(image: viewStore.journal.wrappedImage)
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -52,6 +51,9 @@ struct JournalView: View {
                             }
                         }
                 }
+            }
+            .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { item in
+                ActivityView(image: item)
             }
             .background(Color.backgroundPrimary.ignoresSafeArea())
             .onChange(of: viewStore.dismiss) { value in
@@ -89,14 +91,9 @@ struct JournalView: View {
                     .labelStyle(.iconOnly)
                 }
                 
-                if let image = viewStore.journal.wrappedImage {
-                    let imageToShare = Image(uiImage: image)
-                    ToolbarItem(placement: .primaryAction) {
-                        ShareLink(item: imageToShare, preview: SharePreview("그림 일기", image: imageToShare)) {
-                            Image(systemName: "square.and.arrow.up")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
+                ToolbarItem(placement: .primaryAction) {
+                    Button("공유", systemImage: "square.and.arrow.up") {
+                        viewStore.send(.showShareSheet(true))
                     }
                 }
                 
@@ -105,6 +102,10 @@ struct JournalView: View {
                         viewStore.send(.delete)
                     }
                 }
+            }
+            .sheet(isPresented: viewStore.binding(get: \.showShareSheet, send: JournalFeature.Action.showShareSheet)) {
+                shareSheetView
+                    .presentationDetents([.fraction(0.8)])
             }
         }
         .onAppear {
@@ -199,6 +200,130 @@ struct JournalView: View {
         }
     }
     
+    private var shareSheetView: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack {
+                Capsule()
+                    .fill(.buttonDisabled)
+                    .frame(width: 36, height: 5)
+                Text("공유하기")
+                    .font(.pretendard(.semiBold, size: 18))
+                    .padding(.top, 20)
+                Spacer()
+                ZStack {
+                    shareView
+                }
+                .padding()
+                Spacer()
+                Button {
+                    viewStore.send(.showShareSheet(false))
+                    DispatchQueue.main.async {
+                        if let image = _shareView.frame(width: 720).render() {
+                            viewStore.send(.shareItem(ShareImageWrapper(id: UUID(), image: image)))
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("오늘의 일기 공유")
+                            .font(.pretendard(.semiBold, size: 18))
+                            .foregroundColor(.textOnButton)
+                        Spacer()
+                    }
+                    .padding(20)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 8)
+        }
+    }
+    
+    private var shareView: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack(spacing: 0) {
+                Group {
+                    if let image = viewStore.journal.wrappedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                    } else {
+                        Rectangle()
+                            .fill(.blue)
+                            .aspectRatio(1, contentMode: .fit)
+                    }
+                }
+                .padding(22)
+                .overlay {
+                    Image("templatesTop")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                ZStack {
+                    Image("templatesBottom")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Text(String(viewStore.journal.timestamp?.journalShareString ?? ""))
+                        .font(.uhbeeSehyun(.regular, size: 22))
+                }
+                .padding(.top, -20)
+            }
+            .overlay {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Image("sharesheetBottomIcon")
+                            .shadow(color: .shadow.opacity(0.14), radius: 4, y: 2)
+                    }
+                }
+                .padding(6)
+            }
+        }
+    }
+    
+    private var _shareView: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            VStack(spacing: 0) {
+                Group {
+                    if let image = viewStore.journal.wrappedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                    } else {
+                        Rectangle()
+                            .fill(.blue)
+                            .aspectRatio(1, contentMode: .fit)
+                    }
+                }
+                .padding(22)
+                .overlay {
+                    Image("templatesTop")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                ZStack {
+                    Image("templatesBottom")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Text(String(viewStore.journal.timestamp?.journalShareString ?? ""))
+                        .font(.uhbeeSehyun(.regular, size: 44))
+                }
+                .padding(.top, -20)
+            }
+            .overlay {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Image("sharesheetBottomIcon")
+                            .shadow(color: .shadow.opacity(0.14), radius: 4, y: 2)
+                    }
+                }
+                .padding(6)
+            }
+        }
+    }
 }
 
 #Preview {
@@ -212,7 +337,7 @@ struct JournalView: View {
     context.insert(journal)
     
     return NavigationStack {
-        JournalView(store: Store(initialState: JournalFeature.State(journal: journal), reducer: {
+        JournalView(store: Store(initialState: JournalFeature.State(journal: journal, showShareSheet: false), reducer: {
             JournalFeature()
         }))
     }

@@ -23,10 +23,17 @@ struct FallWinApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
+        // MARK: Settings
         UserDefaults.standard.register(defaults: [
             UserDefaultsKey.Settings.lock: false,
             UserDefaultsKey.Settings.biometric: false,
-            UserDefaultsKey.Settings.haptic: true
+            UserDefaultsKey.Settings.haptic: true,
+        ])
+        
+        // MARK: User
+        UserDefaults.standard.register(defaults: [
+            UserDefaultsKey.User.nickname: "PICDA",
+            UserDefaultsKey.User.gender: "none",
         ])
         
         if !UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled) {

@@ -17,26 +17,15 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "oilPainting": "oil painting",
-        "sketch": "sketch, black and white",
-        "renoir": "painting of Renoir",
-        "noDrawingStyle": "",
-        "chagall": "modernism, painting of Chagall",
-        "anime": "anime",
-        "vanGogh": "impressionism, painting of Van Gogh",
-        "kandinsky": "painting of Kandinsky",
-        "gauguin": "painting of Gauguin",
-        "picasso": "painting of Picasso",
-        "rembrandt": "painting of Rembrandt",
-        "henriRousseau": "painting of Henri Rousseau",
-        "henriMatisse": "painting of Henri Matisse",
-        "egonSchiele": "painting of Egon Schiele",
-        "webtoon": "webtoon",
-        "dcComics": "DC comics",
-        "ghibli": "studio Ghibli",
-        "film": "film Stills",
-        "illustration": "children's book illustration",
-        "cg": "extremely detailed CG unity 8k wallpaper"
+        "Childlike crayon": "Naive, childlish crayon scribbles, childlike drawing Style",
+        "Oil Painting": "Oil painting",
+        "Water Color": "Watercolor Painting",
+        "Sketch": "pencil sketches Painting",
+        "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
+        "Pixel Art": "Retro-styled pixel-by-pixel video game graphics Style",
+        "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
+        "Monet": "Impressionism art in the style of Claude Monet Painting",
+        "Salvador Dali": "Dream-like and bizarre surreal art in the style of Salvador Dali Painting"
     ]
     
     let emotionToEnglish: [String: String] = [
@@ -97,7 +86,7 @@ struct GeneratedDiaryView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        DateView()
+                        DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: GeneratedDiaryFeature.Action.pickDate))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
@@ -119,7 +108,7 @@ struct GeneratedDiaryView: View {
                     LottieImageGenView(jsonName: "LottieImageGen")
                     VStack {
                         Spacer()
-                        Text("폴윈의 하루를\n그림으로 그리고 있어요")
+                        Text("\(UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA")의 하루를\n그림으로 그리고 있어요")
                             .font(.pretendard(.bold, size: 28))
                             .foregroundStyle(Color.textPrimary)
                             .multilineTextAlignment(.center)
@@ -150,7 +139,7 @@ struct GeneratedDiaryView: View {
                     let karloPrompt = KarloApiManager.shared.addEmotionDrawingStyle(prompt: promptOutput, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
                     print("original input text:\n\(viewStore.mainText)\n------\nchatGPT's output:\n\(promptOutput)\n------\nprompt with drawing style:\n\(karloPrompt)")
                     
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "scary, dirty, ugly, text, letter, alphabet, signature, watermark, text-like, letter-like, alphabet-like, poorly drawn face, side face, poorly drawn feet, poorly drawn hand, divided, framed, cross line", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "scary, dirty, ugly, text, letter, alphabet, signature, watermark, text-like, letter-like, alphabet-like, poorly drawn face, side face, poorly drawn feet, poorly drawn hand, divided, framed, cross line, realistic", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
                     
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {

@@ -14,7 +14,7 @@ struct DrawingCount: Hashable, Codable {
 
 final class DrawingCountManager {
     static let shared = DrawingCountManager()
-    static let INITIAL_COUNT = 1
+    static let INITIAL_COUNT = 3
     static let debug: Bool = false
     
     private var drawingCount: DrawingCount
@@ -35,7 +35,7 @@ final class DrawingCountManager {
     }
     
     var remainingCount: Int {
-        drawingCount.count
+        DrawingCountManager.debug ? 1 : drawingCount.count
     }
     
     func reduceCount() -> Int {

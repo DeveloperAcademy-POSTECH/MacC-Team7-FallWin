@@ -15,10 +15,9 @@ struct MainFeature: Reducer {
         var year: Int = Date().year
         var month: Int = Date().month
         var isPickerShown: Bool = false
-        var selectedMonthInPicker: Date = Date()
         var showCountAlert: Bool = false
         var remainingCount: Int = 0
-        var pickedDateValue: Int = PickerManager.shared.initDateValue(date: Date())
+        var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
@@ -33,7 +32,13 @@ struct MainFeature: Reducer {
         case showWritingView
         case showSettingsView
         case showPickerSheet
-        case setMonthInPicker(Date)
+        case hidePickerSheet
+        case pickDate(DateTagValue)
+        case updateYear(Int)
+        case updateMonth(Int)
+        case updateTagValue(Int)
+        case updateScrolling
+        case bindJournal
         case showCountAlert(Bool)
         case getRemainingCount
         
@@ -75,11 +80,35 @@ struct MainFeature: Reducer {
                 return .none
                 
             case .showPickerSheet:
-                state.isPickerShown.toggle()
+                state.isPickerShown = true
                 return .none
                 
-            case let .setMonthInPicker(date):
-                state.selectedMonthInPicker = date
+            case .hidePickerSheet:
+                state.isPickerShown = false
+                return .none
+                
+            case let .pickDate(dateTagValue):
+                state.pickedDateTagValue = dateTagValue
+                return .none
+                
+            case let .updateYear(year):
+                state.pickedDateTagValue.year = year
+                return .none
+                
+            case let .updateMonth(month):
+                state.pickedDateTagValue.month = month
+                return .none
+                
+            case let .updateTagValue(tagValue):
+                state.pickedDateTagValue.tagValue = tagValue
+                return .none
+                
+            case .updateScrolling:
+                state.pickedDateTagValue.isScrolling.toggle()
+                return .none
+                
+            // PickerView에서 journals를 읽기 위한 바인딩용 action. set 작업은 하지 않음.
+            case .bindJournal:
                 return .none
                 
             case let .showCountAlert(show):
