@@ -20,7 +20,7 @@ struct GeneratedDiaryView: View {
         "Oil Painting": "Oil painting",
         "Water Color": "Watercolor Painting",
         "Sketch": "pencil sketches Painting",
-        "Anime": "Studio Ghibli films Style",
+        "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
         "Pixel Art": "Retro-styled pixel-by-pixel video game graphics Style",
         "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
         "Monet": "Impressionism art in the style of Claude Monet Painting",
