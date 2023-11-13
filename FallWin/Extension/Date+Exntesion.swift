@@ -58,6 +58,10 @@ extension Date {
         return "\(dateString)-\(timeInMillis)"
     }
     
+    var journalShareString: String {
+        return "\(year).\(String(format: "%02d", month))\(String(format: "%02d", day)). \(dayOfWeek)요일"
+    }
+    
     var timeInMillis: Int64 {
         get {
             return Int64((self.timeIntervalSince1970 * 1000.0).rounded())

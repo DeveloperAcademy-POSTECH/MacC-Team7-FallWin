@@ -1,0 +1,23 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "sharesheetBottomIcon~universal@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "sharesheetBottomIcon~universal@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "scale" : "3x",
+      "idiom" : "universal",
+      "filename" : "sharesheetBottomIcon~universal@3x.png"
+    }
+  ]
+}
