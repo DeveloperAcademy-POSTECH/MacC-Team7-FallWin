@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct GeneratedDiaryView: View {
     let store: StoreOf<GeneratedDiaryFeature>
@@ -20,7 +21,7 @@ struct GeneratedDiaryView: View {
         "Oil Painting": "Oil painting",
         "Water Color": "Watercolor Painting",
         "Sketch": "pencil sketches Painting",
-        "Anime": "Studio Ghibli films Style",
+        "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
         "Pixel Art": "Retro-styled pixel-by-pixel video game graphics Style",
         "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
         "Monet": "Impressionism art in the style of Claude Monet Painting",
@@ -66,6 +67,8 @@ struct GeneratedDiaryView: View {
                                 .padding(.horizontal)
                             Button {
                                 viewStore.send(.doneGenerating)
+                                Tracking.logEvent(Tracking.Event.A2_5_4__일기작성_그림선택_일기마무리버튼.rawValue)
+                                print("@Log : A2_5_4__일기작성_그림선택_일기마무리버튼")
                             } label: {
                                 ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             }
@@ -88,12 +91,18 @@ struct GeneratedDiaryView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             viewStore.send(.cancelWriting)
+                            Tracking.logEvent(Tracking.Event.A2_5_2__일기작성_그림선택_닫기.rawValue)
+                            print("@Log : A2_5_2__일기작성_그림선택_닫기")
                         } label: {
                             Image(systemName: "xmark")
                         }
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    Tracking.logScreenView(screenName: Tracking.Screen.V2_5__일기작성_결과선택뷰.rawValue)
+                    print("@Log : wrtingSelectEmotionView")
+                   }
             } else {
                 ZStack {
                     LottieImageGenView(jsonName: "LottieImageGen")
@@ -111,6 +120,11 @@ struct GeneratedDiaryView: View {
                         Spacer()
                     }
                 }
+                .onAppear {
+                    Tracking.logScreenView(screenName: Tracking.Screen.V2_4__일기작성_대기뷰.rawValue)
+                    print("@Log : wrtingSelectEmotionView")
+                   }
+                
             }
             
         }
