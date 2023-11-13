@@ -102,39 +102,17 @@ struct DrawingStyleView: View {
     
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
-        //TODO: 함께 해결해야 할 부분
-        // let drawingStyles: [(String, Color, Image, String,String)] = [
-        //     ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화","A2_3_4_1__일기작성_화풍선택_유화"),
-        //     ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치", "A2_3_4_2__일기작성_화풍선택_스케치"),
-        //     ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르", "A2_3_4_3__일기작성_화풍선택_르누아르"),
-        //     ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함", "A2_3_4_4__일기작성_화풍선택_화풍선택안함 "),
-        //     ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈", "A2_3_4_5__일기작성_화풍선택_샤갈"),
-        //     ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션", "A2_3_4_6__일기작성_화풍선택_애니메이션"),
-        //     ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐", "A2_3_4_7__일기작성_화풍선택_반고흐"),
-        //     ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키", "A2_3_4_8__일기작성_화풍선택_칸딘스키"),
-        //     ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱", "A2_3_4_9__일기작성_화풍선택_고갱"),
-        //     ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소", "A2_3_4_10__일기작성_화풍선택_피카소"),
-        //     ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트", "A2_3_4_11__일기작성_화풍선택_렘브란트"),
-        //     ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소", "A2_3_4_12__일기작성_화풍선택_앙리루소"),
-        //     ("henriMatisse", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 마티스", "A2_3_4_13__일기작성_화풍선택_앙리마티스"),
-        //     ("egonSchiele", Color(hexCode: "#191919"), Image("SalvadorDali"), "에곤 쉴레", "A2_3_4_14__일기작성_화풍선택_에곤쉴레"),
-        //     ("webtoon", Color(hexCode: "#191919"), Image("SalvadorDali"), "웹툰", "A2_3_4_15__일기작성_화풍선택_웹툰"),
-        //     ("dcComics", Color(hexCode: "#191919"), Image("SalvadorDali"), "DC 코믹스", "A2_3_4_16__일기작성_화풍선택_DC코믹스"),
-        //     ("ghibli", Color(hexCode: "#191919"), Image("SalvadorDali"), "지브리", "A2_3_4_17__일기작성_화풍선택_지브리"),
-        //     ("film", Color(hexCode: "#191919"), Image("SalvadorDali"), "필름", "A2_3_4_18__일기작성_화풍선택_필름"),
-        //     ("illustration", Color(hexCode: "#191919"), Image("SalvadorDali"), "일러스트", "A2_3_4_19__일기작성_화풍선택_일러스트"),
-        //     ("cg", Color(hexCode: "#191919"), Image("SalvadorDali"), "CG", "A2_3_4_20__일기작성_화풍선택_CG")
         
-        let drawingStyles: [(String, Color, Image, String)] = [
-            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용"), 
-            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화"),
-            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화"),
-            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치"),
-            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션"),
-            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트"),
-            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "반 고흐"),
-            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "모네"),
-            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "달리")
+        let drawingStyles: [(String, Color, Image, String, String)] = [
+            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용", "A2_3_4_1__일기작성_화풍선택_크레용"),
+            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화", "A2_3_4_2__일기작성_화풍선택_유화"),
+            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화", "A2_3_4_3__일기작성_화풍선택_수채화"),
+            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치", "A2_3_4_4__일기작성_화풍선택_스케치"),
+            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션","A2_3_4_5__일기작성_화풍선택_애니메이션"),
+            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트","A2_3_4_6__일기작성_화풍선택_픽셀아트"),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "반 고흐", "A2_3_4_7__일기작성_화풍선택_반고흐"),
+            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "모네","A2_3_4_8__일기작성_화풍선택_모네"),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "달리","A2_3_4_9__일기작성_화풍선택_달리")
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
