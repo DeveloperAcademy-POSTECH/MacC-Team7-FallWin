@@ -14,14 +14,22 @@ enum DateElementInPicker {
 }
 
 struct YearMonthPickerView: View {
-    @State var selectedYear: Int = Date().year
-    @State var selectedMonth: Int = Date().month
-    @State var isCompleted: Bool = false
+    @State var pickedYear: Int = Date().year
+    @State var pickedMonth: Int = Date().month
+    @Binding var isPickerShown: Bool
+    @Binding var pickedDateTagValue: DateTagValue
+    @Binding var journals: [Journal]
     
     var years: [Int]
     
-    init(yearRange: ClosedRange<Int>) {
+    init(yearRange: ClosedRange<Int>, isPickerShown: Binding<Bool>, pickedDateTagValue: Binding<DateTagValue>, journals: Binding<[Journal]>) {
         self.years = Array(yearRange)
+        self._isPickerShown = isPickerShown
+        self._pickedDateTagValue = pickedDateTagValue
+        self._journals = journals
+        
+        self.pickedYear = pickedDateTagValue.wrappedValue.year
+        self.pickedMonth = pickedDateTagValue.wrappedValue.month
     }
     
     var body: some View {
@@ -33,13 +41,13 @@ struct YearMonthPickerView: View {
                     .foregroundColor(.textPrimary)
                 HStack(spacing: 0) {
                     Spacer()
-                    Picker("Year", selection: $selectedYear) {
+                    Picker("Year", selection: $pickedYear) {
                         ForEach(years, id: \.self) { year in
                             Text(String(describing: year) + "년").tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
-                    Picker("Month", selection: $selectedMonth) {
+                    Picker("Month", selection: $pickedMonth) {
                         ForEach(1...12, id: \.self) { month in
                             Text(String(describing: month) + "월").tag(month)
                         }
@@ -48,11 +56,18 @@ struct YearMonthPickerView: View {
                     Spacer()
                 }
                 Button {
-                    isCompleted = true
+                    pickedDateTagValue.year = pickedYear
+                    pickedDateTagValue.month = pickedMonth
+                    pickedDateTagValue.updateTagValue(journals: journals)
+                    isPickerShown = false
                 } label: {
                     ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
                 }
             }
+        }
+        .onAppear {
+            pickedYear = $pickedDateTagValue.wrappedValue.year
+            pickedMonth = $pickedDateTagValue.wrappedValue.month
         }
     }
 }
@@ -129,6 +144,6 @@ struct MonthDayYearPickerView: View {
 }
 
 #Preview {
-    //    YearMonthPickerView(yearRange: 1990...2023)
-    MonthDayYearPickerView(yearRange: 1990...2023)
+    YearMonthPickerView(yearRange: 1990...2023, isPickerShown: .constant(true), pickedDateTagValue: .constant(DateTagValue(date: Date())), journals: .constant([Journal()]))
+//    MonthDayYearPickerView(yearRange: 1990...2023)
 }
