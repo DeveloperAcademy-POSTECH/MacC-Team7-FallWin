@@ -145,7 +145,7 @@ struct SettingsView: View {
                     .listRowBackground(Color.backgroundPrimary)
                     
                     NavigationLink {
-                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                        WebView(url: "https://instagram.com/picd_a?igshid=eHViMWpyenVmcDNp")
                             .toolbar(.hidden, for: .tabBar)
                         
                     } label: {
@@ -164,7 +164,7 @@ struct SettingsView: View {
 //                        IfLetStore(store.scope(state: \.$feedback, action: SettingsFeature.Action.feedback)) { store in
 //                            FeedbackView(store: store)
 //                        }
-                        WebView(url: "https://instagram.com/ohwa_todaysart")
+                        WebView(url: "https://forms.gle/DxFtstGew7zctnWm9")
                             .toolbar(.hidden, for: .tabBar)
                         
                     } label: {
@@ -175,21 +175,16 @@ struct SettingsView: View {
                     }
                     .listRowBackground(Color.backgroundPrimary)
                     
-                    NavigationLink {
-                        WebView(url: "https://instagram.com/ohwa_todaysart")
-                            .toolbar(.hidden, for: .tabBar)
-                        
-                    } label: {
-                        HStack {
-                            Text("픽다에 대하여")
-                            Spacer()
-                            Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
-                                .foregroundStyle(.textSecondary)
-                        }
-                        .font(.pretendard(size: 18))
-                        .foregroundColor(.textPrimary)
-                        .padding(.vertical, 8)
+                    HStack {
+                        Text("픽다에 대하여")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                        Spacer()
+                        Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
+                            .font(.pretendard(size: 18))
+                            .foregroundStyle(.textSecondary)
                     }
+                    .padding(.vertical, 8)
                     .listRowBackground(Color.backgroundPrimary)
                 }
             }
