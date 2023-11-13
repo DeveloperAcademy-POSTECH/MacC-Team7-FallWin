@@ -47,7 +47,7 @@ struct BackupSettingView: View {
                 
                 
                 Button(action: backup, label: {
-                    Text("iCloud 백업")
+                    Text("백업")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textOnButton)
                         .frame(maxWidth: .infinity, minHeight: 45)
@@ -63,12 +63,12 @@ struct BackupSettingView: View {
                 
                 
                 Button(action: restore, label: {
-                    Text("iCloud 복원")
+                    Text("복원")
                         .font(.pretendard(.semiBold, size: 18))
-                        .foregroundStyle(.textOnButton)
+                        .foregroundStyle(.textPrimary)
                         .frame(maxWidth: .infinity, minHeight: 45)
                 })
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.bordered)
                 .alert(isPresented: $isclickedRestore, content: {
                     Alert(title: Text("iCloud 복원")
                         .font(.pretendard(.bold, size: 20))
