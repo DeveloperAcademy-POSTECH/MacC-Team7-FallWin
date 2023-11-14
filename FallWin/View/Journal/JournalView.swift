@@ -154,6 +154,7 @@ struct JournalView: View {
                 if let timestamp = viewStore.journal.timestamp {
                     Text(String(format: "%d/%02d/%02d(\(timestamp.dayOfWeek))", timestamp.year, timestamp.month, timestamp.day))
                         .font(.uhbeeSehyun(size: 22))
+                        .foregroundStyle(Color.textPrimary)
                         .padding(.bottom, 8)
                 }
             }

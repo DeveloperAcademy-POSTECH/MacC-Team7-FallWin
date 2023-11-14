@@ -132,9 +132,10 @@ extension ChatGPTApiManager {
     func generatePromptForChat3(_ prompt: String) -> String {
         print("<<'generatePromptyForChat3' in ChatGPTApiManager is called>>")
         let template: String = """
-        Please summarize <<INPUT TEXT>> in english according to the guidelines provided below for Dall-E Prompt:
+        Please summarize smooth english translation of <<INPUT TEXT>> according to the <<GUIDELINES>> provided below:
+        
         <<GUIDELINES>>
-        1. Limit your summary upto five noun phrases.
+        1. Limit your summary upto five english noun phrases.
         2. Your summary should focus on tangible subjects, avoiding abstract concepts.
         3. Include concrete, visual subjects such as a person, object, or location.
         4. Provide your summary in the form of comma-separated noun phrases or words. <</GUIDELINES>>

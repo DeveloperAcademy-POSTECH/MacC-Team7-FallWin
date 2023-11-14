@@ -34,7 +34,7 @@ extension KarloApiManager {
             print("------------------bad URL------------------")
             throw KarloImageError.badURL
         }
-        print(Int(priorSteps), Int(steps))
+        print("--Negative Prompt: --\n\(negativePrompt)\n")
         
         let parameters: [String: Any] = [
             "prompt": prompt,
