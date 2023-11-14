@@ -17,7 +17,7 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "Childlike crayon": "Naive, childlish crayon scribbles, childlike drawing Style",
+        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by 5-year-old-kid's-drawing-skill, drawn with innocent charm and rough lines, unrefined strokes childlike painting",
         "Oil Painting": "Oil painting",
         "Water Color": "Watercolor Painting",
         "Sketch": "pencil sketches Painting",
