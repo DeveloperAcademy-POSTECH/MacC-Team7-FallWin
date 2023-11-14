@@ -69,6 +69,7 @@ struct GeneratedDiaryFeature: Reducer {
             if let date = PickerManager.shared.getDateFromDateTagValue(dateTagValue: state.pickedDateTagValue) {
                 journal.timestamp = date
             }
+            
             context.insert(journal)
             PersistenceController.shared.saveContext()
             return .run { send in
