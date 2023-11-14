@@ -183,9 +183,9 @@ struct GeneratedDiaryView: View {
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .alert(isPresented: $isError, title: "그림 그리기 실패") {
-            Text("뒤로 돌아가서 다시 버튼을 눌러주세요.")
+            Text("뒤로 돌아가서 다시 그림을 그려주세요")
         } primaryButton: {
-            OhwaAlertButton(label: Text("뒤로가기").foregroundColor(.textOnButton), color: .button) {
+            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
                 isError.toggle()
                 dismiss()
             }
