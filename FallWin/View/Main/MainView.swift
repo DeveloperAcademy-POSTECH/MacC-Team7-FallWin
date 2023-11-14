@@ -23,24 +23,27 @@ struct MainView: View {
                             LazyVStack(spacing: 28) {
                                 ForEach(viewStore.journals.indices, id: \.self) { i in
                                     let journal = viewStore.journals[i]
-                                    
-                                    mainCell(journal: journal)
-                                        .id(DateTagValue(date: journal.timestamp ?? Date()).tagValue)
-                                        .onTapGesture {
-                                            HapticManager.shared.impact()
-                                            viewStore.send(.showJournalView(journal))
-                                        }
-                                        .onAppear {
-                                            print("timestamp: \(journal.timestamp)")
-                                            if let timestamp = journal.timestamp {
-                                                if !viewStore.pickedDateTagValue.isScrolling {
-                                                    viewStore.send(.updateYear(timestamp.year ))
-                                                    viewStore.send(.updateMonth(timestamp.month))
-                                                    let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
-                                                    viewStore.send(.updateTagValue(newTagValue))
+                                    VStack {
+                                        Spacer()
+                                            .frame(height: 1)
+                                            .onAppear {
+                                                print("timestamp: \(journal.timestamp)")
+                                                if let timestamp = journal.timestamp {
+                                                    if !viewStore.pickedDateTagValue.isScrolling {
+                                                        viewStore.send(.updateYear(timestamp.year ))
+                                                        viewStore.send(.updateMonth(timestamp.month))
+                                                        let newTagValue = PickerManager.shared.getDateTagValue(date: timestamp)
+                                                        viewStore.send(.updateTagValue(newTagValue))
+                                                    }
                                                 }
                                             }
-                                        }
+                                        mainCell(journal: journal)
+                                            .id(DateTagValue(date: journal.timestamp ?? Date()).tagValue)
+                                            .onTapGesture {
+                                                HapticManager.shared.impact()
+                                                viewStore.send(.showJournalView(journal))
+                                            }
+                                    }
                                 }
                             }
                             .padding(.top)
