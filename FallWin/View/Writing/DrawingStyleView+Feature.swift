@@ -14,7 +14,7 @@ struct DrawingStyleFeature: Reducer {
         var mainText: String
         var selectedDrawingStyle: String?
         var showCountAlert: Bool = false
-        var priorSteps: Double = 70.0
+        var priorSteps: Double = 25.0
         var priorScale: Double = 10.0
         var steps: Double = 50.0
         var scale: Double = 10.0
