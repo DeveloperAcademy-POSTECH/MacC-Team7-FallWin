@@ -52,74 +52,77 @@ struct PasscodeView: View {
     }
     
     var body: some View {
-        VStack {
-            if dismissable {
-                HStack {
-                    Button {
-                        dismiss()
+        ZStack {
+            Color.backgroundPrimary.ignoresSafeArea()
+            
+            VStack {
+                if dismissable {
+                    HStack {
+                        Button {
+                            dismiss()
+                            
+                        } label: {
+                            Image(systemName: "xmark")
+                                .padding(8)
+                                .background(
+                                    Circle()
+                                        .fill(.ultraThickMaterial)
+                                )
+                        }
                         
-                    } label: {
-                        Image(systemName: "xmark")
-                            .padding(8)
-                            .background(
-                                Circle()
-                                    .fill(.ultraThickMaterial)
-                            )
+                        Spacer()
                     }
-                    
-                    Spacer()
+                    .padding()
                 }
-                .padding()
-            }
-            
-            Spacer()
-            
-            Text(message)
-                .font(.pretendard(.semiBold, size: 24))
-                .multilineTextAlignment(.center)
-            
-            Spacer()
-            
-            HStack(spacing: 16) {
-                ForEach(0..<6) { number in
-                    RoundedRectangle(cornerRadius: 6)
-                        .frame(width: 28, height: 48)
-                        .opacity(number < typed.count ? 0.8 : 0.1)
+                
+                Spacer()
+                
+                Text(message)
+                    .font(.pretendard(.semiBold, size: 24))
+                    .multilineTextAlignment(.center)
+                
+                Spacer()
+                
+                HStack(spacing: 16) {
+                    ForEach(0..<6) { number in
+                        RoundedRectangle(cornerRadius: 6)
+                            .frame(width: 28, height: 48)
+                            .opacity(number < typed.count ? 0.8 : 0.1)
+                    }
                 }
-            }
-            
-            Spacer()
-            
-            LazyVGrid(columns: Array(repeating: GridItem(alignment: .center), count: 3), alignment: .center, spacing: 24) {
-                ForEach(pad, id: \.self) { pad in
-                    switch pad {
-                    case .number(let number):
-                        numberButton(number: number)
-                        
-                    case .delete:
-                        deleteButton
-                        
-                    case .biometric:
-                        if biometric &&
-                            UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.biometric) &&
-                            laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) &&
-                            laContext.biometryType != .none {
-                            biometricButton
-                                .onAppear {
-                                    if authenticateOnLaunch {
-                                        authenticateViaBiometric()
+                
+                Spacer()
+                
+                LazyVGrid(columns: Array(repeating: GridItem(alignment: .center), count: 3), alignment: .center, spacing: 24) {
+                    ForEach(pad, id: \.self) { pad in
+                        switch pad {
+                        case .number(let number):
+                            numberButton(number: number)
+                            
+                        case .delete:
+                            deleteButton
+                            
+                        case .biometric:
+                            if biometric &&
+                                UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.biometric) &&
+                                laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) &&
+                                laContext.biometryType != .none {
+                                biometricButton
+                                    .onAppear {
+                                        if authenticateOnLaunch {
+                                            authenticateViaBiometric()
+                                        }
                                     }
-                                }
-                        } else {
-                            Spacer()
+                            } else {
+                                Spacer()
+                            }
                         }
                     }
                 }
+                .frame(maxWidth: 360)
+                .padding()
             }
-            .frame(maxWidth: 360)
-            .padding()
         }
-        .background(Color.backgroundPrimary.ignoresSafeArea())
     }
     
     private var biometricButton: some View {

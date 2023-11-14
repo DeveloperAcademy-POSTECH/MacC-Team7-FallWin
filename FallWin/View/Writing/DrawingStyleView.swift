@@ -7,104 +7,137 @@
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct DrawingStyleView: View {
     var store: StoreOf<DrawingStyleFeature>
+    @State var styleLabeling: Tracking.Event.RawValue = "nil"
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-                ZStack {
-                    Color.backgroundPrimary
-                        .ignoresSafeArea()
-                    VStack(spacing: 0) {
-                        DateView()
-                            .padding(.top, 30)
-                        MessageView(titleText: "오늘 하루를\n어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
-                            .padding(.top, 24)
-                        VStack {
-                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
-                            Spacer()
-                            Text("prior_guidance_scale: \(viewStore.priorScale)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
-                            Spacer()
-                            Text("num_inference_steps: \(viewStore.steps)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
-                            Spacer()
-                            Text("guidance_scale: \(viewStore.scale)")
-                                .font(.pretendard(.semiBold, size: 18))
-                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
-                        }
-                        generateDrawingStyleView()
-                            .padding(.top, 16)
-                            .padding(.horizontal)
+            ZStack {
+                Color.backgroundPrimary
+                    .ignoresSafeArea()
+                VStack(spacing: 0) {
+                    MessageView(titleText: "어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
+                        .padding(.top, 24)
+                    //                        VStack {
+                    //                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
+                    //                            Spacer()
+                    //                            Text("prior_guidance_scale: \(viewStore.priorScale)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
+                    //                            Spacer()
+                    //                            Text("num_inference_steps: \(viewStore.steps)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
+                    //                            Spacer()
+                    //                            Text("guidance_scale: \(viewStore.scale)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
+                    //                        }
+                    generateDrawingStyleView()
+                        .padding(.top, 16)
+                        .padding(.horizontal)
+                    VStack(spacing: 12) {
+                        Text("그림을 그리면 필름이 차감돼요")
+                            .font(.pretendard(.regular, size: 14))
+                            .foregroundColor(.textTertiary)
                         Button {
-                            viewStore.send(.showGeneratedDiaryView)
+                            Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
+                            print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
+                            Tracking.logEvent(styleLabeling)
+                            if DrawingCountManager.shared.remainingCount <= 0 {
+                                viewStore.send(.showCountAlert(true))
+                            } else {
+                                viewStore.send(.showGeneratedDiaryView)
+                            }
+                            
                         } label: {
-                            HStack {
+                            //                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                            HStack(spacing: 8) {
                                 Spacer()
-                                Text("다음")
+                                Image(systemName: "film")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 16)
+                                Text("그림 그리기")
                                     .font(.pretendard(.semiBold, size: 18))
                                 Spacer()
                             }
-                            .padding()
+                            .foregroundColor(.textOnButton)
+                            .frame(height: 54)
                             .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
-                            .cornerRadius(9)
-                            .foregroundColor(Color.white)
+                            .cornerRadius(8)
                         }
                         .disabled(viewStore.selectedDrawingStyle == nil)
-                        .padding(.top, 15)
-                        .padding(.horizontal, 24)
-                        .padding(.bottom, 16)
-                        .background{
-                            Color.backgroundPrimary
-                                .ignoresSafeArea()
-                                .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                    }
+                    .padding(.top, 15)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 16)
+                    .background{
+                        Color.backgroundPrimary
+                            .ignoresSafeArea()
+                            .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
+                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showCountAlert(false))
                         }
                     }
                 }
-                .navigationTitle(Text("일기 쓰기"))
-                .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
-                    GeneratedDiaryView(store: store)
-                })
+            }
+            .safeToolbar {
+                ToolbarItem(placement: .principal) {
+                    DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: DrawingStyleFeature.Action.pickDate))
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        Tracking.logEvent(Tracking.Event.A2_3_2__일기작성_화풍선택_닫기.rawValue)
+                        print("@Log : A2_3_2__일기작성_화풍선택_닫기")
+                        viewStore.send(.cancelWriting)
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
+                GeneratedDiaryView(store: store)
+            })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+            .toolbar(.hidden, for: .tabBar)
         }
+        .onAppear {
+            Tracking.logScreenView(screenName: Tracking.Screen.V2_3__일기작성_화풍선택뷰.rawValue)
+            print("@Log : V2_3__일기작성_화풍선택뷰")
+        }
+        
     }
     
     @ViewBuilder
     func generateDrawingStyleView() -> some View {
         
-//        let drawingStyles: [(String, Color, Image)] = [
-//            ("크레용", Color(hexCode: "#191919"), Image("ChildlikeCrayon")),
-//            ("스케치", Color(hexCode: "#191919"), Image("Sketch")),
-//            ("동화", Color(hexCode: "#191919"), Image("ChildrenIllustration")),
-//            ("수채화", Color(hexCode: "#191919"), Image("WaterColor")),
-//            ("디지털 아트", Color(hexCode: "#191919"), Image("DigitalArt")),
-//            ("네온", Color(hexCode: "#191919"), Image("Neon")),
-//            ("반 고흐", Color(hexCode: "#191919"), Image("VanGogh")),
-//            ("살바도르 달리", Color(hexCode: "#191919"), Image("SalvadorDali")),
-//        ]
-        
-        let drawingStyles: [(String, Color, Image, String)] = [
-            ("oilPainting", Color(hexCode: "#191919"), Image("ChildlikeCrayon"), "유화"),
-            ("sketch", Color(hexCode: "#191919"), Image("Sketch"), "스케치"),
-            ("renoir", Color(hexCode: "#191919"), Image("ChildrenIllustration"), "르누아르"),
-            ("noDrawingStyle", Color(hexCode: "#191919"), Image("WaterColor"), "화풍 선택 안함"),
-            ("chagall", Color(hexCode: "#191919"), Image("DigitalArt"), "샤갈"),
-            ("anime", Color(hexCode: "#191919"), Image("Neon"), "애니메이션"),
-            ("vanGogh", Color(hexCode: "#191919"), Image("VanGogh"), "반 고흐"),
-            ("kandinsky", Color(hexCode: "#191919"), Image("SalvadorDali"), "칸딘스키"),
-            ("gauguin", Color(hexCode: "#191919"), Image("SalvadorDali"), "고갱"),
-            ("picasso", Color(hexCode: "#191919"), Image("SalvadorDali"), "피카소"),
-            ("rembrandt", Color(hexCode: "#191919"), Image("SalvadorDali"), "렘브란트"),
-            ("henriRousseau", Color(hexCode: "#191919"), Image("SalvadorDali"), "앙리 루소")
+        let drawingStyles: [(String, Color, Image, String, Tracking.Event.RawValue)] = [
+            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용", Tracking.Event.A2_3_4_1__일기작성_화풍선택_크레용.rawValue),
+            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화", Tracking.Event.A2_3_4_2__일기작성_화풍선택_유화.rawValue),
+            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화", Tracking.Event.A2_3_4_3__일기작성_화풍선택_수채화.rawValue),
+            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치", Tracking.Event.A2_3_4_4__일기작성_화풍선택_스케치.rawValue),
+            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션",Tracking.Event.A2_3_4_5__일기작성_화풍선택_애니메이션.rawValue),
+            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트",Tracking.Event.A2_3_4_6__일기작성_화풍선택_픽셀아트.rawValue),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "반 고흐", Tracking.Event.A2_3_4_7__일기작성_화풍선택_반고흐.rawValue),
+            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "모네",Tracking.Event.A2_3_4_8__일기작성_화풍선택_모네.rawValue),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "달리",Tracking.Event.A2_3_4_9__일기작성_화풍선택_달리.rawValue)
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 16) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 12) {
                     ForEach(drawingStyles, id: \.0) { style in
                         generateDrawingStyleCardView(drawingStyle: style)
                             .onTapGesture(perform: {
@@ -112,20 +145,22 @@ struct DrawingStyleView: View {
                                     viewStore.send(.selectDrawingStyle(nil))
                                 } else {
                                     viewStore.send(.selectDrawingStyle(style.0))
+                                    styleLabeling = style.4
+                                    print("@Log_styleLabeling : \(styleLabeling)")
+                                    
                                 }
                             })
-                            .padding(12)
+                            .padding(8)
                     }
-                    .aspectRatio(1.0, contentMode: .fit)
                 }
-                .padding(4)
                 .padding(.bottom, 32)
             }
         }
     }
     
     @ViewBuilder
-    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String)) -> some View {
+    //TODO: 함께 해결해야 할 부분
+    func generateDrawingStyleCardView(drawingStyle: (String, Color, Image, String, Tracking.Event.RawValue)) -> some View {
         WithViewStore(store, observe: {$0}) { viewStore in
             VStack(spacing: 16) {
                 drawingStyle.2
@@ -140,8 +175,9 @@ struct DrawingStyleView: View {
                             .shadow(color: viewStore.selectedDrawingStyle == drawingStyle.0 ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.selectedDrawingStyle == drawingStyle.0 ?  8 : 4)
                     )
                 Text(drawingStyle.3)
-                    .font(.pretendard(.medium, size: 18))
+                    .font(viewStore.selectedDrawingStyle == drawingStyle.0 ? .pretendard(.bold, size: 16) : .pretendard(.medium, size: 16))
                     .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.center)
             }
             .opacity(((viewStore.selectedDrawingStyle == nil || viewStore.selectedDrawingStyle == drawingStyle.0) ? 1 : 0.5))
         }
@@ -149,7 +185,9 @@ struct DrawingStyleView: View {
 }
 
 #Preview {
-    DrawingStyleView(store: Store(initialState: DrawingStyleFeature.State(selectedEmotion: "행복한", mainText: "행복한 하루였다")) {
-        DrawingStyleFeature()
-    })
+    NavigationStack {
+        DrawingStyleView(store: Store(initialState: DrawingStyleFeature.State(selectedEmotion: "행복한", mainText: "행복한 하루였다")) {
+            DrawingStyleFeature()
+        })
+    }
 }

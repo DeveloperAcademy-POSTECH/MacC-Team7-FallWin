@@ -24,8 +24,8 @@ struct ContentView: View {
                                 MainView(store: store)
                             }
                             .tabItem {
-                                Text("Main")
-                                viewStore.tabSelection == 0 ? Image("MainEnabled") : Image("MainDisabled")
+                                Text("피드")
+                                viewStore.tabSelection == 0 ? Image("MainDefault") : Image("MainDisabled")
                             }
                             .tag(0)
                         }
@@ -35,13 +35,24 @@ struct ContentView: View {
                                 SearchView(store: store)
                             }
                             .tabItem {
-                                Text("Feed")
-                                viewStore.tabSelection == 1 ? Image("FeedEnabled") : Image("FeedDisabled")
+                                Text("앨범")
+                                viewStore.tabSelection == 1 ? Image("AlbumDefault") : Image("AlbumDisabled")
                             }
                             .tag(1)
                         }
+                        
+                        IfLetStore(store.scope(state: \.$settings, action: Feature.Action.settings)) { store in
+                            NavigationStack {
+                                SettingsView(store: store)
+                            }
+                            .tabItem {
+                                Text("더보기")
+                                viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
+                            }
+                            .tag(2)
+                        }
                     }
-                    .toolbarBackground(Color(hexCode: "ededed"), for: .tabBar)
+                    .toolbarBackground(Color.backgroundPrimary, for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarColorScheme(.light, for: .tabBar)
                 }
@@ -51,9 +62,6 @@ struct ContentView: View {
                         .fill(.regularMaterial)
                         .ignoresSafeArea()
                 }
-            }
-            .onAppear {
-                viewStore.send(.initViews)
             }
             .onChange(of: scenePhase) { value in
                 if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {

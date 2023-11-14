@@ -2,99 +2,81 @@
 //  SettingsView+Feature.swift
 //  FallWin
 //
-//  Created by 최명근 on 11/1/23.
+//  Created by 최명근 on 11/7/23.
 //
 
 import Foundation
-import LocalAuthentication
-import SwiftKeychainWrapper
 import ComposableArchitecture
 
 struct SettingsFeature: Reducer {
     struct State: Equatable {
-        // Constants
-        let laContext: LAContext = LAContext()
-        var biometricString: String? = nil
+        // App Info
+        var appVersion: String = "1.0.0"
+        var appBuild: String = "1"
         
-        // Settings
-        var haptic: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.haptic)
-        var lock: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)
-        var biometric: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.biometric)
+        // Profile
+        var nickname: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
+        var gender: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.gender) ?? "none"
+        var remainingDrawingCount: Int = DrawingCountManager.shared.remainingCount
+        var showNicknameAlert: Bool = false
+        var tempNickname: String = ""
+        var showCountInfo: Bool = false
         
-        // States
-        var showPasscodeView: Bool = false
-        
-        // Passcode
-        var passcode: String = ""
+        @PresentationState var lockSetting: LockSettingFeature.State? = .init()
+        @PresentationState var policy: PolicyFeature.State? = .init()
+//        @PresentationState var feedback: FeedbackFeature.State? = .init()
     }
     
     enum Action: Equatable {
-        // Settings
-        case setHaptic(Bool)
-        case setLock(Bool)
-        case saveLockSettings(Bool)
-        case setBiometric(Bool)
-        // Actions
-        case showPasscodeView(Bool)
-        case initBiometricString
-        case setFirstPasscode(String)
-        case setPasscode(String)
+        case fetchAppInfo
+        case setNickname(String)
+        case showNicknameAlert(Bool)
+        case setTempNickname(String)
+        case showCountInfo(Bool)
+        case lockSetting(PresentationAction<LockSettingFeature.Action>)
+        case policy(PresentationAction<PolicyFeature.Action>)
+//        case feedback(PresentationAction<FeedbackFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case let .setHaptic(haptic):
-                UserDefaults.standard.setValue(haptic, forKey: UserDefaultsKey.Settings.haptic)
-                state.haptic = haptic
-                return .none
-                
-            case .initBiometricString:
-                if state.laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                    if state.laContext.biometryType == .touchID {
-                        state.biometricString = "Touch ID"
-                    } else if state.laContext.biometryType == .faceID {
-                        state.biometricString = "Face ID"
-                    } else if #available(iOS 17, *), state.laContext.biometryType == .opticID {
-                        state.biometricString = "Optic ID"
-                    } else {
-                        state.biometricString = nil
-                    }
+            case .fetchAppInfo:
+                if let dictionary = Bundle.main.infoDictionary, let version = dictionary["CFBundleShortVersionString"] as? String, let build = dictionary["CFBundleVersion"] as? String {
+                    state.appVersion = version
+                    state.appBuild = build
                 }
+                state.remainingDrawingCount = DrawingCountManager.shared.remainingCount
                 return .none
                 
-            case let .setLock(lock):
-                if lock {
-                    return .send(.showPasscodeView(true))
-                } else {
-                    KeychainWrapper.standard.remove(forKey: .password)
-                    return .send(.saveLockSettings(lock))
-                }
-                
-            case let .saveLockSettings(lock):
-                UserDefaults.standard.setValue(lock, forKey: UserDefaultsKey.Settings.lock)
-                state.lock = lock
+            case let .setNickname(nickname):
+                UserDefaults.standard.set(nickname, forKey: UserDefaultsKey.User.nickname)
+                state.nickname = nickname
                 return .none
                 
-            case let .setBiometric(biometric):
-                UserDefaults.standard.setValue(biometric, forKey: UserDefaultsKey.Settings.biometric)
-                state.biometric = biometric
+            case let .showNicknameAlert(show):
+                state.showNicknameAlert = show
                 return .none
                 
-            case let .showPasscodeView(show):
-                state.showPasscodeView = show
+            case let .setTempNickname(nickname):
+                state.tempNickname = nickname
                 return .none
                 
-            case let .setFirstPasscode(passcode):
-                state.passcode = passcode
+            case let .showCountInfo(show):
+                state.showCountInfo = show
                 return .none
-                
-            case let .setPasscode(passcode):
-                KeychainWrapper.standard[.password] = passcode
-                return .send(.saveLockSettings(true))
                 
             default: return .none
             }
         }
+        .ifLet(\.$lockSetting, action: /Action.lockSetting) {
+            LockSettingFeature()
+        }
+        .ifLet(\.$policy, action: /Action.policy) {
+            PolicyFeature()
+        }
+//        .ifLet(\.$feedback, action: /Action.feedback) {
+//            FeedbackFeature()
+//        }
     }
 }

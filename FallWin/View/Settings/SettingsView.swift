@@ -2,79 +2,242 @@
 //  SettingsView.swift
 //  FallWin
 //
-//  Created by 최명근 on 11/1/23.
+//  Created by 최명근 on 11/7/23.
 //
 
 import SwiftUI
 import ComposableArchitecture
+import FirebaseAnalytics
 
 struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
     
-    @Environment(\.dismiss) var dismiss
-    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Form {
-                Section {
-                    Toggle("햅틱 피드백 사용", isOn: viewStore.binding(get: \.haptic, send: SettingsFeature.Action.setHaptic))
-                } header: {
-                    Text("환경")
+            List {
+                Section("프로필") {
+                    HStack {
+                        Text(viewStore.nickname)
+                            .font(.pretendard(.bold, size: 18))
+                            .foregroundColor(.textPrimary)
+                        Spacer()
+                        Button {
+                            viewStore.send(.showNicknameAlert(true))
+                        } label: {
+                            Text("변경")
+                                .font(.pretendard(size: 16))
+                                .foregroundColor(.textPrimary)
+                        }
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.capsule)
+                    }
+                    .padding(.vertical, 8)
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    VStack {
+                        HStack {
+                            Text("남은 필름")
+                            Button {
+                                viewStore.send(.showCountInfo(true))
+                            } label: {
+                                Image(systemName: "info.circle")
+                                    .resizable()
+                                    .frame(width: 16, height: 16)
+                            }
+                            Spacer()
+                            HStack {
+                                Image(systemName: "film")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20)
+                                Text("\(viewStore.remainingDrawingCount)")
+                                    .font(.pretendard(.bold, size: 16))
+                                    .foregroundColor(.textPrimary)
+                            }
+                        }
+                        
+                        Rectangle()
+                            .fill(Color(hexCode: "#E9E4E3").opacity(0.4))
+                            .frame(height: 8)
+                            .padding(.top, 16)
+                            .padding(.horizontal, -20)
+                    }
+                    .foregroundColor(.textPrimary)
+                    .padding(.vertical, 8)
+                    .listRowBackground(Color.backgroundPrimary)
+                }
+                .listSectionSeparator(.hidden)
+
+                .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "닉네임 변경") {
+                    TextField("닉네임", text: viewStore.binding(get: \.tempNickname, send: SettingsFeature.Action.setTempNickname))
+                } primaryButton: {
+                    OhwaAlertButton(label: Text("취소"), color: .clear) {
+                        viewStore.send(.setTempNickname(""))
+                        viewStore.send(.showNicknameAlert(false))
+                    }
+                } secondaryButton: {
+                    OhwaAlertButton(label: Text("변경").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: .button) {
+                        if !viewStore.tempNickname.isEmpty {
+                            viewStore.send(.setNickname(viewStore.tempNickname))
+                            viewStore.send(.setTempNickname(""))
+                            viewStore.send(.showNicknameAlert(false))
+                        }
+                    }
+                }
+                .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo), title: "남은 필름") {
+                    Text("일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 \(DrawingCountManager.INITIAL_COUNT)개로 리셋되니, 필름이 떨어지지 않게 유의하세요!")
+                        .multilineTextAlignment(.center)
+                } primaryButton: {
+                    OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                        viewStore.send(.showCountInfo(false))
+                    }
                 }
                 
-                Section {
-                    Toggle("앱 잠금", isOn: viewStore.binding(get: \.lock, send: SettingsFeature.Action.setLock))
-                    
-                    if let biometricString = viewStore.biometricString {
-                        Toggle(biometricString, isOn: viewStore.binding(get: \.biometric, send: SettingsFeature.Action.setBiometric))
-                            .disabled(!viewStore.lock)
+                Section("잠금") {
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$lockSetting, action: SettingsFeature.Action.lockSetting)) { store in
+                            LockSettingView(store: store)
+                        }
+                    } label: {
+                        Text("화면 잠금")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
                     }
-                    
-                } header: {
-                    Text("보안")
-                }
-                .onAppear {
-                    viewStore.send(.initBiometricString)
+                    .listRowBackground(Color.backgroundPrimary)
                 }
                 
-                Section {
-                    Link(destination: URL(string: "https://mgdgc.notion.site/6c94fdf60c3f413db4d5d0bbd6b751cb?pvs=4")!) {
-                        Text("개인정보처리방침")
+                Section("데이터 관리") {
+                    NavigationLink {
+                        BackupSettingView()
+                        
+                    } label: {
+                        Text("iCloud 백업/ 복원")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
                     }
-                    .foregroundStyle(.blue)
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        DataSettingsView()
+                        
+                    } label: {
+                        Text("데이터 관리")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                }
+                
+                Section("애플리케이션 정보") {
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$policy, action: SettingsFeature.Action.policy)) { store in
+                            PolicyView(store: store)
+                        }
+                        
+                    } label: {
+                        Text("이용약관")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        WebView(url: "https://instagram.com/picd_a?igshid=eHViMWpyenVmcDNp")
+                            .toolbar(.hidden, for: .tabBar)
+                        
+                    } label: {
+                        Text("소통 창구")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                    .onTapGesture {
+                        Tracking.logEvent(Tracking.Event.A5_3_1_설정뷰_소통창구.rawValue)
+                        print("@Log : A5_3_1_설정뷰_소통창구")
+                    }
+                    
+                    NavigationLink {
+                        WebView(url: "https://forms.gle/DxFtstGew7zctnWm9")
+                            .toolbar(.hidden, for: .tabBar)
+                        
+                    } label: {
+                        Text("피드백 남기기")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    HStack {
+                        Text("픽다에 대하여")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                        Spacer()
+                        Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
+                            .font(.pretendard(size: 18))
+                            .foregroundStyle(.textSecondary)
+                    }
+                    .padding(.vertical, 8)
+                    .listRowBackground(Color.backgroundPrimary)
                 }
             }
-            .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: SettingsFeature.Action.showPasscodeView), content: {
-                PasscodeView(initialMessage: "설정할 비밀번호를 입력하세요.", dismissable: true, enableBiometric: false, authenticateOnLaunch: false) { typed, _ in
-                    if viewStore.passcode.isEmpty {
-                        if let typed = typed {
-                            viewStore.send(.setFirstPasscode(typed))
-                            return .retype("입력한 비밀번호를 확인해 주세요.")
-                        } else {
-                            return .dismiss
-                        }
-                    } else {
-                        if viewStore.passcode == typed {
-                            viewStore.send(.setPasscode(viewStore.passcode))
-                            viewStore.send(.setFirstPasscode(""))
-                            return .dismiss
-                        } else {
-                            viewStore.send(.setFirstPasscode(""))
-                            return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
-                        }
-                    }
-                }
-            })
+            .listStyle(.plain)
+            .listRowSeparatorTint(.separator)
+            .background(Color.backgroundPrimary.ignoresSafeArea())
             .navigationTitle("설정")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("닫기") {
-                        dismiss()
-                    }
-                }
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
+                print("@Log : V5__설정뷰")
+                viewStore.send(.fetchAppInfo)
             }
         }
     }
+    
+//    @ViewBuilder
+//    func nicknameSettingHStack() -> Alert {
+//        HStack {
+//            nicknameSettingView(buttonType: .cancel)
+//            nicknameSettingView(buttonType: .update)
+//        }
+//    }
+//    
+//    @ViewBuilder
+//    func nicknameSettingView(buttonType: NicknameButtonType) -> some View {
+//        
+//        WithViewStore(store, observe: { $0 }) { viewStore in
+//            if buttonType == .cancel {
+//                Button {
+//                    viewStore.send(.setTempNickname(""))
+//                    viewStore.send(.showNicknameAlert(false))
+//                } label: {
+//                    Text("취소")
+//                }
+//                .background(Color.clear)
+//                .cornerRadius(4)
+//            } else {
+//                Button {
+//                    if !viewStore.tempNickname.isEmpty {
+//                        viewStore.send(.setNickname(viewStore.tempNickname))
+//                        viewStore.send(.setTempNickname(""))
+//                        viewStore.send(.showNicknameAlert(false))
+//                    }
+//                } label: {
+//                    Text("변경")
+//                        .foregroundStyle(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton)
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                        .padding()
+//                }
+//                .background(viewStore.tempNickname.isEmpty ? .buttonDisabled : .button)
+//                .cornerRadius(4)
+//            }
+//        }
+//    }
 }
 
 #Preview {

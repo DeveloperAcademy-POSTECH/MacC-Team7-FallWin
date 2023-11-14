@@ -9,9 +9,10 @@ import Foundation
 import SwiftUI
 protocol OhwaAlert:View{
     associatedtype Content: View
+    var title: String? { get }
     var content: Content {get}
     var primaryButton: OhwaAlertButton {get}
     var secondaryButton: OhwaAlertButton? {get}
     
-    init(content: () -> Content, primaryButton: () ->  OhwaAlertButton, secondaryButton: (() -> OhwaAlertButton)?)
+    init(title: String?, content: () -> Content, primaryButton: () ->  OhwaAlertButton, secondaryButton: (() -> OhwaAlertButton)?)
 }
