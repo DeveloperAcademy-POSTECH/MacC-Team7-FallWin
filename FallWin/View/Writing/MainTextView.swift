@@ -90,7 +90,7 @@ struct MainTextView: View {
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
             }
-            .toolbar {
+            .safeToolbar {
                 ToolbarItem(placement: .principal) {
                     DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainTextFeature.Action.pickDate))
                 }

@@ -91,7 +91,7 @@ struct DrawingStyleView: View {
                     }
                 }
             }
-            .toolbar {
+            .safeToolbar {
                 ToolbarItem(placement: .principal) {
                     DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: DrawingStyleFeature.Action.pickDate))
                 }
