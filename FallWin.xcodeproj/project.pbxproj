@@ -115,7 +115,6 @@
 		9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B6392AE6533A00C7359B /* Font+Extension.swift */; };
 		987086AB2AFA17020060E59C /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987086AA2AFA17020060E59C /* PickerView.swift */; };
 		987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987086AC2AFA22150060E59C /* ButtonLabelView.swift */; };
-		9871B1E42B036D2B00C5840A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */; };
 		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
 		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
 		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
@@ -232,7 +231,6 @@
 		9867B6392AE6533A00C7359B /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		987086AA2AFA17020060E59C /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		987086AC2AFA22150060E59C /* ButtonLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabelView.swift; sourceTree = "<group>"; };
-		9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		98A2BC282AFCD688003C9835 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
@@ -366,7 +364,6 @@
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
 				79ADA5FD2AE55280007A56EC /* Secret.plist */,
-				9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */,
 				79407D582AD7E68E006C7571 /* Preview Content */,
 				9867B6252AE6521800C7359B /* Resource */,
 				79AF69432ADCC2390064E410 /* Util */,
@@ -683,7 +680,6 @@
 				9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */,
 				9867B6352AE6524900C7359B /* Pretendard-Thin.ttf in Resources */,
 				79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */,
-				9871B1E42B036D2B00C5840A /* GoogleService-Info.plist in Resources */,
 				9867B6362AE6524900C7359B /* Pretendard-Medium.ttf in Resources */,
 				98202FA42AE69FA90089CF79 /* LottieImageGen.json in Resources */,
 				9867B6302AE6524900C7359B /* Pretendard-Black.ttf in Resources */,
