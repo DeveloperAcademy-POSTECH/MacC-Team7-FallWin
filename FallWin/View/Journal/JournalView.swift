@@ -174,7 +174,7 @@ struct JournalView: View {
                 let mind = viewStore.journal.wrappedMind
                 let drawingStyle = viewStore.journal.wrappedDrawingStyle
                 
-                HStack {
+                HStack(spacing: 16) {
                     if mind != .none, let string = mind.string(), let icon = mind.iconName() {
                         Spacer()
                         VStack {
@@ -317,6 +317,7 @@ struct JournalView: View {
     journal.content = "blah blah blah sdlkfjas fjklasd flkasjd flaksdjf laksdjflkasdj flkasjdf lkasjdflkawjfoiejalskdmf laskdjf lkawjfl kewj lidsjflkawjs deflkjaw dsoifjaweiopfj awoeifj osdaijf oawijf oiawej foiawejf iowajef oiawjef oisdjf oiasdj foiawje foiwaje foij\nasdf \nasdfasdf"
     journal.image = nil
     journal.mind = 1
+    journal.drawingStyle = 1
     journal.timestamp = Date()
     context.insert(journal)
     
