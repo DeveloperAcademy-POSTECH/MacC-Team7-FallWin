@@ -115,8 +115,8 @@ struct BackupSettingView: View {
     }
     
     private func backup() {
-                Tracking.logEvent(Tracking.Event.A5_2_1_설정뷰_iCloud백업_백업.rawValue)
-                print("@Log : A5_2_1_설정뷰_iCloud백업_백업")
+        Tracking.logEvent(Tracking.Event.A5_2_1_설정뷰_iCloud백업_백업.rawValue)
+        print("@Log : A5_2_1_설정뷰_iCloud백업_백업")
         DispatchQueue.global().async {
             if let backupManager = backupManager {
                 backupManager.backup { procedure in
@@ -159,8 +159,8 @@ struct BackupSettingView: View {
     }
     
     private func restore() {
-                Tracking.logEvent(Tracking.Event.A5_2_2_설정뷰_iCloud백업_복원.rawValue)
-                print("@Log : A5_2_2_설정뷰_iCloud백업_복원")
+        Tracking.logEvent(Tracking.Event.A5_2_2_설정뷰_iCloud백업_복원.rawValue)
+        print("@Log : A5_2_2_설정뷰_iCloud백업_복원")
         DispatchQueue.global().async {
             if let backupManager = backupManager {
                 backupManager.restore { procedure in
