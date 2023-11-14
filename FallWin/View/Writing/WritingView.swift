@@ -57,7 +57,7 @@ struct WritingView: View {
                     }
                 }
             }
-            .toolbar {
+            .safeToolbar {
                 ToolbarItem(placement: .principal) {
                     DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: WritingFeature.Action.pickDate))
                 }
@@ -173,7 +173,7 @@ struct DateView: View {
     
     var body: some View {
         HStack {
-            Text("\(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일 (\(pickedDateTagValue.dayOfWeek))")
+            Text("\(String(describing: pickedDateTagValue.year))년 \(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일 (\(pickedDateTagValue.dayOfWeek))")
                 .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
             Image(systemName: "chevron.down")

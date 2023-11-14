@@ -154,8 +154,8 @@ struct MonthDayYearPickerView: View {
                     Spacer()
                 }
                 Button {
-                    pickedDateTagValue.month = selectedMonth
                     pickedDateTagValue.year = selectedYear
+                    pickedDateTagValue.month = selectedMonth
                     pickedDateTagValue.day = selectedDay
                     isPickerShown.toggle()
                 } label: {
