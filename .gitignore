@@ -346,4 +346,4 @@ iOSInjectionProject/
 
 # Files
 FallWin/Secret.plist
-FallWin/GoogleService-Info.plist
+*/GoogleService-Info.plist
