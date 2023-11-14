@@ -173,7 +173,7 @@ struct DateView: View {
     
     var body: some View {
         HStack {
-            Text("\(String(describing: pickedDateTagValue.year))년 \(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일 (\(pickedDateTagValue.dayOfWeek))")
+            Text("\(String(describing: pickedDateTagValue.year))년 \(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일")
                 .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
             Image(systemName: "chevron.down")
