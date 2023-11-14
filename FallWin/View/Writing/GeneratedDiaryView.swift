@@ -11,6 +11,8 @@ import ComposableArchitecture
 import FirebaseAnalytics
 
 struct GeneratedDiaryView: View {
+    @Environment(\.dismiss) var dismiss
+    @State var isError = false
     let store: StoreOf<GeneratedDiaryFeature>
     @ObservedObject var viewStore: ViewStoreOf<GeneratedDiaryFeature>
     private let dallEAPIKey: String = Bundle.main.dallEAPIKey
@@ -174,11 +176,21 @@ struct GeneratedDiaryView: View {
                 }
             } catch {
                 print(error)
+                isError.toggle()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .alert(isPresented: $isError, title: "그림 그리기 실패") {
+            Text("뒤로 돌아가서 다시 버튼을 눌러주세요.")
+        } primaryButton: {
+            OhwaAlertButton(label: Text("뒤로가기").foregroundColor(.textOnButton), color: .button) {
+                isError.toggle()
+                dismiss()
+            }
+        }
+
     }
     
     @ViewBuilder
