@@ -15,10 +15,10 @@ struct MainView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
-                ScrollViewReader { proxy in
-                    if viewStore.journals.isEmpty {
-                        EmptyPlaceholderView()
-                    } else {
+                if viewStore.journals.isEmpty {
+                    EmptyPlaceholderView()
+                } else {
+                    ScrollViewReader { proxy in
                         ScrollView {
                             LazyVStack(spacing: 28) {
                                 ForEach(viewStore.journals.indices, id: \.self) { i in

@@ -119,11 +119,25 @@ struct MainFeature: Reducer {
                 state.remainingCount = DrawingCountManager.shared.remainingCount
                 return .none
                 
-            case .writing(let action):
-                return handleWritingAction(state: &state, action: action)
+//            case .writing(let action):
+//                return handleWritingAction(state: &state, action: action)
+            case let .writing(.presented(.doneGenerating(journal))):
+                state.writing = nil
+                print("dismiss main")
+                return .send(.doneGenerating(journal))
+            
+            case .writing(.presented(.cancelWriting)):
+                state.writing?.mainText?.drawingStyle?.generatedDiary = nil
+                state.writing?.mainText?.drawingStyle = nil
+                state.writing?.mainText = nil
+                state.writing = nil
+                print("dismiss main")
+                return .none
                 
-            case .journal(let action):
-                return handleJournalAction(state: &state, action: action)
+//            case .journal(let action):
+//                return handleJournalAction(state: &state, action: action)
+            case .journal(.presented(.delete)):
+                return .send(.fetchAll)
                 
             default: return .none
             }
@@ -133,28 +147,6 @@ struct MainFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
-        }
-    }
-    
-    private func handleWritingAction(state: inout State, action: PresentationAction<WritingFeature.Action>) -> Effect<Action> {
-        switch action {
-        case .presented(.doneGenerating(let journal)):
-            state.writing = nil
-            return .send(.doneGenerating(journal))
-        
-        case .presented(.cancelWriting):
-            state.writing = nil
-            return .none
-            
-        default: return .none
-        }
-    }
-    
-    private func handleJournalAction(state: inout State, action: PresentationAction<JournalFeature.Action>) -> Effect<Action> {
-        switch action {
-        case .presented(.delete):
-            return .send(.fetchAll)
-        default: return .none
         }
     }
 }
