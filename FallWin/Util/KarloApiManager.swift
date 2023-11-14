@@ -23,12 +23,13 @@ extension KarloApiManager {
     }
     
     func addEmotionDrawingStyle(prompt: String, emotion: String, drawingStyle: String) -> String {
-        
+        print("<<'addEmotionDrawingStyle' in KarloApiManager is called>>")
         return (drawingStyle == "" ? "" : "\(drawingStyle), ") + prompt + (emotion == "" ? "" : " with \(emotion) mood")
     }
     
     func generateImage(prompt: String, negativePrompt: String, priorSteps: Double, priorScale: Double, steps: Double, scale: Double, apiKey: String) async throws  -> KarloImageGenerationResponse {
         
+        print("<<'generateImage' in KarloApiManager is called>>")
         guard let url = URL(string: "https://api.kakaobrain.com/v2/inference/karlo/t2i") else {
             print("------------------bad URL------------------")
             throw KarloImageError.badURL
