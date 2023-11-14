@@ -22,7 +22,6 @@ struct MainFeature: Reducer {
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
-        @PresentationState var settings: OldSettingsFeature.State?
     }
     
     enum Action: Equatable {
@@ -31,7 +30,6 @@ struct MainFeature: Reducer {
         case doneGenerating(Journal)
         case showJournalView(Journal)
         case showWritingView
-        case showSettingsView
         case showPickerSheet
         case hidePickerSheet
         case pickDate(DateTagValue)
@@ -75,10 +73,6 @@ struct MainFeature: Reducer {
                 
             case .showWritingView:
                 state.writing = WritingFeature.State()
-                return .none
-                
-            case .showSettingsView:
-                state.settings = .init()
                 return .none
                 
             case .showPickerSheet:
@@ -131,10 +125,6 @@ struct MainFeature: Reducer {
             case .journal(let action):
                 return handleJournalAction(state: &state, action: action)
                 
-//            case .writing(.presented(.cancelWriting)):
-//                state.writing = nil
-//                return .none
-                
             default: return .none
             }
         }
@@ -143,9 +133,6 @@ struct MainFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
-        }
-        .ifLet(\.$settings, action: /Action.settings) {
-            OldSettingsFeature()
         }
     }
     

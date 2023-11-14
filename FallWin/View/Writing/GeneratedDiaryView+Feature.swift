@@ -72,10 +72,7 @@ struct GeneratedDiaryFeature: Reducer {
             
             context.insert(journal)
             PersistenceController.shared.saveContext()
-            return .run { send in
-                usleep(500_000)
-                await send(.doneImage(journal))
-            }
+            return .send(.doneImage(journal))
             
         case let .setPriorSteps(priorSteps):
             state.priorSteps = priorSteps

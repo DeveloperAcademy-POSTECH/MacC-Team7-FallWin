@@ -15,108 +15,108 @@ struct DrawingStyleView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-                ZStack {
-                    Color.backgroundPrimary
-                        .ignoresSafeArea()
-                    VStack(spacing: 0) {
-                        MessageView(titleText: "어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
-                            .padding(.top, 24)
-//                        VStack {
-//                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
-//                                .font(.pretendard(.semiBold, size: 18))
-//                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
-//                            Spacer()
-//                            Text("prior_guidance_scale: \(viewStore.priorScale)")
-//                                .font(.pretendard(.semiBold, size: 18))
-//                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
-//                            Spacer()
-//                            Text("num_inference_steps: \(viewStore.steps)")
-//                                .font(.pretendard(.semiBold, size: 18))
-//                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
-//                            Spacer()
-//                            Text("guidance_scale: \(viewStore.scale)")
-//                                .font(.pretendard(.semiBold, size: 18))
-//                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
-//                        }
-                        generateDrawingStyleView()
-                            .padding(.top, 16)
-                            .padding(.horizontal)
-                        VStack(spacing: 12) {
-                            Text("그림을 그리면 필름이 차감돼요")
-                                .font(.pretendard(.regular, size: 14))
-                                .foregroundColor(.textTertiary)
-                            Button {
-                                if DrawingCountManager.shared.remainingCount <= 0 {
-                                    viewStore.send(.showCountAlert(true))
-                                } else {
-                                    viewStore.send(.showGeneratedDiaryView)
-                                }
-                                Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
-                                print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
-                                Tracking.logEvent(styleLabeling)
-                                
-                            } label: {
-                                //                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
-                                HStack(spacing: 8) {
-                                    Spacer()
-                                    Image(systemName: "film")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 20, height: 16)
-                                    Text("그림 그리기")
-                                        .font(.pretendard(.semiBold, size: 18))
-                                    Spacer()
-                                }
-                                .foregroundColor(.textOnButton)
-                                .frame(height: 54)
-                                .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
-                                .cornerRadius(8)
-                            }
-                            .disabled(viewStore.selectedDrawingStyle == nil)
-                        }
-                        .padding(.top, 15)
-                        .padding(.horizontal, 24)
-                        .padding(.bottom, 16)
-                        .background{
-                            Color.backgroundPrimary
-                                .ignoresSafeArea()
-                                .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
-                        }
-                        .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
-                            Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
-                        } primaryButton: {
-                            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
-                                viewStore.send(.showCountAlert(false))
-                            }
-                        }
-                    }
-                }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: DrawingStyleFeature.Action.pickDate))
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
+            ZStack {
+                Color.backgroundPrimary
+                    .ignoresSafeArea()
+                VStack(spacing: 0) {
+                    MessageView(titleText: "어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
+                        .padding(.top, 24)
+                    //                        VStack {
+                    //                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
+                    //                            Spacer()
+                    //                            Text("prior_guidance_scale: \(viewStore.priorScale)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
+                    //                            Spacer()
+                    //                            Text("num_inference_steps: \(viewStore.steps)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
+                    //                            Spacer()
+                    //                            Text("guidance_scale: \(viewStore.scale)")
+                    //                                .font(.pretendard(.semiBold, size: 18))
+                    //                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
+                    //                        }
+                    generateDrawingStyleView()
+                        .padding(.top, 16)
+                        .padding(.horizontal)
+                    VStack(spacing: 12) {
+                        Text("그림을 그리면 필름이 차감돼요")
+                            .font(.pretendard(.regular, size: 14))
+                            .foregroundColor(.textTertiary)
                         Button {
-                            viewStore.send(.cancelWriting)
-                            Tracking.logEvent(Tracking.Event.A2_3_2__일기작성_화풍선택_닫기.rawValue)
-                            print("@Log : A2_3_2__일기작성_화풍선택_닫기")
+                            Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
+                            print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
+                            Tracking.logEvent(styleLabeling)
+                            if DrawingCountManager.shared.remainingCount <= 0 {
+                                viewStore.send(.showCountAlert(true))
+                            } else {
+                                viewStore.send(.showGeneratedDiaryView)
+                            }
+                            
                         } label: {
-                            Image(systemName: "xmark")
+                            //                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                            HStack(spacing: 8) {
+                                Spacer()
+                                Image(systemName: "film")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 16)
+                                Text("그림 그리기")
+                                    .font(.pretendard(.semiBold, size: 18))
+                                Spacer()
+                            }
+                            .foregroundColor(.textOnButton)
+                            .frame(height: 54)
+                            .background(viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button)
+                            .cornerRadius(8)
+                        }
+                        .disabled(viewStore.selectedDrawingStyle == nil)
+                    }
+                    .padding(.top, 15)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 16)
+                    .background{
+                        Color.backgroundPrimary
+                            .ignoresSafeArea()
+                            .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
+                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showCountAlert(false))
                         }
                     }
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
-                    GeneratedDiaryView(store: store)
-                })
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar(.visible, for: .navigationBar)
-                .toolbar(.hidden, for: .tabBar)
+            }
+            .safeToolbar {
+                ToolbarItem(placement: .principal) {
+                    DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: DrawingStyleFeature.Action.pickDate))
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        Tracking.logEvent(Tracking.Event.A2_3_2__일기작성_화풍선택_닫기.rawValue)
+                        print("@Log : A2_3_2__일기작성_화풍선택_닫기")
+                        viewStore.send(.cancelWriting)
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(store: store.scope(state: \.$generatedDiary, action: DrawingStyleFeature.Action.generatedDiary), destination: { store in
+                GeneratedDiaryView(store: store)
+            })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+            .toolbar(.hidden, for: .tabBar)
         }
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V2_3__일기작성_화풍선택뷰.rawValue)
             print("@Log : V2_3__일기작성_화풍선택뷰")
-               }
+        }
         
     }
     

@@ -97,6 +97,7 @@
 		98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98202FA92AE6A0800089CF79 /* LottieImageGenView.swift */; };
 		98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98202FAB2AE933D50089CF79 /* KarloApiManager.swift */; };
 		98439ECE2B0282BB00B7669F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98439ECD2B0282BB00B7669F /* GoogleService-Info.plist */; };
+		98439ED02B0353AC00B7669F /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98439ECF2B0353AC00B7669F /* View+Extension.swift */; };
 		9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6262AE6524800C7359B /* Pretendard-Regular.ttf */; };
 		9867B6302AE6524900C7359B /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6272AE6524800C7359B /* Pretendard-Black.ttf */; };
 		9867B6312AE6524900C7359B /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9867B6282AE6524900C7359B /* Pretendard-Light.ttf */; };
@@ -206,6 +207,7 @@
 		98202FA92AE6A0800089CF79 /* LottieImageGenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieImageGenView.swift; sourceTree = "<group>"; };
 		98202FAB2AE933D50089CF79 /* KarloApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarloApiManager.swift; sourceTree = "<group>"; };
 		98439ECD2B0282BB00B7669F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		98439ECF2B0353AC00B7669F /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		9867B6262AE6524800C7359B /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9867B6272AE6524800C7359B /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
 		9867B6282AE6524900C7359B /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.ttf"; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				6637556E2AF7E3A300117085 /* View+Alert.swift */,
 				663755702AF7E53100117085 /* UIViewController+Extension.swift */,
 				6637557C2AF7F0A700117085 /* UIApplication+Extension.swift */,
+				98439ECF2B0353AC00B7669F /* View+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
 				792444112B02700000E28FFE /* EmptyPlaceholderView.swift in Sources */,
+				98439ED02B0353AC00B7669F /* View+Extension.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
 				7924440F2B02195300E28FFE /* ActivityView.swift in Sources */,
 				987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */,
@@ -887,7 +891,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111400;
+				CURRENT_PROJECT_VERSION = 23111401;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
@@ -928,7 +932,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWinRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111400;
+				CURRENT_PROJECT_VERSION = 23111401;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
@@ -1014,8 +1018,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				kind = exactVersion;
+				version = 1.4.0;
 			};
 		};
 		79E5B2D22ADD502100A86770 /* XCRemoteSwiftPackageReference "Alamofire" */ = {

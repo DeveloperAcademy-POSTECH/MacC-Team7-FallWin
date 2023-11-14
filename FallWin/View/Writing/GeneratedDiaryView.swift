@@ -59,16 +59,16 @@ struct GeneratedDiaryView: View {
                         Color.backgroundPrimary
                             .ignoresSafeArea()
                         VStack(spacing: 0) {
-//                            DateView()
+                            //                            DateView()
                             MessageView(titleText: "하루와 가장 잘 어울리는 그림을 선택하세요")
                                 .padding(.top, 40)
                             imageView()
                                 .padding(.top, 16)
                                 .padding(.horizontal, 8)
                             Button {
-                                viewStore.send(.doneGenerating)
                                 Tracking.logEvent(Tracking.Event.A2_5_4__일기작성_그림선택_일기마무리버튼.rawValue)
                                 print("@Log : A2_5_4__일기작성_그림선택_일기마무리버튼")
+                                viewStore.send(.doneGenerating)
                             } label: {
                                 ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             }
@@ -84,15 +84,15 @@ struct GeneratedDiaryView: View {
                         }
                     }
                 }
-                .toolbar {
+                .safeToolbar {
                     ToolbarItem(placement: .principal) {
                         DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: GeneratedDiaryFeature.Action.pickDate))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            viewStore.send(.cancelWriting)
                             Tracking.logEvent(Tracking.Event.A2_5_2__일기작성_그림선택_닫기.rawValue)
                             print("@Log : A2_5_2__일기작성_그림선택_닫기")
+                            viewStore.send(.cancelWriting)
                         } label: {
                             Image(systemName: "xmark")
                         }
@@ -102,7 +102,7 @@ struct GeneratedDiaryView: View {
                 .onAppear {
                     Tracking.logScreenView(screenName: Tracking.Screen.V2_5__일기작성_결과선택뷰.rawValue)
                     print("@Log : wrtingSelectEmotionView")
-                   }
+                }
             } else {
                 ZStack {
                     LottieImageGenView(jsonName: "LottieImageGen")
@@ -123,7 +123,7 @@ struct GeneratedDiaryView: View {
                 .onAppear {
                     Tracking.logScreenView(screenName: Tracking.Screen.V2_4__일기작성_대기뷰.rawValue)
                     print("@Log : wrtingSelectEmotionView")
-                   }
+                }
                 
             }
             

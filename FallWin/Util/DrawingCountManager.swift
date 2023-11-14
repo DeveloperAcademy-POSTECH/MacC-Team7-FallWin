@@ -41,7 +41,9 @@ final class DrawingCountManager {
     func reduceCount() -> Int {
         if !DrawingCountManager.debug && self.drawingCount.count > 0 {
             self.drawingCount.count -= 1
+            print("count saved", drawingCount)
             UserDefaults.standard.set(try! PropertyListEncoder().encode(self.drawingCount), forKey: UserDefaultsKey.AppEnvironment.drawingCount)
+            print("count saved", drawingCount)
         }
         print(self.drawingCount)
         return self.drawingCount.count

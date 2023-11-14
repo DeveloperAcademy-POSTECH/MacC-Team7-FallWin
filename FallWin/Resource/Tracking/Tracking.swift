@@ -102,13 +102,17 @@ struct Tracking {
 
     // 이벤트 로깅을 위한 일반적인 메소드
     static func logEvent(_ name: String, parameters: [String: Any]? = nil) {
-        Analytics.logEvent(name, parameters: parameters)
+        DispatchQueue.global().async {
+            Analytics.logEvent(name, parameters: parameters)
+        }
     }
 
     static func logScreenView(screenName: String, className: String? = nil) {
-        Analytics.logEvent(AnalyticsEventScreenView,
-                 parameters: [AnalyticsParameterScreenName: screenName,
-                              AnalyticsParameterScreenClass: className ?? screenName])
+        DispatchQueue.global().async {
+            Analytics.logEvent(AnalyticsEventScreenView,
+                               parameters: [AnalyticsParameterScreenName: screenName,
+                                           AnalyticsParameterScreenClass: className ?? screenName])
+        }
     }
     
     /*
