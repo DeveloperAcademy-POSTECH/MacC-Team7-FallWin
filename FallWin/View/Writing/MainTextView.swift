@@ -19,8 +19,8 @@ struct MainTextView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    MessageMainTextView()
-                        .padding(.top, 24)
+                        MessageMainTextView()
+                            .padding(.top, 24)
                     TextEditor(text: viewStore.binding(get: \.mainText, send: { .inputMainText($0)}))
                         .font(.pretendard(.medium, size: 18))
                         .foregroundColor(.textPrimary)
@@ -87,6 +87,14 @@ struct MainTextView: View {
                     .padding(.top, 15)
                     .padding(.bottom, 16)
                 }
+                .background(.white.opacity(0.001))
+                .onTapGesture {
+                    if isFocused {
+                        isFocused.toggle()
+                    }
+                    
+                }
+                
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
             }
@@ -127,6 +135,8 @@ struct MessageMainTextView: View {
             .foregroundStyle(.textPrimary)
             .padding(.bottom, 24)
     }
+    
+    
 }
 
 #Preview {
