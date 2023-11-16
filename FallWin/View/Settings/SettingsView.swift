@@ -146,7 +146,7 @@ struct SettingsView: View {
                     .listRowBackground(Color.backgroundPrimary)
                     
                     NavigationLink {
-                        WebView(url: "https://instagram.com/picd_a?igshid=eHViMWpyenVmcDNp")
+                        WebView(url: "https://instagram.com/picda_official")
                             .toolbar(.hidden, for: .tabBar)
                         
                     } label: {

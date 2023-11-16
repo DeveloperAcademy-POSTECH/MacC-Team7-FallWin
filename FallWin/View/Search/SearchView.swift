@@ -31,7 +31,7 @@ struct SearchView: View {
                                 ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key < $1.key }), id: \.key) { key, searchResults in
                                     if !searchResults.isEmpty {
                                         Section(header: HStack {
-                                            Text(key)
+                                            Text(key.string)
                                                 .font(.pretendard(.semiBold, size: 20))
                                             Spacer()
                                         }
@@ -145,10 +145,6 @@ struct SearchView: View {
     }
     
 }
-
-// TODO: 테스트 이후에 더미데이터에 관련한 기능들 삭제
-
-
 
 #Preview {
     SearchView(store: Store(initialState: SearchFeature.State(), reducer: {

@@ -134,6 +134,7 @@ struct BackupSettingView: View {
                             iCloudWorkMessage = "백업 등록"
                         case .clean:
                             iCloudWorkMessage = "임시 파일 삭제"
+                            iCloudWorkMessage = nil
                         }
                     }
                     print(procedure)
@@ -151,6 +152,7 @@ struct BackupSettingView: View {
                         backupManager.cleanLocalBackupFolder()
                         break
                     }
+                    sleep(1)
                     iCloudWorkMessage = nil
                 }
             } else {
@@ -178,6 +180,7 @@ struct BackupSettingView: View {
                             iCloudWorkMessage = "이미지 복원"
                         case .clean:
                             iCloudWorkMessage = "임시 파일 삭제"
+                            iCloudWorkMessage = nil
                         }
                     }
                     print(procedure)
@@ -194,6 +197,7 @@ struct BackupSettingView: View {
                         errorOccured = true
                         break
                     }
+                    sleep(1)
                     iCloudWorkMessage = nil
                     backupManager.cleanTempFolder()
                 }

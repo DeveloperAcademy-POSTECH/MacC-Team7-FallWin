@@ -128,6 +128,7 @@ struct WritingView: View {
                 }
                 .padding()
             }
+            .scrollIndicators(.hidden)
         }
     }
     

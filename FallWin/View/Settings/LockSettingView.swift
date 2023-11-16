@@ -42,6 +42,9 @@ struct LockSettingView: View {
                         .font(.pretendard(size: 14))
                         .listRowBackground(Color.backgroundPrimary)
                 }
+                .onAppear {
+                    viewStore.send(.initBiometricString)
+                }
             }
             .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: LockSettingFeature.Action.showPasscodeView), content: {
                 PasscodeView(initialMessage: "설정할 비밀번호를 입력하세요.", dismissable: true, enableBiometric: false, authenticateOnLaunch: false) { typed, _ in
