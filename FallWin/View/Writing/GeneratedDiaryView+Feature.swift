@@ -20,6 +20,7 @@ struct GeneratedDiaryFeature: Reducer {
         var priorScale: Double = 5.0
         var steps: Double = 25.0
         var scale: Double = 5.0
+        var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
     }
     
     
@@ -27,12 +28,15 @@ struct GeneratedDiaryFeature: Reducer {
         case selectDrawingStyle(_ selectedDrawingStyle: String)
         case setImage(UIImage?)
         case setImages([UIImage?])
+        case reduceCount
         case doneGenerating
         case doneImage(Journal)
         case setPriorSteps(_ priorSteps: Double)
         case setPriorScale(_ priorScale: Double)
         case setSteps(_ steps: Double)
         case setScale(_ scale: Double)
+        case pickDate(DateTagValue)
+        case cancelWriting
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -47,17 +51,25 @@ struct GeneratedDiaryFeature: Reducer {
             
         case let .setImages(imageSet):
             state.imageSet = imageSet
+            return .send(.reduceCount)
+            
+        case .reduceCount:
+            DrawingCountManager.shared.reduceCount()
             return .none
             
         case .doneGenerating:
             let context = PersistenceController.shared.container.viewContext
             let journal = Journal(context: context)
             journal.content = state.mainText
-            journal.mind = getMind(mind: state.selectedEmotion).rawValue
+            journal.mind = Mind(rawName: state.selectedEmotion).rawValue
             if let image = state.image {
                 journal.setImage(image)
             }
-            journal.timestamp = Date()
+            journal.drawingStyle = DrawingStyle(rawName: state.selectedDrawingStyle).rawValue
+            if let date = PickerManager.shared.getDateFromDateTagValue(dateTagValue: state.pickedDateTagValue) {
+                journal.timestamp = date
+            }
+            
             context.insert(journal)
             PersistenceController.shared.saveContext()
             return .send(.doneImage(journal))
@@ -78,56 +90,14 @@ struct GeneratedDiaryFeature: Reducer {
             state.scale = scale
             return .none
             
-        default: return .none
-        }
-    }
-    
-    private func getMind(mind: String) -> Mind {
-        switch mind {
-        case "happy":
-            return Mind.happy
-            
-        case "nervous":
-            return .nervous
-            
-        case "grateful":
-            return .grateful
-            
-        case "sad":
-            return .sad
-            
-        case "joyful":
-            return .joyful
-            
-        case "lonely":
-            return .lonely
-            
-        case "proud":
-            return .proud
-            
-        case "suffocated":
-            return .suffocated
-            
-        case "touched":
-            return .touched
-            
-        case "shy":
-            return .shy
-            
-        case "exciting":
-            return .exciting
-            
-        case "lazy":
-            return .lazy
-            
-        case "annoyed":
-            return .annoyed
-            
-        case "frustrated":
-            return .frustrated
-            
-        default:
+        case let .pickDate(dateTagValue):
+            state.pickedDateTagValue = dateTagValue
             return .none
+            
+        case .cancelWriting:
+            return .none
+            
+        default: return .none
         }
     }
 }

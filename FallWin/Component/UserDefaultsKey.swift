@@ -11,14 +11,22 @@ class UserDefaultsKey {
     class AppEnvironment { }
     
     class Settings { }
+    
+    class User { }
 }
 
 extension UserDefaultsKey.AppEnvironment {
     static let alreadyInstalled = "alreadyInstalled"
+    static let drawingCount = "drawingCount"
 }
 
 extension UserDefaultsKey.Settings {
     static let lock = "lock"
     static let biometric = "biometric"
     static let haptic = "haptic"
+}
+
+extension UserDefaultsKey.User {
+    static let nickname = "nickname"
+    static let gender = "gender"
 }

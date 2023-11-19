@@ -8,20 +8,40 @@
 import SwiftUI
 import SwiftKeychainWrapper
 import ComposableArchitecture
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+    return true
+  }
+}
 
 @main
 struct FallWinApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     init() {
+        // MARK: Settings
         UserDefaults.standard.register(defaults: [
             UserDefaultsKey.Settings.lock: false,
             UserDefaultsKey.Settings.biometric: false,
-            UserDefaultsKey.Settings.haptic: true
+            UserDefaultsKey.Settings.haptic: true,
+        ])
+        
+        // MARK: User
+        UserDefaults.standard.register(defaults: [
+            UserDefaultsKey.User.nickname: "PICDA",
+            UserDefaultsKey.User.gender: "none",
         ])
         
         if !UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled) {
             KeychainWrapper.standard.removeAllKeys()
             UserDefaults.standard.set(true, forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled)
         }
+        
+        ICloudBackupManager()?.test()
     }
     
     @State private var locked: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock)

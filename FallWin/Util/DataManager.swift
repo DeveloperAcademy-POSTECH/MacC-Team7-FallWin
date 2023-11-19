@@ -7,16 +7,16 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 final class DataManager {
     static let shared = DataManager()
     
-    private init() { }
+    init() { }
 }
 
 // MARK: - Image
 extension DataManager {
-    
     func saveImage(_ image: UIImage) -> String? {
         let name = UUID().uuidString
         guard let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -75,4 +75,29 @@ extension DataManager {
         return false
     }
     
+    func deleteAllData() {
+        guard let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
+        }
+        do {
+            for file in try FileManager.default.contentsOfDirectory(atPath: documentUrl.path()) {
+                if file.hasSuffix("jpg") || file.hasSuffix("jpeg") {
+                    try FileManager.default.removeItem(at: documentUrl.appending(path: file))
+                }
+            }
+        } catch {
+            print(error)
+        }
+        
+        let context = PersistenceController.shared.container.viewContext
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Journal")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try context.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+            print(error)
+        }
+    }
 }

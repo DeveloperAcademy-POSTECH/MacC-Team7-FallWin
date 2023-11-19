@@ -344,4 +344,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+# Files
 FallWin/Secret.plist
+*/GoogleService-Info.plist
