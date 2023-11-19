@@ -20,7 +20,7 @@
 
 ## Design Pattern
 - The Composable Architecture
-  - ![TCA Github](https://github.com/pointfreeco/swift-composable-architecture)
+  - [TCA Github](https://github.com/pointfreeco/swift-composable-architecture)
   - SwiftUI 중심의 코드를 작성하되, 확장성과 유지보수성을 높이기 위해 채택하였습니다. 
   단방향의 동작 방식을 갖추었다는 점, 작은 구성의 유기적인 연결로 동작한다는 점에서 사람이 이해하기 쉽고 테스트 및 수정하기 편하다는 점에 주목했습니다.
 
