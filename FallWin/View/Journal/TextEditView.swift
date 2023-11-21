@@ -102,14 +102,37 @@ struct TextEditView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    viewStore.send(.cancelEditing)
+                    viewStore.send(.showCancelAlert(true))
                 } label: {
                     Image(systemName: "xmark")
+                }
+                .alert(isPresented: viewStore.binding(get: \.showCancelAlert, send: TextEditFeature.Action.showCancelAlert), title: "수정을 그만둘까요?") {
+                    Text("수정 사항이 반영되지 않아요.")
+                } primaryButton: {
+                    OhwaAlertButton(label: Text("취소"), color: .clear) {
+                        viewStore.send(.showCancelAlert(false))
+                    }
+                } secondaryButton: {
+                    OhwaAlertButton(label: Text("그만두기").foregroundColor(.textOnButton), color: .button) {
+//                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+//                        print("@Log : A3_3__상세페이지_일기삭제")
+//                        viewStore.send(.hideCancelAlertAndCancelEditing)
+                        viewStore.send(.showCancelAlert(false))
+                        viewStore.send(.cancelEditing)
+                    }
+                }
+            }
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    viewStore.send(.showCancelAlert(true))
+                } label: {
+                    Image(systemName: "chevron.left")
                 }
             }
         }
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .navigationBarBackButtonHidden(true)
         
         //
         .onAppear {
