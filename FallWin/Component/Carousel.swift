@@ -112,7 +112,7 @@ extension Carousel {
     Carousel(0..<5, id: \.self, initialPage: 3) { i in
         VStack {
             Spacer()
-            Text("\(i)")
+            Text(String(i))
             Spacer()
             HStack {
                 Spacer()

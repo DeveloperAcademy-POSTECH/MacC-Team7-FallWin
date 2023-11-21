@@ -77,10 +77,10 @@ struct MainView: View {
                         Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
                         print("@Log : A1_3__메인_새일기쓰기")
                     }
-                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
-                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
+                        Text("limit_alert_message")
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
                         }
                     }
@@ -92,11 +92,11 @@ struct MainView: View {
                             YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
-                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "남은 필름") {
-                            Text("일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 \(DrawingCountManager.INITIAL_COUNT)개로 리셋되니, 필름이 떨어지지 않게 유의하세요!")
+                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "film_alert_title".localized) {
+                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count", with: "\(DrawingCountManager.INITIAL_COUNT)"))
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
-                            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                                 viewStore.send(.showCountInfo(false))
                             }
                         }

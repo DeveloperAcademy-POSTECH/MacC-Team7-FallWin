@@ -14,11 +14,11 @@ struct EmptyPlaceholderView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 120)
-            Text("아직 작성된 일기가 없어요")
+            Text("empty_title")
                 .font(.pretendard(.semiBold, size: 20))
                 .foregroundColor(.textSecondary)
                 .padding(.top, 16)
-            Text("플러스 버튼을 눌러\n일기 쓰기를 시작해보세요")
+            Text("empty_message")
                 .font(.pretendard(.medium, size: 16))
                 .foregroundColor(.textTertiary)
         }

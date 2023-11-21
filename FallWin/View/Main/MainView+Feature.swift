@@ -44,7 +44,6 @@ struct MainFeature: Reducer {
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
-        case settings(PresentationAction<OldSettingsFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {

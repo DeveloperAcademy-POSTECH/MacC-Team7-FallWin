@@ -36,8 +36,6 @@
 		792444112B02700000E28FFE /* EmptyPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792444102B02700000E28FFE /* EmptyPlaceholderView.swift */; };
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Feature.swift */; };
-		7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511B2AF232FD0023123C /* OldSettingsView.swift */; };
-		7927511E2AF233060023123C /* OldSettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511D2AF233060023123C /* OldSettingsView+Feature.swift */; };
 		792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511F2AF2392C0023123C /* UserDefaultsKey.swift */; };
 		792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 792751242AF23DC10023123C /* SwiftKeychainWrapper */; };
 		792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */; };
@@ -52,6 +50,7 @@
 		79407D682AD7ED11006C7571 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D672AD7ED11006C7571 /* Colors.swift */; };
 		794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */; };
 		7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7951CE542AF4AF98006A3AA7 /* PasscodeView.swift */; };
+		799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 799A57A82B0B409700D6966C /* Localizable.xcstrings */; };
 		799F1D8C2B02EFDD009908DB /* JournalWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */; };
 		799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */; };
 		799F1D912B033322009908DB /* MindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D902B033322009908DB /* MindView.swift */; };
@@ -155,8 +154,6 @@
 		792444102B02700000E28FFE /* EmptyPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPlaceholderView.swift; sourceTree = "<group>"; };
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Feature.swift"; sourceTree = "<group>"; };
-		7927511B2AF232FD0023123C /* OldSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSettingsView.swift; sourceTree = "<group>"; };
-		7927511D2AF233060023123C /* OldSettingsView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OldSettingsView+Feature.swift"; sourceTree = "<group>"; };
 		7927511F2AF2392C0023123C /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftKeychainWrapper+Extension.swift"; sourceTree = "<group>"; };
 		7927512A2AF359590023123C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -171,6 +168,7 @@
 		79407D672AD7ED11006C7571 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingScrollView.swift; sourceTree = "<group>"; };
 		7951CE542AF4AF98006A3AA7 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		799A57A82B0B409700D6966C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalWritingView.swift; sourceTree = "<group>"; };
 		799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalWritingView+Feature.swift"; sourceTree = "<group>"; };
 		799F1D902B033322009908DB /* MindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindView.swift; sourceTree = "<group>"; };
@@ -326,8 +324,6 @@
 		7927511A2AF232F00023123C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				7927511B2AF232FD0023123C /* OldSettingsView.swift */,
-				7927511D2AF233060023123C /* OldSettingsView+Feature.swift */,
 				79D8B15C2AFA22510020DFCC /* SettingsView.swift */,
 				792444082B00D04E00E28FFE /* SettingsView+Feature.swift */,
 				79D8B1602AFA2A910020DFCC /* LockSettingView.swift */,
@@ -364,6 +360,7 @@
 				9867B6382AE652A400C7359B /* Info.plist */,
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
+				799A57A82B0B409700D6966C /* Localizable.xcstrings */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
 				79ADA5FD2AE55280007A56EC /* Secret.plist */,
 				9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */,
@@ -647,6 +644,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 79407D462AD7E68D006C7571;
 			packageReferences = (
@@ -679,6 +677,7 @@
 				9867B6372AE6524900C7359B /* Pretendard-ExtraLight.ttf in Resources */,
 				79ADA5FE2AE55280007A56EC /* Secret.plist in Resources */,
 				79D8B14D2AF8C1D30020DFCC /* UhBee Se_hyun Bold.ttf in Resources */,
+				799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */,
 				79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */,
 				9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */,
 				9867B6352AE6524900C7359B /* Pretendard-Thin.ttf in Resources */,
@@ -721,7 +720,6 @@
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
-				7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
@@ -779,7 +777,6 @@
 				7924440B2B00F13000E28FFE /* DataSettingsView.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
 				792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */,
-				7927511E2AF233060023123C /* OldSettingsView+Feature.swift in Sources */,
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
 				7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */,
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,

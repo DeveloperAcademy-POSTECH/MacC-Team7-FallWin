@@ -111,9 +111,9 @@ struct SearchView: View {
                 viewStore.send(.filterData(newValue))
             }
             .navigationTitle(
-                Text("앨범")
+                Text("tab_album")
             )
-            .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("찾고 싶은 추억을 입력해보세요"))
+            .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("album_search_placeholder"))
             .onTapGesture {
                 Tracking.logEvent(Tracking.Event.A4_1__검색뷰_피드검색.rawValue)
                 print("@Log : A4_1__검색뷰_피드검색")

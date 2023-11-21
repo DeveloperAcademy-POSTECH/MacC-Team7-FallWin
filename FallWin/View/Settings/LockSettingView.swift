@@ -17,7 +17,7 @@ struct LockSettingView: View {
             List {
                 Section {
                     Toggle(isOn: viewStore.binding(get: \.lock, send: LockSettingFeature.Action.setLock)) {
-                        Text("비밀번호 잠금")
+                        Text("settings_lock_enable")
                             .font(.pretendard(size: 18))
                             .padding(.vertical, 8)
                     }
@@ -37,7 +37,7 @@ struct LockSettingView: View {
                         .listRowBackground(Color.backgroundPrimary)
                     }
                 } footer: {
-                    Text("비밀번호를 분실한 경우 되찾을 수 없어요.")
+                    Text("settings_lock_footer")
                         .foregroundStyle(.textSecondary)
                         .font(.pretendard(size: 14))
                         .listRowBackground(Color.backgroundPrimary)
@@ -47,11 +47,11 @@ struct LockSettingView: View {
                 }
             }
             .fullScreenCover(isPresented: viewStore.binding(get: \.showPasscodeView, send: LockSettingFeature.Action.showPasscodeView), content: {
-                PasscodeView(initialMessage: "설정할 비밀번호를 입력하세요.", dismissable: true, enableBiometric: false, authenticateOnLaunch: false) { typed, _ in
+                PasscodeView(initialMessage: "passcode_set".localized, dismissable: true, enableBiometric: false, authenticateOnLaunch: false) { typed, _ in
                     if viewStore.passcode.isEmpty {
                         if let typed = typed {
                             viewStore.send(.setFirstPasscode(typed))
-                            return .retype("입력한 비밀번호를 확인해 주세요.")
+                            return .retype("passcode_set_retype".localized)
                         } else {
                             return .dismiss
                         }
@@ -62,14 +62,14 @@ struct LockSettingView: View {
                             return .dismiss
                         } else {
                             viewStore.send(.setFirstPasscode(""))
-                            return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
+                            return .retype("passcode_set_wrong".localized)
                         }
                     }
                 }
             })
             .listStyle(.plain)
             .background(Color.backgroundPrimary.ignoresSafeArea())
-            .navigationTitle("화면 잠금")
+            .navigationTitle("settings_lock")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

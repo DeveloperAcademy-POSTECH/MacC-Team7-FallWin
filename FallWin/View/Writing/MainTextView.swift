@@ -32,12 +32,12 @@ struct MainTextView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color.backgroundPrimary)
-                                .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
+                                .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 2)
                                 .overlay {
                                     VStack {
                                         if viewStore.mainText.isEmpty {
                                             HStack {
-                                                Text("그림으로 담고 싶은 이야기를 작성해보세요.")
+                                                Text("main_text_placeholder")
                                                     .font(.pretendard(.regular, size: 18))
                                                     .multilineTextAlignment(.leading)
                                                     .foregroundStyle(.textTertiary)
@@ -51,16 +51,16 @@ struct MainTextView: View {
                                             Spacer()
                                             Group {
                                                 if viewStore.mainText.count > 1000 {
-                                                    Text("\(viewStore.mainText.count)")
+                                                    Text(String("\(viewStore.mainText.count)"))
                                                         .foregroundStyle(.red)
                                                 }else {
-                                                    Text("\(viewStore.mainText.count)")
+                                                    Text(String("\(viewStore.mainText.count)"))
                                                         .foregroundStyle(.textSecondary)
                                                 }
                                             }
                                             .font(.pretendard(.medium, size: 14))
                                             
-                                            Text(" / \(1000)")
+                                            Text(String(" / \(1000)"))
                                                 .font(.pretendard(.regular, size: 14))
                                                 .foregroundStyle(.textTertiary)
                                                 .padding(.trailing, 8)
@@ -77,7 +77,7 @@ struct MainTextView: View {
                         viewStore.send(.showDrawingStyleView)
                     } label: {
                         ConfirmButtonLabelView(
-                            text: "다음",
+                            text: "next".localized,
                             backgroundColor: (viewStore.mainText == "" || viewStore.mainText.count > 1000) ? Color.buttonDisabled : Color.button,
                             foregroundColor: .textOnButton
                         )
@@ -130,7 +130,7 @@ struct MainTextView: View {
 
 struct MessageMainTextView: View {
     var body: some View {
-        Text("어떤 하루였나요?")
+        Text("main_text_title")
             .font(.pretendard(.bold, size: 24))
             .foregroundStyle(.textPrimary)
             .padding(.bottom, 24)

@@ -14,7 +14,7 @@ struct WritingContentView: View {
     
     var body: some View {
         VStack {
-            WritingHeaderView(title: "어떤 하루였나요?") {
+            WritingHeaderView(title: "main_text_title".localized) {
                 TextEditor(text: $text)
                     .font(.pretendard(.medium, size: 18))
                     .foregroundColor(.textPrimary)
@@ -29,7 +29,7 @@ struct WritingContentView: View {
                         VStack {
                             if text.isEmpty {
                                 HStack {
-                                    Text("그림으로 담고 싶은 이야기를 작성해보세요.")
+                                    Text("main_text_placeholder")
                                         .font(.pretendard(.regular, size: 18))
                                         .multilineTextAlignment(.leading)
                                         .foregroundStyle(.textTertiary)
@@ -43,16 +43,16 @@ struct WritingContentView: View {
                                 Spacer()
                                 Group {
                                     if text.count > 1000 {
-                                        Text("\(text.count)")
+                                        Text(String("\(text.count)"))
                                             .foregroundStyle(.red)
                                     }else {
-                                        Text("\(text.count)")
+                                        Text(String("\(text.count)"))
                                             .foregroundStyle(.textSecondary)
                                     }
                                 }
                                 .font(.pretendard(.medium, size: 14))
                                 
-                                Text(" / \(1000)")
+                                Text(String(" / \(1000)"))
                                     .font(.pretendard(.regular, size: 14))
                                     .foregroundStyle(.textTertiary)
                                     .padding(.trailing, 8)
@@ -67,7 +67,7 @@ struct WritingContentView: View {
                 Button {
                     tab = .mind
                 } label: {
-                    Text("이전")
+                    Text("prev")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textSecondary)
                 }
@@ -79,7 +79,7 @@ struct WritingContentView: View {
                 } label: {
                     HStack {
                         Spacer()
-                        Text("다음")
+                        Text("next")
                             .font(.pretendard(.semiBold, size: 18))
                             .foregroundStyle(.textOnButton)
                         Spacer()

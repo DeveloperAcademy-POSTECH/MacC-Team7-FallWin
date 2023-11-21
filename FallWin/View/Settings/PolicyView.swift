@@ -19,7 +19,7 @@ struct PolicyView: View {
                         .toolbar(.hidden, for: .tabBar)
                     
                 } label: {
-                    Text("서비스 이용약관")
+                    Text("settings_policy_service")
                         .font(.pretendard(size: 18))
                         .padding(.vertical, 8)
                 }
@@ -30,7 +30,7 @@ struct PolicyView: View {
                         .toolbar(.hidden, for: .tabBar)
                     
                 } label: {
-                    Text("개인정보처리방침")
+                    Text("settings_policy_privacy")
                         .font(.pretendard(size: 18))
                         .padding(.vertical, 8)
                 }
@@ -40,7 +40,7 @@ struct PolicyView: View {
                     LicenseView()
                     
                 } label: {
-                    Text("오픈소스 라이선스")
+                    Text("settings_policy_license")
                         .font(.pretendard(size: 18))
                         .padding(.vertical, 8)
                 }
@@ -48,7 +48,7 @@ struct PolicyView: View {
             }
             .listStyle(.plain)
             .background(Color.backgroundPrimary.ignoresSafeArea())
-            .navigationTitle("이용약관")
+            .navigationTitle("settings_policy")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -104,7 +104,7 @@ struct LicenseView: View {
         }
         .listStyle(.plain)
         .background(Color.backgroundPrimary.ignoresSafeArea())
-        .navigationTitle("오픈소스 라이선스")
+        .navigationTitle("settings_policy_license")
         .navigationBarTitleDisplayMode(.inline)
     }
     

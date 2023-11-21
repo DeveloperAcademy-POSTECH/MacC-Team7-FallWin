@@ -34,7 +34,7 @@ struct DrawStyleView: View {
     
     var body: some View {
         VStack {
-            WritingHeaderView(title: "어떻게 표현하고 싶나요?", message: "화풍을 선택하면 그림을 그려줘요") {
+            WritingHeaderView(title: "drawing_style_title".localized, message: "drawing_style_subtitle".localized) {
                 ScrollView {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), alignment: .center, spacing: 0) {
                         ForEach(drawStyles) { style in
@@ -64,7 +64,7 @@ struct DrawStyleView: View {
                         .fill(Color.backgroundPrimary)
                         .shadow(color: selected == style.drawingStyle ? .shadow.opacity(0.2) : .shadow.opacity(0.1), radius: selected == style.drawingStyle ?  8 : 4)
                 )
-            Text(style.drawingStyle.name() ?? "")
+            Text(String(style.drawingStyle.name() ?? ""))
                 .font(selected == style.drawingStyle ? .pretendard(.bold, size: 16) : .pretendard(.medium, size: 16))
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)
