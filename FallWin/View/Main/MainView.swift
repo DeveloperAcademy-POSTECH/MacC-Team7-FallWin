@@ -93,7 +93,7 @@ struct MainView: View {
                                 .presentationDetents([.fraction(0.5)])
                         }
                         .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count", with: "\(DrawingCountManager.INITIAL_COUNT)"))
+                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(DrawingCountManager.INITIAL_COUNT)"))
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
                             OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {

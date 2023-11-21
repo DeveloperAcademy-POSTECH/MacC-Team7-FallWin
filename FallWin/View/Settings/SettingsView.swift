@@ -85,7 +85,7 @@ struct SettingsView: View {
                     }
                 }
                 .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                    Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count", with: "\(DrawingCountManager.INITIAL_COUNT)"))
+                    Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(DrawingCountManager.INITIAL_COUNT)"))
                         .multilineTextAlignment(.center)
                 } primaryButton: {
                     OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
