@@ -371,9 +371,32 @@
         }
       }
     },
+    "date_year_month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{month}, {year}"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{year}년 {month}"
+          }
+        }
+      }
+    },
     "delete" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -402,6 +425,12 @@
     "done" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",

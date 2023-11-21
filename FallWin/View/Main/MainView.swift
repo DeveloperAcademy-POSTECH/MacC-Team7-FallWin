@@ -174,8 +174,11 @@ struct MainView: View {
                     viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {
-                        Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
-                            .font(.pretendard(.bold, size: 24))
+                        Text("date_year_month".localized
+                            .replacingOccurrences(of: "{year}", with: String(viewStore.pickedDateTagValue.year))
+                            .replacingOccurrences(of: "{month}", with: String("date_picker_month_\(viewStore.pickedDateTagValue.month)".localized))
+                        )
+                        .font(.pretendard(.bold, size: 24))
                         Image(systemName: "chevron.down")
                     }
                 }
