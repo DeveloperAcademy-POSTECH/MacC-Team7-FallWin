@@ -37,6 +37,9 @@ struct JournalView: View {
                         .ignoresSafeArea()
                 }
             }
+            .onAppear {
+                print("textEdit is nil? \(viewStore.textEdit == nil)")
+            }
             .fullScreenCover(isPresented: viewStore.binding(get: \.showImageDetailView, send: JournalFeature.Action.showImageDetailView)) {
                 NavigationStack {
                     ImageZoomView(image: viewStore.journal.wrappedImage)
@@ -76,7 +79,7 @@ struct JournalView: View {
                 @unknown default: break
                 }
             }
-            .toolbar {
+            .safeToolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
                         dismiss()
@@ -101,30 +104,38 @@ struct JournalView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .secondaryAction) {
-                    Button("삭제", systemImage: "trash", role: .destructive) {
-                        viewStore.send(.showDeleteAlert(true))
-                    }
-                    .alert(isPresented: viewStore.binding(get: \.showDeleteAlert, send: JournalFeature.Action.showDeleteAlert), title: "일기를 삭제할까요?") {
-                        Text("일기를 삭제하면 다시 복구할 수 없습니다.")
-                    } primaryButton: {
-                        OhwaAlertButton(label: Text("취소"), color: .clear) {
-                            viewStore.send(.showDeleteAlert(false))
+                ToolbarItemGroup(placement: .secondaryAction) {
+                        Button("수정", systemImage: "pencil"){
+                            viewStore.send(.showTextEditView)
                         }
-                    } secondaryButton: {
-                        OhwaAlertButton(label: Text("삭제하기").foregroundColor(.textOnButton), color: .button) {
-                            Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
-                            print("@Log : A3_3__상세페이지_일기삭제")
-                            viewStore.send(.delete)
-                            viewStore.send(.showDeleteAlert(false))
+                        Button("삭제", systemImage: "trash", role: .destructive) {
+                            viewStore.send(.showDeleteAlert(true))
                         }
-                    }
+                        .alert(isPresented: viewStore.binding(get: \.showDeleteAlert, send: JournalFeature.Action.showDeleteAlert), title: "일기를 삭제할까요?") {
+                            Text("일기를 삭제하면 다시 복구할 수 없습니다.")
+                        } primaryButton: {
+                            OhwaAlertButton(label: Text("취소"), color: .clear) {
+                                viewStore.send(.showDeleteAlert(false))
+                            }
+                        } secondaryButton: {
+                            OhwaAlertButton(label: Text("삭제하기").foregroundColor(.textOnButton), color: .button) {
+                                Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+                                print("@Log : A3_3__상세페이지_일기삭제")
+                                viewStore.send(.delete)
+                                viewStore.send(.showDeleteAlert(false))
+                            }
+                        }
+                    
                 }
             }
+            .toolbar(.visible, for: .navigationBar)
             .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { image in
                 shareSheetView(image: image.image)
                     .presentationDetents([.fraction(0.8)])
             }
+            .navigationDestination(store: store.scope(state: \.$textEdit, action: JournalFeature.Action.textEdit), destination: { store in
+                TextEditView(store: store)
+            })
         }
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V3__상세페이지뷰.rawValue)
