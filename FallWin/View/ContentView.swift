@@ -16,72 +16,78 @@ struct ContentView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ZStack {
-                TabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
-                    Group {
-                        IfLetStore(store.scope(state: \.$main, action: Feature.Action.main)) { store in
-                            NavigationStack {
-                                MainView(store: store)
+            if UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched) {
+                IfLetStore(store.scope(state: \.$onboarding, action: Feature.Action.onboarding)) { store in
+                    OnboardingView(store: store)
+                }
+            } else {
+                ZStack {
+                    TabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
+                        Group {
+                            IfLetStore(store.scope(state: \.$main, action: Feature.Action.main)) { store in
+                                NavigationStack {
+                                    MainView(store: store)
+                                }
+                                .tabItem {
+                                    Text("피드")
+                                    viewStore.tabSelection == 0 ? Image("MainDefault") : Image("MainDisabled")
+                                }
+                                .tag(0)
                             }
-                            .tabItem {
-                                Text("피드")
-                                viewStore.tabSelection == 0 ? Image("MainDefault") : Image("MainDisabled")
+                            
+                            IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
+                                NavigationStack {
+                                    SearchView(store: store)
+                                }
+                                .tabItem {
+                                    Text("앨범")
+                                    viewStore.tabSelection == 1 ? Image("AlbumDefault") : Image("AlbumDisabled")
+                                }
+                                .tag(1)
                             }
-                            .tag(0)
+                            
+                            IfLetStore(store.scope(state: \.$settings, action: Feature.Action.settings)) { store in
+                                NavigationStack {
+                                    SettingsView(store: store)
+                                }
+                                .tabItem {
+                                    Text("더보기")
+                                    viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
+                                }
+                                .tag(2)
+                            }
                         }
-                        
-                        IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
-                            NavigationStack {
-                                SearchView(store: store)
-                            }
-                            .tabItem {
-                                Text("앨범")
-                                viewStore.tabSelection == 1 ? Image("AlbumDefault") : Image("AlbumDisabled")
-                            }
-                            .tag(1)
-                        }
-                        
-                        IfLetStore(store.scope(state: \.$settings, action: Feature.Action.settings)) { store in
-                            NavigationStack {
-                                SettingsView(store: store)
-                            }
-                            .tabItem {
-                                Text("더보기")
-                                viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
-                            }
-                            .tag(2)
-                        }
+                        .toolbarBackground(Color.backgroundPrimary, for: .tabBar)
+                        .toolbarBackground(.visible, for: .tabBar)
+                        .toolbarColorScheme(.light, for: .tabBar)
                     }
-                    .toolbarBackground(Color.backgroundPrimary, for: .tabBar)
-                    .toolbarBackground(.visible, for: .tabBar)
-                    .toolbarColorScheme(.light, for: .tabBar)
+                    
+                    if viewStore.invisible {
+                        Rectangle()
+                            .fill(.regularMaterial)
+                            .ignoresSafeArea()
+                    }
                 }
-                
-                if viewStore.invisible {
-                    Rectangle()
-                        .fill(.regularMaterial)
-                        .ignoresSafeArea()
-                }
-            }
-            .onChange(of: scenePhase) { value in
-                if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    switch value {
-                    case .inactive:
-                        viewStore.send(.setInvisibility(true))
-                        break
-                        
-                    case .active:
-                        viewStore.send(.setInvisibility(false))
-                        break
-                        
-                    case .background:
-                        break
-                        
-                    @unknown default: break
+                .onChange(of: scenePhase) { value in
+                    if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        switch value {
+                        case .inactive:
+                            viewStore.send(.setInvisibility(true))
+                            break
+                            
+                        case .active:
+                            viewStore.send(.setInvisibility(false))
+                            break
+                            
+                        case .background:
+                            break
+                            
+                        @unknown default: break
+                        }
                     }
                 }
             }

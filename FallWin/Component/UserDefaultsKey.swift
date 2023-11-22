@@ -18,6 +18,7 @@ class UserDefaultsKey {
 extension UserDefaultsKey.AppEnvironment {
     static let alreadyInstalled = "alreadyInstalled"
     static let drawingCount = "drawingCount"
+    static let isFirstLaunched = "isFirstLaunched"
 }
 
 extension UserDefaultsKey.Settings {
