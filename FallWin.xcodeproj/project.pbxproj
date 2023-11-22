@@ -50,6 +50,9 @@
 		79407D682AD7ED11006C7571 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D672AD7ED11006C7571 /* Colors.swift */; };
 		794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */; };
 		7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7951CE542AF4AF98006A3AA7 /* PasscodeView.swift */; };
+		7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */; };
+		7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */; };
+		7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */; };
 		799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 799A57A82B0B409700D6966C /* Localizable.xcstrings */; };
 		799F1D8C2B02EFDD009908DB /* JournalWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */; };
 		799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */; };
@@ -168,6 +171,9 @@
 		79407D672AD7ED11006C7571 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingScrollView.swift; sourceTree = "<group>"; };
 		7951CE542AF4AF98006A3AA7 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
+		7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationSettingView+Feature.swift"; sourceTree = "<group>"; };
+		7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		799A57A82B0B409700D6966C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalWritingView.swift; sourceTree = "<group>"; };
 		799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalWritingView+Feature.swift"; sourceTree = "<group>"; };
@@ -332,6 +338,8 @@
 				7924440A2B00F13000E28FFE /* DataSettingsView.swift */,
 				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
 				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
+				7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */,
+				7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -428,6 +436,7 @@
 				79D8B1782AFB692E0020DFCC /* WebView.swift */,
 				7924440E2B02195300E28FFE /* ActivityView.swift */,
 				792444102B02700000E28FFE /* EmptyPlaceholderView.swift */,
+				7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -737,6 +746,7 @@
 				79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
 				6637556F2AF7E3A300117085 /* View+Alert.swift in Sources */,
+				7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */,
 				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
@@ -769,6 +779,8 @@
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
 				79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */,
+				7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */,
+				7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */,

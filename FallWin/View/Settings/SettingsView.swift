@@ -93,13 +93,25 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("setting_section_lock") {
+                Section("setting_section_settings") {
                     NavigationLink {
                         IfLetStore(store.scope(state: \.$lockSetting, action: SettingsFeature.Action.lockSetting)) { store in
                             LockSettingView(store: store)
                         }
                     } label: {
                         Text("settings_lock")
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
+                    }
+                    .listRowBackground(Color.backgroundPrimary)
+                    
+                    NavigationLink {
+                        IfLetStore(store.scope(state: \.$notification, action: SettingsFeature.Action.notification)) { store in
+                            NotificationSettingView(store: store)
+                        }
+                    } label: {
+                        Text("settings_notification")
                             .font(.pretendard(size: 18))
                             .foregroundColor(.textPrimary)
                             .padding(.vertical, 8)
@@ -189,7 +201,7 @@ struct SettingsView: View {
             .listStyle(.plain)
             .listRowSeparatorTint(.separator)
             .background(Color.backgroundPrimary.ignoresSafeArea())
-            .navigationTitle("settings_title")
+            .navigationTitle("tab_more")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)

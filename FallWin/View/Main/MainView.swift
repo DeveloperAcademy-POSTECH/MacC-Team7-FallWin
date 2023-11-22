@@ -115,6 +115,7 @@ struct MainView: View {
                 viewStore.send(.fetchAll)
                 viewStore.send(.hideTabBar(false))
             }
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
         }

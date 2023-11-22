@@ -28,6 +28,7 @@ struct FallWinApp: App {
             UserDefaultsKey.Settings.lock: false,
             UserDefaultsKey.Settings.biometric: false,
             UserDefaultsKey.Settings.haptic: true,
+            UserDefaultsKey.Settings.dailyNotification: false,
         ])
         
         // MARK: User

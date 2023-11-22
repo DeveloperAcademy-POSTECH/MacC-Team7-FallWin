@@ -23,8 +23,8 @@ struct SettingsFeature: Reducer {
         var showCountInfo: Bool = false
         
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
+        @PresentationState var notification: NotificationSettingFeature.State? = .init()
         @PresentationState var policy: PolicyFeature.State? = .init()
-//        @PresentationState var feedback: FeedbackFeature.State? = .init()
     }
     
     enum Action: Equatable {
@@ -34,8 +34,8 @@ struct SettingsFeature: Reducer {
         case setTempNickname(String)
         case showCountInfo(Bool)
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
+        case notification(PresentationAction<NotificationSettingFeature.Action>)
         case policy(PresentationAction<PolicyFeature.Action>)
-//        case feedback(PresentationAction<FeedbackFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -75,8 +75,8 @@ struct SettingsFeature: Reducer {
         .ifLet(\.$policy, action: /Action.policy) {
             PolicyFeature()
         }
-//        .ifLet(\.$feedback, action: /Action.feedback) {
-//            FeedbackFeature()
-//        }
+        .ifLet(\.$notification, action: /Action.notification) {
+            NotificationSettingFeature()
+        }
     }
 }
