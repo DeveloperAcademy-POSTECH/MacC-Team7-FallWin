@@ -19,12 +19,12 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by 5-year-old-kid's-drawing-skill, drawn with innocent charm and rough lines, unrefined strokes childlike painting",
+        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by 5-year-old-kid's drawing skill, drawn with innocent charm and rough lines, unrefined strokes childlike painting",
         "Oil Painting": "Oil painting",
         "Water Color": "Watercolor Painting",
         "Sketch": "pencil sketches Painting",
         "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
-        "Pixel Art": "Retro-styled pixel-by-pixel video game graphics Style",
+        "Pixel Art": "Retro-styled pixel-by-pixel non-alphabet video game graphics Style",
         "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
         "Monet": "Impressionism art in the style of Claude Monet Painting",
         "Salvador Dali": "Dream-like and bizarre surreal art in the style of Salvador Dali Painting"
@@ -143,7 +143,7 @@ struct GeneratedDiaryView: View {
                     let karloPrompt = KarloApiManager.shared.addEmotionDrawingStyle(prompt: promptOutput, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
                     print("original input text:\n\(viewStore.mainText)\n------\nchatGPT's output:\n\(promptOutput)\n------\nprompt with drawing style:\n\(karloPrompt)")
                     
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "realistic photo, ugly, poorly drawn face, nsfw, text, alphabet, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "text, alphabet, child, crayon, realistic photo, ugly, poorly drawn face, nsfw, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
                     
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {
@@ -160,7 +160,7 @@ struct GeneratedDiaryView: View {
                     
                 } else {
                     print("--chatGPT response is null--")
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: viewStore.mainText, negativePrompt: "realistic photo, ugly, poorly drawn face, nsfw, text, alphabet, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: viewStore.mainText, negativePrompt: "text, alphabet, child, crayon, realistic photo, ugly, poorly drawn face, nsfw, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
                     
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {
