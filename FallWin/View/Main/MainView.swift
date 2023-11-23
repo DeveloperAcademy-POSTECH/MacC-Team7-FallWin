@@ -12,10 +12,9 @@ import FirebaseAnalytics
 struct MainView: View {
     let store: StoreOf<MainFeature>
     
-    @StateObject private var rewardManager = RewardAdsManager()
-    
     let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
     let networkModel = NetworkModel()
+    let rewardAdsManager = RewardAdsManager()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -84,7 +83,11 @@ struct MainView: View {
                     .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
                         Text("limit_alert_message")
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.button), color: .backgroundPrimary) {
+                            viewStore.send(.showCountAlert(false))
+                        }
+                    } secondaryButton: {
+                        OhwaAlertButton(label: Text("limit_alert_ad").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
                         }
                     }
@@ -95,7 +98,24 @@ struct MainView: View {
                             viewStore.send(.showNetworkAlert(false))
                         }
                     }
-                
+                    .alert(isPresented: viewStore.binding(get: \.showAdFailAlert, send: MainFeature.Action.showAdFailAlert), title: "ad_fail_alert_title".localized) {
+                        Text("ad_fail_alert_message")
+                    } primaryButton: { 
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showAdFailAlert(false))
+                        }
+                    }
+                    .onChange(of: viewStore.showAd) { newValue in
+                        rewardAdsManager.displayReward { reward in
+                            if reward {
+                                FilmManager.shared.increaseCount()
+                                viewStore.send(.getRemainingCount)
+                            } else {
+                                viewStore.send(.showAdFailAlert(true))
+                            }
+                        }
+                        viewStore.send(.showAd(false))
+                    }
                 
                 VStack {
                     toolbar

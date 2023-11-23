@@ -2,17 +2,31 @@
 import Foundation
 import GoogleMobileAds
 
-class RewardAdsManager: NSObject,GADFullScreenContentDelegate,ObservableObject{
+class RewardAdsManager: NSObject, GADFullScreenContentDelegate {
     
     // Properties
-    @Published var rewardLoaded:Bool = false
+    var rewardLoaded: Bool = false
     var rewardAd:GADRewardedAd?
     
     override init() {
         super.init()
+        loadReward()
     }
     
     // Load reward ads
+    func loadReward() async -> GADRewardedAd? {
+        do {
+            let ad = try await GADRewardedAd.load(withAdUnitID: Bundle.main.adUnitId, request: GADRequest())
+            ad.fullScreenContentDelegate = self
+            return ad
+//            self.rewardAd = ad
+//            return true
+        } catch {
+            print(#function, error)
+            return nil
+        }
+    }
+    
     func loadReward(){
         GADRewardedAd.load(withAdUnitID: Bundle.main.adUnitId, request: GADRequest()) { [weak self] add, error in
             guard let self = self else {return}
@@ -29,8 +43,24 @@ class RewardAdsManager: NSObject,GADFullScreenContentDelegate,ObservableObject{
     }
     
     // Display reward ads
-    func displayReward(){
-        guard let root = UIApplication.shared.windows.first?.rootViewController else {
+    func displayReward() async -> Bool {
+        guard let root = await UIApplication.shared.keyWindow?.rootViewController else {
+            return false
+        }
+        
+        if let ad = await loadReward() {
+            return await withUnsafeContinuation { continuation in
+                ad.present(fromRootViewController: root) {
+                    continuation.resume(returning: true)
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func displayReward(onReward: @escaping (Bool) -> Void) {
+        guard let root = UIApplication.shared.keyWindow?.rootViewController else {
             return
         }
         
@@ -39,6 +69,7 @@ class RewardAdsManager: NSObject,GADFullScreenContentDelegate,ObservableObject{
                 print("🟢: Earned a reward")
                 //여기서 보상이 주어진다.
                 self.rewardLoaded = false
+                onReward(true)
             }
         } else {
             print("🔵: Ad wasn't ready")
@@ -46,4 +77,19 @@ class RewardAdsManager: NSObject,GADFullScreenContentDelegate,ObservableObject{
             self.loadReward()
         }
     }
+    
+    /// Tells the delegate that the ad failed to present full screen content.
+      func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        print("Ad did fail to present full screen content.")
+      }
+
+      /// Tells the delegate that the ad will present full screen content.
+      func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad will present full screen content.")
+      }
+
+      /// Tells the delegate that the ad dismissed full screen content.
+      func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad did dismiss full screen content.")
+      }
 }
