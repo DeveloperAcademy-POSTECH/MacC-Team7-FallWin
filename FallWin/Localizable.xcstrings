@@ -1152,13 +1152,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1 film required per drawing. It will be reset to {initial_count} every day."
+            "value" : "1 film required per drawing. It will be reset to {initial_count} every day.\n\n* Internet connection required."
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 {initial_count}개로 리셋되니, 필름이 떨어지지 않게 유의하세요!"
+            "state" : "needs_review",
+            "value" : "일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 {initial_count}개로 리셋되니, 필름이 떨어지지 않게 유의하세요!\n\n* 인터넷에 연결하지 않으면 필름이 채워지지 않아요."
           }
         }
       }
