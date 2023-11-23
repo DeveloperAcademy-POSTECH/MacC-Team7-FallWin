@@ -12,6 +12,8 @@ import FirebaseAnalytics
 struct MainView: View {
     let store: StoreOf<MainFeature>
     
+    @StateObject private var rewardManager = RewardAdsManager()
+    
     let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
     let networkModel = NetworkModel()
     
@@ -246,6 +248,8 @@ struct MainView: View {
                         
                         if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
+//                            rewardManager.displayReward()
+                            //Alert 추가하기
                         } else {
                             viewStore.send(.showWritingView)
                         }

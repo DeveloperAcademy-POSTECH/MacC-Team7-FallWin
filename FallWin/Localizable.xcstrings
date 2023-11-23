@@ -82,6 +82,9 @@
         }
       }
     },
+    "Dall-E에 들어간 프롬프트:\n%@" : {
+
+    },
     "date_picker_day" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1577,6 +1580,9 @@
         }
       }
     },
+    "loading..." : {
+
+    },
     "main_text_placeholder" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2665,6 +2671,9 @@
         }
       }
     },
+    "Something wrong!" : {
+
+    },
     "tab_album" : {
       "localizations" : {
         "en" : {
@@ -3018,6 +3027,18 @@
           }
         }
       }
+    },
+    "감정을 입력하세요. (영어)" : {
+
+    },
+    "이미지 생성" : {
+
+    },
+    "프롬프트를 입력하세요." : {
+
+    },
+    "화풍을 입력하세요. (영어)" : {
+
     }
   },
   "version" : "1.0"

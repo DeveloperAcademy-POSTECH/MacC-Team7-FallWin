@@ -144,6 +144,8 @@
 		98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */; };
 		98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */; };
 		A9D4C73B2AF8CAA30004CF04 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */; };
+		A9E84A5F2B0F4588002A811F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A9E84A5E2B0F4588002A811F /* GoogleMobileAds */; };
+		A9E84A622B0F45B6002A811F /* RewardAdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -271,6 +273,7 @@
 		98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedDiaryView.swift; sourceTree = "<group>"; };
 		98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedDiaryView+Feature.swift"; sourceTree = "<group>"; };
 		A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
+		A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardAdsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 				79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */,
 				665837752AF8110600A5833E /* FirebaseAnalyticsSwift in Frameworks */,
 				6658376B2AF80B7600A5833E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				A9E84A5F2B0F4588002A811F /* GoogleMobileAds in Frameworks */,
 				665837772AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				6658376D2AF80B7600A5833E /* FirebaseAppCheck in Frameworks */,
 				665837792AF8110600A5833E /* FirebaseAppCheck in Frameworks */,
@@ -385,6 +389,7 @@
 		79407D512AD7E68D006C7571 /* FallWin */ = {
 			isa = PBXGroup;
 			children = (
+				A9E84A602B0F459F002A811F /* Admob */,
 				66392A992B020CEB004C8381 /* FallWinRelease.entitlements */,
 				79A5667B2AFE06BF00524A57 /* FallWin.entitlements */,
 				9867B6382AE652A400C7359B /* Info.plist */,
@@ -631,6 +636,14 @@
 			path = Writing;
 			sourceTree = "<group>";
 		};
+		A9E84A602B0F459F002A811F /* Admob */ = {
+			isa = PBXGroup;
+			children = (
+				A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */,
+			);
+			path = Admob;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -664,6 +677,7 @@
 				665837762AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport */,
 				665837782AF8110600A5833E /* FirebaseAppCheck */,
 				7975B6EF2B0E329B0047B5BD /* Kronos */,
+				A9E84A5E2B0F4588002A811F /* GoogleMobileAds */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -702,6 +716,7 @@
 				79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				665837632AF80B7600A5833E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */,
+				A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -816,6 +831,7 @@
 				7927512D2AF364DC0023123C /* ImageDetailView.swift in Sources */,
 				98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */,
 				98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */,
+				A9E84A622B0F45B6002A811F /* RewardAdsManager.swift in Sources */,
 				799F1D972B034632009908DB /* DrawStyleView.swift in Sources */,
 				7927512B2AF359590023123C /* HapticManager.swift in Sources */,
 				79C99FD52B0F43F0003B3A0B /* NetworkModel.swift in Sources */,
@@ -982,7 +998,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = V59QA8T54G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -1023,7 +1039,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = V59QA8T54G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -1135,6 +1151,14 @@
 				minimumVersion = 4.3.3;
 			};
 		};
+		A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.13.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1217,6 +1241,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98202FA52AE6A0360089CF79 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		A9E84A5E2B0F4588002A811F /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 
