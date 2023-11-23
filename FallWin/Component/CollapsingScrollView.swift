@@ -17,45 +17,51 @@ struct CollapsingScrollViewKey: PreferenceKey {
 struct CollapsingScrollView<Header: View, Content: View>: View {
     @ViewBuilder var header: () -> Header
     @ViewBuilder var content: () -> Content
+    var onPullAction: (() -> Void)? = nil
     
     @State private var headerHeight: CGFloat = 0
     @State private var scrollY: CGFloat = .zero
     @State private var originY: CGFloat = .zero
     @State private var scale: CGFloat = 1
+    @State private var pullAction: Bool = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                header()
-                    .overlay {
-                        GeometryReader { proxy in
-                            Color.clear
-                                .onAppear {
-                                    headerHeight = proxy.size.height
-                                }
-                        }
-                    }
-                    .scaleEffect(CGSize(width: scale < 1 ? 1 : scale, height: scale < 1 ? 1 : scale), anchor: .top)
-                Spacer()
-            }
-            
-            ScrollView {
-                VStack(spacing: 0) {
+        GeometryReader { proxy in
+            ZStack {
+                VStack {
                     header()
-                        .opacity(0)
-                        .drawingGroup()
-                    
-                    LazyVStack {
-                        content()
-                            .background(
-                                GeometryReader { proxy in
-                                    Color.clear
-                                        .preference(key: CollapsingScrollViewKey.self, value: proxy.frame(in: .global).origin.y)
-                                }
-                            )
-                    }
-                    .background {
-                        Colors.backgroundPrimary.color().ignoresSafeArea()
+                        .overlay {
+                            GeometryReader { proxy in
+                                Color.clear
+                                    .onAppear {
+                                        headerHeight = proxy.size.height
+                                    }
+                            }
+                        }
+                        .scaleEffect(CGSize(width: scale < 1 ? 1 : scale, height: scale < 1 ? 1 : scale), anchor: .top)
+                    Spacer()
+                }
+                
+                ScrollView {
+                    VStack(spacing: 0) {
+                        header()
+                            .opacity(0)
+                            .drawingGroup()
+                        
+                        LazyVStack {
+                            content()
+                                .background(
+                                    GeometryReader { proxy in
+                                        Color.clear
+                                            .preference(key: CollapsingScrollViewKey.self, value: proxy.frame(in: .global).origin.y)
+                                    }
+                                )
+                            Colors.backgroundPrimary.color()
+                                .frame(height: proxy.size.height / 2)
+                        }
+                        .background {
+                            Colors.backgroundPrimary.color().ignoresSafeArea()
+                        }
                     }
                 }
             }
@@ -65,7 +71,16 @@ struct CollapsingScrollView<Header: View, Content: View>: View {
                 }
                 scrollY = value
                 scale = scrollY / originY
-                print("scroll:", scrollY, ", origin:", originY)
+                
+                if scale > 1.25 {
+                    pullAction = true
+                }
+            }
+            .onChange(of: pullAction) { value in
+                if let onPullAction = onPullAction {
+                    HapticManager.shared.impact()
+                    onPullAction()
+                }
             }
         }
         .ignoresSafeArea(.all, edges: .top)
@@ -73,20 +88,4 @@ struct CollapsingScrollView<Header: View, Content: View>: View {
             Colors.backgroundPrimary.color().ignoresSafeArea()
         )
     }
-}
-
-#Preview {
-    CollapsingScrollView {
-        ZStack {
-            Rectangle()
-                .fill(.blue)
-                .aspectRatio(1, contentMode: .fit)
-            Text("Hello")
-        }
-    } content: {
-        ForEach(0..<10) { i in
-            Text("Hello, World! \(i)")
-        }
-    }
-    
 }

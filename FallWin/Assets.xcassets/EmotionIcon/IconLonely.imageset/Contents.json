@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "IconLonely.png",
+      "filename" : "IconLonely~universal@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "IconLonely~universal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "IconLonely~universal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

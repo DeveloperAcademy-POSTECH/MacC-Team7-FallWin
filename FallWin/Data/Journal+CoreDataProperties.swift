@@ -20,6 +20,7 @@ extension Journal {
     @NSManaged public var content: String?
     @NSManaged public var timestamp: Date?
     @NSManaged public var mind: Int64
+    @NSManaged public var drawingStyle: Int64
     @NSManaged public var image: String?
     
     var wrappedImage: UIImage? {

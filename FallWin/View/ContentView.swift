@@ -6,88 +6,90 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 import ComposableArchitecture
-
-//struct ContentView: View {
-//    let store: StoreOf<Feature>
-//    
-//    var body: some View {
-//        
-//        WithViewStore(store, observe: { $0 }) { viewStore in
-//            CvasTabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
-//                
-//                IfLetStore(store.scope(state: \.$gallery, action: Feature.Action.gallery)) { store in
-//                    GalleryView(store: store)
-//                        .tabItem(.init(title: "Gallery", image: "circle.fill", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-//                }
-//                
-//                IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
-//                    SearchView(store: store)
-//                        .tabItem(.init(title: "Search", image: "circle.fill", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-//                }
-//                
-//                IfLetStore(store.scope(state: \.$surf, action: Feature.Action.surf)) { store in
-//                    SurfView(store: store)
-//                        .tabItem(.init(title: "Surf", image: "circle.fill", tabItem: .surf), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-//                }
-//                
-//                IfLetStore(store.scope(state: \.$profile, action: Feature.Action.profile)) { store in
-//                    ProfileView(store: store)
-//                        .tabItem(.init(title: "Profile", image: "circle.fill", tabItem: .profile), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-//                }
-//                
-//            }
-//            .onAppear {
-//                viewStore.send(.initViews)
-//            }
-//        }
-//    }
-//}
-//
-//#Preview {
-//    ContentView(store: Store(initialState: Feature.State(), reducer: {
-//        Feature()
-//    }))
-//
-//}
-
 
 struct ContentView: View {
     let store: StoreOf<Feature>
     
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some View {
-//        DallEApiTestView()
-//        WritingView(store: store)
-        
         WithViewStore(store, observe: { $0 }) { viewStore in
-            CvasTabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect),
-                        hideTabBar: viewStore.binding(get: \.hideTabBar, send: Feature.Action.hideTabBar)) {
-                
-                IfLetStore(store.scope(state: \.$gallery, action: Feature.Action.gallery)) { store in
-                    NavigationStack {
-                        GalleryView(store: store)
+            if UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched) {
+                IfLetStore(store.scope(state: \.$onboarding, action: Feature.Action.onboarding)) { store in
+                    OnboardingView(store: store)
+                }
+            } else {
+                ZStack {
+                    TabView(selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect)) {
+                        Group {
+                            IfLetStore(store.scope(state: \.$main, action: Feature.Action.main)) { store in
+                                NavigationStack {
+                                    MainView(store: store)
+                                }
+                                .tabItem {
+                                    Text("tab_feed")
+                                    viewStore.tabSelection == 0 ? Image("MainDefault") : Image("MainDisabled")
+                                }
+                                .tag(0)
+                            }
+                            
+                            IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
+                                NavigationStack {
+                                    SearchView(store: store)
+                                }
+                                .tabItem {
+                                    Text("tab_album")
+                                    viewStore.tabSelection == 1 ? Image("AlbumDefault") : Image("AlbumDisabled")
+                                }
+                                .tag(1)
+                            }
+                            
+                            IfLetStore(store.scope(state: \.$settings, action: Feature.Action.settings)) { store in
+                                NavigationStack {
+                                    SettingsView(store: store)
+                                }
+                                .tabItem {
+                                    Text("tab_more")
+                                    viewStore.tabSelection == 2 ? Image("SettingsDefault") : Image("SettingsDisabled")
+                                }
+                                .tag(2)
+                            }
+                        }
+                        .toolbarBackground(Color.backgroundPrimary, for: .tabBar)
+                        .toolbarBackground(.visible, for: .tabBar)
+                        .toolbarColorScheme(.light, for: .tabBar)
                     }
-                    .tabItem(.init(title: "Gallery", enabledImage: "MainEnabled", disabledImage: "MainDisabled", tabItem: .gallery), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                    
+                    if viewStore.invisible {
+                        Rectangle()
+                            .fill(.regularMaterial)
+                            .ignoresSafeArea()
+                    }
                 }
-                
-                IfLetStore(store.scope(state: \.$search, action: Feature.Action.search)) { store in
-                    SearchView(store: store)
-                        .tabItem(.init(title: "Search", enabledImage: "FeedEnabled", disabledImage: "FeedDisabled", tabItem: .search), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
+                .onChange(of: scenePhase) { value in
+                    if !UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.lock) {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        switch value {
+                        case .inactive:
+                            viewStore.send(.setInvisibility(true))
+                            break
+                            
+                        case .active:
+                            viewStore.send(.setInvisibility(false))
+                            break
+                            
+                        case .background:
+                            break
+                            
+                        @unknown default: break
+                        }
+                    }
                 }
-                
-                IfLetStore(store.scope(state: \.$surf, action: Feature.Action.surf)) { store in
-                    SurfView(store: store)
-                        .tabItem(.init(title: "Surf", enabledImage: "SurfEnabled", disabledImage: "SurfDisabled", tabItem: .surf), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-                }
-                
-                IfLetStore(store.scope(state: \.$profile, action: Feature.Action.profile)) { store in
-                    ProfileView(store: store)
-                        .tabItem(.init(title: "Profile", enabledImage: "ProfileEnabled", disabledImage: "ProfileDisabled", tabItem: .profile), selection: viewStore.binding(get: \.tabSelection, send: Feature.Action.tabSelect))
-                }
-                
-            }
-            .onAppear {
-                viewStore.send(.initViews)
             }
         }
     }

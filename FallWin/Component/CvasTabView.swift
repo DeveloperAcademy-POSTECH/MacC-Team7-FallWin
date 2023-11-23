@@ -81,6 +81,7 @@ struct CvasTabView<Content>: View where Content: View {
             }
             .padding(0)
         }
+        .ignoresSafeArea(.keyboard)
         .background(Colors.backgroundPrimary.color().ignoresSafeArea())
         .onPreferenceChange(CvasTabItemPreferenceKey.self) { value in
             self.tabItems = value
@@ -95,12 +96,12 @@ struct CvasTabView<Content>: View where Content: View {
                 Spacer()
                 Label {
                     Text(tabItem.title)
-                        .font(.system(size: 11))
+                        .font(.pretendard(size: 11))
                 } icon: {
                     Image(tabItem.getStateImage(enabled: selection == tabItem.tabItem))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 24)
+                        .frame(width: 32)
                 }
                 .labelStyle(TabBarLabelStyle())
                 .foregroundStyle(Colors.tabBarItem.color())

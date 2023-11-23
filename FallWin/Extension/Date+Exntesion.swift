@@ -54,9 +54,31 @@ extension Date {
         return "\(dateString) \(timeString)"
     }
     
+    var fullStringWithoutSpaces: String {
+        return "\(dateString)-\(timeInMillis)"
+    }
+    
+    var journalShareString: String {
+        return "\(year).\(String(format: "%02d", month)).\(String(format: "%02d", day)). \(dayOfWeek)\("date_week_suffix".localized)"
+    }
+    
     var timeInMillis: Int64 {
         get {
             return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+        }
+    }
+    
+    var dayOfWeek: String {
+        let dayOfWeek = Calendar.current.component(.weekday, from: self)
+        switch dayOfWeek {
+        case 1: return "week_sunday_short".localized
+        case 2: return "week_monday_short".localized
+        case 3: return "week_tuesday_short".localized
+        case 4: return "week_wednesday_short".localized
+        case 5: return "week_thursday_short".localized
+        case 6: return "week_friday_short".localized
+        case 7: return "week_saturday_short".localized
+        default: return ""
         }
     }
     
