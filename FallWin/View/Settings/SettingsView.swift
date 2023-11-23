@@ -210,6 +210,20 @@ struct SettingsView: View {
                     .padding(.vertical, 8)
                     .listRowBackground(Color.backgroundPrimary)
                 }
+                
+                #if DEBUG
+                Section(String("디버깅")) {
+                    NavigationLink {
+                        DebuggingView()
+                    } label: {
+                        Text(String("디버그 메뉴"))
+                            .font(.pretendard(size: 18))
+                            .foregroundColor(.textPrimary)
+                            .padding(.vertical, 8)
+                    }
+
+                }
+                #endif
             }
             .listStyle(.plain)
             .listRowSeparatorTint(.separator)
