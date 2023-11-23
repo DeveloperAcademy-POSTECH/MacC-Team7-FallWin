@@ -1611,6 +1611,40 @@
         }
       }
     },
+    "network_warning_alert_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing a journal requires network connection.\nPlease try again after connecting WiFi or cellular network."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기 작성을 위해 네트워크 연결이 필요합니다.\nWiFi 혹은 셀룰러 네트워크에 연결한 후 다시 시도해주세요."
+          }
+        }
+      }
+    },
+    "network_warning_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인터넷 연결 없음"
+          }
+        }
+      }
+    },
     "next" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -13,6 +13,7 @@ struct MainView: View {
     let store: StoreOf<MainFeature>
     
     let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    let networkModel = NetworkModel()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -83,6 +84,13 @@ struct MainView: View {
                     } primaryButton: {
                         OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
+                        }
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showNetworkAlert, send: MainFeature.Action.showNetworkAlert), title: "network_warning_alert_title".localized) {
+                        Text("network_warning_alert_message")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showNetworkAlert(false))
                         }
                     }
                 
@@ -199,7 +207,14 @@ struct MainView: View {
                         Image(systemName: "film")
                             .resizable()
                             .frame(width: 20, height: 18)
-                        Text("\(viewStore.remainingCount)")
+                        if networkModel.isConnected {
+                            Text("\(viewStore.remainingCount)")
+                        } else {
+                            Image(systemName: "network.slash")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .opacity(0.6)
+                        }
                     }
                     .padding(10)
                     .background {
@@ -224,6 +239,11 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
+                        if !networkModel.isConnected {
+                            viewStore.send(.showNetworkAlert(true))
+                            return
+                        }
+                        
                         if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
                         } else {

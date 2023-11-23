@@ -73,6 +73,7 @@
 		79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */; };
 		79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */; };
 		79AF69452ADCC2820064E410 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69442ADCC2820064E410 /* DataManager.swift */; };
+		79C99FD52B0F43F0003B3A0B /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */; };
 		79D8B14B2AF8C1D30020DFCC /* UhBee Se_hyun.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D8B1482AF8C1D20020DFCC /* UhBee Se_hyun.ttf */; };
 		79D8B14C2AF8C1D30020DFCC /* SejongGeulggot.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D8B1492AF8C1D20020DFCC /* SejongGeulggot.ttf */; };
 		79D8B14D2AF8C1D30020DFCC /* UhBee Se_hyun Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D8B14A2AF8C1D20020DFCC /* UhBee Se_hyun Bold.ttf */; };
@@ -202,6 +203,7 @@
 		79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79AF69442ADCC2820064E410 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		79D8B1482AF8C1D20020DFCC /* UhBee Se_hyun.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UhBee Se_hyun.ttf"; sourceTree = "<group>"; };
 		79D8B1492AF8C1D20020DFCC /* SejongGeulggot.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SejongGeulggot.ttf; sourceTree = "<group>"; };
 		79D8B14A2AF8C1D20020DFCC /* UhBee Se_hyun Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UhBee Se_hyun Bold.ttf"; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */,
 				79A566792AFE058E00524A57 /* ICloudBackupManager.swift */,
 				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
+				79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -815,6 +818,7 @@
 				98F70A812AE4E1AA00FEE4D2 /* DrawingStyleView+Feature.swift in Sources */,
 				799F1D972B034632009908DB /* DrawStyleView.swift in Sources */,
 				7927512B2AF359590023123C /* HapticManager.swift in Sources */,
+				79C99FD52B0F43F0003B3A0B /* NetworkModel.swift in Sources */,
 				79D8B1532AF947E30020DFCC /* ViewGeometry.swift in Sources */,
 				79D8B1592AFA148D0020DFCC /* ImageZoomView.swift in Sources */,
 				79D8B1572AF95D0D0020DFCC /* Journal+DrawingStyle.swift in Sources */,
