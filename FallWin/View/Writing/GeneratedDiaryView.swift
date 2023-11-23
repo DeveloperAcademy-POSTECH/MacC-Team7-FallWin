@@ -134,7 +134,6 @@ struct GeneratedDiaryView: View {
         }
         .task {
             do {
-                
                 let chatResponse = try await ChatGPTApiManager.shared.createChat3(prompt: viewStore.mainText,  apiKey: dallEAPIKey)
                 
                 var image: UIImage?
@@ -156,6 +155,7 @@ struct GeneratedDiaryView: View {
                         let (imageData, _) = try await URLSession.shared.data(from: imageURL)
                         images.append(UIImage(data: imageData))
                     }
+                    FilmManager.shared.reduceCount()
                     viewStore.send(.setImages(images))
                     
                 } else {

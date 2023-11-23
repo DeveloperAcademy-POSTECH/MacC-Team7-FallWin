@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "kronos",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MobileNativeFoundation/Kronos.git",
+      "state" : {
+        "revision" : "a46542ce639581af2a85ab9ec1616a507a5d4ae2",
+        "version" : "4.2.2"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",

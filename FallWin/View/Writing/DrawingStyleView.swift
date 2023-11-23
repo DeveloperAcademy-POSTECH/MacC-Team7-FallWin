@@ -49,7 +49,7 @@ struct DrawingStyleView: View {
                             Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
                             print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
                             Tracking.logEvent(styleLabeling)
-                            if DrawingCountManager.shared.remainingCount <= 0 {
+                            if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                                 viewStore.send(.showCountAlert(true))
                             } else {
                                 viewStore.send(.showGeneratedDiaryView)
@@ -82,8 +82,8 @@ struct DrawingStyleView: View {
                             .ignoresSafeArea()
                             .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
                     }
-                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "drawing_style_alert_title".localized) {
-                        Text("drawing_style_alert_message".localized)
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
+                        Text("limit_alert_message".localized)
                     } primaryButton: {
                         OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))

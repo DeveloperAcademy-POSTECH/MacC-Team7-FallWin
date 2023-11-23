@@ -12,6 +12,8 @@ import FirebaseAnalytics
 struct MainView: View {
     let store: StoreOf<MainFeature>
     
+    let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
@@ -31,7 +33,6 @@ struct MainView: View {
                                             viewStore.send(.showJournalView(journal))
                                         }
                                         .onAppear {
-                                            print("timestamp: \(journal.timestamp)")
                                             if let timestamp = journal.timestamp {
                                                 if !viewStore.pickedDateTagValue.isScrolling {
                                                     viewStore.send(.updateYear(timestamp.year ))
@@ -93,12 +94,15 @@ struct MainView: View {
                                 .presentationDetents([.fraction(0.5)])
                         }
                         .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(DrawingCountManager.INITIAL_COUNT)"))
+                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(FilmManager.INITIAL_COUNT)"))
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
                             OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                                 viewStore.send(.showCountInfo(false))
                             }
+                        }
+                        .onReceive(filmCountPublisher) { _ in
+                            viewStore.send(.getRemainingCount)
                         }
                     Spacer()
                 }
@@ -113,6 +117,7 @@ struct MainView: View {
             }
             .onAppear {
                 viewStore.send(.fetchAll)
+                viewStore.send(.getRemainingCount)
                 viewStore.send(.hideTabBar(false))
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -203,9 +208,6 @@ struct MainView: View {
                             .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
                     }
                 }
-                .onAppear {
-                    viewStore.send(.getRemainingCount)
-                }
             }
             .padding(.top)
             .padding(.horizontal, 20)
@@ -222,7 +224,7 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
-                        if DrawingCountManager.shared.remainingCount <= 0 {
+                        if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
                         } else {
                             viewStore.send(.showWritingView)

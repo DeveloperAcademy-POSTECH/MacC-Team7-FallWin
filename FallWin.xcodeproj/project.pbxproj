@@ -53,6 +53,9 @@
 		7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */; };
 		7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */; };
 		7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */; };
+		7975B6F02B0E329B0047B5BD /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 7975B6EF2B0E329B0047B5BD /* Kronos */; };
+		7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F32B0E38030047B5BD /* FilmManager.swift */; };
+		7975B6F62B0F0C180047B5BD /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F52B0F0C180047B5BD /* Notification+Name.swift */; };
 		799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 799A57A82B0B409700D6966C /* Localizable.xcstrings */; };
 		799F1D8C2B02EFDD009908DB /* JournalWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */; };
 		799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */; };
@@ -174,6 +177,8 @@
 		7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
 		7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationSettingView+Feature.swift"; sourceTree = "<group>"; };
 		7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		7975B6F32B0E38030047B5BD /* FilmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmManager.swift; sourceTree = "<group>"; };
+		7975B6F52B0F0C180047B5BD /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		799A57A82B0B409700D6966C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalWritingView.swift; sourceTree = "<group>"; };
 		799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalWritingView+Feature.swift"; sourceTree = "<group>"; };
@@ -263,6 +268,7 @@
 				79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */,
 				665837652AF80B7600A5833E /* FirebaseAnalytics in Frameworks */,
 				665837672AF80B7600A5833E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				7975B6F02B0E329B0047B5BD /* Kronos in Frameworks */,
 				665837692AF80B7600A5833E /* FirebaseAnalyticsSwift in Frameworks */,
 				792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */,
 				665837712AF8110600A5833E /* FirebaseAnalytics in Frameworks */,
@@ -411,6 +417,7 @@
 				663755702AF7E53100117085 /* UIViewController+Extension.swift */,
 				6637557C2AF7F0A700117085 /* UIApplication+Extension.swift */,
 				98439ECF2B0353AC00B7669F /* View+Extension.swift */,
+				7975B6F52B0F0C180047B5BD /* Notification+Name.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -496,6 +503,7 @@
 				98A2BC282AFCD688003C9835 /* PickerManager.swift */,
 				79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */,
 				79A566792AFE058E00524A57 /* ICloudBackupManager.swift */,
+				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -626,6 +634,7 @@
 				665837742AF8110600A5833E /* FirebaseAnalyticsSwift */,
 				665837762AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport */,
 				665837782AF8110600A5833E /* FirebaseAppCheck */,
+				7975B6EF2B0E329B0047B5BD /* Kronos */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -663,6 +672,7 @@
 				792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				665837632AF80B7600A5833E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -742,9 +752,11 @@
 				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
 				79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
+				7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
 				79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
+				7975B6F62B0F0C180047B5BD /* Notification+Name.swift in Sources */,
 				6637556F2AF7E3A300117085 /* View+Alert.swift in Sources */,
 				7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */,
 				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
@@ -1047,6 +1059,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
 		79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
@@ -1136,6 +1156,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		7975B6EF2B0E329B0047B5BD /* Kronos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */;
+			productName = Kronos;
 		};
 		79A5667D2AFE089D00524A57 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -115,7 +115,7 @@ struct MainFeature: Reducer {
                 return .none
                 
             case .getRemainingCount:
-                state.remainingCount = DrawingCountManager.shared.remainingCount
+                state.remainingCount = FilmManager.shared.drawingCount?.count ?? 0
                 return .none
                 
 //            case .writing(let action):

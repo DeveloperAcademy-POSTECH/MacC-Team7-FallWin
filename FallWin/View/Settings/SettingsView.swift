@@ -12,6 +12,8 @@ import FirebaseAnalytics
 struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
     
+    let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             List {
@@ -65,6 +67,9 @@ struct SettingsView: View {
                     .foregroundColor(.textPrimary)
                     .padding(.vertical, 8)
                     .listRowBackground(Color.backgroundPrimary)
+                    .onReceive(filmCountPublisher) { _ in
+                        viewStore.send(.getRemainingDrawingCount)
+                    }
                 }
                 .listSectionSeparator(.hidden)
 
@@ -85,7 +90,7 @@ struct SettingsView: View {
                     }
                 }
                 .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                    Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(DrawingCountManager.INITIAL_COUNT)"))
+                    Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(FilmManager.INITIAL_COUNT)"))
                         .multilineTextAlignment(.center)
                 } primaryButton: {
                     OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
@@ -207,6 +212,7 @@ struct SettingsView: View {
                 Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
                 print("@Log : V5__설정뷰")
                 viewStore.send(.fetchAppInfo)
+                viewStore.send(.getRemainingDrawingCount)
             }
         }
     }

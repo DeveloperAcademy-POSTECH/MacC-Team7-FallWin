@@ -86,7 +86,8 @@ struct LicenseView: View {
         License(name: "lottie-ios", license: .Apache2, url: "https://github.com/airbnb/lottie-ios"),
         License(name: "ZIPFoundation", license: .MIT, url: "https://github.com/weichsel/ZIPFoundation"),
         License(name: "Karlo", license: .etc("CreativeML Open RAIL-M license"), url: "https://github.com/kakaobrain/karlo"),
-        License(name: "Pretendard", license: .etc("OFL"), url: "https://cactus.tistory.com/306")
+        License(name: "Pretendard", license: .etc("OFL"), url: "https://cactus.tistory.com/306"),
+        License(name: "Kronos", license: .Apache2, url: "https://github.com/MobileNativeFoundation/Kronos")
     ]
     
     var body: some View {

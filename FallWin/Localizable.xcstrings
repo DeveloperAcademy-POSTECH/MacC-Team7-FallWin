@@ -32,7 +32,14 @@
       }
     },
     "asdf" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "asdf"
+          }
+        }
+      }
     },
     "cancel" : {
       "extractionState" : "manual",
