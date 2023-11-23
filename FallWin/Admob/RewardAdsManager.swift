@@ -14,7 +14,7 @@ class RewardAdsManager: NSObject,GADFullScreenContentDelegate,ObservableObject{
     
     // Load reward ads
     func loadReward(){
-        GADRewardedAd.load(withAdUnitID: "ca-app-pub-3940256099942544/1712485313", request: GADRequest()) { [weak self] add, error in
+        GADRewardedAd.load(withAdUnitID: Bundle.main.adUnitId, request: GADRequest()) { [weak self] add, error in
             guard let self = self else {return}
             if let error  = error {
                 print("🔴: \(error.localizedDescription)")
