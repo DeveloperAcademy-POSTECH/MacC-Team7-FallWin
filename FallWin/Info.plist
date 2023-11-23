@@ -29,5 +29,7 @@
 		<string>UhBee Se_hyun.ttf</string>
 		<string>UhBee Se_hyun Bold.ttf</string>
 	</array>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
 </dict>
 </plist>
