@@ -21,6 +21,7 @@ struct Feature: Reducer {
         @PresentationState var main: MainFeature.State? = .init()
         @PresentationState var search: SearchFeature.State? = .init()
         @PresentationState var settings: SettingsFeature.State? = .init()
+        @PresentationState var onboarding: OnboardingFeature.State? = .init()
     }
     
     enum Action: Equatable {
@@ -29,10 +30,12 @@ struct Feature: Reducer {
         case setInvisibility(Bool)
         case setLock(Bool)
         case showPasscodeView(Bool)
+        case setProfileNickname(String?)
         
         case main(PresentationAction<MainFeature.Action>)
         case search(PresentationAction<SearchFeature.Action>)
         case settings(PresentationAction<SettingsFeature.Action>)
+        case onboarding(PresentationAction<OnboardingFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -60,8 +63,18 @@ struct Feature: Reducer {
                 state.showPasscodeView = show
                 return .none
                 
+            case let .setProfileNickname(nickname):
+                state.settings?.nickname = nickname ?? ""
+                return .none
+                
             case let .main(action):
                 return handleMainAction(state: &state, action: action)
+                
+            case .onboarding(.presented(.doneInitSetting)):
+                let nickname = state.onboarding?.nicknameInit?.nickname
+                state.onboarding?.nicknameInit = nil
+                state.onboarding = nil
+                return .send(.setProfileNickname(nickname))
                 
             default: return .none
             }
@@ -74,6 +87,9 @@ struct Feature: Reducer {
         }
         .ifLet(\.$settings, action: /Action.settings) {
             SettingsFeature()
+        }
+        .ifLet(\.$onboarding, action: /Action.onboarding) {
+            OnboardingFeature()
         }
     }
     

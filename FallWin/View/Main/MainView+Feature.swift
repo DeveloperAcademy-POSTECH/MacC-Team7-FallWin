@@ -17,6 +17,7 @@ struct MainFeature: Reducer {
         var isPickerShown: Bool = false
         var showCountAlert: Bool = false
         var showCountInfo: Bool = false
+        var showNetworkAlert: Bool = false
         var remainingCount: Int = 0
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
@@ -40,6 +41,7 @@ struct MainFeature: Reducer {
         case bindJournal
         case showCountAlert(Bool)
         case showCountInfo(Bool)
+        case showNetworkAlert(Bool)
         case getRemainingCount
         
         case journal(PresentationAction<JournalFeature.Action>)
@@ -112,6 +114,10 @@ struct MainFeature: Reducer {
                 
             case let .showCountInfo(show):
                 state.showCountInfo = show
+                return .none
+                
+            case let .showNetworkAlert(show):
+                state.showNetworkAlert = show
                 return .none
                 
             case .getRemainingCount:

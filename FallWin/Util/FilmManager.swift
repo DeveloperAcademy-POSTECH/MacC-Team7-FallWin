@@ -22,19 +22,24 @@ final class FilmManager {
     private init() {
         self.drawingCount = nil
         
-        Clock.sync { [self] date, _ in
-            print(date)
-            if let drawingCountValue = UserDefaults.standard.value(forKey: UserDefaultsKey.AppEnvironment.drawingCount) as? Data,
-               let drawingCount = try? PropertyListDecoder().decode(DrawingCount.self, from: drawingCountValue), !FilmManager.debug {
-                if drawingCount.date == date.dateString {
-                    self.drawingCount = drawingCount
+        let _ = NetworkModel { isConnected in
+            if !isConnected {
+                return
+            }
+            Clock.sync { [self] date, _ in
+                print(date)
+                if let drawingCountValue = UserDefaults.standard.value(forKey: UserDefaultsKey.AppEnvironment.drawingCount) as? Data,
+                   let drawingCount = try? PropertyListDecoder().decode(DrawingCount.self, from: drawingCountValue), !FilmManager.debug {
+                    if drawingCount.date == date.dateString {
+                        self.drawingCount = drawingCount
+                    } else {
+                        self.drawingCount = DrawingCount(date: date.dateString, count: FilmManager.INITIAL_COUNT)
+                        UserDefaults.standard.set(try! PropertyListEncoder().encode(self.drawingCount), forKey: UserDefaultsKey.AppEnvironment.drawingCount)
+                    }
                 } else {
                     self.drawingCount = DrawingCount(date: date.dateString, count: FilmManager.INITIAL_COUNT)
                     UserDefaults.standard.set(try! PropertyListEncoder().encode(self.drawingCount), forKey: UserDefaultsKey.AppEnvironment.drawingCount)
                 }
-            } else {
-                self.drawingCount = DrawingCount(date: date.dateString, count: FilmManager.INITIAL_COUNT)
-                UserDefaults.standard.set(try! PropertyListEncoder().encode(self.drawingCount), forKey: UserDefaultsKey.AppEnvironment.drawingCount)
             }
         }
     }

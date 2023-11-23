@@ -13,6 +13,7 @@ struct SettingsView: View {
     let store: StoreOf<SettingsFeature>
     
     let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    let networkModel = NetworkModel()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -52,9 +53,16 @@ struct SettingsView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 20)
-                                Text("\(viewStore.remainingDrawingCount)")
-                                    .font(.pretendard(.bold, size: 16))
-                                    .foregroundColor(.textPrimary)
+                                if networkModel.isConnected {
+                                    Text("\(viewStore.remainingDrawingCount)")
+                                        .font(.pretendard(.bold, size: 16))
+                                        .foregroundColor(.textPrimary)
+                                } else {
+                                    Image(systemName: "network.slash")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .opacity(0.6)
+                                }
                             }
                         }
                         

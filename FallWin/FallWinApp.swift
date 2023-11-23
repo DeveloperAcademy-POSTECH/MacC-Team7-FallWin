@@ -25,6 +25,11 @@ struct FallWinApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
+        // MARK: AppEnvironment
+        UserDefaults.standard.register(defaults: [
+            UserDefaultsKey.AppEnvironment.isFirstLaunched: true
+        ])
+        
         // MARK: Settings
         UserDefaults.standard.register(defaults: [
             UserDefaultsKey.Settings.lock: false,

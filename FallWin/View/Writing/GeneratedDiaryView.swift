@@ -182,8 +182,8 @@ struct GeneratedDiaryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .alert(isPresented: $isError, title: "limit_alert_title".localized) {
-            Text("limit_alert_message".localized)
+        .alert(isPresented: $isError, title: "generated_fail_alert_title".localized) {
+            Text("generated_fail_alert_message".localized)
         } primaryButton: {
             OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                 isError.toggle()

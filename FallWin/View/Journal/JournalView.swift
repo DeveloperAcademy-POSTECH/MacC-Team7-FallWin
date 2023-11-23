@@ -37,6 +37,9 @@ struct JournalView: View {
                         .ignoresSafeArea()
                 }
             }
+            .onAppear {
+                print("textEdit is nil? \(viewStore.textEdit == nil)")
+            }
             .fullScreenCover(isPresented: viewStore.binding(get: \.showImageDetailView, send: JournalFeature.Action.showImageDetailView)) {
                 NavigationStack {
                     ImageZoomView(image: viewStore.journal.wrappedImage)
@@ -76,7 +79,7 @@ struct JournalView: View {
                 @unknown default: break
                 }
             }
-            .toolbar {
+            .safeToolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
                         dismiss()
@@ -101,7 +104,10 @@ struct JournalView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .secondaryAction) {
+                ToolbarItemGroup(placement: .secondaryAction) {
+                    Button("edit", systemImage: "pencil"){
+                        viewStore.send(.showTextEditView)
+                    }
                     Button("delete", systemImage: "trash", role: .destructive) {
                         viewStore.send(.showDeleteAlert(true))
                     }
@@ -118,18 +124,23 @@ struct JournalView: View {
                             viewStore.send(.delete)
                             viewStore.send(.showDeleteAlert(false))
                         }
+                        
                     }
                 }
             }
+            .toolbar(.visible, for: .navigationBar)
             .sheet(item: viewStore.binding(get: \.shareItem, send: JournalFeature.Action.shareItem)) { image in
                 shareSheetView(image: image.image)
                     .presentationDetents([.fraction(0.8)])
             }
+            .navigationDestination(store: store.scope(state: \.$textEdit, action: JournalFeature.Action.textEdit), destination: { store in
+                TextEditView(store: store)
+            })
         }
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V3__상세페이지뷰.rawValue)
             print("@Log : V3__상세페이지뷰")
-           }
+        }
     }
     
     private var journalDrawing: some View {
