@@ -17,14 +17,14 @@ struct SettingsFeature: Reducer {
         // Profile
         var nickname: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
         var gender: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.gender) ?? "none"
-        var remainingDrawingCount: Int = DrawingCountManager.shared.remainingCount
+        var remainingDrawingCount: Int = FilmManager.shared.drawingCount?.count ?? 0
         var showNicknameAlert: Bool = false
         var tempNickname: String = ""
         var showCountInfo: Bool = false
         
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
+        @PresentationState var notification: NotificationSettingFeature.State? = .init()
         @PresentationState var policy: PolicyFeature.State? = .init()
-//        @PresentationState var feedback: FeedbackFeature.State? = .init()
     }
     
     enum Action: Equatable {
@@ -33,9 +33,10 @@ struct SettingsFeature: Reducer {
         case showNicknameAlert(Bool)
         case setTempNickname(String)
         case showCountInfo(Bool)
+        case getRemainingDrawingCount
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
+        case notification(PresentationAction<NotificationSettingFeature.Action>)
         case policy(PresentationAction<PolicyFeature.Action>)
-//        case feedback(PresentationAction<FeedbackFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -46,7 +47,6 @@ struct SettingsFeature: Reducer {
                     state.appVersion = version
                     state.appBuild = build
                 }
-                state.remainingDrawingCount = DrawingCountManager.shared.remainingCount
                 return .none
                 
             case let .setNickname(nickname):
@@ -66,6 +66,10 @@ struct SettingsFeature: Reducer {
                 state.showCountInfo = show
                 return .none
                 
+            case .getRemainingDrawingCount:
+                state.remainingDrawingCount = FilmManager.shared.drawingCount?.count ?? 0
+                return .none
+                
             default: return .none
             }
         }
@@ -75,8 +79,8 @@ struct SettingsFeature: Reducer {
         .ifLet(\.$policy, action: /Action.policy) {
             PolicyFeature()
         }
-//        .ifLet(\.$feedback, action: /Action.feedback) {
-//            FeedbackFeature()
-//        }
+        .ifLet(\.$notification, action: /Action.notification) {
+            NotificationSettingFeature()
+        }
     }
 }

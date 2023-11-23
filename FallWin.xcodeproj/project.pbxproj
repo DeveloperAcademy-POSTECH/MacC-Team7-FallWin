@@ -36,8 +36,6 @@
 		792444112B02700000E28FFE /* EmptyPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792444102B02700000E28FFE /* EmptyPlaceholderView.swift */; };
 		792751122AF21AA30023123C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751112AF21AA30023123C /* MainView.swift */; };
 		792751142AF21AAB0023123C /* MainView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751132AF21AAB0023123C /* MainView+Feature.swift */; };
-		7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511B2AF232FD0023123C /* OldSettingsView.swift */; };
-		7927511E2AF233060023123C /* OldSettingsView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511D2AF233060023123C /* OldSettingsView+Feature.swift */; };
 		792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927511F2AF2392C0023123C /* UserDefaultsKey.swift */; };
 		792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 792751242AF23DC10023123C /* SwiftKeychainWrapper */; };
 		792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */; };
@@ -52,6 +50,13 @@
 		79407D682AD7ED11006C7571 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D672AD7ED11006C7571 /* Colors.swift */; };
 		794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */; };
 		7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7951CE542AF4AF98006A3AA7 /* PasscodeView.swift */; };
+		7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */; };
+		7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */; };
+		7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */; };
+		7975B6F02B0E329B0047B5BD /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 7975B6EF2B0E329B0047B5BD /* Kronos */; };
+		7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F32B0E38030047B5BD /* FilmManager.swift */; };
+		7975B6F62B0F0C180047B5BD /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F52B0F0C180047B5BD /* Notification+Name.swift */; };
+		799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 799A57A82B0B409700D6966C /* Localizable.xcstrings */; };
 		799F1D8C2B02EFDD009908DB /* JournalWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */; };
 		799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */; };
 		799F1D912B033322009908DB /* MindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D902B033322009908DB /* MindView.swift */; };
@@ -161,8 +166,6 @@
 		792444102B02700000E28FFE /* EmptyPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPlaceholderView.swift; sourceTree = "<group>"; };
 		792751112AF21AA30023123C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		792751132AF21AAB0023123C /* MainView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Feature.swift"; sourceTree = "<group>"; };
-		7927511B2AF232FD0023123C /* OldSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSettingsView.swift; sourceTree = "<group>"; };
-		7927511D2AF233060023123C /* OldSettingsView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OldSettingsView+Feature.swift"; sourceTree = "<group>"; };
 		7927511F2AF2392C0023123C /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		792751262AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftKeychainWrapper+Extension.swift"; sourceTree = "<group>"; };
 		7927512A2AF359590023123C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -177,6 +180,12 @@
 		79407D672AD7ED11006C7571 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		794216B72AE22C6A00F24CFD /* CollapsingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingScrollView.swift; sourceTree = "<group>"; };
 		7951CE542AF4AF98006A3AA7 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
+		7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationSettingView+Feature.swift"; sourceTree = "<group>"; };
+		7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		7975B6F32B0E38030047B5BD /* FilmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmManager.swift; sourceTree = "<group>"; };
+		7975B6F52B0F0C180047B5BD /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
+		799A57A82B0B409700D6966C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalWritingView.swift; sourceTree = "<group>"; };
 		799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalWritingView+Feature.swift"; sourceTree = "<group>"; };
 		799F1D902B033322009908DB /* MindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindView.swift; sourceTree = "<group>"; };
@@ -271,6 +280,7 @@
 				79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */,
 				665837652AF80B7600A5833E /* FirebaseAnalytics in Frameworks */,
 				665837672AF80B7600A5833E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				7975B6F02B0E329B0047B5BD /* Kronos in Frameworks */,
 				665837692AF80B7600A5833E /* FirebaseAnalyticsSwift in Frameworks */,
 				792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */,
 				665837712AF8110600A5833E /* FirebaseAnalytics in Frameworks */,
@@ -340,8 +350,6 @@
 		7927511A2AF232F00023123C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				7927511B2AF232FD0023123C /* OldSettingsView.swift */,
-				7927511D2AF233060023123C /* OldSettingsView+Feature.swift */,
 				79D8B15C2AFA22510020DFCC /* SettingsView.swift */,
 				792444082B00D04E00E28FFE /* SettingsView+Feature.swift */,
 				79D8B1602AFA2A910020DFCC /* LockSettingView.swift */,
@@ -350,6 +358,8 @@
 				7924440A2B00F13000E28FFE /* DataSettingsView.swift */,
 				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
 				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
+				7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */,
+				7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -378,6 +388,7 @@
 				9867B6382AE652A400C7359B /* Info.plist */,
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
+				799A57A82B0B409700D6966C /* Localizable.xcstrings */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
 				79ADA5FD2AE55280007A56EC /* Secret.plist */,
 				9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */,
@@ -420,6 +431,7 @@
 				663755702AF7E53100117085 /* UIViewController+Extension.swift */,
 				6637557C2AF7F0A700117085 /* UIApplication+Extension.swift */,
 				98439ECF2B0353AC00B7669F /* View+Extension.swift */,
+				7975B6F52B0F0C180047B5BD /* Notification+Name.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -445,6 +457,7 @@
 				79D8B1782AFB692E0020DFCC /* WebView.swift */,
 				7924440E2B02195300E28FFE /* ActivityView.swift */,
 				792444102B02700000E28FFE /* EmptyPlaceholderView.swift */,
+				7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -505,6 +518,7 @@
 				98A2BC282AFCD688003C9835 /* PickerManager.swift */,
 				79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */,
 				79A566792AFE058E00524A57 /* ICloudBackupManager.swift */,
+				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -646,6 +660,7 @@
 				665837742AF8110600A5833E /* FirebaseAnalyticsSwift */,
 				665837762AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport */,
 				665837782AF8110600A5833E /* FirebaseAppCheck */,
+				7975B6EF2B0E329B0047B5BD /* Kronos */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -673,6 +688,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 79407D462AD7E68D006C7571;
 			packageReferences = (
@@ -682,6 +698,7 @@
 				792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				665837632AF80B7600A5833E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -705,6 +722,7 @@
 				9867B6372AE6524900C7359B /* Pretendard-ExtraLight.ttf in Resources */,
 				79ADA5FE2AE55280007A56EC /* Secret.plist in Resources */,
 				79D8B14D2AF8C1D30020DFCC /* UhBee Se_hyun Bold.ttf in Resources */,
+				799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */,
 				79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */,
 				9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */,
 				9867B6352AE6524900C7359B /* Pretendard-Thin.ttf in Resources */,
@@ -747,7 +765,6 @@
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
-				7927511C2AF232FD0023123C /* OldSettingsView.swift in Sources */,
 				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
@@ -763,10 +780,13 @@
 				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
 				79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
+				7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
 				79D8B16D2AFB505A0020DFCC /* PolicyView.swift in Sources */,
 				79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */,
+				7975B6F62B0F0C180047B5BD /* Notification+Name.swift in Sources */,
 				6637556F2AF7E3A300117085 /* View+Alert.swift in Sources */,
+				7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */,
 				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
@@ -801,6 +821,8 @@
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
 				79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */,
+				7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */,
+				7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
 				9808AA052B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift in Sources */,
@@ -810,7 +832,6 @@
 				7924440B2B00F13000E28FFE /* DataSettingsView.swift in Sources */,
 				79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */,
 				792751202AF2392C0023123C /* UserDefaultsKey.swift in Sources */,
-				7927511E2AF233060023123C /* OldSettingsView+Feature.swift in Sources */,
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
 				7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */,
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
@@ -955,7 +976,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111500;
+				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
@@ -977,7 +998,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -996,7 +1017,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWinRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111500;
+				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
@@ -1018,7 +1039,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1068,6 +1089,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.1;
+			};
+		};
+		7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
 			};
 		};
 		79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
@@ -1159,6 +1188,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		7975B6EF2B0E329B0047B5BD /* Kronos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */;
+			productName = Kronos;
 		};
 		79A5667D2AFE089D00524A57 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

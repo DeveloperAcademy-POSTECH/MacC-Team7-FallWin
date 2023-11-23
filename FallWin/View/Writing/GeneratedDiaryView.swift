@@ -62,7 +62,7 @@ struct GeneratedDiaryView: View {
                             .ignoresSafeArea()
                         VStack(spacing: 0) {
                             //                            DateView()
-                            MessageView(titleText: "하루와 가장 잘 어울리는 그림을 선택하세요")
+                            MessageView(titleText: "generated_title".localized)
                                 .padding(.top, 40)
                             imageView()
                                 .padding(.top, 16)
@@ -74,7 +74,7 @@ struct GeneratedDiaryView: View {
                                 print("--parameters: \(viewStore.priorSteps), \(viewStore.priorScale), \(viewStore.steps), \(viewStore.scale)--")
                                 viewStore.send(.doneGenerating)
                             } label: {
-                                ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                                ConfirmButtonLabelView(text: "generated_finish_button".localized, backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             }
                             .disabled(viewStore.image == nil)
                             .padding(.top, 15)
@@ -112,7 +112,7 @@ struct GeneratedDiaryView: View {
                     LottieImageGenView(jsonName: "LottieImageGen")
                     VStack {
                         Spacer()
-                        Text("\(UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA")의 하루를\n그림으로 그리고 있어요")
+                        Text("generated_generating".localized.replacingOccurrences(of: "{nickname}", with: UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"))
                             .font(.pretendard(.bold, size: 28))
                             .foregroundStyle(Color.textPrimary)
                             .multilineTextAlignment(.center)
@@ -134,7 +134,6 @@ struct GeneratedDiaryView: View {
         }
         .task {
             do {
-                
                 let chatResponse = try await ChatGPTApiManager.shared.createChat3(prompt: viewStore.mainText,  apiKey: dallEAPIKey)
                 
                 var image: UIImage?
@@ -156,6 +155,7 @@ struct GeneratedDiaryView: View {
                         let (imageData, _) = try await URLSession.shared.data(from: imageURL)
                         images.append(UIImage(data: imageData))
                     }
+                    FilmManager.shared.reduceCount()
                     viewStore.send(.setImages(images))
                     
                 } else {
@@ -182,10 +182,10 @@ struct GeneratedDiaryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .alert(isPresented: $isError, title: "그림 그리기 실패") {
-            Text("뒤로 돌아가서 다시 그림을 그려주세요")
+        .alert(isPresented: $isError, title: "limit_alert_title".localized) {
+            Text("limit_alert_message".localized)
         } primaryButton: {
-            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                 isError.toggle()
                 dismiss()
             }
@@ -236,7 +236,7 @@ struct GeneratedDiaryView: View {
             .padding(10)
             .background(
                 Color.backgroundCard
-                    .shadow(color: viewStore.image == image ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.image == image ?  8 : 4)
+                    .shadow(color: viewStore.image == image ? Color.shadow.opacity(0.2) : Color.shadow.opacity(0.1), radius: viewStore.image == image ?  8 : 4)
             )
         }
     }

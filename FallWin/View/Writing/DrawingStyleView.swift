@@ -19,7 +19,7 @@ struct DrawingStyleView: View {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    MessageView(titleText: "어떻게 표현하고 싶나요?", subTitleText: "화풍을 선택하면 그림을 그려줘요")
+                    MessageView(titleText: "drawing_style_title".localized, subTitleText: "drawing_style_subtitle".localized)
                         .padding(.top, 24)
                     //                        VStack {
                     //                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
@@ -42,14 +42,14 @@ struct DrawingStyleView: View {
                         .padding(.top, 16)
                         .padding(.horizontal)
                     VStack(spacing: 12) {
-                        Text("그림을 그리면 필름이 차감돼요")
+                        Text("drawing_style_warning".localized)
                             .font(.pretendard(.regular, size: 14))
                             .foregroundColor(.textTertiary)
                         Button {
                             Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
                             print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
                             Tracking.logEvent(styleLabeling)
-                            if DrawingCountManager.shared.remainingCount <= 0 {
+                            if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                                 viewStore.send(.showCountAlert(true))
                             } else {
                                 viewStore.send(.showGeneratedDiaryView)
@@ -63,7 +63,7 @@ struct DrawingStyleView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 20, height: 16)
-                                Text("그림 그리기")
+                                Text("drawing_style_draw_button")
                                     .font(.pretendard(.semiBold, size: 18))
                                 Spacer()
                             }
@@ -82,10 +82,10 @@ struct DrawingStyleView: View {
                             .ignoresSafeArea()
                             .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
                     }
-                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
-                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: DrawingStyleFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
+                        Text("limit_alert_message".localized)
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
                         }
                     }
@@ -124,15 +124,15 @@ struct DrawingStyleView: View {
     func generateDrawingStyleView() -> some View {
         
         let drawingStyles: [(String, Color, Image, String, Tracking.Event.RawValue)] = [
-            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), "크레용", Tracking.Event.A2_3_4_1__일기작성_화풍선택_크레용.rawValue),
-            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), "유화", Tracking.Event.A2_3_4_2__일기작성_화풍선택_유화.rawValue),
-            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), "수채화", Tracking.Event.A2_3_4_3__일기작성_화풍선택_수채화.rawValue),
-            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), "스케치", Tracking.Event.A2_3_4_4__일기작성_화풍선택_스케치.rawValue),
-            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), "애니메이션",Tracking.Event.A2_3_4_5__일기작성_화풍선택_애니메이션.rawValue),
-            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), "픽셀아트",Tracking.Event.A2_3_4_6__일기작성_화풍선택_픽셀아트.rawValue),
-            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), "반 고흐", Tracking.Event.A2_3_4_7__일기작성_화풍선택_반고흐.rawValue),
-            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), "모네",Tracking.Event.A2_3_4_8__일기작성_화풍선택_모네.rawValue),
-            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), "달리",Tracking.Event.A2_3_4_9__일기작성_화풍선택_달리.rawValue)
+            ("Childlike crayon", Color(hexCode: "#191919"), Image("dsCrayon"), DrawingStyle.crayon.name() ?? "", Tracking.Event.A2_3_4_1__일기작성_화풍선택_크레용.rawValue),
+            ("Oil Painting", Color(hexCode: "#191919"), Image("dsOilPainting"), DrawingStyle.oilPainting.name() ?? "", Tracking.Event.A2_3_4_2__일기작성_화풍선택_유화.rawValue),
+            ("Water Color", Color(hexCode: "#191919"), Image("dsWaterColor"), DrawingStyle.waterColor.name() ?? "", Tracking.Event.A2_3_4_3__일기작성_화풍선택_수채화.rawValue),
+            ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), DrawingStyle.sketch.name() ?? "", Tracking.Event.A2_3_4_4__일기작성_화풍선택_스케치.rawValue),
+            ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), DrawingStyle.anime.name() ?? "",Tracking.Event.A2_3_4_5__일기작성_화풍선택_애니메이션.rawValue),
+            ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), DrawingStyle.pixelArt.name() ?? "",Tracking.Event.A2_3_4_6__일기작성_화풍선택_픽셀아트.rawValue),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), DrawingStyle.vanGogh.name() ?? "", Tracking.Event.A2_3_4_7__일기작성_화풍선택_반고흐.rawValue),
+            ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), DrawingStyle.monet.name() ?? "",Tracking.Event.A2_3_4_8__일기작성_화풍선택_모네.rawValue),
+            ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), DrawingStyle.dali.name() ?? "",Tracking.Event.A2_3_4_9__일기작성_화풍선택_달리.rawValue)
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -155,6 +155,7 @@ struct DrawingStyleView: View {
                 }
                 .padding(.bottom, 32)
             }
+            .scrollIndicators(.hidden)
         }
     }
     

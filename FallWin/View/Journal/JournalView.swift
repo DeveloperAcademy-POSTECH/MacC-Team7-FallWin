@@ -48,7 +48,7 @@ struct JournalView: View {
                                 Button {
                                     viewStore.send(.showImageDetailView(false))
                                 } label: {
-                                    Label("닫기", systemImage: "xmark")
+                                    Label("dismiss", systemImage: "xmark")
                                 }
                                 .labelStyle(.iconOnly)
                             }
@@ -92,7 +92,7 @@ struct JournalView: View {
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
-                    Button("공유", systemImage: "square.and.arrow.up") {
+                    Button("share", systemImage: "square.and.arrow.up") {
                         Tracking.logEvent(Tracking.Event.A3_1__상세페이지_공유하기.rawValue)
                         print("@Log : A3_1__상세페이지_공유하기")
                         
@@ -105,27 +105,27 @@ struct JournalView: View {
                 }
                 
                 ToolbarItemGroup(placement: .secondaryAction) {
-                        Button("수정", systemImage: "pencil"){
-                            viewStore.send(.showTextEditView)
+                    Button("edit", systemImage: "pencil"){
+                        viewStore.send(.showTextEditView)
+                    }
+                    Button("delete", systemImage: "trash", role: .destructive) {
+                        viewStore.send(.showDeleteAlert(true))
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showDeleteAlert, send: JournalFeature.Action.showDeleteAlert), title: "journal_delete_alert_title".localized) {
+                        Text("journal_delete_alert_message")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("cancel"), color: .clear) {
+                            viewStore.send(.showDeleteAlert(false))
                         }
-                        Button("삭제", systemImage: "trash", role: .destructive) {
-                            viewStore.send(.showDeleteAlert(true))
+                    } secondaryButton: {
+                        OhwaAlertButton(label: Text("delete").foregroundColor(.textOnButton), color: .button) {
+                            Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+                            print("@Log : A3_3__상세페이지_일기삭제")
+                            viewStore.send(.delete)
+                            viewStore.send(.showDeleteAlert(false))
                         }
-                        .alert(isPresented: viewStore.binding(get: \.showDeleteAlert, send: JournalFeature.Action.showDeleteAlert), title: "일기를 삭제할까요?") {
-                            Text("일기를 삭제하면 다시 복구할 수 없습니다.")
-                        } primaryButton: {
-                            OhwaAlertButton(label: Text("취소"), color: .clear) {
-                                viewStore.send(.showDeleteAlert(false))
-                            }
-                        } secondaryButton: {
-                            OhwaAlertButton(label: Text("삭제하기").foregroundColor(.textOnButton), color: .button) {
-                                Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
-                                print("@Log : A3_3__상세페이지_일기삭제")
-                                viewStore.send(.delete)
-                                viewStore.send(.showDeleteAlert(false))
-                            }
-                        }
-                    
+                        
+                    }
                 }
             }
             .toolbar(.visible, for: .navigationBar)
@@ -140,7 +140,7 @@ struct JournalView: View {
         .onAppear {
             Tracking.logScreenView(screenName: Tracking.Screen.V3__상세페이지뷰.rawValue)
             print("@Log : V3__상세페이지뷰")
-           }
+        }
     }
     
     private var journalDrawing: some View {
@@ -190,7 +190,7 @@ struct JournalView: View {
                     if mind != .none, let string = mind.string(), let icon = mind.iconName() {
                         Spacer()
                         VStack {
-                            Text("오늘의 기분")
+                            Text("journal_mind")
                                 .font(.sejong(size: 16))
                             Spacer()
                             HStack(spacing: 8) {
@@ -211,7 +211,7 @@ struct JournalView: View {
                     if drawingStyle != .none, let string = drawingStyle.name() {
                         Spacer()
                         VStack {
-                            Text("오늘의 그림")
+                            Text("journal_drawing_style")
                                 .font(.sejong(size: 16))
                             Spacer()
                             Text(string)
@@ -248,7 +248,7 @@ struct JournalView: View {
                 Capsule()
                     .fill(.buttonDisabled)
                     .frame(width: 36, height: 5)
-                Text("공유하기")
+                Text("journal_share")
                     .font(.pretendard(.semiBold, size: 18))
                     .padding(.top, 20)
                 Spacer()
@@ -259,10 +259,10 @@ struct JournalView: View {
                 }
                 .padding()
                 Spacer()
-                ShareLink(item: Image(uiImage: image), preview: SharePreview("그림 일기", image: Image(uiImage: image))) {
+                ShareLink(item: Image(uiImage: image), preview: SharePreview("journal_share_preview", image: Image(uiImage: image))) {
                     HStack {
                         Spacer()
-                        Text("오늘의 일기 공유")
+                        Text("journal_share_button")
                             .font(.pretendard(.semiBold, size: 18))
                             .foregroundColor(.textOnButton)
                         Spacer()

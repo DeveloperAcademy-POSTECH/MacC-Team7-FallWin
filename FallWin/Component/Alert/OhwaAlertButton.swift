@@ -73,7 +73,7 @@ struct NicknameSettingButton: View {
                     isAlertShown = false
                 }
             } label: {
-                Text("변경")
+                Text("change")
                     .foregroundStyle(tempNickname.isEmpty ? .textTertiary : .textOnButton)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
@@ -85,7 +85,7 @@ struct NicknameSettingButton: View {
                 tempNickname = ""
                 isAlertShown = false
             } label: {
-                Text("취소")
+                Text("cancel")
             }
             .background(Color.clear)
             .cornerRadius(4)

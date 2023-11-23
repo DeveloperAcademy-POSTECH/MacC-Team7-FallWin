@@ -20,7 +20,7 @@ struct WritingView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    MessageView(titleText: "어떤 감정을 느꼈나요?", subTitleText: "그림으로 담고 싶은 감정을 선택해보세요")
+                    MessageView(titleText: "writing_title".localized, subTitleText: "writing_subtitle".localized)
                         .padding(.top, 24)
                     generateEmotionView()
                     HStack {
@@ -33,7 +33,7 @@ struct WritingView: View {
                             viewStore.send(.showMainTextView(nil))
                             
                         } label: {
-                            ConfirmButtonLabelView(text: "건너뛰기", backgroundColor: .backgroundPrimary, foregroundColor: .textSecondary, width: nil)
+                            ConfirmButtonLabelView(text: "skip".localized, backgroundColor: .backgroundPrimary, foregroundColor: .textSecondary, width: nil)
                         }
                         Spacer()
                         Button {
@@ -43,7 +43,7 @@ struct WritingView: View {
                             viewStore.send(.showMainTextView(viewStore.selectedEmotion))
                             
                         } label: {
-                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
+                            ConfirmButtonLabelView(text: "next".localized, backgroundColor: viewStore.selectedEmotion == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                         }
                         .disabled(viewStore.selectedEmotion == nil)
                         .padding(.trailing, 20)
@@ -53,7 +53,7 @@ struct WritingView: View {
                     .background{
                         Color.backgroundPrimary
                             .ignoresSafeArea()
-                            .shadow(color: Color(hexCode: "#191919").opacity(0.05), radius: 4, y: -2)
+                            .shadow(color: Color.shadow.opacity(0.05), radius: 4, y: -2)
                     }
                 }
             }
@@ -89,24 +89,24 @@ struct WritingView: View {
     func generateEmotionView() -> some View {
         //TODO: 이부분 소통해서 다시 진행할 것
         let emotions: [(String, Color, Image, String, Tracking.Event.RawValue)] = [
-            ("happy", Color.emotionHappy, Image("IconHappy"), "행복한", Tracking.Event.A2_1_5_1__일기작성_감정선택_행복한.rawValue),
-            ("proud", Color.emotionProud, Image("IconProud"), "뿌듯한", Tracking.Event.A2_1_5_2__일기작성_감정선택_뿌듯한.rawValue),
-            ("touched", Color.emotionTouched, Image("IconTouched"), "감동받은", Tracking.Event.A2_1_5_3__일기작성_감정선택_감동받은.rawValue),
-            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed"), "짜증나는", Tracking.Event.A2_1_5_4__일기작성_감정선택_짜증나는.rawValue),
-            ("sad", Color.emotionSad, Image("IconSad"), "슬픈", Tracking.Event.A2_1_5_5__일기작성_감정선택_슬픈.rawValue),
-            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), "답답한", Tracking.Event.A2_1_5_6__일기작성_감정선택_답답한.rawValue),
-            ("lazy", Color.emotionLazy, Image("IconLazy"), "귀찮은", Tracking.Event.A2_1_5_7__일기작성_감정선택_귀찮은.rawValue),
-            ("grateful", Color.emotionGrateful, Image("IconGrateful"), "감사한", Tracking.Event.A2_1_5_8__일기작성_감정선택_감사한.rawValue),
-            ("joyful", Color.emotionJoyful, Image("IconJoyful"), "신나는", Tracking.Event.A2_1_5_9__일기작성_감정선택_신나는.rawValue),
-            ("exciting", Color.emotionExciting, Image("IconExciting"), "기대되는", Tracking.Event.A2_1_5_10__일기작성_감정선택_기대되는.rawValue),
-            ("nervous", Color.emotionNervous, Image("IconNervous"), "불안한",Tracking.Event.A2_1_5_11__일기작성_감정선택_불안한.rawValue),
-            ("lonely", Color.emotionLonely, Image("IconLonely"), "외로운", Tracking.Event.A2_1_5_12__일기작성_감정선택_외로운.rawValue),
-            ("shy", Color.emotionShy, Image("IconShy"), "부끄러운", Tracking.Event.A2_1_5_13__일기작성_감정선택_부끄러운.rawValue),
-            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), "당황한", Tracking.Event.A2_1_5_14__일기작성_감정선택_당황한.rawValue),
-            ("tough", Color.emotionTough, Image("IconTough"), "힘든", Tracking.Event.A2_1_5_15__일기작성_감정선택_힘든.rawValue),
-            ("peaceful", Color.emotionPeaceful, Image("IconPeaceful"), "평온한", Tracking.Event.A2_1_5_16__일기작성_감정선택_평온한.rawValue),
-            ("surprised", Color.emotionSurprised, Image("IconSurprised"), "놀란", Tracking.Event.A2_1_5_17__일기작성_감정선택_놀란.rawValue),
-            ("reassuring", Color.emotionReassuring, Image("IconReassuring"), "안심되는", Tracking.Event.A2_1_5_18__일기작성_감정선택_안심되는.rawValue)
+            ("happy", Color.emotionHappy, Image("IconHappy"), Mind.happy.string() ?? "", Tracking.Event.A2_1_5_1__일기작성_감정선택_행복한.rawValue),
+            ("proud", Color.emotionProud, Image("IconProud"), Mind.proud.string() ?? "", Tracking.Event.A2_1_5_2__일기작성_감정선택_뿌듯한.rawValue),
+            ("touched", Color.emotionTouched, Image("IconTouched"), Mind.touched.string() ?? "", Tracking.Event.A2_1_5_3__일기작성_감정선택_감동받은.rawValue),
+            ("annoyed", Color.emotionAnnoyed, Image("IconAnnoyed"), Mind.annoyed.string() ?? "", Tracking.Event.A2_1_5_4__일기작성_감정선택_짜증나는.rawValue),
+            ("sad", Color.emotionSad, Image("IconSad"), Mind.sad.string() ?? "", Tracking.Event.A2_1_5_5__일기작성_감정선택_슬픈.rawValue),
+            ("suffocated", Color.emotionSuffocated, Image("IconSuffocated"), Mind.suffocated.string() ?? "", Tracking.Event.A2_1_5_6__일기작성_감정선택_답답한.rawValue),
+            ("lazy", Color.emotionLazy, Image("IconLazy"), Mind.lazy.string() ?? "", Tracking.Event.A2_1_5_7__일기작성_감정선택_귀찮은.rawValue),
+            ("grateful", Color.emotionGrateful, Image("IconGrateful"), Mind.grateful.string() ?? "", Tracking.Event.A2_1_5_8__일기작성_감정선택_감사한.rawValue),
+            ("joyful", Color.emotionJoyful, Image("IconJoyful"), Mind.joyful.string() ?? "", Tracking.Event.A2_1_5_9__일기작성_감정선택_신나는.rawValue),
+            ("exciting", Color.emotionExciting, Image("IconExciting"), Mind.exciting.string() ?? "", Tracking.Event.A2_1_5_10__일기작성_감정선택_기대되는.rawValue),
+            ("nervous", Color.emotionNervous, Image("IconNervous"), Mind.nervous.string() ?? "",Tracking.Event.A2_1_5_11__일기작성_감정선택_불안한.rawValue),
+            ("lonely", Color.emotionLonely, Image("IconLonely"), Mind.lonely.string() ?? "", Tracking.Event.A2_1_5_12__일기작성_감정선택_외로운.rawValue),
+            ("shy", Color.emotionShy, Image("IconShy"), Mind.shy.string() ?? "", Tracking.Event.A2_1_5_13__일기작성_감정선택_부끄러운.rawValue),
+            ("frustrated", Color.emotionFrustrated, Image("IconFrustrated"), Mind.frustrated.string() ?? "", Tracking.Event.A2_1_5_14__일기작성_감정선택_당황한.rawValue),
+            ("tough", Color.emotionTough, Image("IconTough"), Mind.tough.string() ?? "", Tracking.Event.A2_1_5_15__일기작성_감정선택_힘든.rawValue),
+            ("peaceful", Color.emotionPeaceful, Image("IconPeaceful"), Mind.peaceful.string() ?? "", Tracking.Event.A2_1_5_16__일기작성_감정선택_평온한.rawValue),
+            ("surprised", Color.emotionSurprised, Image("IconSurprised"), Mind.surprised.string() ?? "", Tracking.Event.A2_1_5_17__일기작성_감정선택_놀란.rawValue),
+            ("reassuring", Color.emotionReassuring, Image("IconReassuring"), Mind.reassuring.string() ?? "", Tracking.Event.A2_1_5_18__일기작성_감정선택_안심되는.rawValue)
         ]
         
         WithViewStore(store , observe: { $0 }) { viewStore in
@@ -128,6 +128,7 @@ struct WritingView: View {
                 }
                 .padding()
             }
+            .scrollIndicators(.hidden)
         }
     }
     
@@ -157,7 +158,7 @@ struct WritingView: View {
                             .fill(viewStore.selectedEmotion == emotion.0 ? Color.backgroundPrimary : Color.clear)
                     }
                     .aspectRatio(1, contentMode: .fill)
-                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color(hexCode: "#191919").opacity(0), radius: 6) // 더 퍼지게
+                    .shadow(color: viewStore.selectedEmotion == emotion.0 ? emotion.1.opacity(0.3) : Color.shadow.opacity(0), radius: 6) // 더 퍼지게
                 
             }
             .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
@@ -173,7 +174,8 @@ struct DateView: View {
     
     var body: some View {
         HStack {
-            Text("\(String(describing: pickedDateTagValue.year))년 \(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일")
+//            Text("\(String(describing: pickedDateTagValue.year))년 \(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일")
+            Text(pickedDateTagValue.yyyyMMdd)
                 .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
             Image(systemName: "chevron.down")

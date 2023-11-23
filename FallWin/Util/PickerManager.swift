@@ -181,5 +181,13 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
         
         self.tagValue = lastTagValue.first ?? self.tagValue
     }
+    
+    var yyyyMMdd: String {
+        let date = DateComponents(year: year, month: month, day: day).date ?? Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
+    }
 }
 

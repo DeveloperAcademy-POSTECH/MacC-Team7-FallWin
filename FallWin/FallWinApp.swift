@@ -33,6 +33,7 @@ struct FallWinApp: App {
             UserDefaultsKey.Settings.lock: false,
             UserDefaultsKey.Settings.biometric: false,
             UserDefaultsKey.Settings.haptic: true,
+            UserDefaultsKey.Settings.dailyNotification: false,
         ])
         
         // MARK: User
@@ -58,13 +59,13 @@ struct FallWinApp: App {
                     Feature()
                 }))
             } else {
-                PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
+                PasscodeView(initialMessage: "passcode_enter".localized, dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
                     if typed == KeychainWrapper.standard[.password] || biometric ?? false {
                         locked = false
                         return .dismiss
                         
                     } else {
-                        return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
+                        return .retype("passcode_enter_fail".localized)
                     }
                 }
             }

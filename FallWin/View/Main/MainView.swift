@@ -12,6 +12,8 @@ import FirebaseAnalytics
 struct MainView: View {
     let store: StoreOf<MainFeature>
     
+    let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
@@ -31,7 +33,6 @@ struct MainView: View {
                                             viewStore.send(.showJournalView(journal))
                                         }
                                         .onAppear {
-                                            print("timestamp: \(journal.timestamp)")
                                             if let timestamp = journal.timestamp {
                                                 if !viewStore.pickedDateTagValue.isScrolling {
                                                     viewStore.send(.updateYear(timestamp.year ))
@@ -77,10 +78,10 @@ struct MainView: View {
                         Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
                         print("@Log : A1_3__메인_새일기쓰기")
                     }
-                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
-                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
+                        Text("limit_alert_message")
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
                         }
                     }
@@ -92,13 +93,16 @@ struct MainView: View {
                             YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
-                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "남은 필름") {
-                            Text("일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 \(DrawingCountManager.INITIAL_COUNT)개로 리셋되니, 필름이 떨어지지 않게 유의하세요!")
+                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "film_alert_title".localized) {
+                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(FilmManager.INITIAL_COUNT)"))
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
-                            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                                 viewStore.send(.showCountInfo(false))
                             }
+                        }
+                        .onReceive(filmCountPublisher) { _ in
+                            viewStore.send(.getRemainingCount)
                         }
                     Spacer()
                 }
@@ -113,8 +117,10 @@ struct MainView: View {
             }
             .onAppear {
                 viewStore.send(.fetchAll)
+                viewStore.send(.getRemainingCount)
                 viewStore.send(.hideTabBar(false))
             }
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
         }
@@ -174,8 +180,11 @@ struct MainView: View {
                     viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {
-                        Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
-                            .font(.pretendard(.bold, size: 24))
+                        Text("date_year_month".localized
+                            .replacingOccurrences(of: "{year}", with: String(viewStore.pickedDateTagValue.year))
+                            .replacingOccurrences(of: "{month}", with: String("date_picker_month_\(viewStore.pickedDateTagValue.month)".localized))
+                        )
+                        .font(.pretendard(.bold, size: 24))
                         Image(systemName: "chevron.down")
                     }
                 }
@@ -199,9 +208,6 @@ struct MainView: View {
                             .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
                     }
                 }
-                .onAppear {
-                    viewStore.send(.getRemainingCount)
-                }
             }
             .padding(.top)
             .padding(.horizontal, 20)
@@ -218,7 +224,7 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
-                        if DrawingCountManager.shared.remainingCount <= 0 {
+                        if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
                         } else {
                             viewStore.send(.showWritingView)

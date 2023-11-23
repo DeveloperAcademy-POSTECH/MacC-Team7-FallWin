@@ -196,7 +196,7 @@ struct PasscodeView: View {
     
     private func authenticateViaBiometric() {
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "일기장 잠금 해제") { success, error in
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "passcode_faceid_reason".localized) { success, error in
                 if let error = error {
                     print(error)
                 }
