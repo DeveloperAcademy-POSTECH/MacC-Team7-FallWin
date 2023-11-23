@@ -29,13 +29,13 @@ struct NicknameInitView: View {
                 }
             VStack {
                 Spacer()
-                Text("닉네임을 입력해주세요")
+                Text("onboarding_nickname_title")
                     .font(.pretendard(.bold, size: 24))
                     .foregroundStyle(Color.textPrimary)
                 Spacer()
                 ZStack {
                     TextField(text: viewStore.binding(get: \.nickname, send: NicknameInitFeature.Action.setNickname)) {
-                        Text("닉네임")
+                        Text("nickname")
                             .font(.pretendard(.regular, size: 18))
                             .foregroundStyle(Color.textTertiary)
                     }
@@ -52,11 +52,11 @@ struct NicknameInitView: View {
                 .background {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.backgroundPrimary)
-                        .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 4, y: 2)
+                        .shadow(color: Color.shadow.opacity(0.14), radius: 4, y: 2)
                 }
                 HStack {
                     Spacer()
-                    Text("\(viewStore.nickname.count) / 10")
+                    Text(String("\(viewStore.nickname.count) / 10"))
                         .font(.pretendard(.regular, size: 14))
                         .foregroundStyle((viewStore.nickname.isEmpty) || (viewStore.nickname.count > 10) ? Color.red : Color.textTertiary)
                 }
@@ -67,7 +67,7 @@ struct NicknameInitView: View {
                     UserDefaults.standard.set(false, forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched)
                     viewStore.send(.doneInitSetting)
                 } label: {
-                    ConfirmButtonLabelView(text: "다음", backgroundColor: (viewStore.nickname == "") || (viewStore.nickname.count > 10) ? .buttonDisabled : .button, foregroundColor: .textOnButton)
+                    ConfirmButtonLabelView(text: "next".localized, backgroundColor: (viewStore.nickname == "") || (viewStore.nickname.count > 10) ? .buttonDisabled : .button, foregroundColor: .textOnButton)
                 }
                 .disabled((viewStore.nickname == "") || (viewStore.nickname.count > 10))
             }
@@ -75,7 +75,7 @@ struct NicknameInitView: View {
         }
         .safeToolbar {
             ToolbarItem(placement: .principal) {
-                Text("닉네임 설정")
+                Text("onboarding_nickname_set")
                     .font(.pretendard(.bold, size: 18))
                     .foregroundStyle(Color.textPrimary)
             }

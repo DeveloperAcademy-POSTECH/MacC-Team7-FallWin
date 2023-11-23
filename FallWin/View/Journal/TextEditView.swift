@@ -35,12 +35,12 @@ struct TextEditView: View {
                     .background {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.backgroundPrimary)
-                            .shadow(color: Color(hexCode: "#191919").opacity(0.14), radius: 8, y: 2)
+                            .shadow(color: Color.shadow.opacity(0.14), radius: 8, y: 2)
                             .overlay {
                                 VStack {
                                     if viewStore.tempText.isEmpty {
                                         HStack {
-                                            Text("그림으로 담고 싶은 이야기를 작성해보세요.")
+                                            Text("main_text_placeholder")
                                                 .font(.pretendard(.regular, size: 18))
                                                 .multilineTextAlignment(.leading)
                                                 .foregroundStyle(.textTertiary)
@@ -54,16 +54,16 @@ struct TextEditView: View {
                                         Spacer()
                                         Group {
                                             if viewStore.tempText.count > 1000 {
-                                                Text("\(viewStore.tempText.count)")
+                                                Text(String("\(viewStore.tempText.count)"))
                                                     .foregroundStyle(.red)
                                             }else {
-                                                Text("\(viewStore.tempText.count)")
+                                                Text(String("\(viewStore.tempText.count)"))
                                                     .foregroundStyle(.textSecondary)
                                             }
                                         }
                                         .font(.pretendard(.medium, size: 14))
                                         
-                                        Text(" / \(1000)")
+                                        Text(String(" / \(1000)"))
                                             .font(.pretendard(.regular, size: 14))
                                             .foregroundStyle(.textTertiary)
                                             .padding(.trailing, 8)
@@ -80,7 +80,7 @@ struct TextEditView: View {
                     viewStore.send(.saveText)
                 } label: {
                     ConfirmButtonLabelView(
-                        text: "수정 완료",
+                        text: "text_edit_done".localized,
                         backgroundColor: ((viewStore.tempText == viewStore.journal.content) || (viewStore.tempText == "") || (viewStore.tempText.count > 1000)) ? Color.buttonDisabled : Color.button,
                         foregroundColor: .textOnButton
                     )
@@ -96,7 +96,7 @@ struct TextEditView: View {
         }
         .safeToolbar {
             ToolbarItem(placement: .principal) {
-                Text("수정하기")
+                Text("text_edit_save")
                     .font(.pretendard(.bold, size: 18))
                     .foregroundStyle(.textPrimary)
             }
@@ -106,14 +106,14 @@ struct TextEditView: View {
                 } label: {
                     Image(systemName: "xmark")
                 }
-                .alert(isPresented: viewStore.binding(get: \.showCancelAlert, send: TextEditFeature.Action.showCancelAlert), title: "수정을 그만둘까요?") {
-                    Text("수정 사항이 반영되지 않아요.")
+                .alert(isPresented: viewStore.binding(get: \.showCancelAlert, send: TextEditFeature.Action.showCancelAlert), title: "text_edit_title".localized) {
+                    Text("text_edit_message".localized)
                 } primaryButton: {
-                    OhwaAlertButton(label: Text("취소"), color: .clear) {
+                    OhwaAlertButton(label: Text("cancel"), color: .clear) {
                         viewStore.send(.showCancelAlert(false))
                     }
                 } secondaryButton: {
-                    OhwaAlertButton(label: Text("그만두기").foregroundColor(.textOnButton), color: .button) {
+                    OhwaAlertButton(label: Text("text_edit_discard").foregroundColor(.textOnButton), color: .button) {
 //                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
 //                        print("@Log : A3_3__상세페이지_일기삭제")
 //                        viewStore.send(.hideCancelAlertAndCancelEditing)

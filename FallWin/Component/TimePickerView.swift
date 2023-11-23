@@ -28,7 +28,7 @@ struct TimePickerView: View {
                 
                 Spacer()
                 
-                DatePicker("asdf", selection: $selected, displayedComponents: .hourAndMinute)
+                DatePicker("date_picker_title", selection: $selected, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)
                     .labelsHidden()
                 

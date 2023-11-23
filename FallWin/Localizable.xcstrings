@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " / %lld" : {
-
-    },
     "%@ (%@)" : {
       "localizations" : {
         "en" : {
@@ -15,9 +12,6 @@
       }
     },
     "%lld" : {
-
-    },
-    "%lld / 10" : {
 
     },
     "album_search_placeholder" : {
@@ -33,16 +27,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "찾고 싶은 추억을 입력해보세요"
-          }
-        }
-      }
-    },
-    "asdf" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "asdf"
           }
         }
       }
@@ -813,7 +797,20 @@
       }
     },
     "edit" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정"
+          }
+        }
+      }
     },
     "emotion_annoyed" : {
       "extractionState" : "manual",
@@ -1166,7 +1163,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 {initial_count}개로 리셋되니, 필름이 떨어지지 않게 유의하세요!\n\n* 인터넷에 연결하지 않으면 필름이 채워지지 않아요."
           }
         }
@@ -1631,6 +1628,91 @@
         }
       }
     },
+    "nickname" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nickname"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닉네임"
+          }
+        }
+      }
+    },
+    "onboarding_nickname_set" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nickname"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닉네임 설정"
+          }
+        }
+      }
+    },
+    "onboarding_nickname_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your nickname"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닉네임을 입력해주세요"
+          }
+        }
+      }
+    },
+    "onboarding_start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작하기"
+          }
+        }
+      }
+    },
+    "onboarding_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Have a nice memory\nwith PICDA!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA와 함께 그림 한 장에\n하루를 추억으로 담아보세요!"
+          }
+        }
+      }
+    },
     "passcode_enter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1732,12 +1814,6 @@
           }
         }
       }
-    },
-    "PICDA" : {
-
-    },
-    "PICDA와 함께 그림 한 장에\n하루를 추억으로 담아보세요!" : {
-
     },
     "prev" : {
       "extractionState" : "manual",
@@ -2603,6 +2679,91 @@
         }
       }
     },
+    "text_edit_discard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그만두기"
+          }
+        }
+      }
+    },
+    "text_edit_done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장 완료"
+          }
+        }
+      }
+    },
+    "text_edit_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changes will not be saved."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "변경사항이 저장되지 않아요."
+          }
+        }
+      }
+    },
+    "text_edit_save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정하기"
+          }
+        }
+      }
+    },
+    "text_edit_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit Editing?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정을 그만둘까요?"
+          }
+        }
+      }
+    },
     "time_am" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2823,30 +2984,6 @@
           }
         }
       }
-    },
-    "그림으로 담고 싶은 이야기를 작성해보세요." : {
-
-    },
-    "그만두기" : {
-
-    },
-    "닉네임" : {
-
-    },
-    "닉네임 설정" : {
-
-    },
-    "닉네임을 입력해주세요" : {
-
-    },
-    "수정 사항이 반영되지 않아요." : {
-
-    },
-    "수정하기" : {
-
-    },
-    "취소" : {
-
     }
   },
   "version" : "1.0"
