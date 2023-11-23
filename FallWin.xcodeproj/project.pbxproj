@@ -101,6 +101,12 @@
 		79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */; };
 		79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */; };
 		79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */; };
+		9808A9FA2B0C92A700A2CEB7 /* TextEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */; };
+		9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */; };
+		9808A9FF2B0DD97A00A2CEB7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */; };
+		9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808AA002B0DDD7300A2CEB7 /* OnboardingView+Feature.swift */; };
+		9808AA032B0DDE1B00A2CEB7 /* NicknameInitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808AA022B0DDE1B00A2CEB7 /* NicknameInitView.swift */; };
+		9808AA052B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808AA042B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift */; };
 		9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31D2AE01F2600FD0E30 /* MainTextView.swift */; };
 		9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */; };
 		98202FA42AE69FA90089CF79 /* LottieImageGen.json in Resources */ = {isa = PBXBuildFile; fileRef = 98202FA32AE69FA90089CF79 /* LottieImageGen.json */; };
@@ -222,6 +228,12 @@
 		79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlert.swift; sourceTree = "<group>"; };
 		79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditView.swift; sourceTree = "<group>"; };
+		9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditView+Feature.swift"; sourceTree = "<group>"; };
+		9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9808AA002B0DDD7300A2CEB7 /* OnboardingView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingView+Feature.swift"; sourceTree = "<group>"; };
+		9808AA022B0DDE1B00A2CEB7 /* NicknameInitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameInitView.swift; sourceTree = "<group>"; };
+		9808AA042B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NicknameInitView+Feature.swift"; sourceTree = "<group>"; };
 		9814C31D2AE01F2600FD0E30 /* MainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextView.swift; sourceTree = "<group>"; };
 		9814C31F2AE250BE00FD0E30 /* MainTextView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTextView+Feature.swift"; sourceTree = "<group>"; };
 		98202FA32AE69FA90089CF79 /* LottieImageGen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieImageGen.json; sourceTree = "<group>"; };
@@ -312,6 +324,8 @@
 				A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */,
 				79D8B1582AFA148D0020DFCC /* ImageZoomView.swift */,
 				79D8B15A2AFA14DB0020DFCC /* ImageZoomViewController.swift */,
+				9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */,
+				9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
@@ -453,6 +467,7 @@
 			children = (
 				79407D542AD7E68D006C7571 /* ContentView.swift */,
 				791F14732ADD8EA500F8DDD2 /* Feature.swift */,
+				9808A9FD2B0DD96200A2CEB7 /* Onboarding */,
 				792751152AF221140023123C /* Passcode */,
 				799F1D8F2B02F17C009908DB /* Write */,
 				98DA96F82ADFA577000DDAFA /* Writing */,
@@ -532,6 +547,17 @@
 				79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		9808A9FD2B0DD96200A2CEB7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */,
+				9808AA002B0DDD7300A2CEB7 /* OnboardingView+Feature.swift */,
+				9808AA022B0DDE1B00A2CEB7 /* NicknameInitView.swift */,
+				9808AA042B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		98202FA02AE69F790089CF79 /* Font */ = {
@@ -739,8 +765,10 @@
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
+				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
+				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
 				79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */,
 				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
@@ -762,9 +790,11 @@
 				79D8B15B2AFA14DB0020DFCC /* ImageZoomViewController.swift in Sources */,
 				9814C3202AE250BE00FD0E30 /* MainTextView+Feature.swift in Sources */,
 				98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */,
+				9808A9FF2B0DD97A00A2CEB7 /* OnboardingView.swift in Sources */,
 				792444112B02700000E28FFE /* EmptyPlaceholderView.swift in Sources */,
 				98439ED02B0353AC00B7669F /* View+Extension.swift in Sources */,
 				79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */,
+				9808AA032B0DDE1B00A2CEB7 /* NicknameInitView.swift in Sources */,
 				7924440F2B02195300E28FFE /* ActivityView.swift in Sources */,
 				987086AD2AFA22150060E59C /* ButtonLabelView.swift in Sources */,
 				98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */,
@@ -795,6 +825,7 @@
 				7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
+				9808AA052B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift in Sources */,
 				792751272AF23F9E0023123C /* SwiftKeychainWrapper+Extension.swift in Sources */,
 				663755792AF7ED3600117085 /* OhwaAlert.swift in Sources */,
 				799F1D8C2B02EFDD009908DB /* JournalWritingView.swift in Sources */,
@@ -804,6 +835,7 @@
 				79E5B2C02ADD1C6800A86770 /* PersistenceController.swift in Sources */,
 				7951CE552AF4AF98006A3AA7 /* PasscodeView.swift in Sources */,
 				98F70A7F2AE4E18100FEE4D2 /* DrawingStyleView.swift in Sources */,
+				9808A9FA2B0C92A700A2CEB7 /* TextEditView.swift in Sources */,
 				79EE3CA92AFCBA4D005BD2FD /* OhwaAlertImpl.swift in Sources */,
 				79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */,
 				987086AB2AFA17020060E59C /* PickerView.swift in Sources */,
@@ -946,7 +978,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -987,7 +1019,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
