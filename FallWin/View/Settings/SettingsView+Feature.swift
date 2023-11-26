@@ -17,7 +17,7 @@ struct SettingsFeature: Reducer {
         // Profile
         var nickname: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
         var gender: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.gender) ?? "none"
-        var remainingDrawingCount: Int = FilmManager.shared.drawingCount?.count ?? 0
+        var remainingDrawingCount: Int? = FilmManager.shared.drawingCount?.count
         var showNicknameAlert: Bool = false
         var tempNickname: String = ""
         var showCountInfo: Bool = false
@@ -67,7 +67,7 @@ struct SettingsFeature: Reducer {
                 return .none
                 
             case .getRemainingDrawingCount:
-                state.remainingDrawingCount = FilmManager.shared.drawingCount?.count ?? 0
+                state.remainingDrawingCount = FilmManager.shared.drawingCount?.count
                 return .none
                 
             default: return .none

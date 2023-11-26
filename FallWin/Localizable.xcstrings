@@ -1220,6 +1220,57 @@
         }
       }
     },
+    "film_detail_ad" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get A Film"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필름 받기"
+          }
+        }
+      }
+    },
+    "film_detail_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every drawing requires one film. \nFilm count resets to {initial_count} each day, and if you use it up, you can watch an ad and get another one."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그림을 그릴 때 마다 필름 1개가 소모돼요.\n필름은 매일 {initial_count}로 리셋되고, 만약 필름을 다 사용했다면 광고를 시청하고 하나를 더 받을 수 있어요."
+          }
+        }
+      }
+    },
+    "film_detail_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Films"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필름"
+          }
+        }
+      }
+    },
     "generated_fail_alert_message" : {
       "extractionState" : "manual",
       "localizations" : {

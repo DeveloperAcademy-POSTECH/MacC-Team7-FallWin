@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 struct LineNoteView: View {
     @Binding var text: String
@@ -42,6 +43,43 @@ struct LineNoteView: View {
     }
 }
 
+extension UITextView {
+    var numberOfLine: Int {
+        let size = CGSize(width: frame.width, height: .infinity)
+        let estimatedSize = sizeThatFits(size)
+        
+        return Int(estimatedSize.height / (self.font!.lineHeight))
+    }
+}
+
+struct LineTextView: UIViewRepresentable {
+    @Binding var text: String
+    
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.isEditable = false
+        return textView
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+    }
+    
+    private func getLineView(textView: UITextView) -> UIView {
+        let view = UIView()
+        
+        view.frame = textView.frame
+        for i in 0..<textView.numberOfLine {
+            let line = UIView()
+            line.
+            view.addSubview()
+        }
+        
+        return view
+    }
+}
+
 #Preview {
-    LineNoteView(text: .constant("1\n2\n3\n4\n5\n6\n7\n8\n9"), fontSize: 20, lineSpacing: 20)
+    LineTextView(text: .constant("1\n2\n3\n4\n5\n6\n7\n8\n9"))
+//    LineNoteView(text: .constant("1\n2\n3\n4\n5\n6\n7\n8\n9"), fontSize: 20, lineSpacing: 20)
 }

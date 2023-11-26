@@ -54,9 +54,13 @@ struct SettingsView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 20)
                                 if networkModel.isConnected {
-                                    Text("\(viewStore.remainingDrawingCount)")
-                                        .font(.pretendard(.bold, size: 16))
-                                        .foregroundColor(.textPrimary)
+                                    if let remainingCount = viewStore.remainingDrawingCount {
+                                        Text("\(remainingCount)")
+                                            .font(.pretendard(.bold, size: 16))
+                                            .foregroundColor(.textPrimary)
+                                    } else {
+                                        ProgressView()
+                                    }
                                 } else {
                                     Image(systemName: "network.slash")
                                         .resizable()
