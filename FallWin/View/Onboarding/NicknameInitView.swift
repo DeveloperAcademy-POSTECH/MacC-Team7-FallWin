@@ -64,8 +64,8 @@ struct NicknameInitView: View {
                 Button {
                     print(viewStore.nickname)
                     UserDefaults.standard.set(viewStore.nickname, forKey: UserDefaultsKey.User.nickname)
-                    UserDefaults.standard.set(false, forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched)
-                    viewStore.send(.doneInitSetting)
+//                    UserDefaults.standard.set(false, forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched)
+                    viewStore.send(.showNotificationInitView)
                 } label: {
                     ConfirmButtonLabelView(text: "next".localized, backgroundColor: (viewStore.nickname == "") || (viewStore.nickname.count > 10) ? .buttonDisabled : .button, foregroundColor: .textOnButton)
                 }
@@ -82,6 +82,9 @@ struct NicknameInitView: View {
         }
         .toolbar(.visible, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(store: store.scope(state: \.$notificationInit, action: NicknameInitFeature.Action.notificationInit), destination: { store in
+            NotificationInitView(store: store)
+        })
     }
 }
 //

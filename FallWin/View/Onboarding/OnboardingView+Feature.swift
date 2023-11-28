@@ -11,13 +11,12 @@ import SwiftUI
 
 struct OnboardingFeature: Reducer {
     struct State: Equatable {
-        var showNicknameInitView: Bool = false
 
         @PresentationState var nicknameInit: NicknameInitFeature.State?
     }
     
     enum Action: Equatable {
-        case showNicknameInitView(Bool)
+        case showNicknameInitView
         case doneInitSetting
         
         case nicknameInit(PresentationAction<NicknameInitFeature.Action>)
@@ -26,9 +25,8 @@ struct OnboardingFeature: Reducer {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case let .showNicknameInitView(show):
+            case .showNicknameInitView:
                 state.nicknameInit = .init()
-                state.showNicknameInitView = show
                 return .none
                 
             case .doneInitSetting:

@@ -45,12 +45,19 @@ struct OnboardingView: View {
                         .multilineTextAlignment(.center)
                     Spacer()
                     Button {
-                        viewStore.send(.showNicknameInitView(true))
+                        viewStore.send(.showNicknameInitView)
                     } label: {
                         ConfirmButtonLabelView(text: "onboarding_start".localized, backgroundColor: .button, foregroundColor: .textOnButton)
                     }
                 }
                 .padding()
+            }
+            .safeToolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("setting_section_notification")
+                        .font(.pretendard(.bold, size: 18))
+                        .foregroundStyle(Color.textPrimary)
+                }
             }
             .navigationDestination(store: store.scope(state: \.$nicknameInit, action: OnboardingFeature.Action.nicknameInit), destination: { store in
                 NicknameInitView(store: store)

@@ -132,6 +132,8 @@
 		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
 		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
 		989152C32B0F7F03001119B1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 989152C22B0F7F02001119B1 /* Secret.plist */; };
+		989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C42B1608EF001119B1 /* NotificationInitView.swift */; };
+		989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */; };
 		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
@@ -264,6 +266,8 @@
 		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		989152C22B0F7F02001119B1 /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
+		989152C42B1608EF001119B1 /* NotificationInitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInitView.swift; sourceTree = "<group>"; };
+		989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationInitView+Feature.swift"; sourceTree = "<group>"; };
 		98A2BC282AFCD688003C9835 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
@@ -570,6 +574,8 @@
 				9808AA002B0DDD7300A2CEB7 /* OnboardingView+Feature.swift */,
 				9808AA022B0DDE1B00A2CEB7 /* NicknameInitView.swift */,
 				9808AA042B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift */,
+				989152C42B1608EF001119B1 /* NotificationInitView.swift */,
+				989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -768,6 +774,7 @@
 			files = (
 				792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */,
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
+				989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */,
 				79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */,
 				98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */,
 				9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */,
@@ -791,6 +798,7 @@
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
 				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
+				989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
