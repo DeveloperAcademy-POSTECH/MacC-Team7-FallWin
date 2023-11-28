@@ -83,12 +83,13 @@ struct MainView: View {
                     .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
                         Text("limit_alert_message")
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("confirm").foregroundColor(.button), color: .backgroundPrimary) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textPrimary), color: .backgroundPrimary) {
                             viewStore.send(.showCountAlert(false))
                         }
                     } secondaryButton: {
                         OhwaAlertButton(label: Text("limit_alert_ad").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
+                            viewStore.send(.showFilmDetailView(true))
                         }
                     }
                     .alert(isPresented: viewStore.binding(get: \.showNetworkAlert, send: MainFeature.Action.showNetworkAlert), title: "network_warning_alert_title".localized) {
@@ -104,17 +105,6 @@ struct MainView: View {
                         OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showAdFailAlert(false))
                         }
-                    }
-                    .onChange(of: viewStore.showAd) { newValue in
-                        rewardAdsManager.displayReward { reward in
-                            if reward {
-                                FilmManager.shared.increaseCount()
-                                viewStore.send(.getRemainingCount)
-                            } else {
-                                viewStore.send(.showAdFailAlert(true))
-                            }
-                        }
-                        viewStore.send(.showAd(false))
                     }
                 
                 VStack {
@@ -145,6 +135,9 @@ struct MainView: View {
                     JournalView(store: store)
                 }
             }
+            .navigationDestination(isPresented: viewStore.binding(get: \.showFilmDetailView, send: MainFeature.Action.showFilmDetailView), destination: {
+                FilmDetailView()
+            })
             .onAppear {
                 viewStore.send(.fetchAll)
                 viewStore.send(.getRemainingCount)
@@ -230,7 +223,12 @@ struct MainView: View {
                             .resizable()
                             .frame(width: 20, height: 18)
                         if networkModel.isConnected {
-                            Text("\(viewStore.remainingCount)")
+                            if let remainingCount = viewStore.remainingCount {
+                                Text("\(remainingCount)")
+                                    .font(.pretendard(.bold, size: 16))
+                            } else {
+                                ProgressView()
+                            }
                         } else {
                             Image(systemName: "network.slash")
                                 .resizable()

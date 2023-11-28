@@ -50,8 +50,10 @@ class RewardAdsManager: NSObject, GADFullScreenContentDelegate {
         
         if let ad = await loadReward() {
             return await withUnsafeContinuation { continuation in
-                ad.present(fromRootViewController: root) {
-                    continuation.resume(returning: true)
+                DispatchQueue.main.async {
+                    ad.present(fromRootViewController: root) {
+                        continuation.resume(returning: true)
+                    }
                 }
             }
         }

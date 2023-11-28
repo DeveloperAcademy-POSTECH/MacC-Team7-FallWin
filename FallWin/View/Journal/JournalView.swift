@@ -229,8 +229,9 @@ struct JournalView: View {
                         .background(.separator)
                 }
                 
-                LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 20)
+                LineNoteView(text: .constant(viewStore.journal.content ?? ""), fontSize: 20, lineSpacing: 12)
                     .foregroundStyle(.textPrimary)
+                    .padding(.top, 20)
             }
             .padding()
             .background {
@@ -326,7 +327,7 @@ struct JournalView: View {
     let context = PersistenceController.debug.container.viewContext
     let journal = Journal(context: context)
     journal.id = UUID()
-    journal.content = "blah blah blah sdlkfjas fjklasd flkasjd flaksdjf laksdjflkasdj flkasjdf lkasjdflkawjfoiejalskdmf laskdjf lkawjfl kewj lidsjflkawjs deflkjaw dsoifjaweiopfj awoeifj osdaijf oawijf oiawej foiawejf iowajef oiawjef oisdjf oiasdj foiawje foiwaje foij\nasdf \nasdfasdf"
+    journal.content = "가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오.가나다라마바사 아자차카타파하 에헤~ 이에이에이;여오."
     journal.image = nil
     journal.mind = 1
     journal.drawingStyle = 1
