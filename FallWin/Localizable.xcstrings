@@ -1555,7 +1555,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "오늘의 그림"
+            "value" : "오늘의 화풍"
           }
         }
       }
@@ -1572,7 +1572,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "오늘의 기분"
+            "value" : "오늘의 감정"
           }
         }
       }
