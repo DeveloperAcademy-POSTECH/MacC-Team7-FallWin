@@ -29,7 +29,7 @@ struct OnboardingView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 40)
-                        Text("PICDA")
+                        Text(String("PICDA"))
                             .font(.pretendard(.bold, size: 40))
                             .foregroundStyle(.textPrimary)
                     }
@@ -39,7 +39,7 @@ struct OnboardingView: View {
                         .scaledToFit()
                         .frame(height: 300)
                     Spacer()
-                    Text("PICDA와 함께 그림 한 장에\n하루를 추억으로 담아보세요!")
+                    Text("onboarding_title")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textSecondary)
                         .multilineTextAlignment(.center)
@@ -47,7 +47,7 @@ struct OnboardingView: View {
                     Button {
                         viewStore.send(.showNicknameInitView(true))
                     } label: {
-                        ConfirmButtonLabelView(text: "시작하기", backgroundColor: .button, foregroundColor: .textOnButton)
+                        ConfirmButtonLabelView(text: "onboarding_start".localized, backgroundColor: .button, foregroundColor: .textOnButton)
                     }
                 }
                 .padding()

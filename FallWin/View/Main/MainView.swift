@@ -13,6 +13,8 @@ struct MainView: View {
     let store: StoreOf<MainFeature>
     
     let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    let networkModel = NetworkModel()
+    let rewardAdsManager = RewardAdsManager()
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -81,11 +83,39 @@ struct MainView: View {
                     .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
                         Text("limit_alert_message")
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.button), color: .backgroundPrimary) {
+                            viewStore.send(.showCountAlert(false))
+                        }
+                    } secondaryButton: {
+                        OhwaAlertButton(label: Text("limit_alert_ad").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showCountAlert(false))
                         }
                     }
-                
+                    .alert(isPresented: viewStore.binding(get: \.showNetworkAlert, send: MainFeature.Action.showNetworkAlert), title: "network_warning_alert_title".localized) {
+                        Text("network_warning_alert_message")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showNetworkAlert(false))
+                        }
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showAdFailAlert, send: MainFeature.Action.showAdFailAlert), title: "ad_fail_alert_title".localized) {
+                        Text("ad_fail_alert_message")
+                    } primaryButton: { 
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showAdFailAlert(false))
+                        }
+                    }
+                    .onChange(of: viewStore.showAd) { newValue in
+                        rewardAdsManager.displayReward { reward in
+                            if reward {
+                                FilmManager.shared.increaseCount()
+                                viewStore.send(.getRemainingCount)
+                            } else {
+                                viewStore.send(.showAdFailAlert(true))
+                            }
+                        }
+                        viewStore.send(.showAd(false))
+                    }
                 
                 VStack {
                     toolbar
@@ -199,7 +229,14 @@ struct MainView: View {
                         Image(systemName: "film")
                             .resizable()
                             .frame(width: 20, height: 18)
-                        Text("\(viewStore.remainingCount)")
+                        if networkModel.isConnected {
+                            Text("\(viewStore.remainingCount)")
+                        } else {
+                            Image(systemName: "network.slash")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .opacity(0.6)
+                        }
                     }
                     .padding(10)
                     .background {
@@ -224,8 +261,15 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
+                        if !networkModel.isConnected {
+                            viewStore.send(.showNetworkAlert(true))
+                            return
+                        }
+                        
                         if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
+//                            rewardManager.displayReward()
+                            //Alert 추가하기
                         } else {
                             viewStore.send(.showWritingView)
                         }

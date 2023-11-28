@@ -21,7 +21,7 @@ extension ChatGPTApiManager {
         let template: String = """
 Let’s work this out in a step by step way to be sure we have the right answer.
 1. Please summarize smooth english translation of <<\(prompt)>>
-2. Limit your summary upto five english noun phrases.
+2. Limit your summary upto 3 english noun phrases.
 3. Your summary should focus on tangible subjects, Including concrete, visual subjects such as a person, object, or location.
 4. In cases where a clear object that can be depicted in a drawing is absent, such as emotions or concepts, let's arbitrarily choose a representative object that resonates universally. This chosen object should be widely relatable to the majority of people.
 5. Your answer must be in the form of comma-separated noun phrases or words.
@@ -107,7 +107,7 @@ Let’s work this out in a step by step way to be sure we have the right answer.
                 ],
                 [
                     "role": "assistant",
-                    "content": "what I truly love, today's workshop, lifelong pondering, importance of self-reflection recognition"
+                    "content": "what I truly love, lifelong pondering, importance of self-reflection recognition"
                 ],
                 [
                     "role": "user",
@@ -122,7 +122,7 @@ Let’s work this out in a step by step way to be sure we have the right answer.
                 ],
                 [
                     "role": "assistant",
-                    "content": "fried sweet potatoes, fish-shaped pastry, The return of winter, happiness worth 3000 won, tears of joy"
+                    "content": "fried sweet potatoes, fish-shaped pastry, The return of winter"
                 ],
                 [
                     "role": "user",

@@ -19,10 +19,10 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by 5-year-old-kid's drawing skill, drawn with innocent charm and rough lines, unrefined strokes childlike painting",
-        "Oil Painting": "Oil painting",
-        "Water Color": "Watercolor Painting",
-        "Sketch": "pencil sketches Painting",
+        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by young child drawing skill, drawn with innocent charm and rough lines, unrefined strokes child-like painting",
+        "Oil Painting": "Oil painting, Varnish",
+        "Water Color": "Watercolor Painting, gouache",
+        "Sketch": "pencil sketches Painting, croquis",
         "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
         "Pixel Art": "Retro-styled pixel-by-pixel non-alphabet video game graphics Style",
         "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
@@ -182,8 +182,8 @@ struct GeneratedDiaryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .alert(isPresented: $isError, title: "limit_alert_title".localized) {
-            Text("limit_alert_message".localized)
+        .alert(isPresented: $isError, title: "generated_fail_alert_title".localized) {
+            Text("generated_fail_alert_message".localized)
         } primaryButton: {
             OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                 isError.toggle()

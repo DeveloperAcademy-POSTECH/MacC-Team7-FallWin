@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " / %lld" : {
-
-    },
     "%@ (%@)" : {
       "localizations" : {
         "en" : {
@@ -17,8 +14,39 @@
     "%lld" : {
 
     },
-    "%lld / 10" : {
-
+    "ad_fail_alert_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topping film up failed due to an ad failure."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고를 불러올 수 없어서 필름을 충전할 수 없어요."
+          }
+        }
+      }
+    },
+    "ad_fail_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film Top Up"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필름 충전 실패"
+          }
+        }
+      }
     },
     "album_search_placeholder" : {
       "extractionState" : "manual",
@@ -33,16 +61,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "찾고 싶은 추억을 입력해보세요"
-          }
-        }
-      }
-    },
-    "asdf" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "asdf"
           }
         }
       }
@@ -813,7 +831,20 @@
       }
     },
     "edit" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정"
+          }
+        }
+      }
     },
     "emotion_annoyed" : {
       "extractionState" : "manual",
@@ -1166,7 +1197,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 {initial_count}개로 리셋되니, 필름이 떨어지지 않게 유의하세요!\n\n* 인터넷에 연결하지 않으면 필름이 채워지지 않아요."
           }
         }
@@ -1546,6 +1577,23 @@
         }
       }
     },
+    "limit_alert_ad" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top Up"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필름 받기"
+          }
+        }
+      }
+    },
     "limit_alert_message" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1614,6 +1662,40 @@
         }
       }
     },
+    "network_warning_alert_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing a journal requires network connection.\nPlease try again after connecting WiFi or cellular network."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기 작성을 위해 네트워크 연결이 필요합니다.\nWiFi 혹은 셀룰러 네트워크에 연결한 후 다시 시도해주세요."
+          }
+        }
+      }
+    },
+    "network_warning_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인터넷 연결 없음"
+          }
+        }
+      }
+    },
     "next" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1627,6 +1709,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "다음"
+          }
+        }
+      }
+    },
+    "nickname" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nickname"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닉네임"
+          }
+        }
+      }
+    },
+    "onboarding_nickname_set" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nickname"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닉네임 설정"
+          }
+        }
+      }
+    },
+    "onboarding_nickname_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your nickname"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닉네임을 입력해주세요"
+          }
+        }
+      }
+    },
+    "onboarding_start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작하기"
+          }
+        }
+      }
+    },
+    "onboarding_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Have a nice memory\nwith PICDA!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA와 함께 그림 한 장에\n하루를 추억으로 담아보세요!"
           }
         }
       }
@@ -1732,12 +1899,6 @@
           }
         }
       }
-    },
-    "PICDA" : {
-
-    },
-    "PICDA와 함께 그림 한 장에\n하루를 추억으로 담아보세요!" : {
-
     },
     "prev" : {
       "extractionState" : "manual",
@@ -2603,6 +2764,91 @@
         }
       }
     },
+    "text_edit_discard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그만두기"
+          }
+        }
+      }
+    },
+    "text_edit_done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장 완료"
+          }
+        }
+      }
+    },
+    "text_edit_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changes will not be saved."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "변경사항이 저장되지 않아요."
+          }
+        }
+      }
+    },
+    "text_edit_save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정하기"
+          }
+        }
+      }
+    },
+    "text_edit_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit Editing?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정을 그만둘까요?"
+          }
+        }
+      }
+    },
     "time_am" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2823,21 +3069,6 @@
           }
         }
       }
-    },
-    "그림으로 담고 싶은 이야기를 작성해보세요." : {
-
-    },
-    "닉네임" : {
-
-    },
-    "닉네임 설정" : {
-
-    },
-    "닉네임을 입력해주세요" : {
-
-    },
-    "수정하기" : {
-
     }
   },
   "version" : "1.0"

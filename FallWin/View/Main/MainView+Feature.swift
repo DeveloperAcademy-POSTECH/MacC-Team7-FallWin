@@ -17,7 +17,11 @@ struct MainFeature: Reducer {
         var isPickerShown: Bool = false
         var showCountAlert: Bool = false
         var showCountInfo: Bool = false
+        var showNetworkAlert: Bool = false
         var remainingCount: Int = 0
+        var showAd: Bool = false
+        var showAdFailAlert: Bool = false
+        
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
@@ -40,7 +44,10 @@ struct MainFeature: Reducer {
         case bindJournal
         case showCountAlert(Bool)
         case showCountInfo(Bool)
+        case showNetworkAlert(Bool)
         case getRemainingCount
+        case showAd(Bool)
+        case showAdFailAlert(Bool)
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -114,8 +121,20 @@ struct MainFeature: Reducer {
                 state.showCountInfo = show
                 return .none
                 
+            case let .showNetworkAlert(show):
+                state.showNetworkAlert = show
+                return .none
+                
             case .getRemainingCount:
                 state.remainingCount = FilmManager.shared.drawingCount?.count ?? 0
+                return .none
+                
+            case let .showAd(show):
+                state.showAd = show
+                return .none
+                
+            case let .showAdFailAlert(show):
+                state.showAdFailAlert = show
                 return .none
                 
 //            case .writing(let action):
