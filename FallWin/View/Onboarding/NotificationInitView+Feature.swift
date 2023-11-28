@@ -16,6 +16,7 @@ struct NotificationInitFeature: Reducer {
         
         var notificationCenter = UNUserNotificationCenter.current()
         var isPickerShown: Bool = false
+        var isAlertShown: Bool = false
         
     }
     
@@ -25,8 +26,9 @@ struct NotificationInitFeature: Reducer {
         case requestNotificationAuth
         case authorizationResponse(Bool)
         case showPicker(Bool)
+        case showAlert(Bool)
         case addNotificationRequest(Int, Int)
-        case doneInitSetting
+        case doneInitSetting(Bool)
         
     }
     
@@ -59,16 +61,24 @@ struct NotificationInitFeature: Reducer {
                     }
                 }
             }
-            return .send(.doneInitSetting)
+            return .send(.doneInitSetting(false))
             
         case let .showPicker(show):
             state.isPickerShown = show
             return .none
             
-        case .doneInitSetting:
-            UserDefaults.standard.set(state.hour, forKey: UserDefaultsKey.Settings.dailyNotificationHour)
-            UserDefaults.standard.set(state.minute, forKey: UserDefaultsKey.Settings.dailyNotificationMinute)
-            UserDefaults.standard.set(true, forKey: UserDefaultsKey.Settings.dailyNotification)
+        case let .showAlert(show):
+            state.isAlertShown = show
+            return .none
+            
+        case let .doneInitSetting(isSkipped):
+            if isSkipped {
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.Settings.dailyNotification)
+            } else {
+                UserDefaults.standard.set(state.hour, forKey: UserDefaultsKey.Settings.dailyNotificationHour)
+                UserDefaults.standard.set(state.minute, forKey: UserDefaultsKey.Settings.dailyNotificationMinute)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.Settings.dailyNotification)
+            }
             UserDefaults.standard.set(false, forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched)
             return .none
             

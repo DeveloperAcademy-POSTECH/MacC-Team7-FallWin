@@ -52,6 +52,7 @@ struct NotificationInitView: View {
                 HStack {
                     Spacer()
                     Button {
+                        viewStore.send(.doneInitSetting(true))
                     } label: {
                         ConfirmButtonLabelView(text: "skip".localized, backgroundColor: .backgroundPrimary, foregroundColor: .textSecondary, width: nil)
                     }
@@ -63,8 +64,11 @@ struct NotificationInitView: View {
                                 let granted = try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
                                 if granted {
                                     viewStore.send(.showPicker(true))
+                                } else {
+                                    viewStore.send(.showAlert(true))
                                 }
                             } catch {
+                                print("notification 권한 허용 alert에서 뭔가 문제 발생!!!!!!!!!!!!!!!!!!!!")
                                 print(error)
                             }
                         }
@@ -80,6 +84,15 @@ struct NotificationInitView: View {
                         }
                         .presentationDetents([.fraction(0.5)])
                     })
+                    .alert(isPresented: viewStore.binding(get: \.isAlertShown, send: NotificationInitFeature.Action.showAlert), title: "알림 설정") {
+                        Text("'설정'에서 알림 권한을 허용해주세요")
+                            .font(.pretendard(.regular, size: 18))
+                            .foregroundStyle(Color.textSecondary)
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showAlert(false))
+                        }
+                    }
                     Spacer()
                 }
             }
