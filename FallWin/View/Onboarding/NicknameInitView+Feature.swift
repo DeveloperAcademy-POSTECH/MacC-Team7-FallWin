@@ -37,6 +37,7 @@ struct NicknameInitFeature: Reducer {
                 return .none
                 
             case .doneInitSetting:
+                UserDefaults.standard.set(state.nickname, forKey: UserDefaultsKey.User.nickname)
                 return .none
                 
             case .notificationInit(.presented(.doneInitSetting)):

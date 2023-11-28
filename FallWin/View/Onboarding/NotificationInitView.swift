@@ -57,9 +57,29 @@ struct NotificationInitView: View {
                     }
                     Spacer()
                     Button {
+                        Task {
+                            do {
+                                let notificationCenter = UNUserNotificationCenter.current()
+                                let granted = try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
+                                if granted {
+                                    viewStore.send(.showPicker(true))
+                                }
+                            } catch {
+                                print(error)
+                            }
+                        }
                     } label: {
                         ConfirmButtonLabelView(text: "setting_section_notification".localized, backgroundColor: .button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                     }
+                    .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: NotificationInitFeature.Action.showPicker), onDismiss: {
+                        viewStore.send(.addNotificationRequest(viewStore.hour, viewStore.minute))
+                    }, content: {
+                        TimePickerView(hour: 21, minute: 0) { hour, minute in
+                            viewStore.send(.setHour(hour))
+                            viewStore.send(.setMinute(minute))
+                        }
+                        .presentationDetents([.fraction(0.5)])
+                    })
                     Spacer()
                 }
             }

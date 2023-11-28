@@ -63,8 +63,6 @@ struct NicknameInitView: View {
                 Spacer()
                 Button {
                     print(viewStore.nickname)
-                    UserDefaults.standard.set(viewStore.nickname, forKey: UserDefaultsKey.User.nickname)
-//                    UserDefaults.standard.set(false, forKey: UserDefaultsKey.AppEnvironment.isFirstLaunched)
                     viewStore.send(.showNotificationInitView)
                 } label: {
                     ConfirmButtonLabelView(text: "next".localized, backgroundColor: (viewStore.nickname == "") || (viewStore.nickname.count > 10) ? .buttonDisabled : .button, foregroundColor: .textOnButton)
