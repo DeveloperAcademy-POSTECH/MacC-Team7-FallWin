@@ -11,7 +11,6 @@ import Kronos
 final class FilmManager {
     static let shared = FilmManager()
     static let INITIAL_COUNT = 1
-    static let debug: Bool = true
     var drawingCount: DrawingCount? {
         didSet {
             NotificationCenter.default.post(name: .filmCountChanged, object: nil)
@@ -25,7 +24,7 @@ final class FilmManager {
             if !isConnected {
                 return
             }
-            Clock.sync(completion:  { [self] date, _ in
+            Clock.sync(completion: { [self] date, _ in
                 guard let date = date else {
                     return
                 }
@@ -33,7 +32,12 @@ final class FilmManager {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
                 
-                let dateString = formatter.string(from: date)
+                var dateString: String = formatter.string(from: date)
+                #if DEBUG
+                print("real: \(dateString)")
+                dateString = formatter.string(from: Date())
+                print("sim: \(dateString)")
+                #endif
                 
                 if let drawingCountValue = UserDefaults.standard.value(forKey: UserDefaultsKey.AppEnvironment.drawingCount) as? Data,
                    let drawingCount = try? PropertyListDecoder().decode(DrawingCount.self, from: drawingCountValue) {
