@@ -55,7 +55,7 @@ struct NotificationSettingFeature: Reducer {
             state.notificationHour = hour
             UserDefaults.standard.set(min, forKey: UserDefaultsKey.Settings.dailyNotificationMinute)
             state.notificationMinute = min
-            return .none
+            return .send(.setDailyNotification(hour, min))
             
         case .turnOffNotificationSetting:
             UserDefaults.standard.removeObject(forKey: UserDefaultsKey.Settings.dailyNotificationHour)
@@ -69,6 +69,7 @@ struct NotificationSettingFeature: Reducer {
             
         case let .setDailyNotification(hour, minute):
             return .run { send in
+                NotificationManager().removeAllPendingNotifications()
                 let registered = await NotificationManager().registerDailyNotification(hour: hour, minute: minute)
                 if !registered {
                     await send(.setNotification(false))
