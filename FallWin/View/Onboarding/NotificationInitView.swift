@@ -26,28 +26,24 @@ struct NotificationInitView: View {
                 .resizable()
                 .scaledToFit()
             VStack {
-                Spacer()
-                Image(systemName: "bell.circle")
+                Image(systemName: "bell.circle.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width * 0.1)
-                Spacer()
+                    .padding(.top, 38)
                 Text("onboarding_notifiacation_title")
                     .font(.pretendard(.bold, size: 24))
                     .foregroundStyle(Color.textPrimary)
-                Spacer()
+                    .padding(.top, 28)
                 Text("onboarding_notification_subtitle")
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(Color.textSecondary)
                     .multilineTextAlignment(.center)
-                Spacer()
+                    .padding(.top, 16)
                 Image("Alert")
                     .resizable()
                     .scaledToFit()
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
+                    .padding(.top, 47)
                 Spacer()
                 HStack {
                     Spacer()
@@ -94,8 +90,10 @@ struct NotificationInitView: View {
                     }
                     Spacer()
                 }
+                .padding(.bottom)
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
