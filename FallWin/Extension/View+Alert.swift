@@ -28,7 +28,7 @@ extension View{
         })
     }
     
-    func alert<Content: View>(isPresented: Binding<Bool>, title: String, content: () -> Content, primaryButton: () -> OhwaAlertButton, secondaryButton: (() -> OhwaAlertButton)? = nil) -> some View {
+    func alert<Content: View>(isPresented: Binding<Bool>, title: String? = nil, content: () -> Content, primaryButton: () -> OhwaAlertButton, secondaryButton: (() -> OhwaAlertButton)? = nil) -> some View {
         return alert(isPresented: isPresented) {
             OhwaAlertImpl(title: title, content: content, primaryButton: primaryButton, secondaryButton: secondaryButton)
         }

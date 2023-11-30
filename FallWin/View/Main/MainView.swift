@@ -113,12 +113,20 @@ struct MainView: View {
                             YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
-                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(FilmManager.INITIAL_COUNT)"))
+                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo)) {
+                            Text("film_alert_message".localized)
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
                             OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                                 viewStore.send(.showCountInfo(false))
+                            }
+                        }
+                        .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: MainFeature.Action.showFilmNetworkAlert)) {
+                            Text("film_network_alert_message".localized)
+                                .multilineTextAlignment(.center)
+                        } primaryButton: {
+                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                                viewStore.send(.showFilmNetworkAlert(false))
                             }
                         }
                         .onReceive(filmCountPublisher) { _ in
@@ -216,7 +224,11 @@ struct MainView: View {
                 Spacer()
                 
                 Button {
-                    viewStore.send(.showCountInfo(true))
+                    if networkModel.isConnected {
+                        viewStore.send(.showCountInfo(true))
+                    } else {
+                        viewStore.send(.showFilmNetworkAlert(true))
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "film")

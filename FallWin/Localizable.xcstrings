@@ -11,11 +11,24 @@
             "state" : "new",
             "value" : "%1$@ (%2$@)"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
     "%lld" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "ad_fail_alert_message" : {
       "extractionState" : "manual",
@@ -23,7 +36,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Topping film up failed due to an ad failure."
+            "value" : "Failed to top up film due to the ad failure."
           }
         },
         "ko" : {
@@ -40,7 +53,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Film Top Up"
+            "value" : "Top Up Film"
           }
         },
         "ko" : {
@@ -499,7 +512,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose a drawing style you prefer."
+            "value" : "Choose the drawing style you prefer."
           }
         },
         "ko" : {
@@ -855,7 +868,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Annoyed"
+            "value" : "Irritated"
           }
         },
         "ko" : {
@@ -872,7 +885,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Exciting"
+            "value" : "Excited"
           }
         },
         "ko" : {
@@ -889,7 +902,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Frustrated"
+            "value" : "Bewildered"
           }
         },
         "ko" : {
@@ -940,7 +953,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Joyful"
+            "value" : "Fun"
           }
         },
         "ko" : {
@@ -957,7 +970,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lazy"
+            "value" : "Tiresome"
           }
         },
         "ko" : {
@@ -991,7 +1004,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nervous"
+            "value" : "Unsettled"
           }
         },
         "ko" : {
@@ -1008,7 +1021,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Peaceful"
+            "value" : "Calm"
           }
         },
         "ko" : {
@@ -1042,7 +1055,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reassuring"
+            "value" : "Relieved"
           }
         },
         "ko" : {
@@ -1076,7 +1089,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shy"
+            "value" : "Ashamed"
           }
         },
         "ko" : {
@@ -1093,7 +1106,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suffocated"
+            "value" : "Suffocating"
           }
         },
         "ko" : {
@@ -1178,7 +1191,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No journal"
+            "value" : "There's no diary written yet"
           }
         },
         "ko" : {
@@ -1195,13 +1208,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1 film required per drawing. It will be reset to {initial_count} every day.\n\n* Internet connection required."
+            "value" : "One film required per drawing. Films are reset to {initial_count} every day.\n\n* Internet connection required."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 {initial_count}개로 리셋되니, 필름이 떨어지지 않게 유의하세요!\n\n* 인터넷에 연결하지 않으면 필름이 채워지지 않아요."
+            "value" : "일기 작성 시 필름을 사용해 그림을 그릴 수 있고, 매일 한 개로 채워져요."
           }
         }
       }
@@ -1274,6 +1287,40 @@
         }
       }
     },
+    "film_network_alert_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film count is unknown due to the network failure."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네트워크에 연결하지 않으면 필름 수를 알 수 없어요."
+          }
+        }
+      }
+    },
+    "film_network_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네트워크 연결 없음"
+          }
+        }
+      }
+    },
     "generated_fail_alert_message" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1297,7 +1344,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Drawing Failed"
+            "value" : "Failed To Draw"
           }
         },
         "ko" : {
@@ -1314,7 +1361,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Finish Drawing"
+            "value" : "Finish Diary"
           }
         },
         "ko" : {
@@ -1348,7 +1395,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose the picture"
+            "value" : "Choose the picture that best suits your day"
           }
         },
         "ko" : {
@@ -1518,13 +1565,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Would you like to delete this journal?"
+            "value" : "If you delete the diary, you cannot recover it again."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "일기를 삭제하면 다시 복구할 수 없습니다."
+            "value" : "일기를 삭제하면 다시 복구할 수 없어요."
           }
         }
       }
@@ -1535,7 +1582,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete"
+            "value" : "Do you want to delete the diary?"
           }
         },
         "ko" : {
@@ -1654,13 +1701,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can draw three pictures per day. The count will be reset tomorrow."
+            "value" : "You used up the film given today. You can get another film tomorrow."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 리셋해드릴게요!"
+            "value" : "광고를 보고 일기를 추가로 작성할까요?"
           }
         }
       }
@@ -1677,7 +1724,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "오늘의 제한 도달"
+            "value" : "필름이 부족해요"
           }
         }
       }
@@ -1688,7 +1735,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Write a story you'd like to illustrate."
+            "value" : "Write a story that you want to make into a picture."
           }
         },
         "ko" : {
@@ -1728,7 +1775,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "일기 작성을 위해 네트워크 연결이 필요합니다.\nWiFi 혹은 셀룰러 네트워크에 연결한 후 다시 시도해주세요."
+            "value" : "WIFI 혹은 셀룰러 네트워크에 연결한 후 다시 시도해주세요"
           }
         }
       }
@@ -1745,7 +1792,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인터넷 연결 없음"
+            "value" : "네트워크 연결 없음"
           }
         }
       }
@@ -1875,7 +1922,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Passcode is not correct.\nEnter the passcode"
+            "value" : "Passcode is not correct. \nPlease enter the right passcode."
           }
         },
         "ko" : {
@@ -1977,7 +2024,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Data"
+            "value" : "Data Management"
           }
         },
         "ko" : {
@@ -2096,7 +2143,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deleting all journal and image data.\nThis action is not undoable.\nMake sure your data is backed up in iCloud before continuing.\n\nAre you sure you want to continue?"
+            "value" : "Delete all diary data and pictures.\nThis operation is irreversible.\nMake sure your data is backed up on iCloud before continuing.\n\nAre you sure you want to delete it?"
           }
         },
         "ko" : {
@@ -2113,7 +2160,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Data Deletion"
+            "value" : "Delete data"
           }
         },
         "ko" : {
@@ -2147,7 +2194,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Data has been deleted.\nExiting application."
+            "value" : "All data has been deleted.\nShutting down the application."
           }
         },
         "ko" : {
@@ -2266,7 +2313,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The data has been successfully backed up."
+            "value" : "iCloud backup is complete."
           }
         },
         "ko" : {
@@ -2419,7 +2466,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The data has been successfully restored."
+            "value" : "iCloud restore completed."
           }
         },
         "ko" : {
@@ -3079,7 +3126,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose the feeling of the day."
+            "value" : "Choose the emotion that you want to capture in the picture."
           }
         },
         "ko" : {
@@ -3096,7 +3143,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "How do you feel?"
+            "value" : "How did you feel?"
           }
         },
         "ko" : {
