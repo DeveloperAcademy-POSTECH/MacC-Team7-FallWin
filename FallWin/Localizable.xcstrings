@@ -1250,19 +1250,53 @@
         }
       }
     },
+    "film_detail_cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Thanks"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "괜찮아요"
+          }
+        }
+      }
+    },
+    "film_detail_confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sure"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네, 좋아요"
+          }
+        }
+      }
+    },
     "film_detail_message" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Every drawing requires one film. \nFilm count resets to {initial_count} each day, and if you use it up, you can watch an ad and get another one."
+            "value" : "Would you like to watch ad and get another film?"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "그림을 그릴 때 마다 필름 1개가 소모돼요.\n필름은 매일 {initial_count}로 리셋되고, 만약 필름을 다 사용했다면 광고를 시청하고 하나를 더 받을 수 있어요."
+            "value" : "광고를 보고 일기를 추가로 작성할까요?"
           }
         }
       }
@@ -1273,13 +1307,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Films"
+            "value" : "No Films"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "필름"
+            "value" : "필름이 부족해요"
           }
         }
       }
