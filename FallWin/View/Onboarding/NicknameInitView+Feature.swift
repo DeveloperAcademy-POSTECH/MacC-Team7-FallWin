@@ -19,6 +19,7 @@ struct NicknameInitFeature: Reducer {
     
     enum Action: Equatable {
         case setNickname(String)
+        case clearNickname
         case showNotificationInitView
         case doneInitSetting
         
@@ -30,6 +31,10 @@ struct NicknameInitFeature: Reducer {
             switch action {
             case let .setNickname(nickname):
                 state.nickname = nickname
+                return .none
+                
+            case let .clearNickname:
+                state.nickname = ""
                 return .none
                 
             case .showNotificationInitView:

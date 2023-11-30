@@ -22,35 +22,29 @@ struct OnboardingView: View {
             ZStack {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
-                VStack {
-                    Spacer()
-                    HStack {
-                        Image("shareSheetBottomIcon")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 40)
-                        Text(String("PICDA"))
-                            .font(.pretendard(.bold, size: 40))
-                            .foregroundStyle(.textPrimary)
-                    }
-                    Spacer()
-                    Image(systemName: "questionmark")
+                Image("onboarding")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .offset(y: -45)
+                VStack(spacing: 0) {
+                    Image("onboarding_logo")
                         .resizable()
-                        .scaledToFit()
-                        .frame(height: 300)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 160)
+                        .padding(.top, 40)
                     Spacer()
                     Text("onboarding_title")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textSecondary)
                         .multilineTextAlignment(.center)
-                    Spacer()
+                        .padding(.bottom, 60)
                     Button {
                         viewStore.send(.showNicknameInitView)
                     } label: {
                         ConfirmButtonLabelView(text: "onboarding_start".localized, backgroundColor: .button, foregroundColor: .textOnButton)
                     }
+                    .padding(.bottom)
                 }
-                .padding()
             }
             .safeToolbar {
                 ToolbarItem(placement: .principal) {
@@ -62,6 +56,7 @@ struct OnboardingView: View {
             .navigationDestination(store: store.scope(state: \.$nicknameInit, action: OnboardingFeature.Action.nicknameInit), destination: { store in
                 NicknameInitView(store: store)
             })
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

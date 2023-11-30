@@ -22,17 +22,13 @@ struct NicknameInitView: View {
         ZStack {
             Color.backgroundPrimary
                 .ignoresSafeArea()
-                .onTapGesture {
-                    if isFocused {
-                        isFocused.toggle()
-                    }
-                }
             VStack {
-                Spacer()
+                ProgressView(value: 1, total: 3)
+                    .progressViewStyle(ColoredProgressBar(backgroundColor: .buttonDisabled, fillColor: .tabbarEnabled))
                 Text("onboarding_nickname_title")
                     .font(.pretendard(.bold, size: 24))
                     .foregroundStyle(Color.textPrimary)
-                Spacer()
+                    .padding(.top, 56)
                 ZStack {
                     TextField(text: viewStore.binding(get: \.nickname, send: NicknameInitFeature.Action.setNickname)) {
                         Text("nickname")
@@ -42,10 +38,15 @@ struct NicknameInitView: View {
                     .focused($isFocused)
                     HStack {
                         Spacer()
-                        Image(systemName: "x.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 18)
+                        Button {
+                            viewStore.send(.clearNickname)
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundStyle(Color.textTertiary)
+                                .frame(height: 18)
+                        }
                     }
                 }
                 .padding()
@@ -54,12 +55,15 @@ struct NicknameInitView: View {
                         .fill(Color.backgroundPrimary)
                         .shadow(color: Color.shadow.opacity(0.14), radius: 4, y: 2)
                 }
+                .padding(.horizontal, 20)
+                .padding(.top, 32)
                 HStack {
                     Spacer()
                     Text(String("\(viewStore.nickname.count) / 10"))
                         .font(.pretendard(.regular, size: 14))
-                        .foregroundStyle((viewStore.nickname.isEmpty) || (viewStore.nickname.count > 10) ? Color.red : Color.textTertiary)
+                        .foregroundStyle(viewStore.nickname.count > 10 ? Color.red : Color.textTertiary)
                 }
+                .padding(.horizontal, 20)
                 Spacer()
                 Button {
                     print(viewStore.nickname)
@@ -68,8 +72,17 @@ struct NicknameInitView: View {
                     ConfirmButtonLabelView(text: "next".localized, backgroundColor: (viewStore.nickname == "") || (viewStore.nickname.count > 10) ? .buttonDisabled : .button, foregroundColor: .textOnButton)
                 }
                 .disabled((viewStore.nickname == "") || (viewStore.nickname.count > 10))
+                .padding(.bottom)
+                .padding(.horizontal, 20)
             }
-            .padding()
+            .onTapGesture {
+                if isFocused {
+                    isFocused.toggle()
+                }
+            }
+        }
+        .onAppear {
+            isFocused = true
         }
         .safeToolbar {
             ToolbarItem(placement: .principal) {

@@ -1930,16 +1930,6 @@
         }
       }
     },
-    "onboarding_notifiacation_title" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "알림 설정을 허용해주세요"
-          }
-        }
-      }
-    },
     "onboarding_notification_permission_alert" : {
       "extractionState" : "manual",
       "localizations" : {

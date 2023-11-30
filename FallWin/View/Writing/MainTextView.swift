@@ -98,6 +98,9 @@ struct MainTextView: View {
                 .padding([.leading, .trailing], 20)
                 .padding(.bottom, 15)
             }
+            .onAppear {
+                isFocused = true
+            }
             .safeToolbar {
                 ToolbarItem(placement: .principal) {
                     DateView(pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainTextFeature.Action.pickDate))
