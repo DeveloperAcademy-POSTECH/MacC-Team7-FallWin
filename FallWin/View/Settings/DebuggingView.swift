@@ -17,7 +17,7 @@ struct DebuggingView: View {
     
     var body: some View {
         List {
-            Section("광고") {
+            Section(String("광고")) {
                 Text(adId)
                     .textSelection(.enabled)
             }
@@ -40,7 +40,7 @@ struct DebuggingView: View {
                 adId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
             }
             
-            Section("필름") {
+            Section(String("필름")) {
                 Text(String("필름 수: \(filmCount)"))
                     .onReceive(filmPublisher) { _ in
                         filmCount = FilmManager.shared.drawingCount?.count ?? 0
@@ -56,7 +56,7 @@ struct DebuggingView: View {
                 }
             }
             
-            Section("알림") {
+            Section(String("알림")) {
                 Button(String("알림 테스트")) {
                     NotificationManager().registerTestNotification { registered in
                         print("Alert \(registered)")
