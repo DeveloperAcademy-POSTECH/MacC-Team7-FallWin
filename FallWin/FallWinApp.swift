@@ -10,11 +10,15 @@ import SwiftKeychainWrapper
 import ComposableArchitecture
 import FirebaseCore
 import GoogleMobileAds
+import AppTrackingTransparency
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
+        DispatchQueue.main.async {
+            ATTrackingManager.requestTrackingAuthorization { _ in }
+        }
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
