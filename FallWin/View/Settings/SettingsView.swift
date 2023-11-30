@@ -41,7 +41,11 @@ struct SettingsView: View {
                         HStack {
                             Text("settings_film")
                             Button {
-                                viewStore.send(.showCountInfo(true))
+                                if networkModel.isConnected {
+                                    viewStore.send(.showCountInfo(true))
+                                } else {
+                                    viewStore.send(.showFilmNetworkAlert(true))
+                                }
                             } label: {
                                 Image(systemName: "info.circle")
                                     .resizable()
@@ -84,7 +88,6 @@ struct SettingsView: View {
                     }
                 }
                 .listSectionSeparator(.hidden)
-
                 .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "settings_nickname_change_title".localized) {
                     TextField("settings_nickname_change_placeholder", text: viewStore.binding(get: \.tempNickname, send: SettingsFeature.Action.setTempNickname))
                 } primaryButton: {
@@ -101,13 +104,24 @@ struct SettingsView: View {
                         }
                     }
                 }
-                .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                    Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(FilmManager.INITIAL_COUNT)"))
+                .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo)) {
+                    Text("film_alert_message".localized)
                         .multilineTextAlignment(.center)
                 } primaryButton: {
                     OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                         viewStore.send(.showCountInfo(false))
                     }
+                }
+                .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: SettingsFeature.Action.showFilmNetworkAlert)) {
+                    Text("film_network_alert_message".localized)
+                        .multilineTextAlignment(.center)
+                } primaryButton: {
+                    OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                        viewStore.send(.showFilmNetworkAlert(false))
+                    }
+                }
+                .onReceive(filmCountPublisher) { _ in
+                    viewStore.send(.getRemainingDrawingCount)
                 }
                 
                 Section("setting_section_settings") {

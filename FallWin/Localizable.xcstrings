@@ -8,11 +8,24 @@
             "state" : "new",
             "value" : "%1$@ (%2$@)"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
     "%lld" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "ad_fail_alert_message" : {
       "extractionState" : "manual",

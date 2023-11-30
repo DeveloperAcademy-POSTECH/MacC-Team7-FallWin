@@ -21,6 +21,7 @@ struct SettingsFeature: Reducer {
         var showNicknameAlert: Bool = false
         var tempNickname: String = ""
         var showCountInfo: Bool = false
+        var showFilmNetworkAlert: Bool = false
         
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
         @PresentationState var notification: NotificationSettingFeature.State? = .init()
@@ -34,6 +35,8 @@ struct SettingsFeature: Reducer {
         case setTempNickname(String)
         case showCountInfo(Bool)
         case getRemainingDrawingCount
+        case showFilmNetworkAlert(Bool)
+        
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
         case notification(PresentationAction<NotificationSettingFeature.Action>)
         case policy(PresentationAction<PolicyFeature.Action>)
@@ -68,6 +71,10 @@ struct SettingsFeature: Reducer {
                 
             case .getRemainingDrawingCount:
                 state.remainingDrawingCount = FilmManager.shared.drawingCount?.count
+                return .none
+                
+            case let .showFilmNetworkAlert(show):
+                state.showFilmNetworkAlert = show
                 return .none
                 
             default: return .none
