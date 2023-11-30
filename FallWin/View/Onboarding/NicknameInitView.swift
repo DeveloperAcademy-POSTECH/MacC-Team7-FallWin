@@ -38,11 +38,15 @@ struct NicknameInitView: View {
                     .focused($isFocused)
                     HStack {
                         Spacer()
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundStyle(Color.textTertiary)
-                            .frame(height: 18)
+                        Button {
+                            viewStore.send(.clearNickname)
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundStyle(Color.textTertiary)
+                                .frame(height: 18)
+                        }
                     }
                 }
                 .padding()
