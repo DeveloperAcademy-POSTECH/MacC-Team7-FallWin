@@ -114,7 +114,15 @@ struct MainView: View {
                                 .presentationDetents([.fraction(0.5)])
                         }
                         .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "film_alert_title".localized) {
-                            Text("film_alert_message".localized.replacingOccurrences(of: "{initial_count}", with: "\(FilmManager.INITIAL_COUNT)"))
+                            Text("film_alert_message".localized, with: "\(FilmManager.INITIAL_COUNT)"))
+                                .multilineTextAlignment(.center)
+                        } primaryButton: {
+                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                                viewStore.send(.showCountInfo(false))
+                            }
+                        }
+                        .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: MainFeature.Action.showFilmNetworkAlert), title: "film_network_alert_title".localized) {
+                            Text("film_network_alert_message".localized, with: "\(FilmManager.INITIAL_COUNT)"))
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
                             OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {

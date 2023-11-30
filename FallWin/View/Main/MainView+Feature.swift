@@ -21,6 +21,7 @@ struct MainFeature: Reducer {
         var remainingCount: Int? = nil
         var showAdFailAlert: Bool = false
         var showFilmDetailView: Bool = false
+        var showFilmNetworkAlert: Bool = false
         
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
@@ -48,6 +49,7 @@ struct MainFeature: Reducer {
         case getRemainingCount
         case showAdFailAlert(Bool)
         case showFilmDetailView(Bool)
+        case showFilmNetworkAlert(Bool)
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
@@ -135,6 +137,10 @@ struct MainFeature: Reducer {
                 
             case let .showFilmDetailView(show):
                 state.showFilmDetailView = show
+                return .none
+                
+            case let .showFilmNetworkAlert(show):
+                state.showFilmNetworkAlert = show
                 return .none
                 
 //            case .writing(let action):
