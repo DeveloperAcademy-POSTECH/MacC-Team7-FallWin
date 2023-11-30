@@ -19,10 +19,10 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by young child drawing skill, drawn with innocent charm and rough lines, unrefined strokes child-like painting",
+        "Childlike crayon": "babyish Poor detailed Oil pastel rough doodle",
         "Oil Painting": "Oil painting, Varnish",
         "Water Color": "Watercolor Painting, gouache",
-        "Sketch": "pencil sketches Painting, croquis",
+        "Sketch": "Poor detailed simple pencil sketch",
         "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
         "Pixel Art": "Retro-styled pixel-by-pixel non-alphabet video game graphics Style",
         "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
@@ -31,20 +31,27 @@ struct GeneratedDiaryView: View {
     ]
     
     let emotionToEnglish: [String: String] = [
-        "happy": "Happy",
-        "nervous": "Nervous",
-        "grateful": "Grateful",
-        "sad": "Sad",
-        "joyful": "Joyful",
-        "lonely": "Lonely",
-        "proud": "Proud",
-        "suffocated": "Suffocated",
-        "touched": "Touched",
-        "shy": "Shy",
-        "exciting": "Exciting",
-        "lazy": "Lazy",
-        "annoyed": "Annoyed",
-        "frustrated": "Frustrated"
+        "happy": "POSITIVE",
+        "proud": "POSITIVE",
+        "touched": "POSITIVE",
+        "annoyed": "NEGATIVE",
+        "sad": "NEGATIVE",
+        
+        "suffocated": "NEGATIVE",
+        "lazy": "NEUTRAL",
+        "grateful": "POSITIVE",
+        "joyful": "POSITIVE",
+        "exciting": "POSITIVE",
+        
+        "nervous": "NEGATIVE",
+        "lonely": "NEGATIVE",
+        "shy": "NEUTRAL",
+        "frustrated": "NEUTRAL",
+        "tough": "NEGATIVE",
+        
+        "peaceful": "POSITIVE",
+        "surprised": "NEUTRAL",
+        "reassuring": "POSITIVE"
     ]
     
     init(store: StoreOf<GeneratedDiaryFeature>) {
