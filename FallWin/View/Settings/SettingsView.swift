@@ -96,7 +96,7 @@ struct SettingsView: View {
                         viewStore.send(.showNicknameAlert(false))
                     }
                 } secondaryButton: {
-                    OhwaAlertButton(label: Text("change").foregroundColor(viewStore.tempNickname.isEmpty ? .textTertiary : .textOnButton), color: .button) {
+                    OhwaAlertButton(label: Text("change").foregroundColor(.textOnButton), color: .button) {
                         if !viewStore.tempNickname.isEmpty {
                             viewStore.send(.setNickname(viewStore.tempNickname))
                             viewStore.send(.setTempNickname(""))

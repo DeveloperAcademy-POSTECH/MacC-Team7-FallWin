@@ -30,7 +30,8 @@ struct Feature: Reducer {
         case setInvisibility(Bool)
         case setLock(Bool)
         case showPasscodeView(Bool)
-        case setProfileNickname(String?)
+        case updateSettingsStates
+        case setNotification
         
         case main(PresentationAction<MainFeature.Action>)
         case search(PresentationAction<SearchFeature.Action>)
@@ -63,18 +64,21 @@ struct Feature: Reducer {
                 state.showPasscodeView = show
                 return .none
                 
-            case let .setProfileNickname(nickname):
-                state.settings?.nickname = nickname ?? ""
+            case .updateSettingsStates:
+                state.settings?.nickname = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
+                state.settings?.notification?.notification = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.dailyNotification)
+                state.settings?.notification?.notificationHour = UserDefaults.standard.integer(forKey: UserDefaultsKey.Settings.dailyNotificationHour)
+                state.settings?.notification?.notificationMinute = UserDefaults.standard.integer(forKey: UserDefaultsKey.Settings.dailyNotificationMinute)
                 return .none
                 
             case let .main(action):
                 return handleMainAction(state: &state, action: action)
                 
             case .onboarding(.presented(.doneInitSetting)):
-                let nickname = state.onboarding?.nicknameInit?.nickname
+                state.onboarding?.nicknameInit?.notificationInit = nil
                 state.onboarding?.nicknameInit = nil
                 state.onboarding = nil
-                return .send(.setProfileNickname(nickname))
+                return .send(.updateSettingsStates)
                 
             default: return .none
             }

@@ -1896,6 +1896,48 @@
         }
       }
     },
+    "onboarding_notifiacation_title" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 설정을 허용해주세요"
+          }
+        }
+      }
+    },
+    "onboarding_notification_permission_alert" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'설정'에서 알림 권한을 허용해주세요"
+          }
+        }
+      }
+    },
+    "onboarding_notification_subtitle" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하루를 잊지 않고 기억할 수 있게 도와드릴게요!"
+          }
+        }
+      }
+    },
+    "onboarding_notification_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 설정을 허용해주세요"
+          }
+        }
+      }
+    },
     "onboarding_start" : {
       "extractionState" : "manual",
       "localizations" : {

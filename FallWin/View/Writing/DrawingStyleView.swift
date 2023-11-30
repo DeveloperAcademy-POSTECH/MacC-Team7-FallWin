@@ -130,7 +130,7 @@ struct DrawingStyleView: View {
             ("Sketch", Color(hexCode: "#191919"), Image("dsSketch"), DrawingStyle.sketch.name() ?? "", Tracking.Event.A2_3_4_4__일기작성_화풍선택_스케치.rawValue),
             ("Anime", Color(hexCode: "#191919"), Image("dsAnimation"), DrawingStyle.anime.name() ?? "",Tracking.Event.A2_3_4_5__일기작성_화풍선택_애니메이션.rawValue),
             ("Pixel Art", Color(hexCode: "#191919"), Image("dsPixelArt"), DrawingStyle.pixelArt.name() ?? "",Tracking.Event.A2_3_4_6__일기작성_화풍선택_픽셀아트.rawValue),
-            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsVanGogh"), DrawingStyle.vanGogh.name() ?? "", Tracking.Event.A2_3_4_7__일기작성_화풍선택_반고흐.rawValue),
+            ("Vincent Van Gogh", Color(hexCode: "#191919"), Image("dsGogh"), DrawingStyle.vanGogh.name() ?? "", Tracking.Event.A2_3_4_7__일기작성_화풍선택_반고흐.rawValue),
             ("Monet", Color(hexCode: "#191919"), Image("dsMonet"), DrawingStyle.monet.name() ?? "",Tracking.Event.A2_3_4_8__일기작성_화풍선택_모네.rawValue),
             ("Salvador Dali", Color(hexCode: "#191919"), Image("dsDali"), DrawingStyle.dali.name() ?? "",Tracking.Event.A2_3_4_9__일기작성_화풍선택_달리.rawValue)
         ]
