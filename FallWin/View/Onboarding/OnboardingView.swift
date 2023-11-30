@@ -22,11 +22,10 @@ struct OnboardingView: View {
             ZStack {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
-                
                 Image("onboarding")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                
+                    .offset(y: -45)
                 VStack(spacing: 0) {
                     Image("onboarding_logo")
                         .resizable()

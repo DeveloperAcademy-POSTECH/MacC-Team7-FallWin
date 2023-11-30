@@ -23,6 +23,8 @@ struct NicknameInitView: View {
             Color.backgroundPrimary
                 .ignoresSafeArea()
             VStack {
+                ProgressView(value: 1, total: 3)
+                    .progressViewStyle(ColoredProgressBar(backgroundColor: .buttonDisabled, fillColor: .tabbarEnabled))
                 Text("onboarding_nickname_title")
                     .font(.pretendard(.bold, size: 24))
                     .foregroundStyle(Color.textPrimary)
@@ -39,6 +41,7 @@ struct NicknameInitView: View {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
                             .scaledToFit()
+                            .foregroundStyle(Color.textTertiary)
                             .frame(height: 18)
                     }
                 }
@@ -54,7 +57,7 @@ struct NicknameInitView: View {
                     Spacer()
                     Text(String("\(viewStore.nickname.count) / 10"))
                         .font(.pretendard(.regular, size: 14))
-                        .foregroundStyle((viewStore.nickname.isEmpty) || (viewStore.nickname.count > 10) ? Color.red : Color.textTertiary)
+                        .foregroundStyle(viewStore.nickname.count > 10 ? Color.red : Color.textTertiary)
                 }
                 .padding(.horizontal, 20)
                 Spacer()
@@ -66,6 +69,7 @@ struct NicknameInitView: View {
                 }
                 .disabled((viewStore.nickname == "") || (viewStore.nickname.count > 10))
                 .padding(.bottom)
+                .padding(.horizontal, 20)
             }
             .onTapGesture {
                 if isFocused {

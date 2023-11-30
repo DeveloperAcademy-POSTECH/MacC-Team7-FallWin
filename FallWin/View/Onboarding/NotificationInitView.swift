@@ -26,24 +26,27 @@ struct NotificationInitView: View {
                 .resizable()
                 .scaledToFit()
             VStack {
-                Image(systemName: "bell.circle.fill")
+                ProgressView(value: 2, total: 3)
+                    .progressViewStyle(ColoredProgressBar(backgroundColor: .buttonDisabled, fillColor: .tabbarEnabled))
+                Image("onboarding_bell")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width * 0.1)
+                    .frame(width: 56)
                     .padding(.top, 38)
-                Text("onboarding_notifiacation_title")
+                Text("onboarding_notification_title")
                     .font(.pretendard(.bold, size: 24))
                     .foregroundStyle(Color.textPrimary)
-                    .padding(.top, 28)
+                    .padding(.top, 18)
                 Text("onboarding_notification_subtitle")
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(Color.textSecondary)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 16)
-                Image("Alert")
+                    .padding(.top, 1)
+                Image("onboarding_alert")
                     .resizable()
                     .scaledToFit()
-                    .padding(.top, 47)
+                    .frame(width: 325)
+                    .padding(.top, 16)
                 Spacer()
                 HStack {
                     Spacer()
@@ -88,11 +91,19 @@ struct NotificationInitView: View {
                             viewStore.send(.showAlert(false))
                         }
                     }
-                    Spacer()
                 }
                 .padding(.bottom)
+                .padding(.trailing, 20)
             }
         }
+        .safeToolbar {
+            ToolbarItem(placement: .principal) {
+                Text("setting_section_notification")
+                    .font(.pretendard(.bold, size: 18))
+                    .foregroundStyle(Color.textPrimary)
+            }
+        }
+        .toolbar(.visible, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

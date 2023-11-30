@@ -134,6 +134,7 @@
 		989152C32B0F7F03001119B1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 989152C22B0F7F02001119B1 /* Secret.plist */; };
 		989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C42B1608EF001119B1 /* NotificationInitView.swift */; };
 		989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */; };
+		989152C92B187A14001119B1 /* ProgressView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C82B187A14001119B1 /* ProgressView+Extension.swift */; };
 		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
@@ -268,6 +269,7 @@
 		989152C22B0F7F02001119B1 /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
 		989152C42B1608EF001119B1 /* NotificationInitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInitView.swift; sourceTree = "<group>"; };
 		989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationInitView+Feature.swift"; sourceTree = "<group>"; };
+		989152C82B187A14001119B1 /* ProgressView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressView+Extension.swift"; sourceTree = "<group>"; };
 		98A2BC282AFCD688003C9835 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				6637557C2AF7F0A700117085 /* UIApplication+Extension.swift */,
 				98439ECF2B0353AC00B7669F /* View+Extension.swift */,
 				7975B6F52B0F0C180047B5BD /* Notification+Name.swift */,
+				989152C82B187A14001119B1 /* ProgressView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
 				6658377C2AF8CB0A00A5833E /* Tracking.swift in Sources */,
 				799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */,
+				989152C92B187A14001119B1 /* ProgressView+Extension.swift in Sources */,
 				79C99FD72B0F52DF003B3A0B /* DebuggingView.swift in Sources */,
 				98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */,
 				79D8B1792AFB692E0020DFCC /* WebView.swift in Sources */,
