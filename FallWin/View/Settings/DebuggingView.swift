@@ -27,6 +27,14 @@ struct DebuggingView: View {
             Button(String("필름 1 감소")) {
                 FilmManager.shared.reduceCount()
             }
+            Button(String("알림 테스트")) {
+                NotificationManager().registerTestNotification { registered in
+                    print("Alert \(registered)")
+                }
+            }
+            Button(String("대기 알림 삭제")) {
+                NotificationManager().removeAllPendingNotifications()
+            }
         }
     }
 }

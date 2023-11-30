@@ -104,6 +104,7 @@
 		79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */; };
 		79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */; };
 		79F650B42B11CE1100401368 /* FilmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B32B11CE1100401368 /* FilmDetailView.swift */; };
+		79F650B62B184F6800401368 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B52B184F6800401368 /* NotificationManager.swift */; };
 		9808A9FA2B0C92A700A2CEB7 /* TextEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */; };
 		9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */; };
 		9808A9FF2B0DD97A00A2CEB7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */; };
@@ -236,6 +237,7 @@
 		79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		79F650B32B11CE1100401368 /* FilmDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailView.swift; sourceTree = "<group>"; };
+		79F650B52B184F6800401368 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditView.swift; sourceTree = "<group>"; };
 		9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditView+Feature.swift"; sourceTree = "<group>"; };
 		9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				79A566792AFE058E00524A57 /* ICloudBackupManager.swift */,
 				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
 				79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */,
+				79F650B52B184F6800401368 /* NotificationManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
 				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
+				79F650B62B184F6800401368 /* NotificationManager.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,

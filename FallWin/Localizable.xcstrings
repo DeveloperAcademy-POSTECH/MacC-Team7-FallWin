@@ -1828,6 +1828,40 @@
         }
       }
     },
+    "notification_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to write about the day!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "소중한 추억들이 사라지기 전에 기록해보세요."
+          }
+        }
+      }
+    },
+    "notification_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA"
+          }
+        }
+      }
+    },
     "onboarding_nickname_set" : {
       "extractionState" : "manual",
       "localizations" : {

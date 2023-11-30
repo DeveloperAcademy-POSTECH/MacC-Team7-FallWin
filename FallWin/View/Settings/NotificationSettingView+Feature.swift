@@ -60,7 +60,7 @@ struct NotificationSettingFeature: Reducer {
         case .turnOffNotificationSetting:
             UserDefaults.standard.removeObject(forKey: UserDefaultsKey.Settings.dailyNotificationHour)
             UserDefaults.standard.removeObject(forKey: UserDefaultsKey.Settings.dailyNotificationMinute)
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            NotificationManager().removeAllPendingNotifications()
             return .none
             
         case let .showTimePicker(show):
@@ -68,22 +68,12 @@ struct NotificationSettingFeature: Reducer {
             return .none
             
         case let .setDailyNotification(hour, minute):
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                if let error = error {
-                    print(error)
-                } else {
-                    let content = UNMutableNotificationContent()
-                    content.title = ""
-                    content.subtitle = ""
-                    content.body = ""
-                    
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(hour: hour, minute: minute), repeats: true)
-                    
-                    let request = UNNotificationRequest(identifier: "daily", content: content, trigger: trigger)
-                    UNUserNotificationCenter.current().add(request)
+            return .run { send in
+                let registered = await NotificationManager().registerDailyNotification(hour: hour, minute: minute)
+                if !registered {
+                    await send(.setNotification(false))
                 }
             }
-            return .none
         }
     }
 }
