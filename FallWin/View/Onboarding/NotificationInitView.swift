@@ -32,11 +32,11 @@ struct NotificationInitView: View {
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width * 0.1)
                 Spacer()
-                Text("알림 설정을 허용해주세요")
+                Text("onboarding_notifiacation_title")
                     .font(.pretendard(.bold, size: 24))
                     .foregroundStyle(Color.textPrimary)
                 Spacer()
-                Text("하루를 잊지 않고 기억할 수 있게 도와드릴게요!")
+                Text("onboarding_notification_subtitle")
                     .font(.pretendard(.medium, size: 18))
                     .foregroundStyle(Color.textSecondary)
                     .multilineTextAlignment(.center)
@@ -68,8 +68,7 @@ struct NotificationInitView: View {
                                     viewStore.send(.showAlert(true))
                                 }
                             } catch {
-                                print("notification 권한 허용 alert에서 뭔가 문제 발생!!!!!!!!!!!!!!!!!!!!")
-                                print(error)
+                                print("<notification permission>: \(error)")
                             }
                         }
                     } label: {
@@ -85,7 +84,7 @@ struct NotificationInitView: View {
                         .presentationDetents([.fraction(0.5)])
                     })
                     .alert(isPresented: viewStore.binding(get: \.isAlertShown, send: NotificationInitFeature.Action.showAlert), title: "알림 설정") {
-                        Text("'설정'에서 알림 권한을 허용해주세요")
+                        Text("onboarding_notification_permission_alert")
                             .font(.pretendard(.regular, size: 18))
                             .foregroundStyle(Color.textSecondary)
                     } primaryButton: {
