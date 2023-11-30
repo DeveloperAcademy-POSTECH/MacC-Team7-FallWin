@@ -73,7 +73,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "찾고 싶은 추억을 입력해보세요"
+            "value" : "찾고 싶은 키워드로 검색해보세요"
           }
         }
       }
@@ -1675,9 +1675,6 @@
         }
       }
     },
-    "Key" : {
-      "extractionState" : "manual"
-    },
     "limit_alert_ad" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1827,6 +1824,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "닉네임"
+          }
+        }
+      }
+    },
+    "notification_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to write about the day!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "소중한 추억들이 사라지기 전에 기록해보세요."
+          }
+        }
+      }
+    },
+    "notification_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA"
           }
         }
       }
@@ -3202,9 +3233,6 @@
           }
         }
       }
-    },
-    "확인" : {
-
     }
   },
   "version" : "1.0"

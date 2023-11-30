@@ -87,7 +87,7 @@ struct NotificationInitView: View {
                             .font(.pretendard(.regular, size: 18))
                             .foregroundStyle(Color.textSecondary)
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showAlert(false))
                         }
                     }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppTrackingTransparency
 
 struct FilmDetailView: View {
     @State private var remainingCount: Int? = FilmManager.shared.drawingCount?.count
@@ -72,13 +73,15 @@ struct FilmDetailView: View {
                 Spacer()
                 
                 Button {
-                    Task {
-                        let reward = await adManager.displayReward()
-                        if reward {
-                            FilmManager.shared.increaseCount()
-                            dismiss()
-                        } else {
-                            showAdFailAlert = true
+                    ATTrackingManager.requestTrackingAuthorization { _ in
+                        Task {
+                            let reward = await adManager.displayReward()
+                            if reward {
+                                FilmManager.shared.increaseCount()
+                                dismiss()
+                            } else {
+                                showAdFailAlert = true
+                            }
                         }
                     }
                     

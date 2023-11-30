@@ -103,6 +103,8 @@
 		79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */; };
 		79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */; };
 		79F650B42B11CE1100401368 /* FilmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B32B11CE1100401368 /* FilmDetailView.swift */; };
+		79F650B62B184F6800401368 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B52B184F6800401368 /* NotificationManager.swift */; };
+		79F650B92B186A2200401368 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79F650BB2B186A2200401368 /* InfoPlist.strings */; };
 		9808A9FA2B0C92A700A2CEB7 /* TextEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */; };
 		9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */; };
 		9808A9FF2B0DD97A00A2CEB7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */; };
@@ -238,6 +240,9 @@
 		79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		79F650B32B11CE1100401368 /* FilmDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailView.swift; sourceTree = "<group>"; };
+		79F650B52B184F6800401368 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		79F650BA2B186A2200401368 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79F650BC2B186A2300401368 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditView.swift; sourceTree = "<group>"; };
 		9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditView+Feature.swift"; sourceTree = "<group>"; };
 		9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -406,6 +411,7 @@
 				9867B6382AE652A400C7359B /* Info.plist */,
 				79407D522AD7E68D006C7571 /* FallWinApp.swift */,
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
+				79F650BB2B186A2200401368 /* InfoPlist.strings */,
 				799A57A82B0B409700D6966C /* Localizable.xcstrings */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
 				9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */,
@@ -540,6 +546,7 @@
 				79A566792AFE058E00524A57 /* ICloudBackupManager.swift */,
 				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
 				79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */,
+				79F650B52B184F6800401368 /* NotificationManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -757,6 +764,7 @@
 				79D8B14D2AF8C1D30020DFCC /* UhBee Se_hyun Bold.ttf in Resources */,
 				799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */,
 				79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */,
+				79F650B92B186A2200401368 /* InfoPlist.strings in Resources */,
 				9867B62F2AE6524900C7359B /* Pretendard-Regular.ttf in Resources */,
 				9867B6352AE6524900C7359B /* Pretendard-Thin.ttf in Resources */,
 				79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */,
@@ -801,6 +809,7 @@
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
 				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
+				79F650B62B184F6800401368 /* NotificationManager.swift in Sources */,
 				989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
@@ -888,6 +897,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		79F650BB2B186A2200401368 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79F650BA2B186A2200401368 /* en */,
+				79F650BC2B186A2300401368 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		79407D5B2AD7E68E006C7571 /* Debug */ = {
@@ -1018,15 +1039,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = 662HVTXJ55;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PICDA;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "일기를 백업합니다.";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "앱 잠금 해제";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진을 저장합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1060,15 +1078,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = 662HVTXJ55;
+				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PICDA;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "일기를 백업합니다.";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "앱 잠금 해제";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진을 저장합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

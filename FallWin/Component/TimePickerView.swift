@@ -22,13 +22,14 @@ struct TimePickerView: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("date_picker_title")
+                Text("time_picker_title")
                     .font(.pretendard(.semiBold, size: 18))
                     .foregroundColor(.textPrimary)
+                    .padding(.top, 20)
                 
                 Spacer()
                 
-                DatePicker("date_picker_title", selection: $selected, displayedComponents: .hourAndMinute)
+                DatePicker("time_picker_title", selection: $selected, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)
                     .labelsHidden()
                 

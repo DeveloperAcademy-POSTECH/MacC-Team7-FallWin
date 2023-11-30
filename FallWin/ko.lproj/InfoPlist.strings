@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  FallWin
+
+  Created by 최명근 on 11/30/23.
+  
+*/
+NSUserTrackingUsageDescription = "사용자에게 최적화된 광고를 제공합니다.";
+NSFaceIDUsageDescription = "일기 잠금 해제";
+NSPhotoLibraryUsageDescription = "일기 그림 저장";
+NSDocumentsFolderUsageDescription = "일기 백업 및 복원";
