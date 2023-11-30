@@ -100,40 +100,40 @@ struct TextEditView: View {
                     .font(.pretendard(.bold, size: 18))
                     .foregroundStyle(.textPrimary)
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    viewStore.send(.showCancelAlert(true))
-                } label: {
-                    Image(systemName: "xmark")
-                }
-                .alert(isPresented: viewStore.binding(get: \.showCancelAlert, send: TextEditFeature.Action.showCancelAlert), title: "text_edit_title".localized) {
-                    Text("text_edit_message".localized)
-                } primaryButton: {
-                    OhwaAlertButton(label: Text("cancel"), color: .clear) {
-                        viewStore.send(.showCancelAlert(false))
-                    }
-                } secondaryButton: {
-                    OhwaAlertButton(label: Text("text_edit_discard").foregroundColor(.textOnButton), color: .button) {
-//                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
-//                        print("@Log : A3_3__상세페이지_일기삭제")
-//                        viewStore.send(.hideCancelAlertAndCancelEditing)
-                        viewStore.send(.showCancelAlert(false))
-                        viewStore.send(.cancelEditing)
-                    }
-                }
-            }
-            ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    viewStore.send(.showCancelAlert(true))
-                } label: {
-                    Image(systemName: "chevron.left")
-                }
-            }
+//            ToolbarItem(placement: .topBarTrailing) {
+//                Button {
+//                    viewStore.send(.showCancelAlert(true))
+//                } label: {
+//                    Image(systemName: "xmark")
+//                }
+//                .alert(isPresented: viewStore.binding(get: \.showCancelAlert, send: TextEditFeature.Action.showCancelAlert), title: "text_edit_title".localized) {
+//                    Text("text_edit_message".localized)
+//                } primaryButton: {
+//                    OhwaAlertButton(label: Text("cancel"), color: .clear) {
+//                        viewStore.send(.showCancelAlert(false))
+//                    }
+//                } secondaryButton: {
+//                    OhwaAlertButton(label: Text("text_edit_discard").foregroundColor(.textOnButton), color: .button) {
+////                        Tracking.logEvent(Tracking.Event.A3_3__상세페이지_일기삭제.rawValue)
+////                        print("@Log : A3_3__상세페이지_일기삭제")
+////                        viewStore.send(.hideCancelAlertAndCancelEditing)
+//                        viewStore.send(.showCancelAlert(false))
+//                        viewStore.send(.cancelEditing)
+//                    }
+//                }
+//            }
+//            ToolbarItem(placement: .cancellationAction) {
+//                Button {
+//                    viewStore.send(.showCancelAlert(true))
+//                } label: {
+//                    Image(systemName: "chevron.left")
+//                }
+//            }
         }
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarBackButtonHidden(true)
         
         //
         .onAppear {

@@ -11,7 +11,7 @@ import Kronos
 final class FilmManager {
     static let shared = FilmManager()
     static let INITIAL_COUNT = 3
-    
+    static let debug: Bool = true
     var drawingCount: DrawingCount? {
         didSet {
             NotificationCenter.default.post(name: .filmCountChanged, object: nil)

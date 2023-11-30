@@ -67,7 +67,6 @@
 		79A5667E2AFE089D00524A57 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A5667D2AFE089D00524A57 /* ZIPFoundation */; };
 		79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5667F2AFE105500524A57 /* Journal+JSON.swift */; };
 		79A566822AFE132B00524A57 /* RawJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A566812AFE132B00524A57 /* RawJournal.swift */; };
-		79ADA5FE2AE55280007A56EC /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79ADA5FD2AE55280007A56EC /* Secret.plist */; };
 		79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69392ADAD6CA0064E410 /* Carousel.swift */; };
 		79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */; };
 		79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */; };
@@ -132,6 +131,9 @@
 		9871B1E42B036D2B00C5840A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */; };
 		98726DC92AE6439200A14860 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DC82AE6439200A14860 /* UIColor+Extension.swift */; };
 		98726DCB2AE643A700A14860 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98726DCA2AE643A700A14860 /* Color+Extension.swift */; };
+		989152C32B0F7F03001119B1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 989152C22B0F7F02001119B1 /* Secret.plist */; };
+		989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C42B1608EF001119B1 /* NotificationInitView.swift */; };
+		989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */; };
 		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
@@ -201,7 +203,6 @@
 		79A5667B2AFE06BF00524A57 /* FallWin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FallWin.entitlements; sourceTree = "<group>"; };
 		79A5667F2AFE105500524A57 /* Journal+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+JSON.swift"; sourceTree = "<group>"; };
 		79A566812AFE132B00524A57 /* RawJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawJournal.swift; sourceTree = "<group>"; };
-		79ADA5FD2AE55280007A56EC /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
 		79AF69392ADAD6CA0064E410 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		79AF693C2ADCC07E0064E410 /* Journal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Journal.xcdatamodel; sourceTree = "<group>"; };
 		79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -264,6 +265,9 @@
 		9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		98726DC82AE6439200A14860 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		98726DCA2AE643A700A14860 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		989152C22B0F7F02001119B1 /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
+		989152C42B1608EF001119B1 /* NotificationInitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInitView.swift; sourceTree = "<group>"; };
+		989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationInitView+Feature.swift"; sourceTree = "<group>"; };
 		98A2BC282AFCD688003C9835 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiManager.swift; sourceTree = "<group>"; };
 		98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallEApiTestView.swift; sourceTree = "<group>"; };
@@ -402,8 +406,8 @@
 				79407D562AD7E68E006C7571 /* Assets.xcassets */,
 				799A57A82B0B409700D6966C /* Localizable.xcstrings */,
 				79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */,
-				79ADA5FD2AE55280007A56EC /* Secret.plist */,
 				9871B1E32B036D2B00C5840A /* GoogleService-Info.plist */,
+				989152C22B0F7F02001119B1 /* Secret.plist */,
 				79407D582AD7E68E006C7571 /* Preview Content */,
 				9867B6252AE6521800C7359B /* Resource */,
 				79AF69432ADCC2390064E410 /* Util */,
@@ -570,6 +574,8 @@
 				9808AA002B0DDD7300A2CEB7 /* OnboardingView+Feature.swift */,
 				9808AA022B0DDE1B00A2CEB7 /* NicknameInitView.swift */,
 				9808AA042B0DDE5400A2CEB7 /* NicknameInitView+Feature.swift */,
+				989152C42B1608EF001119B1 /* NotificationInitView.swift */,
+				989152C62B16090C001119B1 /* NotificationInitView+Feature.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -744,7 +750,7 @@
 				9867B6312AE6524900C7359B /* Pretendard-Light.ttf in Resources */,
 				79D8B14B2AF8C1D30020DFCC /* UhBee Se_hyun.ttf in Resources */,
 				9867B6372AE6524900C7359B /* Pretendard-ExtraLight.ttf in Resources */,
-				79ADA5FE2AE55280007A56EC /* Secret.plist in Resources */,
+				989152C32B0F7F03001119B1 /* Secret.plist in Resources */,
 				79D8B14D2AF8C1D30020DFCC /* UhBee Se_hyun Bold.ttf in Resources */,
 				799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */,
 				79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */,
@@ -768,6 +774,7 @@
 			files = (
 				792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */,
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
+				989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */,
 				79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */,
 				98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */,
 				9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */,
@@ -791,6 +798,7 @@
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
 				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
+				989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
 				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
@@ -1006,7 +1014,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
@@ -1048,7 +1056,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23111502;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
-				DEVELOPMENT_TEAM = BDU85ET24K;
+				DEVELOPMENT_TEAM = 662HVTXJ55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FallWin/Info.plist;
