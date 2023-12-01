@@ -69,7 +69,7 @@ struct SearchFeature: Reducer {
         // Core Data에서 저장된 Journal 엔터티를 가져옵니다.
         let context = PersistenceController.shared.container.viewContext
         let fetchRequest: NSFetchRequest<Journal> = Journal.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
 
         do {
             return try context.fetch(fetchRequest)
@@ -84,7 +84,7 @@ struct SearchFeature: Reducer {
 
         for journal in data {
             if let timestamp = journal.timestamp {
-//                let key = timestamp.monthYearString // Date 확장에서 가져온 monthYearString을 사용
+                // Date 확장에서 가져온 monthYearString을 사용
                 let key = YearAndMonth(year: timestamp.year, month: timestamp.month)
                 if var group = groupedData[key] {
                     group.append(journal)

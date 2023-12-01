@@ -28,7 +28,7 @@ struct SearchView: View {
                     ScrollView {
                         if viewStore.searchTerm.isEmpty {
                             LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
-                                ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key < $1.key }), id: \.key) { key, searchResults in
+                                ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key > $1.key }), id: \.key) { key, searchResults in
                                     if !searchResults.isEmpty {
                                         Section(header: HStack {
                                             Text(key.string)
