@@ -71,6 +71,7 @@
 		79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */; };
 		79AF69412ADCC1320064E410 /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693F2ADCC1320064E410 /* Journal+CoreDataProperties.swift */; };
 		79AF69452ADCC2820064E410 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69442ADCC2820064E410 /* DataManager.swift */; };
+		79BFCA152B1975080012DDA0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79C99FD52B0F43F0003B3A0B /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */; };
 		79C99FD72B0F52DF003B3A0B /* DebuggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C99FD62B0F52DF003B3A0B /* DebuggingView.swift */; };
 		79D8B14B2AF8C1D30020DFCC /* UhBee Se_hyun.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D8B1482AF8C1D20020DFCC /* UhBee Se_hyun.ttf */; };
@@ -762,6 +763,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6637557D2AF7F0A700117085 /* UIApplication+Extension.swift in Sources */,
+				663755712AF7E53100117085 /* UIViewController+Extension.swift in Sources */,
+				79BFCA152B1975080012DDA0 /* ContentView.swift in Sources */,
 				792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */,
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
 				989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */,
@@ -769,12 +773,10 @@
 				9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */,
 				79D8B1552AF95CF70020DFCC /* Journal+Mind.swift in Sources */,
 				79AF69452ADCC2820064E410 /* DataManager.swift in Sources */,
-				663755712AF7E53100117085 /* UIViewController+Extension.swift in Sources */,
 				79407D662AD7EC9E006C7571 /* String+Extension.swift in Sources */,
 				791F146E2ADD8CF200F8DDD2 /* SearchView+Feature.swift in Sources */,
 				79407D682AD7ED11006C7571 /* Colors.swift in Sources */,
 				98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */,
-				6637557D2AF7F0A700117085 /* UIApplication+Extension.swift in Sources */,
 				79D8B1632AFA2A9F0020DFCC /* LockSettingView+Feature.swift in Sources */,
 				A9D4C73B2AF8CAA30004CF04 /* ImageModifier.swift in Sources */,
 				9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */,
