@@ -105,6 +105,8 @@
 		79F650B42B11CE1100401368 /* FilmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B32B11CE1100401368 /* FilmDetailView.swift */; };
 		79F650B62B184F6800401368 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B52B184F6800401368 /* NotificationManager.swift */; };
 		79F650B92B186A2200401368 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79F650BB2B186A2200401368 /* InfoPlist.strings */; };
+		79F650BE2B19640700401368 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650BD2B19640700401368 /* LicenseView.swift */; };
+		79F650C02B19641000401368 /* LicenseView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650BF2B19641000401368 /* LicenseView+Feature.swift */; };
 		9808A9FA2B0C92A700A2CEB7 /* TextEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */; };
 		9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */; };
 		9808A9FF2B0DD97A00A2CEB7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */; };
@@ -243,6 +245,8 @@
 		79F650B52B184F6800401368 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		79F650BA2B186A2200401368 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79F650BC2B186A2300401368 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79F650BD2B19640700401368 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		79F650BF2B19641000401368 /* LicenseView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseView+Feature.swift"; sourceTree = "<group>"; };
 		9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditView.swift; sourceTree = "<group>"; };
 		9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditView+Feature.swift"; sourceTree = "<group>"; };
 		9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 				7924440A2B00F13000E28FFE /* DataSettingsView.swift */,
 				79D8B16C2AFB505A0020DFCC /* PolicyView.swift */,
 				79D8B16E2AFB50660020DFCC /* PolicyView+Feature.swift */,
+				79F650BD2B19640700401368 /* LicenseView.swift */,
+				79F650BF2B19641000401368 /* LicenseView+Feature.swift */,
 				7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */,
 				7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */,
 				79C99FD62B0F52DF003B3A0B /* DebuggingView.swift */,
@@ -808,6 +814,7 @@
 				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
 				79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */,
 				9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */,
+				79F650BE2B19640700401368 /* LicenseView.swift in Sources */,
 				79D8B1512AF946CE0020DFCC /* LineNoteView.swift in Sources */,
 				79F650B62B184F6800401368 /* NotificationManager.swift in Sources */,
 				989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */,
@@ -871,6 +878,7 @@
 				79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */,
 				7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */,
 				7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */,
+				79F650C02B19641000401368 /* LicenseView+Feature.swift in Sources */,
 				79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */,
 				79F650B42B11CE1100401368 /* FilmDetailView.swift in Sources */,
 				791F147B2AE0D8AF00F8DDD2 /* JournalView+Feature.swift in Sources */,
@@ -1037,7 +1045,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111502;
+				CURRENT_PROJECT_VERSION = 23113001;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
@@ -1056,7 +1064,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1076,7 +1084,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWinRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23111502;
+				CURRENT_PROJECT_VERSION = 23113001;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
@@ -1095,7 +1103,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";

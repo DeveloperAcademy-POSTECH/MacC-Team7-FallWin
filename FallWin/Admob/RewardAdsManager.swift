@@ -19,8 +19,6 @@ class RewardAdsManager: NSObject, GADFullScreenContentDelegate {
             let ad = try await GADRewardedAd.load(withAdUnitID: Bundle.main.adUnitId, request: GADRequest())
             ad.fullScreenContentDelegate = self
             return ad
-//            self.rewardAd = ad
-//            return true
         } catch {
             print(#function, error)
             return nil
