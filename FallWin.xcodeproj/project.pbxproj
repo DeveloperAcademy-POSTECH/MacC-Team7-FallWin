@@ -42,7 +42,6 @@
 		7927512B2AF359590023123C /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927512A2AF359590023123C /* HapticManager.swift */; };
 		7927512D2AF364DC0023123C /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7927512C2AF364DC0023123C /* ImageDetailView.swift */; };
 		79407D532AD7E68D006C7571 /* FallWinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D522AD7E68D006C7571 /* FallWinApp.swift */; };
-		79407D552AD7E68D006C7571 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D542AD7E68D006C7571 /* ContentView.swift */; };
 		79407D572AD7E68E006C7571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D562AD7E68E006C7571 /* Assets.xcassets */; };
 		79407D5A2AD7E68E006C7571 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79407D592AD7E68E006C7571 /* Preview Assets.xcassets */; };
 		79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79407D632AD7EC80006C7571 /* Date+Exntesion.swift */; };
@@ -99,9 +98,6 @@
 		79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */; };
 		79EE3CA92AFCBA4D005BD2FD /* OhwaAlertImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */; };
 		79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */; };
-		79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */; };
-		79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */; };
-		79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */; };
 		79F650B42B11CE1100401368 /* FilmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B32B11CE1100401368 /* FilmDetailView.swift */; };
 		79F650B62B184F6800401368 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B52B184F6800401368 /* NotificationManager.swift */; };
 		79F650B92B186A2200401368 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79F650BB2B186A2200401368 /* InfoPlist.strings */; };
@@ -239,7 +235,6 @@
 		79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCountManager.swift; sourceTree = "<group>"; };
 		79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlertImpl.swift; sourceTree = "<group>"; };
 		79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlertButton.swift; sourceTree = "<group>"; };
-		79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlert.swift; sourceTree = "<group>"; };
 		79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		79EE3CAF2AFCBA8C005BD2FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		79F650B32B11CE1100401368 /* FilmDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailView.swift; sourceTree = "<group>"; };
@@ -422,7 +417,6 @@
 				79AF69432ADCC2390064E410 /* Util */,
 				79AF69422ADCC1360064E410 /* Data */,
 				79407D602AD7EC43006C7571 /* Extension */,
-				79EE3CAB2AFCBA5B005BD2FD /* Protocol */,
 				79407D612AD7EC50006C7571 /* Component */,
 				79407D622AD7EC58006C7571 /* View */,
 			);
@@ -568,14 +562,6 @@
 				79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */,
 			);
 			path = Alert;
-			sourceTree = "<group>";
-		};
-		79EE3CAB2AFCBA5B005BD2FD /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				79EE3CAC2AFCBA5B005BD2FD /* OhwaAlert.swift */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		9808A9FD2B0DD96200A2CEB7 /* Onboarding */ = {
@@ -779,7 +765,6 @@
 				792444092B00D04E00E28FFE /* SettingsView+Feature.swift in Sources */,
 				79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */,
 				989152C52B1608EF001119B1 /* NotificationInitView.swift in Sources */,
-				79EE3CAD2AFCBA5B005BD2FD /* OhwaAlert.swift in Sources */,
 				98DA97002ADFA715000DDAFA /* Bundle+Extension.swift in Sources */,
 				9867B63A2AE6533A00C7359B /* Font+Extension.swift in Sources */,
 				79D8B1552AF95CF70020DFCC /* Journal+Mind.swift in Sources */,
@@ -795,7 +780,6 @@
 				9814C31E2AE01F2600FD0E30 /* MainTextView.swift in Sources */,
 				79D8B16F2AFB50660020DFCC /* PolicyView+Feature.swift in Sources */,
 				79A566822AFE132B00524A57 /* RawJournal.swift in Sources */,
-				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */,
 				98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */,
 				98F70A832AE5308200FEE4D2 /* WritingPathState.swift in Sources */,
@@ -807,16 +791,13 @@
 				989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
 				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
-				79EE3CB22AFCBA8C005BD2FD /* UIViewController+Extension.swift in Sources */,
 				79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */,
-				79407D552AD7E68D006C7571 /* ContentView.swift in Sources */,
 				79A5667A2AFE058E00524A57 /* ICloudBackupManager.swift in Sources */,
 				799F1D912B033322009908DB /* MindView.swift in Sources */,
 				79D8B15D2AFA22510020DFCC /* SettingsView.swift in Sources */,
 				799F1D952B0343B8009908DB /* WritingContentView.swift in Sources */,
 				791F14742ADD8EA500F8DDD2 /* Feature.swift in Sources */,
 				79D8B1692AFB4F140020DFCC /* BackupSettingView.swift in Sources */,
-				79EE3CB12AFCBA8C005BD2FD /* UIApplication+Extension.swift in Sources */,
 				791F14682ADD726600F8DDD2 /* RoundedShape.swift in Sources */,
 				7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */,
 				792751122AF21AA30023123C /* MainView.swift in Sources */,
