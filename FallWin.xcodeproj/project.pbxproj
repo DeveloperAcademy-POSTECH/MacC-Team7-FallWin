@@ -360,6 +360,7 @@
 			children = (
 				792751112AF21AA30023123C /* MainView.swift */,
 				792751132AF21AAB0023123C /* MainView+Feature.swift */,
+				79F650B32B11CE1100401368 /* FilmDetailView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -508,7 +509,6 @@
 				791F14772AE0D88F00F8DDD2 /* Journal */,
 				98202FA82AE6A04A0089CF79 /* Lottie */,
 				7927511A2AF232F00023123C /* Settings */,
-				79F650B32B11CE1100401368 /* FilmDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

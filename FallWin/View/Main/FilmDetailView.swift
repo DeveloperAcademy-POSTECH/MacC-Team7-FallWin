@@ -44,6 +44,7 @@ struct FilmDetailView: View {
                             .foregroundStyle(.textSecondary)
                             .multilineTextAlignment(.center)
                     }
+                    .padding(.bottom, 56)
                 }
                 .frame(maxHeight: 360)
                 
