@@ -20,13 +20,13 @@ struct MainFeature: Reducer {
         var showNetworkAlert: Bool = false
         var remainingCount: Int? = nil
         var showAdFailAlert: Bool = false
-        var showFilmDetailView: Bool = false
         var showFilmNetworkAlert: Bool = false
         
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
+        @PresentationState var filmDetail: FilmDetailFeature.State?
     }
     
     enum Action: Equatable {
@@ -53,6 +53,7 @@ struct MainFeature: Reducer {
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
+        case filmDetail(PresentationAction<FilmDetailFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -135,16 +136,14 @@ struct MainFeature: Reducer {
                 state.showAdFailAlert = show
                 return .none
                 
-            case let .showFilmDetailView(show):
-                state.showFilmDetailView = show
+            case .showFilmDetailView:
+                state.filmDetail = .init()
                 return .none
                 
             case let .showFilmNetworkAlert(show):
                 state.showFilmNetworkAlert = show
                 return .none
                 
-//            case .writing(let action):
-//                return handleWritingAction(state: &state, action: action)
             case let .writing(.presented(.doneGenerating(journal))):
                 state.writing = nil
                 print("dismiss main")
@@ -158,8 +157,6 @@ struct MainFeature: Reducer {
                 print("dismiss main")
                 return .none
                 
-//            case .journal(let action):
-//                return handleJournalAction(state: &state, action: action)
             case .journal(.presented(.delete)):
                 return .send(.fetchAll)
                 
@@ -171,6 +168,9 @@ struct MainFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
+        }
+        .ifLet(\.$filmDetail, action: /Action.filmDetail) {
+            FilmDetailFeature()
         }
     }
 }

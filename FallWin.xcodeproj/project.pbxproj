@@ -107,6 +107,7 @@
 		79F650B92B186A2200401368 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79F650BB2B186A2200401368 /* InfoPlist.strings */; };
 		79F650BE2B19640700401368 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650BD2B19640700401368 /* LicenseView.swift */; };
 		79F650C02B19641000401368 /* LicenseView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650BF2B19641000401368 /* LicenseView+Feature.swift */; };
+		79F650C22B196ED700401368 /* FilmDetailView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650C12B196ED700401368 /* FilmDetailView+Feature.swift */; };
 		9808A9FA2B0C92A700A2CEB7 /* TextEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */; };
 		9808A9FC2B0C92CE00A2CEB7 /* TextEditView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */; };
 		9808A9FF2B0DD97A00A2CEB7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */; };
@@ -247,6 +248,7 @@
 		79F650BC2B186A2300401368 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79F650BD2B19640700401368 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		79F650BF2B19641000401368 /* LicenseView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseView+Feature.swift"; sourceTree = "<group>"; };
+		79F650C12B196ED700401368 /* FilmDetailView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmDetailView+Feature.swift"; sourceTree = "<group>"; };
 		9808A9F92B0C92A700A2CEB7 /* TextEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditView.swift; sourceTree = "<group>"; };
 		9808A9FB2B0C92CE00A2CEB7 /* TextEditView+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditView+Feature.swift"; sourceTree = "<group>"; };
 		9808A9FE2B0DD97A00A2CEB7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				792751112AF21AA30023123C /* MainView.swift */,
 				792751132AF21AAB0023123C /* MainView+Feature.swift */,
 				79F650B32B11CE1100401368 /* FilmDetailView.swift */,
+				79F650C12B196ED700401368 /* FilmDetailView+Feature.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
 				79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */,
+				79F650C22B196ED700401368 /* FilmDetailView+Feature.swift in Sources */,
 				7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */,
 				7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */,
 				79F650C02B19641000401368 /* LicenseView+Feature.swift in Sources */,

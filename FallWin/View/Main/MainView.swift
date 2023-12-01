@@ -101,7 +101,7 @@ struct MainView: View {
                     }
                     .alert(isPresented: viewStore.binding(get: \.showAdFailAlert, send: MainFeature.Action.showAdFailAlert), title: "ad_fail_alert_title".localized) {
                         Text("ad_fail_alert_message")
-                    } primaryButton: { 
+                    } primaryButton: {
                         OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                             viewStore.send(.showAdFailAlert(false))
                         }
@@ -143,9 +143,9 @@ struct MainView: View {
                     JournalView(store: store)
                 }
             }
-            .navigationDestination(isPresented: viewStore.binding(get: \.showFilmDetailView, send: MainFeature.Action.showFilmDetailView), destination: {
-                FilmDetailView()
-            })
+            .navigationDestination(store: store.scope(state: \.$filmDetail, action: MainFeature.Action.filmDetail)) { store in
+                FilmDetailView(store: store)
+            }
             .onAppear {
                 viewStore.send(.fetchAll)
                 viewStore.send(.getRemainingCount)
@@ -159,6 +159,7 @@ struct MainView: View {
             Tracking.logScreenView(screenName: Tracking.Screen.V1__메인뷰.rawValue)
             print("@Log : V1__메인뷰")
         }
+        
     }
     
     @ViewBuilder
@@ -278,7 +279,7 @@ struct MainView: View {
                         
                         if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
-//                            rewardManager.displayReward()
+                            //                            rewardManager.displayReward()
                             //Alert 추가하기
                         } else {
                             viewStore.send(.showWritingView)
