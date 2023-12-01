@@ -44,24 +44,12 @@ struct NotificationInitFeature: Reducer {
             return .none
             
         case let .addNotificationRequest(hour, minute):
-            state.notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-                if let error = error {
-                    print(error)
-                } else {
-                    if granted {
-                        let content = UNMutableNotificationContent()
-                        content.title = "PICDA 푸시 알림 title"
-                        content.subtitle = "PICDA 푸시 알림 subtitle"
-                        content.body = "PICDA 푸시 알림 body"
-                        
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(hour: hour, minute: minute), repeats: true)
-                        
-                        let request = UNNotificationRequest(identifier: "daily", content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request)
-                    }
-                }
+            return .run { send in
+                let manager = NotificationManager()
+                manager.removeAllPendingNotifications()
+                let _ = await manager.registerDailyNotification(hour: hour, minute: minute)
+                await send(.doneInitSetting(false))
             }
-            return .send(.doneInitSetting(false))
             
         case let .showPicker(show):
             state.isPickerShown = show

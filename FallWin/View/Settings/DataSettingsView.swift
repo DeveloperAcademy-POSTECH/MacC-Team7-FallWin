@@ -27,7 +27,7 @@ struct DataSettingsView: View {
                     deleteAlert = false
                 }
                 Button("settings_data_delete", role: .destructive) {
-                    DispatchQueue.main.async {
+                    Task {
                         DataManager.shared.deleteAllData()
                         deleteComplete = true
                     }
