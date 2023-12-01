@@ -224,24 +224,59 @@ struct SettingsView: View {
                         Text("\(viewStore.appVersion) (\(viewStore.appBuild))")
                             .font(.pretendard(size: 18))
                             .foregroundStyle(.textSecondary)
+                            .onTapGesture {
+                                viewStore.send(.devTap)
+                            }
                     }
                     .padding(.vertical, 8)
                     .listRowBackground(Color.backgroundPrimary)
                 }
                 
                 #if DEBUG
-                Section(String("디버깅")) {
-                    NavigationLink {
-                        DebuggingView()
-                    } label: {
-                        Text(String("디버그 메뉴"))
-                            .font(.pretendard(size: 18))
-                            .foregroundColor(.textPrimary)
-                            .padding(.vertical, 8)
-                    }
-
-                }
+//                Section(String("디버깅")) {
+//                    NavigationLink {
+//                        DebuggingView()
+//                    } label: {
+//                        Text(String("디버그 메뉴"))
+//                            .font(.pretendard(size: 18))
+//                            .foregroundColor(.textPrimary)
+//                            .padding(.vertical, 8)
+//                    }
+//                    .listRowBackground(Color.backgroundPrimary)
+//                }
                 #endif
+                
+                if viewStore.devMode {
+                    Section(String("디버깅")) {
+                        NavigationLink {
+                            DebuggingView()
+                        } label: {
+                            Text(String("디버그 메뉴"))
+                                .font(.pretendard(size: 18))
+                                .foregroundColor(.textPrimary)
+                                .padding(.vertical, 8)
+                        }
+                        .listRowBackground(Color.backgroundPrimary)
+                    }
+                }
+                
+                Spacer()
+                    .frame(height: 100)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.backgroundPrimary)
+            }
+            .alert(String("Debug Mode"), isPresented: viewStore.binding(get: \.showDevModeAlert, send: SettingsFeature.Action.showDevModeAlert)) {
+                TextField(String("code"), text: viewStore.binding(get: \.devModePasscode, send: SettingsFeature.Action.setDevModePasscode))
+                Button("confirm") {
+                    viewStore.send(.activateDevMode)
+                    viewStore.send(.showDevModeAlert(false))
+                }
+                Button("cancel") {
+                    viewStore.send(.showDevModeAlert(false))
+                }
+                
+            } message: {
+                Text(String("개발자 모드 비밀번호를 입력하세요."))
             }
             .listStyle(.plain)
             .listRowSeparatorTint(.separator)

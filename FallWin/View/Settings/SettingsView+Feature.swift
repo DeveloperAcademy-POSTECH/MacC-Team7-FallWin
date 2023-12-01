@@ -22,6 +22,11 @@ struct SettingsFeature: Reducer {
         var tempNickname: String = ""
         var showCountInfo: Bool = false
         var showFilmNetworkAlert: Bool = false
+        var devMode: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.devMode)
+        var devTapCount: Int = 0
+        var devLastTap: Date = Date()
+        var showDevModeAlert: Bool = false
+        var devModePasscode: String = ""
         
         @PresentationState var lockSetting: LockSettingFeature.State? = .init()
         @PresentationState var notification: NotificationSettingFeature.State? = .init()
@@ -36,6 +41,10 @@ struct SettingsFeature: Reducer {
         case showCountInfo(Bool)
         case getRemainingDrawingCount
         case showFilmNetworkAlert(Bool)
+        case devTap
+        case activateDevMode
+        case showDevModeAlert(Bool)
+        case setDevModePasscode(String)
         
         case lockSetting(PresentationAction<LockSettingFeature.Action>)
         case notification(PresentationAction<NotificationSettingFeature.Action>)
@@ -75,6 +84,33 @@ struct SettingsFeature: Reducer {
                 
             case let .showFilmNetworkAlert(show):
                 state.showFilmNetworkAlert = show
+                return .none
+                
+            case .devTap:
+                if state.devLastTap.timeInMillis - Date().timeInMillis < 1000 {
+                    state.devTapCount += 1
+                } else {
+                    state.devTapCount = 1
+                }
+                state.devLastTap = Date()
+                if state.devTapCount > 5 {
+                    state.devTapCount = 0
+                    return .send(.showDevModeAlert(true))
+                }
+                return .none
+                
+            case .activateDevMode:
+                let activate = Bundle.main.devModePasscode == state.devModePasscode
+                UserDefaults.standard.set(activate, forKey: UserDefaultsKey.AppEnvironment.devMode)
+                state.devMode = activate
+                return .none
+                
+            case let .showDevModeAlert(show):
+                state.showDevModeAlert = show
+                return .none
+                
+            case let .setDevModePasscode(passcode):
+                state.devModePasscode = passcode
                 return .none
                 
             default: return .none

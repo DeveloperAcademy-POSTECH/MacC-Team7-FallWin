@@ -11,6 +11,7 @@ import Kronos
 final class FilmManager {
     static let shared = FilmManager()
     static let INITIAL_COUNT = 1
+    static var unlimited: Bool = false
     var drawingCount: DrawingCount? {
         didSet {
             NotificationCenter.default.post(name: .filmCountChanged, object: nil)
@@ -24,6 +25,7 @@ final class FilmManager {
             if !isConnected {
                 return
             }
+            
             Clock.sync(completion: { [self] date, _ in
                 guard let date = date else {
                     return
@@ -56,7 +58,7 @@ final class FilmManager {
     }
     
     func reduceCount() {
-        if (self.drawingCount?.count ?? 0) > 0 {
+        if (self.drawingCount?.count ?? 0) > 0 && !FilmManager.unlimited {
             self.drawingCount?.count -= 1
             UserDefaults.standard.set(try! PropertyListEncoder().encode(self.drawingCount), forKey: UserDefaultsKey.AppEnvironment.drawingCount)
         }

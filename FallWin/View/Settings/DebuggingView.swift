@@ -12,6 +12,7 @@ import AppTrackingTransparency
 struct DebuggingView: View {
     @State private var filmCount: Int = FilmManager.shared.drawingCount?.count ?? 0
     @State private var adId: String = ""
+    @State private var unlimitedFilm: Bool = FilmManager.unlimited
     
     let filmPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
     
@@ -45,6 +46,10 @@ struct DebuggingView: View {
                     .onReceive(filmPublisher) { _ in
                         filmCount = FilmManager.shared.drawingCount?.count ?? 0
                     }
+                Toggle(String("필름 무제한"), isOn: $unlimitedFilm)
+                    .onChange(of: unlimitedFilm, perform: { value in
+                        FilmManager.unlimited = value
+                    })
                 Button(String("필름 초기화")) {
                     FilmManager.shared.resetCount()
                 }

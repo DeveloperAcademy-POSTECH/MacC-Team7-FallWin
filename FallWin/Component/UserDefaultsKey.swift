@@ -19,6 +19,7 @@ extension UserDefaultsKey.AppEnvironment {
     static let alreadyInstalled = "alreadyInstalled"
     static let drawingCount = "drawingCount"
     static let isFirstLaunched = "isFirstLaunched"
+    static let devMode = "developerMode"
 }
 
 extension UserDefaultsKey.Settings {

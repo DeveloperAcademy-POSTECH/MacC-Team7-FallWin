@@ -27,7 +27,8 @@ struct FallWinApp: App {
     init() {
         // MARK: AppEnvironment
         UserDefaults.standard.register(defaults: [
-            UserDefaultsKey.AppEnvironment.isFirstLaunched: true
+            UserDefaultsKey.AppEnvironment.isFirstLaunched: true,
+            UserDefaultsKey.AppEnvironment.devMode: false
         ])
         
         // MARK: Settings
