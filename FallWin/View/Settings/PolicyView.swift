@@ -15,7 +15,7 @@ struct PolicyView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             List {
                 NavigationLink {
-                    WebView(url: "https://el-capitan.notion.site/4fdc74d2d58b441199e945b100befe10?pvs=4")
+                    WebView(url: "policy_service_url".localized)
                         .toolbar(.hidden, for: .tabBar)
                     
                 } label: {
@@ -26,7 +26,7 @@ struct PolicyView: View {
                 .listRowBackground(Color.backgroundPrimary)
                 
                 NavigationLink {
-                    WebView(url: "https://el-capitan.notion.site/de1c30b56c874f01b97e8e1c23aaa33b?pvs=4")
+                    WebView(url: "policy_privacy_url".localized)
                         .toolbar(.hidden, for: .tabBar)
                     
                 } label: {

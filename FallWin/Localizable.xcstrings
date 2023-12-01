@@ -2098,6 +2098,40 @@
         }
       }
     },
+    "policy_privacy_url" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://el-capitan.notion.site/PRIVACY-POLICY-e5f6f71ef5364c1e98719a86dabdf309?pvs=4"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://el-capitan.notion.site/de1c30b56c874f01b97e8e1c23aaa33b?pvs=4"
+          }
+        }
+      }
+    },
+    "policy_service_url" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://el-capitan.notion.site/TERMS-OF-SERVICE-d2bf03fcc5f74ed485370d5c88f1fa94?pvs=4"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://el-capitan.notion.site/4fdc74d2d58b441199e945b100befe10?pvs=4"
+          }
+        }
+      }
+    },
     "prev" : {
       "extractionState" : "manual",
       "localizations" : {
