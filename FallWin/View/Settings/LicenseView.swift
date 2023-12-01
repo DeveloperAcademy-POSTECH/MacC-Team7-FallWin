@@ -48,6 +48,19 @@ struct LicenseView: View {
                     }
                     .listRowBackground(Color.backgroundPrimary)
                 }
+                HStack {
+                    Spacer()
+                    Image("karlo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 36)
+                    Text(String("Powered By Karlo"))
+                        .font(.pretendard(.medium, size: 18))
+                    Spacer()
+                }
+                .padding()
+                .listRowBackground(Color.backgroundPrimary)
+                .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             .background(Color.backgroundPrimary.ignoresSafeArea())
@@ -83,7 +96,9 @@ struct LicenseView: View {
 }
 
 #Preview {
-    LicenseView(store: Store(initialState: LicenseFeature.State(), reducer: {
-        LicenseFeature()
-    }))
+    NavigationStack {
+        LicenseView(store: Store(initialState: LicenseFeature.State(), reducer: {
+            LicenseFeature()
+        }))
+    }
 }

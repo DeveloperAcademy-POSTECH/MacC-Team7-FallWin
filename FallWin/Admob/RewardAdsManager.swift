@@ -10,7 +10,6 @@ class RewardAdsManager: NSObject, GADFullScreenContentDelegate {
     
     override init() {
         super.init()
-        loadReward()
     }
     
     // Load reward ads
