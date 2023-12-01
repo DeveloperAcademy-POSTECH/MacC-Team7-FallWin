@@ -162,7 +162,6 @@ struct WritingView: View {
                 
             }
             .opacity(((viewStore.selectedEmotion == nil || viewStore.selectedEmotion == emotion.0) ? 1 : 0.5))
-            //            .padding(8)
         }
     }
 }
@@ -174,10 +173,12 @@ struct DateView: View {
     
     var body: some View {
         HStack {
-//            Text("\(String(describing: pickedDateTagValue.year))년 \(pickedDateTagValue.month)월 \(pickedDateTagValue.day)일")
             Text(pickedDateTagValue.yyyyMMdd)
                 .font(.pretendard(.semiBold, size: 18))
                 .foregroundStyle(.textPrimary)
+                .onChange(of: pickedDateTagValue, perform: { value in
+                    print(pickedDateTagValue.yyyyMMdd)
+                })
             Image(systemName: "chevron.down")
         }
         .onTapGesture {

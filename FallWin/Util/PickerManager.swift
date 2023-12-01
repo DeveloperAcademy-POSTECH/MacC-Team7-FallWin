@@ -125,7 +125,6 @@ extension PickerManager {
 
 
 struct DateTagValue: Identifiable, Equatable, Hashable {
-    
     var id: Int
     
     var date: Date
@@ -183,11 +182,8 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
     }
     
     var yyyyMMdd: String {
-        let date = DateComponents(year: year, month: month, day: day).date ?? Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        return formatter.string(from: date)
+        let string = "\(String(format: "%d", year)). \(String(format: "%d", month)) .\(String(format: "%d", day))"
+        return string
     }
 }
 
