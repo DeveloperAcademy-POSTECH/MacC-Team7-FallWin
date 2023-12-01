@@ -12,7 +12,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "%1$@ (%2$@)"
           }
         }
       }
@@ -22,7 +22,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "%lld"
           }
         }
       }

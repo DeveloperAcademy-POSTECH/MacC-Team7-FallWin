@@ -326,14 +326,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		663755772AF7ED1C00117085 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				663755782AF7ED3600117085 /* OhwaAlert.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		6658377A2AF8CAC600A5833E /* Tracking */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,7 +407,6 @@
 		79407D512AD7E68D006C7571 /* FallWin */ = {
 			isa = PBXGroup;
 			children = (
-				A9E84A602B0F459F002A811F /* Admob */,
 				66392A992B020CEB004C8381 /* FallWinRelease.entitlements */,
 				79A5667B2AFE06BF00524A57 /* FallWin.entitlements */,
 				9867B6382AE652A400C7359B /* Info.plist */,
@@ -430,7 +421,6 @@
 				9867B6252AE6521800C7359B /* Resource */,
 				79AF69432ADCC2390064E410 /* Util */,
 				79AF69422ADCC1360064E410 /* Data */,
-				663755772AF7ED1C00117085 /* Protocol */,
 				79407D602AD7EC43006C7571 /* Extension */,
 				79EE3CAB2AFCBA5B005BD2FD /* Protocol */,
 				79407D612AD7EC50006C7571 /* Component */,
@@ -556,6 +546,7 @@
 				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
 				79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */,
 				79F650B52B184F6800401368 /* NotificationManager.swift */,
+				A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -572,6 +563,7 @@
 		79EE3CA62AFCBA4D005BD2FD /* Alert */ = {
 			isa = PBXGroup;
 			children = (
+				663755782AF7ED3600117085 /* OhwaAlert.swift */,
 				79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */,
 				79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */,
 			);
@@ -665,14 +657,6 @@
 				98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */,
 			);
 			path = Writing;
-			sourceTree = "<group>";
-		};
-		A9E84A602B0F459F002A811F /* Admob */ = {
-			isa = PBXGroup;
-			children = (
-				A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */,
-			);
-			path = Admob;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
