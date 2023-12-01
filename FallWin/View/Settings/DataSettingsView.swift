@@ -22,7 +22,7 @@ struct DataSettingsView: View {
                     .padding(.vertical, 8)
             }
             .listRowBackground(Color.backgroundPrimary)
-            .confirmationDialog("settings_data_delete_alert_title", isPresented: $deleteAlert, titleVisibility: .visible, actions: {
+            .confirmationDialog("settings_data_delete_alert_title".localized, isPresented: $deleteAlert, titleVisibility: .visible, actions: {
                 Button("cancel", role: .cancel) {
                     deleteAlert = false
                 }
@@ -35,7 +35,7 @@ struct DataSettingsView: View {
             }, message: {
                 Text("settings_data_delete_alert_message")
             })
-            .alert(isPresented: $deleteComplete, title: "settings_data_delete_alert_title") {
+            .alert(isPresented: $deleteComplete, title: "settings_data_delete_alert_title".localized) {
                 Text("settings_data_delete_result_alert")
             } primaryButton: {
                 OhwaAlertButton(label: Text("settings_data_delete_result_alert_confirm").foregroundColor(.textOnButton), color: .button) {
