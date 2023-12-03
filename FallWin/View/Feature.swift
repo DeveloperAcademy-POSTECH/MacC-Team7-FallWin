@@ -21,6 +21,7 @@ struct Feature: Reducer {
         @PresentationState var main: MainFeature.State? = .init()
         @PresentationState var search: SearchFeature.State? = .init()
         @PresentationState var settings: SettingsFeature.State? = .init()
+        @PresentationState var onboarding: OnboardingFeature.State? = .init()
     }
     
     enum Action: Equatable {
@@ -29,10 +30,13 @@ struct Feature: Reducer {
         case setInvisibility(Bool)
         case setLock(Bool)
         case showPasscodeView(Bool)
+        case updateSettingsStates
+        case setNotification
         
         case main(PresentationAction<MainFeature.Action>)
         case search(PresentationAction<SearchFeature.Action>)
         case settings(PresentationAction<SettingsFeature.Action>)
+        case onboarding(PresentationAction<OnboardingFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -60,8 +64,21 @@ struct Feature: Reducer {
                 state.showPasscodeView = show
                 return .none
                 
+            case .updateSettingsStates:
+                state.settings?.nickname = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
+                state.settings?.notification?.notification = UserDefaults.standard.bool(forKey: UserDefaultsKey.Settings.dailyNotification)
+                state.settings?.notification?.notificationHour = UserDefaults.standard.integer(forKey: UserDefaultsKey.Settings.dailyNotificationHour)
+                state.settings?.notification?.notificationMinute = UserDefaults.standard.integer(forKey: UserDefaultsKey.Settings.dailyNotificationMinute)
+                return .none
+                
             case let .main(action):
                 return handleMainAction(state: &state, action: action)
+                
+            case .onboarding(.presented(.doneInitSetting)):
+                state.onboarding?.nicknameInit?.notificationInit = nil
+                state.onboarding?.nicknameInit = nil
+                state.onboarding = nil
+                return .send(.updateSettingsStates)
                 
             default: return .none
             }
@@ -74,6 +91,9 @@ struct Feature: Reducer {
         }
         .ifLet(\.$settings, action: /Action.settings) {
             SettingsFeature()
+        }
+        .ifLet(\.$onboarding, action: /Action.onboarding) {
+            OnboardingFeature()
         }
     }
     

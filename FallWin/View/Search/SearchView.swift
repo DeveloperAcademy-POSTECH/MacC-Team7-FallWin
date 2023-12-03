@@ -28,10 +28,10 @@ struct SearchView: View {
                     ScrollView {
                         if viewStore.searchTerm.isEmpty {
                             LazyVGrid(columns: columns, spacing: 4, pinnedViews: [.sectionHeaders]) {
-                                ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key < $1.key }), id: \.key) { key, searchResults in
+                                ForEach(viewStore.groupedSearchResults.sorted(by: { $0.key > $1.key }), id: \.key) { key, searchResults in
                                     if !searchResults.isEmpty {
                                         Section(header: HStack {
-                                            Text(key)
+                                            Text(key.string)
                                                 .font(.pretendard(.semiBold, size: 20))
                                             Spacer()
                                         }
@@ -111,9 +111,9 @@ struct SearchView: View {
                 viewStore.send(.filterData(newValue))
             }
             .navigationTitle(
-                Text("앨범")
+                Text("tab_album")
             )
-            .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("찾고 싶은 추억을 입력해보세요"))
+            .searchable(text: viewStore.binding(get: { $0.searchTerm }, send: { .setSearchTerm($0) }), placement: .navigationBarDrawer(displayMode: .always), prompt: Text("album_search_placeholder"))
             .onTapGesture {
                 Tracking.logEvent(Tracking.Event.A4_1__검색뷰_피드검색.rawValue)
                 print("@Log : A4_1__검색뷰_피드검색")
@@ -145,10 +145,6 @@ struct SearchView: View {
     }
     
 }
-
-// TODO: 테스트 이후에 더미데이터에 관련한 기능들 삭제
-
-
 
 #Preview {
     SearchView(store: Store(initialState: SearchFeature.State(), reducer: {

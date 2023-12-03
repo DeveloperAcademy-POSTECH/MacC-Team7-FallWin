@@ -10,16 +10,22 @@ import ComposableArchitecture
 
 struct PolicyFeature: Reducer {
     struct State: Equatable {
-        
+        var license: LicenseFeature.State = .init()
     }
     
     enum Action: Equatable {
-        
+        case license(LicenseFeature.Action)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        default: return .none
+    var body: some Reducer<State, Action> {
+        Scope(state: \.license, action: /Action.license) {
+            LicenseFeature()
+        }
+        
+        Reduce { state, action in
+            switch action {
+            default: return .none
+            }
         }
     }
 }

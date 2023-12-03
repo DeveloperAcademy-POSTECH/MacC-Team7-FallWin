@@ -23,11 +23,11 @@ struct BackupSettingView: View {
         ZStack {
             VStack(alignment: .center, spacing: 9){
                 VStack(alignment: .leading){
-                    Text("- 픽다는 사용자가 작성한 일기 데이터를 저장하지 않아요.")
+                    Text("settings_icloud_message_1")
                         .font(.pretendard(.medium, size: 16))
                         .foregroundStyle(.textSecondary)
                         .multilineTextAlignment(.leading)
-                    Text("- 데이터를 안전하게 보관하려면 iCloud에 주기적으로 백업해주세요.")
+                    Text("settings_icloud_message_2")
                         .font(.pretendard(.medium, size: 16))
                         .foregroundStyle(.textSecondary)
                         .multilineTextAlignment(.leading)
@@ -37,11 +37,11 @@ struct BackupSettingView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text("최근 백업: ")
+                    Text("settings_icloud_recent")
                     if let lastBackup = backupManager?.lastICloudBackup {
                         Text(lastBackup.fullString)
                     } else {
-                        Text("없음")
+                        Text("settings_icloud_recent_none")
                     }
                 }
                 .font(.pretendard(.medium, size: 14))
@@ -50,34 +50,34 @@ struct BackupSettingView: View {
                 
                 
                 Button(action: backup, label: {
-                    Text("백업")
+                    Text("settings_icloud_backup")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textOnButton)
                         .frame(maxWidth: .infinity, minHeight: 45)
                 })
                 .buttonStyle(.borderedProminent)
                 .alert(isPresented: $isclickedBackup, content: {
-                    Alert(title: Text("iCloud 백업")
+                    Alert(title: Text("settings_icloud_backup_alert_title")
                         .font(.pretendard(.bold, size: 20))
-                          , message: Text("iCloud 백업이 완료되었습니다.")
+                          , message: Text("settings_icloud_backup_alert_message")
                         .font(.pretendard(.medium, size: 16))
-                          , dismissButton: .default(Text("완료")))
+                          , dismissButton: .default(Text("done")))
                 })
                 
                 
                 Button(action: restore, label: {
-                    Text("복원")
+                    Text("settings_icloud_restore")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textPrimary)
                         .frame(maxWidth: .infinity, minHeight: 45)
                 })
                 .buttonStyle(.bordered)
                 .alert(isPresented: $isclickedRestore, content: {
-                    Alert(title: Text("iCloud 복원")
+                    Alert(title: Text("settings_icloud_restore_alert_title")
                         .font(.pretendard(.bold, size: 20))
-                          , message: Text("iCloud 복원이 완료되었습니다.")
+                          , message: Text("settings_icloud_restore_alert_message")
                         .font(.pretendard(.medium, size: 16))
-                          , dismissButton: .default(Text("완료")))
+                          , dismissButton: .default(Text("done")))
                 })
                 
             }
@@ -85,8 +85,8 @@ struct BackupSettingView: View {
             .padding(.bottom, 15)
             .padding(.top, 32)
             .padding(.horizontal, 15)
-            .alert("작업 실패", isPresented: $errorOccured) {
-                Button("확인") {
+            .alert("settings_icloud_fail_alert_title", isPresented: $errorOccured) {
+                Button("confirm") {
                     errorOccured = false
                 }
             } message: {
@@ -112,7 +112,7 @@ struct BackupSettingView: View {
                 .onTapGesture { }
             }
         }
-        .navigationTitle("iCloud")
+        .navigationTitle("settings_icloud")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -125,15 +125,16 @@ struct BackupSettingView: View {
                     DispatchQueue.main.async {
                         switch procedure {
                         case .fetch:
-                            iCloudWorkMessage = "데이터 수집"
+                            iCloudWorkMessage = "icloud_fetch".localized
                         case .pack:
-                            iCloudWorkMessage = "데이터 압축"
+                            iCloudWorkMessage = "icloud_pack".localized
                         case .upload:
-                            iCloudWorkMessage = "업로드"
+                            iCloudWorkMessage = "icloud_upload".localized
                         case .register:
-                            iCloudWorkMessage = "백업 등록"
+                            iCloudWorkMessage = "icloud_register".localized
                         case .clean:
-                            iCloudWorkMessage = "임시 파일 삭제"
+                            iCloudWorkMessage = "icloud_clean".localized
+                            iCloudWorkMessage = nil
                         }
                     }
                     print(procedure)
@@ -151,10 +152,11 @@ struct BackupSettingView: View {
                         backupManager.cleanLocalBackupFolder()
                         break
                     }
+                    sleep(1)
                     iCloudWorkMessage = nil
                 }
             } else {
-                errorMessage = "설정에서 iCloud에 로그인한 후 '픽다'가 접근할 수 있도록 허용하십시오."
+                errorMessage = "settings_icloud_permission_error".localized
                 errorOccured = true
             }
         }
@@ -169,15 +171,16 @@ struct BackupSettingView: View {
                     DispatchQueue.main.async {
                         switch procedure {
                         case .fetch:
-                            iCloudWorkMessage = "다운로드"
+                            iCloudWorkMessage = "icloud_download".localized
                         case .unpack:
-                            iCloudWorkMessage = "압축 해제"
+                            iCloudWorkMessage = "icloud_unpack".localized
                         case .data:
-                            iCloudWorkMessage = "데이터 복원"
+                            iCloudWorkMessage = "icloud_restore".localized
                         case .image:
-                            iCloudWorkMessage = "이미지 복원"
+                            iCloudWorkMessage = "icloud_restore_image".localized
                         case .clean:
-                            iCloudWorkMessage = "임시 파일 삭제"
+                            iCloudWorkMessage = "icloud_clean".localized
+                            iCloudWorkMessage = nil
                         }
                     }
                     print(procedure)
@@ -194,11 +197,12 @@ struct BackupSettingView: View {
                         errorOccured = true
                         break
                     }
+                    sleep(1)
                     iCloudWorkMessage = nil
                     backupManager.cleanTempFolder()
                 }
             } else {
-                errorMessage = "설정에서 iCloud에 로그인한 후 '픽다'가 접근할 수 있도록 허용하십시오."
+                errorMessage = "settings_icloud_permission_error".localized
                 errorOccured = true
             }
         }

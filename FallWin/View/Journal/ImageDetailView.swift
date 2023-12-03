@@ -28,7 +28,7 @@ struct ImageDetailView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Label("닫기", systemImage: "xmark")
+                    Label("dismiss", systemImage: "xmark")
                 }
                 .labelStyle(.iconOnly)
             }

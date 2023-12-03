@@ -62,40 +62,40 @@ extension DrawingStyle {
     
     func name() -> String? {
         switch self {
-        case .none: return "화풍 없음"
+        case .none: return "ds_none".localized
         case .oilPainting:
-            return "유화"
+            return "ds_oil_painting".localized
         case .sketch:
-            return "스케치"
+            return "ds_sketch".localized
         case .renoir:
-            return "르누아르"
+            return "ds_renior".localized
         case .chagall:
-            return "샤갈"
+            return "ds_chagall".localized
         case .anime:
-            return "애니메이션"
+            return "ds_anime".localized
         case .vanGogh:
-            return "반 고흐"
+            return "ds_van_gogh".localized
         case .kandinsky:
-            return "칸딘스키"
+            return "ds_kandinsky".localized
         case .gauguin:
-            return "고갱"
+            return "ds_gauguin".localized
         case .picasso:
-            return "피카소"
+            return "ds_picasso".localized
         case .rembrandt:
-            return "램브란트"
+            return "ds_rembrandt".localized
         case .henriRousseau:
-            return "앙리루소"
+            return "ds_henri_rousseau".localized
         case .waterColor:
-            return "수채화"
+            return "ds_water_color".localized
         case .crayon:
-            return "크레용"
+            return "ds_crayon".localized
         case .pixelArt:
-            return "픽셀아트"
+            return "ds_pixel_art".localized
         case .monet:
-            return "클로드 모네"
+            return "ds_monet".localized
         case .dali:
-            return "살바도르 달리"
-        default: return "화풍 없음"
+            return "ds_dali".localized
+        default: return "ds_none".localized
         }
     }
 }

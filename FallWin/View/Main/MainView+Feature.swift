@@ -17,11 +17,16 @@ struct MainFeature: Reducer {
         var isPickerShown: Bool = false
         var showCountAlert: Bool = false
         var showCountInfo: Bool = false
-        var remainingCount: Int = 0
+        var showNetworkAlert: Bool = false
+        var remainingCount: Int? = nil
+        var showAdFailAlert: Bool = false
+        var showFilmNetworkAlert: Bool = false
+        
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
         
         @PresentationState var journal: JournalFeature.State?
         @PresentationState var writing: WritingFeature.State?
+        @PresentationState var filmDetail: FilmDetailFeature.State?
     }
     
     enum Action: Equatable {
@@ -40,11 +45,15 @@ struct MainFeature: Reducer {
         case bindJournal
         case showCountAlert(Bool)
         case showCountInfo(Bool)
+        case showNetworkAlert(Bool)
         case getRemainingCount
+        case showAdFailAlert(Bool)
+        case showFilmDetailView(Bool)
+        case showFilmNetworkAlert(Bool)
         
         case journal(PresentationAction<JournalFeature.Action>)
         case writing(PresentationAction<WritingFeature.Action>)
-        case settings(PresentationAction<OldSettingsFeature.Action>)
+        case filmDetail(PresentationAction<FilmDetailFeature.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -115,12 +124,26 @@ struct MainFeature: Reducer {
                 state.showCountInfo = show
                 return .none
                 
-            case .getRemainingCount:
-                state.remainingCount = DrawingCountManager.shared.remainingCount
+            case let .showNetworkAlert(show):
+                state.showNetworkAlert = show
                 return .none
                 
-//            case .writing(let action):
-//                return handleWritingAction(state: &state, action: action)
+            case .getRemainingCount:
+                state.remainingCount = FilmManager.shared.drawingCount?.count
+                return .none
+                
+            case let .showAdFailAlert(show):
+                state.showAdFailAlert = show
+                return .none
+                
+            case .showFilmDetailView:
+                state.filmDetail = .init()
+                return .none
+                
+            case let .showFilmNetworkAlert(show):
+                state.showFilmNetworkAlert = show
+                return .none
+                
             case let .writing(.presented(.doneGenerating(journal))):
                 state.writing = nil
                 print("dismiss main")
@@ -134,8 +157,6 @@ struct MainFeature: Reducer {
                 print("dismiss main")
                 return .none
                 
-//            case .journal(let action):
-//                return handleJournalAction(state: &state, action: action)
             case .journal(.presented(.delete)):
                 return .send(.fetchAll)
                 
@@ -147,6 +168,9 @@ struct MainFeature: Reducer {
         }
         .ifLet(\.$writing, action: /Action.writing) {
             WritingFeature()
+        }
+        .ifLet(\.$filmDetail, action: /Action.filmDetail) {
+            FilmDetailFeature()
         }
     }
 }

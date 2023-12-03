@@ -44,7 +44,7 @@ struct MindView: View {
     
     var body: some View {
         VStack {
-            WritingHeaderView(title: "어떤 감정을 느꼈나요?", message: "그림으로 담고 싶은 감정을 선택해보세요") {
+            WritingHeaderView(title: "writing_title".localized, message: "writing_subtitle".localized) {
                 ScrollView {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), alignment: .center, spacing: 0) {
                         ForEach(emotions) { emotion in
@@ -62,7 +62,7 @@ struct MindView: View {
                     selected = nil
                     tab = .content
                 } label: {
-                    Text("건너뛰기")
+                    Text("skip")
                         .font(.pretendard(.semiBold, size: 18))
                         .foregroundStyle(.textSecondary)
                 }
@@ -74,7 +74,7 @@ struct MindView: View {
                 } label: {
                     HStack {
                         Spacer()
-                        Text("다음")
+                        Text("next")
                             .font(.pretendard(.semiBold, size: 18))
                             .foregroundStyle(.textOnButton)
                         Spacer()
@@ -101,7 +101,7 @@ struct MindView: View {
                 Image(emotion.icon)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                Text(emotion.mind.string() ?? "")
+                Text(String(emotion.mind.string() ?? ""))
                     .font(selected == emotion.mind ? .pretendard(.bold, size: 16) : .pretendard(.medium, size: 16))
                     .foregroundColor(selected == emotion.mind ? emotion.color : Color.textPrimary)
             }
@@ -116,7 +116,7 @@ struct MindView: View {
                         .fill(selected == emotion.mind ? Color.backgroundPrimary : Color.clear)
                 }
                 .aspectRatio(1, contentMode: .fill)
-                .shadow(color: selected == emotion.mind ? emotion.color.opacity(0.3) : Color(hexCode: "#191919").opacity(0), radius: 6)
+                .shadow(color: selected == emotion.mind ? emotion.color.opacity(0.3) : Color.shadow.opacity(0), radius: 6)
         }
         .opacity((selected == nil || selected == emotion.mind) ? 1 : 0.5)
     }

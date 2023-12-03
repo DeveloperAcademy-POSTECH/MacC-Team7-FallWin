@@ -18,12 +18,17 @@ class UserDefaultsKey {
 extension UserDefaultsKey.AppEnvironment {
     static let alreadyInstalled = "alreadyInstalled"
     static let drawingCount = "drawingCount"
+    static let isFirstLaunched = "isFirstLaunched"
+    static let devMode = "developerMode"
 }
 
 extension UserDefaultsKey.Settings {
     static let lock = "lock"
     static let biometric = "biometric"
     static let haptic = "haptic"
+    static let dailyNotification = "daily_notification"
+    static let dailyNotificationHour = "daily_notification_hour"
+    static let dailyNotificationMinute = "daily_notification_minute"
 }
 
 extension UserDefaultsKey.User {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 struct LineNoteView: View {
     @Binding var text: String
@@ -17,14 +18,14 @@ struct LineNoteView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            VStack(spacing: 0) {
-                ForEach(0..<Int((textViewSize.height + lineSpacing) / (fontSize + lineSpacing)), id: \.self) { i in
-                    Spacer()
-                    Divider()
-                        .background(.separator)
-                }
-            }
-            .frame(height: textViewSize.height + lineSpacing)
+//            VStack(spacing: 0) {
+//                ForEach(0..<Int(ceil((textViewSize.height + 0) / (fontSize + lineSpacing))), id: \.self) { i in
+//                    Spacer()
+//                    Divider()
+//                        .background(.separator)
+//                }
+//            }
+//            .frame(height: ceil(textViewSize.height + lineSpacing))
             
             HStack {
                 Text(text)
@@ -35,6 +36,7 @@ struct LineNoteView: View {
                         textViewSize = value
                     }
                     .padding(.bottom, 8)
+                    .dynamicTypeSize(.medium)
                 Spacer()
             }
             .padding(.horizontal, 4)
@@ -43,5 +45,13 @@ struct LineNoteView: View {
 }
 
 #Preview {
-    LineNoteView(text: .constant("1\n2\n3\n4\n5\n6\n7\n8\n9"), fontSize: 20, lineSpacing: 20)
+//        LineTextView(text: .constant("1\n2\n3\n4\n5kdlfjgklfdsjghjlkhkhkjhgikgiugikgikugiuguigiugiugiujhuuhiuhiugiufuyfuyfuykljdsflkgjdsflkgjlskdfjglksdfjglksdfjglksdfjlkgsfd\n6\n7\n8\n9\n10\n11\n12\ndsfg"))
+//            .scrollDisabled(true)
+//            .fixedSize(horizontal: true, vertical: true)
+//            .frame(width: 100)
+    
+    ScrollView {
+        LineNoteView(text: .constant("blah blah blah sdlkfjas fjklasd flkasjd flaksdjf laksdjflkasdj flkasjdf lkasjdflkawjfoiejalskdmf laskdjf lkawjfl kewj lidsjflkawjs deflkjaw dsoifjaweiopfj awoeifj osdaijf oawijf oiawej foiawejf iowajef oiawjef oisdjf oiasdj foiawje foiwaje foij\nasdf \nasdfasdf\nd\nd\nd\nd\nd\nd\nd\nasdfasdfasdfasdf\nd\nd\nd\nd\nd\ndasdfasdfasdfasdf\ndd\nd\nd\nd\nd\nd\nd\nasdfasdfasdfasdfasdfn\n\n\n\nsadf\nasf"), fontSize: 20, lineSpacing: 20)
+//        LineNoteView(text: .constant("blah blah blah sdlkfjas fjklasd flkasjd flaksdjf laksdjflkasdj flkasjdf lkasjdflkawjfoiejalskdmf laskdjf lkawjfl kewj lidsjflkawjs deflkjaw dsoifjaweiopfj awoeifj osdaijf oawijf oiawej foiawejf iowajef oiawjef oisdjf oiasdj foiawje foiwaje foij\nasdf \nasdfasdf\nd\nd\nd"), fontSize: 20, lineSpacing: 20)
+    }
 }

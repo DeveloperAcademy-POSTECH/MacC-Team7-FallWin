@@ -8,7 +8,7 @@ struct SearchFeature: Reducer {
         var searchTerm: String = ""
         //검색 텍스트 필드에 적히는 String
         var searchResults: [Journal] = [] // 여기에 사용할 모델 타입을 지정해야 합니다.
-        var groupedSearchResults: [String: [Journal]] = [:] // 월별 그룹화된 결과
+        var groupedSearchResults: [YearAndMonth: [Journal]] = [:] // 월별 그룹화된 결과
 
         @PresentationState var journal: JournalFeature.State?
     }
@@ -38,7 +38,7 @@ struct SearchFeature: Reducer {
                 // fetchData 함수를 호출하여 검색 결과를 초기화
                 let allData = fetchData()
                  state.searchResults = allData
-                 state.groupedSearchResults = groupDataByMonth(allData)
+                state.groupedSearchResults = groupDataByMonth(allData)
                 return .none
 
             case let .filterData(query):
@@ -69,6 +69,7 @@ struct SearchFeature: Reducer {
         // Core Data에서 저장된 Journal 엔터티를 가져옵니다.
         let context = PersistenceController.shared.container.viewContext
         let fetchRequest: NSFetchRequest<Journal> = Journal.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Journal.timestamp), ascending: false)]
 
         do {
             return try context.fetch(fetchRequest)
@@ -78,12 +79,13 @@ struct SearchFeature: Reducer {
         }
     }
     
-    func groupDataByMonth(_ data: [Journal]) -> [String: [Journal]] {
-        var groupedData: [String: [Journal]] = [:]
+    private func groupDataByMonth(_ data: [Journal]) -> [YearAndMonth: [Journal]] {
+        var groupedData: [YearAndMonth: [Journal]] = [:]
 
         for journal in data {
             if let timestamp = journal.timestamp {
-                let key = timestamp.monthYearString // Date 확장에서 가져온 monthYearString을 사용
+                // Date 확장에서 가져온 monthYearString을 사용
+                let key = YearAndMonth(year: timestamp.year, month: timestamp.month)
                 if var group = groupedData[key] {
                     group.append(journal)
                     groupedData[key] = group
@@ -92,8 +94,21 @@ struct SearchFeature: Reducer {
                 }
             }
         }
-
+        
         return groupedData
+    }
+}
+
+struct YearAndMonth: Hashable, Comparable {
+    var year: Int
+    var month: Int
+    
+    static func < (lhs: YearAndMonth, rhs: YearAndMonth) -> Bool {
+        (lhs.year < rhs.year) || (lhs.year == rhs.year && lhs.month < rhs.month)
+    }
+    
+    var string: String {
+        String(format: "%d년 %d월", self.year, self.month)
     }
 }
 

@@ -63,24 +63,24 @@ extension Mind {
     func string() -> String? {
         switch self {
         case .none: return nil
-        case .happy: return "행복한"
-        case .nervous: return "불안한"
-        case .grateful: return "감사한"
-        case .sad: return "슬픈"
-        case .joyful: return "신나는"
-        case .lonely: return "외로운"
-        case .proud: return "뿌듯함"
-        case .suffocated: return "답답함"
-        case .touched: return "감동받은"
-        case .shy: return "부끄러운"
-        case .exciting: return "기대되는"
-        case .lazy: return "귀찮음"
-        case .annoyed: return "짜증나는"
-        case .frustrated: return "당황한"
-        case .tough: return "힘든"
-        case .peaceful: return "평온한"
-        case .surprised: return "놀란"
-        case .reassuring: return "안심되는"
+        case .happy: return "emotion_happy".localized
+        case .nervous: return "emotion_nervous".localized
+        case .grateful: return "emotion_grateful".localized
+        case .sad: return "emotion_sad".localized
+        case .joyful: return "emotion_joyful".localized
+        case .lonely: return "emotion_lonely".localized
+        case .proud: return "emotion_proud".localized
+        case .suffocated: return "emotion_suffocated".localized
+        case .touched: return "emotion_touched".localized
+        case .shy: return "emotion_shy".localized
+        case .exciting: return "emotion_exciting".localized
+        case .lazy: return "emotion_lazy".localized
+        case .annoyed: return "emotion_annoyed".localized
+        case .frustrated: return "emotion_frustrated".localized
+        case .tough: return "emotion_tough".localized
+        case .peaceful: return "emotion_peaceful".localized
+        case .surprised: return "emotion_surprise".localized
+        case .reassuring: return "emotion_reassuring".localized
         default: return nil
         }
     }

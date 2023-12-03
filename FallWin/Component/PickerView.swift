@@ -38,20 +38,20 @@ struct YearMonthPickerView: View {
         ZStack {
             Color.backgroundPrimary
             VStack {
-                Text("날짜 변경하기")
+                Text("date_picker_title")
                     .font(.pretendard(.semiBold, size: 18))
                     .foregroundColor(.textPrimary)
                 HStack(spacing: 0) {
                     Spacer()
-                    Picker("Year", selection: $pickedYear) {
+                    Picker(String("Year"), selection: $pickedYear) {
                         ForEach(1900...Date().year, id: \.self) { year in
-                            Text(String(describing: year) + "년").tag(year)
+                            Text(String(format: "date_picker_year".localized, year)).tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
-                    Picker("Month", selection: $pickedMonth) {
+                    Picker(String("Month"), selection: $pickedMonth) {
                         ForEach(1...maxMonthsInYear(year: pickedYear), id: \.self) { month in
-                            Text(String(describing: month) + "월").tag(month)
+                            Text("date_picker_month_\(month)".localized).tag(month)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -64,7 +64,7 @@ struct YearMonthPickerView: View {
                     pickedDateTagValue.isScrolling.toggle()
                     isPickerShown = false
                 } label: {
-                    ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
+                    ConfirmButtonLabelView(text: "confirm".localized, backgroundColor: .button, foregroundColor: .textOnButton)
                 }
             }
         }
@@ -126,28 +126,28 @@ struct MonthDayYearPickerView: View {
         ZStack {
             Color.backgroundPrimary
             VStack {
-                Text("날짜 변경하기")
+                Text("date_picker_title")
                     .font(.pretendard(.semiBold, size: 18))
                     .foregroundColor(.textPrimary)
                 HStack(spacing: 0) {
                     Spacer()
-                    Picker("Year", selection: $selectedYear) {
+                    Picker(String("Year"), selection: $selectedYear) {
                         ForEach(1900...Date().year, id: \.self) { year in
-                            Text(String(describing: year) + "년").tag(year)
+                            Text(String(format: "date_picker_year".localized, year)).tag(year)
                         }
                     }
                     .pickerStyle(.wheel)
                     
-                    Picker("Month", selection: $selectedMonth) {
+                    Picker(String("Month"), selection: $selectedMonth) {
                         ForEach(1...maxMonthsInYear(year: selectedYear), id: \.self) { month in
-                            Text(String(describing: month) + "월").tag(month)
+                            Text("date_picker_month_\(month)".localized).tag(month)
                         }
                     }
                     .pickerStyle(.wheel)
                     
-                    Picker("Day", selection: $selectedDay) {
+                    Picker(String("Day"), selection: $selectedDay) {
                         ForEach(1...(maxDaysInMonth(year: selectedYear, month: selectedMonth) ?? 0), id: \.self) { day in
-                            Text(String(describing: day) + "일").tag(day)
+                            Text(String(format: "date_picker_day".localized, day)).tag(day)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -159,7 +159,7 @@ struct MonthDayYearPickerView: View {
                     pickedDateTagValue.day = selectedDay
                     isPickerShown.toggle()
                 } label: {
-                    ConfirmButtonLabelView(text: "확인", backgroundColor: .button, foregroundColor: .textOnButton)
+                    ConfirmButtonLabelView(text: "confirm".localized, backgroundColor: .button, foregroundColor: .textOnButton)
                 }
             }
         }

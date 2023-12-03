@@ -17,28 +17,28 @@ struct DataSettingsView: View {
                 deleteAlert = true
                 
             } label: {
-                Text("일기 데이터 삭제")
+                Text("settings_data_delete_journal")
                     .font(.pretendard(size: 18))
                     .padding(.vertical, 8)
             }
             .listRowBackground(Color.backgroundPrimary)
-            .confirmationDialog("데이터 삭제", isPresented: $deleteAlert, titleVisibility: .visible, actions: {
-                Button("취소", role: .cancel) {
+            .confirmationDialog("settings_data_delete_alert_title".localized, isPresented: $deleteAlert, titleVisibility: .visible, actions: {
+                Button("cancel", role: .cancel) {
                     deleteAlert = false
                 }
-                Button("데이터 삭제", role: .destructive) {
-                    DispatchQueue.main.async {
+                Button("settings_data_delete", role: .destructive) {
+                    Task {
                         DataManager.shared.deleteAllData()
                         deleteComplete = true
                     }
                 }
             }, message: {
-                Text("일기 데이터와 그림을 모두 삭제합니다.\n이 작업은 되돌릴 수 없습니다.\n계속하기 전 iCloud에 데이터가 백업되었는지 확인하십시오.\n\n정말로 삭제합니까?")
+                Text("settings_data_delete_alert_message")
             })
-            .alert(isPresented: $deleteComplete, title: "데이터 삭제") {
-                Text("모든 데이터를 삭제했습니다.\n애플리케이션을 종료합니다.")
+            .alert(isPresented: $deleteComplete, title: "settings_data_delete_alert_title".localized) {
+                Text("settings_data_delete_result_alert")
             } primaryButton: {
-                OhwaAlertButton(label: Text("애플리케이션 종료").foregroundColor(.textOnButton), color: .button) {
+                OhwaAlertButton(label: Text("settings_data_delete_result_alert_confirm").foregroundColor(.textOnButton), color: .button) {
                     exit(0)
                 }
             }
@@ -46,7 +46,7 @@ struct DataSettingsView: View {
         }
         .listStyle(.plain)
         .background(Color.backgroundPrimary.ignoresSafeArea())
-        .navigationTitle("데이터 관리")
+        .navigationTitle("settings_data_manage")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

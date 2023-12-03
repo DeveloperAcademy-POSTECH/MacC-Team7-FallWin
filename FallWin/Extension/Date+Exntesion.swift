@@ -59,7 +59,7 @@ extension Date {
     }
     
     var journalShareString: String {
-        return "\(year).\(String(format: "%02d", month)).\(String(format: "%02d", day)). \(dayOfWeek)요일"
+        return "\(year).\(String(format: "%02d", month)).\(String(format: "%02d", day)). \(dayOfWeek)\("date_week_suffix".localized)"
     }
     
     var timeInMillis: Int64 {
@@ -71,13 +71,13 @@ extension Date {
     var dayOfWeek: String {
         let dayOfWeek = Calendar.current.component(.weekday, from: self)
         switch dayOfWeek {
-        case 1: return "일"
-        case 2: return "월"
-        case 3: return "화"
-        case 4: return "수"
-        case 5: return "목"
-        case 6: return "금"
-        case 7: return "토"
+        case 1: return "week_sunday_short".localized
+        case 2: return "week_monday_short".localized
+        case 3: return "week_tuesday_short".localized
+        case 4: return "week_wednesday_short".localized
+        case 5: return "week_thursday_short".localized
+        case 6: return "week_friday_short".localized
+        case 7: return "week_saturday_short".localized
         default: return ""
         }
     }

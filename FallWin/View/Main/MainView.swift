@@ -12,6 +12,10 @@ import FirebaseAnalytics
 struct MainView: View {
     let store: StoreOf<MainFeature>
     
+    let filmCountPublisher = NotificationCenter.default.publisher(for: .filmCountChanged)
+    let networkModel = NetworkModel()
+    let rewardAdsManager = RewardAdsManager()
+    
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             ZStack {
@@ -31,7 +35,6 @@ struct MainView: View {
                                             viewStore.send(.showJournalView(journal))
                                         }
                                         .onAppear {
-                                            print("timestamp: \(journal.timestamp)")
                                             if let timestamp = journal.timestamp {
                                                 if !viewStore.pickedDateTagValue.isScrolling {
                                                     viewStore.send(.updateYear(timestamp.year ))
@@ -77,14 +80,32 @@ struct MainView: View {
                         Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
                         print("@Log : A1_3__메인_새일기쓰기")
                     }
-                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "오늘의 제한 도달") {
-                        Text("오늘 쓸 수 있는 필름을 다 썼어요. 내일 더 그릴 수 있도록 필름을 더 드릴게요!")
+                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
+                        Text("limit_alert_message")
                     } primaryButton: {
-                        OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textPrimary), color: .backgroundPrimary) {
                             viewStore.send(.showCountAlert(false))
                         }
+                    } secondaryButton: {
+                        OhwaAlertButton(label: Text("limit_alert_ad").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showCountAlert(false))
+                            viewStore.send(.showFilmDetailView(true))
+                        }
                     }
-                
+                    .alert(isPresented: viewStore.binding(get: \.showNetworkAlert, send: MainFeature.Action.showNetworkAlert), title: "network_warning_alert_title".localized) {
+                        Text("network_warning_alert_message")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showNetworkAlert(false))
+                        }
+                    }
+                    .alert(isPresented: viewStore.binding(get: \.showAdFailAlert, send: MainFeature.Action.showAdFailAlert), title: "ad_fail_alert_title".localized) {
+                        Text("ad_fail_alert_message")
+                    } primaryButton: {
+                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                            viewStore.send(.showAdFailAlert(false))
+                        }
+                    }
                 
                 VStack {
                     toolbar
@@ -92,13 +113,24 @@ struct MainView: View {
                             YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
                         }
-                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo), title: "남은 필름") {
-                            Text("일기를 작성하고 그림을 생성할 때 마다 필름이 하나씩 소모돼요.\n필름은 매일 \(DrawingCountManager.INITIAL_COUNT)개로 리셋되니, 필름이 떨어지지 않게 유의하세요!")
+                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo)) {
+                            Text("film_alert_message".localized)
                                 .multilineTextAlignment(.center)
                         } primaryButton: {
-                            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                                 viewStore.send(.showCountInfo(false))
                             }
+                        }
+                        .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: MainFeature.Action.showFilmNetworkAlert)) {
+                            Text("film_network_alert_message".localized)
+                                .multilineTextAlignment(.center)
+                        } primaryButton: {
+                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+                                viewStore.send(.showFilmNetworkAlert(false))
+                            }
+                        }
+                        .onReceive(filmCountPublisher) { _ in
+                            viewStore.send(.getRemainingCount)
                         }
                     Spacer()
                 }
@@ -111,10 +143,15 @@ struct MainView: View {
                     JournalView(store: store)
                 }
             }
+            .navigationDestination(store: store.scope(state: \.$filmDetail, action: MainFeature.Action.filmDetail)) { store in
+                FilmDetailView(store: store)
+            }
             .onAppear {
                 viewStore.send(.fetchAll)
+                viewStore.send(.getRemainingCount)
                 viewStore.send(.hideTabBar(false))
             }
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.visible, for: .tabBar)
         }
@@ -122,6 +159,7 @@ struct MainView: View {
             Tracking.logScreenView(screenName: Tracking.Screen.V1__메인뷰.rawValue)
             print("@Log : V1__메인뷰")
         }
+        
     }
     
     @ViewBuilder
@@ -174,8 +212,11 @@ struct MainView: View {
                     viewStore.send(.showPickerSheet)
                 } label: {
                     HStack {
-                        Text(String(format: "%d년 %d월", viewStore.pickedDateTagValue.year, viewStore.pickedDateTagValue.month))
-                            .font(.pretendard(.bold, size: 24))
+                        Text("date_year_month".localized
+                            .replacingOccurrences(of: "{year}", with: String(viewStore.pickedDateTagValue.year))
+                            .replacingOccurrences(of: "{month}", with: String("date_picker_month_\(viewStore.pickedDateTagValue.month)".localized))
+                        )
+                        .font(.pretendard(.bold, size: 24))
                         Image(systemName: "chevron.down")
                     }
                 }
@@ -184,13 +225,29 @@ struct MainView: View {
                 Spacer()
                 
                 Button {
-                    viewStore.send(.showCountInfo(true))
+                    if networkModel.isConnected {
+                        viewStore.send(.showCountInfo(true))
+                    } else {
+                        viewStore.send(.showFilmNetworkAlert(true))
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "film")
                             .resizable()
                             .frame(width: 20, height: 18)
-                        Text("\(viewStore.remainingCount)")
+                        if networkModel.isConnected {
+                            if let remainingCount = viewStore.remainingCount {
+                                Text("\(remainingCount)")
+                                    .font(.pretendard(.bold, size: 16))
+                            } else {
+                                ProgressView()
+                            }
+                        } else {
+                            Image(systemName: "network.slash")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .opacity(0.6)
+                        }
                     }
                     .padding(10)
                     .background {
@@ -198,9 +255,6 @@ struct MainView: View {
                             .fill(Color.backgroundCard)
                             .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
                     }
-                }
-                .onAppear {
-                    viewStore.send(.getRemainingCount)
                 }
             }
             .padding(.top)
@@ -218,8 +272,15 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
-                        if DrawingCountManager.shared.remainingCount <= 0 {
+                        if !networkModel.isConnected {
+                            viewStore.send(.showNetworkAlert(true))
+                            return
+                        }
+                        
+                        if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
                             viewStore.send(.showCountAlert(true))
+                            //                            rewardManager.displayReward()
+                            //Alert 추가하기
                         } else {
                             viewStore.send(.showWritingView)
                         }

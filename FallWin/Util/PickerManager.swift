@@ -125,7 +125,6 @@ extension PickerManager {
 
 
 struct DateTagValue: Identifiable, Equatable, Hashable {
-    
     var id: Int
     
     var date: Date
@@ -180,6 +179,11 @@ struct DateTagValue: Identifiable, Equatable, Hashable {
         let lastTagValue = tagValues.filter{ tagValuePeriod[0] <= $0 && $0 <= tagValuePeriod[1] }
         
         self.tagValue = lastTagValue.first ?? self.tagValue
+    }
+    
+    var yyyyMMdd: String {
+        let string = "\(String(format: "%d", year)). \(String(format: "%d", month)) .\(String(format: "%d", day))"
+        return string
     }
 }
 

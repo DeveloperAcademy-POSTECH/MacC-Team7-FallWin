@@ -19,32 +19,39 @@ struct GeneratedDiaryView: View {
     private let karloAPIKey: String = Bundle.main.karloAPIKey
     
     let drawingStyleToEnglish: [String: String] = [
-        "Childlike crayon": "Naive scribbles style characterized colorful crayon doodles drawn by 5-year-old-kid's-drawing-skill, drawn with innocent charm and rough lines, unrefined strokes childlike painting",
-        "Oil Painting": "Oil painting",
-        "Water Color": "Watercolor Painting",
-        "Sketch": "pencil sketches Painting",
+        "Childlike crayon": "babyish Poor detailed Oil pastel rough doodle",
+        "Oil Painting": "Oil painting, Varnish",
+        "Water Color": "Watercolor Painting, gouache",
+        "Sketch": "Poor detailed simple pencil sketch",
         "Anime": "Studio Ghibli's enchanting and whimsical animation reflecting Studio Ghibli's animated features painting",
-        "Pixel Art": "Retro-styled pixel-by-pixel video game graphics Style",
+        "Pixel Art": "Retro-styled pixel-by-pixel non-alphabet video game graphics Style",
         "Vincent Van Gogh": "Vibrant and bold impressionist art inspired by Vincent Van Gogh Painting",
         "Monet": "Impressionism art in the style of Claude Monet Painting",
         "Salvador Dali": "Dream-like and bizarre surreal art in the style of Salvador Dali Painting"
     ]
     
     let emotionToEnglish: [String: String] = [
-        "happy": "Happy",
-        "nervous": "Nervous",
-        "grateful": "Grateful",
-        "sad": "Sad",
-        "joyful": "Joyful",
-        "lonely": "Lonely",
-        "proud": "Proud",
-        "suffocated": "Suffocated",
-        "touched": "Touched",
-        "shy": "Shy",
-        "exciting": "Exciting",
-        "lazy": "Lazy",
-        "annoyed": "Annoyed",
-        "frustrated": "Frustrated"
+        "happy": "POSITIVE",
+        "proud": "POSITIVE",
+        "touched": "POSITIVE",
+        "annoyed": "NEGATIVE",
+        "sad": "NEGATIVE",
+        
+        "suffocated": "NEGATIVE",
+        "lazy": "NEUTRAL",
+        "grateful": "POSITIVE",
+        "joyful": "POSITIVE",
+        "exciting": "POSITIVE",
+        
+        "nervous": "NEGATIVE",
+        "lonely": "NEGATIVE",
+        "shy": "NEUTRAL",
+        "frustrated": "NEUTRAL",
+        "tough": "NEGATIVE",
+        
+        "peaceful": "POSITIVE",
+        "surprised": "NEUTRAL",
+        "reassuring": "POSITIVE"
     ]
     
     init(store: StoreOf<GeneratedDiaryFeature>) {
@@ -62,7 +69,7 @@ struct GeneratedDiaryView: View {
                             .ignoresSafeArea()
                         VStack(spacing: 0) {
                             //                            DateView()
-                            MessageView(titleText: "하루와 가장 잘 어울리는 그림을 선택하세요")
+                            MessageView(titleText: "generated_title".localized)
                                 .padding(.top, 40)
                             imageView()
                                 .padding(.top, 16)
@@ -74,7 +81,7 @@ struct GeneratedDiaryView: View {
                                 print("--parameters: \(viewStore.priorSteps), \(viewStore.priorScale), \(viewStore.steps), \(viewStore.scale)--")
                                 viewStore.send(.doneGenerating)
                             } label: {
-                                ConfirmButtonLabelView(text: "일기 마무리하기", backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
+                                ConfirmButtonLabelView(text: "generated_finish_button".localized, backgroundColor: viewStore.image == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             }
                             .disabled(viewStore.image == nil)
                             .padding(.top, 15)
@@ -112,7 +119,7 @@ struct GeneratedDiaryView: View {
                     LottieImageGenView(jsonName: "LottieImageGen")
                     VStack {
                         Spacer()
-                        Text("\(UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA")의 하루를\n그림으로 그리고 있어요")
+                        Text("generated_generating".localized.replacingOccurrences(of: "{nickname}", with: UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"))
                             .font(.pretendard(.bold, size: 28))
                             .foregroundStyle(Color.textPrimary)
                             .multilineTextAlignment(.center)
@@ -134,7 +141,6 @@ struct GeneratedDiaryView: View {
         }
         .task {
             do {
-                
                 let chatResponse = try await ChatGPTApiManager.shared.createChat3(prompt: viewStore.mainText,  apiKey: dallEAPIKey)
                 
                 var image: UIImage?
@@ -144,7 +150,7 @@ struct GeneratedDiaryView: View {
                     let karloPrompt = KarloApiManager.shared.addEmotionDrawingStyle(prompt: promptOutput, emotion: emotionToEnglish[viewStore.selectedEmotion] ?? "", drawingStyle: drawingStyleToEnglish[viewStore.selectedDrawingStyle] ?? "")
                     print("original input text:\n\(viewStore.mainText)\n------\nchatGPT's output:\n\(promptOutput)\n------\nprompt with drawing style:\n\(karloPrompt)")
                     
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "realistic photo, ugly, poorly drawn face, nsfw, text, alphabet, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: karloPrompt, negativePrompt: "text, alphabet, child, crayon, realistic photo, ugly, poorly drawn face, nsfw, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
                     
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {
@@ -156,11 +162,12 @@ struct GeneratedDiaryView: View {
                         let (imageData, _) = try await URLSession.shared.data(from: imageURL)
                         images.append(UIImage(data: imageData))
                     }
+                    FilmManager.shared.reduceCount()
                     viewStore.send(.setImages(images))
                     
                 } else {
                     print("--chatGPT response is null--")
-                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: viewStore.mainText, negativePrompt: "realistic photo, ugly, poorly drawn face, nsfw, text, alphabet, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
+                    let imageResponse = try await KarloApiManager.shared.generateImage(prompt: viewStore.mainText, negativePrompt: "text, alphabet, child, crayon, realistic photo, ugly, poorly drawn face, nsfw, error, extra digit, fewer digit, cropped, worst quality, low quality, signature, watermark, username, scary, dirty, poorly drawn feet, poorly drawn hand, mutilated, disfigured", priorSteps: viewStore.priorSteps, priorScale: viewStore.priorScale, steps: viewStore.steps, scale: viewStore.scale, apiKey: karloAPIKey)
                     
                     var images: [UIImage?] = []
                     for imageOutput in imageResponse.images {
@@ -182,10 +189,10 @@ struct GeneratedDiaryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .alert(isPresented: $isError, title: "그림 그리기 실패") {
-            Text("뒤로 돌아가서 다시 그림을 그려주세요")
+        .alert(isPresented: $isError, title: "generated_fail_alert_title".localized) {
+            Text("generated_fail_alert_message".localized)
         } primaryButton: {
-            OhwaAlertButton(label: Text("확인").foregroundColor(.textOnButton), color: .button) {
+            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
                 isError.toggle()
                 dismiss()
             }
@@ -236,7 +243,7 @@ struct GeneratedDiaryView: View {
             .padding(10)
             .background(
                 Color.backgroundCard
-                    .shadow(color: viewStore.image == image ? Color(hexCode: "#191919").opacity(0.2) : Color(hexCode: "#191919").opacity(0.1), radius: viewStore.image == image ?  8 : 4)
+                    .shadow(color: viewStore.image == image ? Color.shadow.opacity(0.2) : Color.shadow.opacity(0.1), radius: viewStore.image == image ?  8 : 4)
             )
         }
     }

@@ -89,19 +89,3 @@ struct CollapsingScrollView<Header: View, Content: View>: View {
         )
     }
 }
-
-#Preview {
-    CollapsingScrollView {
-        ZStack {
-            Rectangle()
-                .fill(.blue)
-                .aspectRatio(1, contentMode: .fit)
-            Text("Hello")
-        }
-    } content: {
-        ForEach(0..<10) { i in
-            Text("Hello, World! \(i)")
-        }
-    }
-    
-}

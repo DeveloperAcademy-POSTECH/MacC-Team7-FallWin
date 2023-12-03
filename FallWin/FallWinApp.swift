@@ -9,13 +9,15 @@ import SwiftUI
 import SwiftKeychainWrapper
 import ComposableArchitecture
 import FirebaseCore
+import GoogleMobileAds
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        return true
+    }
 }
 
 @main
@@ -23,11 +25,18 @@ struct FallWinApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
+        // MARK: AppEnvironment
+        UserDefaults.standard.register(defaults: [
+            UserDefaultsKey.AppEnvironment.isFirstLaunched: true,
+            UserDefaultsKey.AppEnvironment.devMode: false
+        ])
+        
         // MARK: Settings
         UserDefaults.standard.register(defaults: [
             UserDefaultsKey.Settings.lock: false,
             UserDefaultsKey.Settings.biometric: false,
             UserDefaultsKey.Settings.haptic: true,
+            UserDefaultsKey.Settings.dailyNotification: false,
         ])
         
         // MARK: User
@@ -53,13 +62,13 @@ struct FallWinApp: App {
                     Feature()
                 }))
             } else {
-                PasscodeView(initialMessage: "비밀번호를 입력하세요.", dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
+                PasscodeView(initialMessage: "passcode_enter".localized, dismissable: false, enableBiometric: true, authenticateOnLaunch: true) { typed, biometric in
                     if typed == KeychainWrapper.standard[.password] || biometric ?? false {
                         locked = false
                         return .dismiss
                         
                     } else {
-                        return .retype("비밀번호가 다릅니다.\n다시 입력해주세요.")
+                        return .retype("passcode_enter_fail".localized)
                     }
                 }
             }

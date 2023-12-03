@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "kronos",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MobileNativeFoundation/Kronos.git",
+      "state" : {
+        "revision" : "a46542ce639581af2a85ab9ec1616a507a5d4ae2",
+        "version" : "4.2.2"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -196,6 +205,24 @@
       "state" : {
         "revision" : "d1e45f3e1eee2c9193f5369fa9d70a6ddad635e8",
         "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swift-package-manager-google-mobile-ads",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
+      "state" : {
+        "revision" : "0cf1f2589641e52c444a3a61470d737efab485fd",
+        "version" : "10.13.0"
+      }
+    },
+    {
+      "identity" : "swift-package-manager-google-user-messaging-platform",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
+      "state" : {
+        "revision" : "129fa838520cd02174f890ae0cfe0242e60714ae",
+        "version" : "2.1.0"
       }
     },
     {
