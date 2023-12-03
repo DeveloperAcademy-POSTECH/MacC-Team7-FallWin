@@ -37,6 +37,17 @@ struct PolicyView: View {
                 .listRowBackground(Color.backgroundPrimary)
                 
                 NavigationLink {
+                    WebView(url: "policy_privacy_optional_url".localized)
+                        .toolbar(.hidden, for: .tabBar)
+                    
+                } label: {
+                    Text("settings_policy_privacy_optional")
+                        .font(.pretendard(size: 18))
+                        .padding(.vertical, 8)
+                }
+                .listRowBackground(Color.backgroundPrimary)
+                
+                NavigationLink {
                     LicenseView(store: store.scope(state: \.license, action: PolicyFeature.Action.license))
                     
                 } label: {

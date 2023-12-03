@@ -71,6 +71,14 @@ struct DebuggingView: View {
                     NotificationManager().removeAllPendingNotifications()
                 }
             }
+            
+            Section(String("데이터")) {
+                Button(String("앱 데이터 삭제")) {
+                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                        UserDefaults.standard.removeObject(forKey: key)
+                    }
+                }
+            }
         }
     }
 }

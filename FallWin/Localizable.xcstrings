@@ -1896,6 +1896,57 @@
         }
       }
     },
+    "onboarding_marketing_alert_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA tracks and uses ad identifiers to display ads that are relevant to you. You can allow or deny tracking for PICDA to use advertising identifiers."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PICDA는 사용자와 연관된 광고를 표시하기 위해 광고 식별자를 추적하고 사용합니다. PICDA가 광고 식별 ID를 사용하도록 추적을 허용하거나 거부할 수 있습니다."
+          }
+        }
+      }
+    },
+    "onboarding_marketing_alert_policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자세히"
+          }
+        }
+      }
+    },
+    "onboarding_marketing_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marketing Policy"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 식별자 ID 추적 및 수집"
+          }
+        }
+      }
+    },
     "onboarding_nickname_set" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1933,6 +1984,12 @@
     "onboarding_notification_permission_alert" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grant notification permission in Settings app"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1943,6 +2000,12 @@
     },
     "onboarding_notification_subtitle" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep a special diary with AI-generated drawings."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1954,10 +2017,33 @@
     "onboarding_notification_title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow PICDA to send notification"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "알림 설정을 허용해주세요"
+          }
+        }
+      }
+    },
+    "onboarding_policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By proceeding, you agree to the terms."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'시작하기'를 누르면 약관에 동의하는 것으로 간주합니다."
           }
         }
       }
@@ -2098,6 +2184,57 @@
         }
       }
     },
+    "policy_marketing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marketings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마케팅목적개인정보수집"
+          }
+        }
+      }
+    },
+    "policy_privacy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보처리방침"
+          }
+        }
+      }
+    },
+    "policy_privacy_optional_url" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://el-capitan.notion.site/Marketing-Purpose-Private-Data-Policy-597d5ea59c204cba9cc7613c3ce3f634?pvs=4"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://el-capitan.notion.site/abbbd48e373c488f82a3808c1bcf1a4a?pvs=4"
+          }
+        }
+      }
+    },
     "policy_privacy_url" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2111,6 +2248,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://el-capitan.notion.site/de1c30b56c874f01b97e8e1c23aaa33b?pvs=4"
+          }
+        }
+      }
+    },
+    "policy_service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Service"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서비스 이용약관"
           }
         }
       }
@@ -2876,6 +3030,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "개인정보처리방침"
+          }
+        }
+      }
+    },
+    "settings_policy_privacy_optional" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marketing Purpose Private Data Policy"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마케팅목적개인정보수집이용동의서 "
           }
         }
       }
