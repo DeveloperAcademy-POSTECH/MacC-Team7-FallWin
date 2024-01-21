@@ -47,6 +47,9 @@ struct NotificationInitView: View {
                     .scaledToFit()
                     .frame(width: 325)
                     .padding(.top, 16)
+                    .onTapGesture {
+                        notificationButtonClick()
+                    }
                 Spacer()
                 HStack {
                     Spacer()
@@ -57,19 +60,7 @@ struct NotificationInitView: View {
                     }
                     Spacer()
                     Button {
-                        Task {
-                            do {
-                                let notificationCenter = UNUserNotificationCenter.current()
-                                let granted = try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
-                                if granted {
-                                    viewStore.send(.showPicker(true))
-                                } else {
-                                    viewStore.send(.showAlert(true))
-                                }
-                            } catch {
-                                print("<notification permission>: \(error)")
-                            }
-                        }
+                        notificationButtonClick()
                     } label: {
                         ConfirmButtonLabelView(text: "setting_section_notification".localized, backgroundColor: .button, foregroundColor: .textOnButton, width: UIScreen.main.bounds.width * 0.6)
                     }
@@ -105,6 +96,22 @@ struct NotificationInitView: View {
         }
         .toolbar(.visible, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func notificationButtonClick() {
+        Task {
+            do {
+                let notificationCenter = UNUserNotificationCenter.current()
+                let granted = try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
+                if granted {
+                    viewStore.send(.showPicker(true))
+                } else {
+                    viewStore.send(.showAlert(true))
+                }
+            } catch {
+                print("<notification permission>: \(error)")
+            }
+        }
     }
 }
 
