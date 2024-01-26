@@ -45,6 +45,11 @@ struct FallWinApp: App {
             UserDefaultsKey.User.gender: "none",
         ])
         
+        // MARK: App Alert
+        UserDefaults.standard.register(defaults: [
+            UserDefaultsKey.AppAlert.apiRegionError: false
+        ])
+        
         if !UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled) {
             KeychainWrapper.standard.removeAllKeys()
             UserDefaults.standard.set(true, forKey: UserDefaultsKey.AppEnvironment.alreadyInstalled)

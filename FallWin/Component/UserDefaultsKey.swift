@@ -13,6 +13,8 @@ class UserDefaultsKey {
     class Settings { }
     
     class User { }
+    
+    class AppAlert { }
 }
 
 extension UserDefaultsKey.AppEnvironment {
@@ -34,4 +36,8 @@ extension UserDefaultsKey.Settings {
 extension UserDefaultsKey.User {
     static let nickname = "nickname"
     static let gender = "gender"
+}
+
+extension UserDefaultsKey.AppAlert {
+    static let apiRegionError = "v1_1_0_region_error"
 }

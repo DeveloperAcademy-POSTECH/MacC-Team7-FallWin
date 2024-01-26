@@ -1016,7 +1016,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23120101;
+				CURRENT_PROJECT_VERSION = 24012600;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
@@ -1035,7 +1035,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1055,7 +1055,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FallWin/FallWinRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23120101;
+				CURRENT_PROJECT_VERSION = 24012600;
 				DEVELOPMENT_ASSET_PATHS = "\"FallWin/Preview Content\"";
 				DEVELOPMENT_TEAM = BDU85ET24K;
 				ENABLE_PREVIEWS = YES;
@@ -1074,7 +1074,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mgchoi.ohwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";

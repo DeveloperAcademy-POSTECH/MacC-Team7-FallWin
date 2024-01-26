@@ -18,6 +18,12 @@ struct Feature: Reducer {
         var lock: Bool = false
         var showPasscodeView: Bool = true
         
+        /*
+         * **Remove After**
+         * v1.1.1 region error alert
+         */
+        var showRegionErrorAlert: Bool = !UserDefaults.standard.bool(forKey: UserDefaultsKey.AppAlert.apiRegionError) && Locale.current.region?.identifier == "RU"
+        
         @PresentationState var main: MainFeature.State? = .init()
         @PresentationState var search: SearchFeature.State? = .init()
         @PresentationState var settings: SettingsFeature.State? = .init()
@@ -32,6 +38,12 @@ struct Feature: Reducer {
         case showPasscodeView(Bool)
         case updateSettingsStates
         case setNotification
+        
+        /*
+         * **Remove After**
+         * v1.1.1 region error alert
+         */
+        case showRegionErrorAlert(_ show: Bool, _ doNotShowAfterward: Bool?)
         
         case main(PresentationAction<MainFeature.Action>)
         case search(PresentationAction<SearchFeature.Action>)
@@ -79,6 +91,17 @@ struct Feature: Reducer {
                 state.onboarding?.nicknameInit = nil
                 state.onboarding = nil
                 return .send(.updateSettingsStates)
+                
+                /*
+                 * **Remove After**
+                 * v1.1.1 region error alert
+                 */
+            case let .showRegionErrorAlert(show, doNotShowAfterward):
+                state.showRegionErrorAlert = show
+                if let doNotShowAfterward = doNotShowAfterward {
+                    UserDefaults.standard.set(doNotShowAfterward, forKey: UserDefaultsKey.AppAlert.apiRegionError)
+                }
+                return .none
                 
             default: return .none
             }
