@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="DrawCount" representedClassName="DrawCount" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="String"/>
+    </entity>
     <entity name="Journal" representedClassName="Journal" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="drawingStyle" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

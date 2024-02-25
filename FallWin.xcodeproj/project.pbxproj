@@ -52,7 +52,6 @@
 		7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E62B0DC5050047B5BD /* NotificationSettingView.swift */; };
 		7975B6E92B0DC5100047B5BD /* NotificationSettingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6E82B0DC5100047B5BD /* NotificationSettingView+Feature.swift */; };
 		7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */; };
-		7975B6F02B0E329B0047B5BD /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 7975B6EF2B0E329B0047B5BD /* Kronos */; };
 		7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F32B0E38030047B5BD /* FilmManager.swift */; };
 		7975B6F62B0F0C180047B5BD /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F52B0F0C180047B5BD /* Notification+Name.swift */; };
 		799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 799A57A82B0B409700D6966C /* Localizable.xcstrings */; };
@@ -66,6 +65,10 @@
 		79A5667E2AFE089D00524A57 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A5667D2AFE089D00524A57 /* ZIPFoundation */; };
 		79A566802AFE105500524A57 /* Journal+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5667F2AFE105500524A57 /* Journal+JSON.swift */; };
 		79A566822AFE132B00524A57 /* RawJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A566812AFE132B00524A57 /* RawJournal.swift */; };
+		79A6675C2B87C17800022369 /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 79A6675B2B87C17800022369 /* Kronos */; };
+		79A6675E2B87C1B300022369 /* DrawCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A6675D2B87C1B300022369 /* DrawCountManager.swift */; };
+		79A667652B87C2FF00022369 /* DrawCount+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A667632B87C2FF00022369 /* DrawCount+CoreDataClass.swift */; };
+		79A667662B87C2FF00022369 /* DrawCount+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A667642B87C2FF00022369 /* DrawCount+CoreDataProperties.swift */; };
 		79AF693A2ADAD6CA0064E410 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF69392ADAD6CA0064E410 /* Carousel.swift */; };
 		79AF693D2ADCC07E0064E410 /* Journal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693B2ADCC07E0064E410 /* Journal.xcdatamodeld */; };
 		79AF69402ADCC1320064E410 /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */; };
@@ -96,7 +99,6 @@
 		79E5B2CA2ADD4FE200A86770 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5B2C92ADD4FE200A86770 /* SearchView.swift */; };
 		79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D02ADD501200A86770 /* ComposableArchitecture */; };
 		79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 79E5B2D32ADD502100A86770 /* Alamofire */; };
-		79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */; };
 		79EE3CA92AFCBA4D005BD2FD /* OhwaAlertImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */; };
 		79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */; };
 		79F650B42B11CE1100401368 /* FilmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F650B32B11CE1100401368 /* FilmDetailView.swift */; };
@@ -206,6 +208,9 @@
 		79A5667B2AFE06BF00524A57 /* FallWin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FallWin.entitlements; sourceTree = "<group>"; };
 		79A5667F2AFE105500524A57 /* Journal+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+JSON.swift"; sourceTree = "<group>"; };
 		79A566812AFE132B00524A57 /* RawJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawJournal.swift; sourceTree = "<group>"; };
+		79A6675D2B87C1B300022369 /* DrawCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCountManager.swift; sourceTree = "<group>"; };
+		79A667632B87C2FF00022369 /* DrawCount+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawCount+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79A667642B87C2FF00022369 /* DrawCount+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawCount+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79AF69392ADAD6CA0064E410 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		79AF693C2ADCC07E0064E410 /* Journal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Journal.xcdatamodel; sourceTree = "<group>"; };
 		79AF693E2ADCC1320064E410 /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -233,7 +238,6 @@
 		79E5B2BF2ADD1C6800A86770 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		79E5B2C12ADD23C200A86770 /* CvasTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvasTabView.swift; sourceTree = "<group>"; };
 		79E5B2C92ADD4FE200A86770 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCountManager.swift; sourceTree = "<group>"; };
 		79EE3CA72AFCBA4D005BD2FD /* OhwaAlertImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlertImpl.swift; sourceTree = "<group>"; };
 		79EE3CA82AFCBA4D005BD2FD /* OhwaAlertButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhwaAlertButton.swift; sourceTree = "<group>"; };
 		79EE3CAE2AFCBA8C005BD2FD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -298,11 +302,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79A6675C2B87C17800022369 /* Kronos in Frameworks */,
 				98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */,
 				79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */,
 				665837652AF80B7600A5833E /* FirebaseAnalytics in Frameworks */,
 				665837672AF80B7600A5833E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
-				7975B6F02B0E329B0047B5BD /* Kronos in Frameworks */,
 				665837692AF80B7600A5833E /* FirebaseAnalyticsSwift in Frameworks */,
 				792751252AF23DC10023123C /* SwiftKeychainWrapper in Frameworks */,
 				665837712AF8110600A5833E /* FirebaseAnalytics in Frameworks */,
@@ -524,6 +528,8 @@
 				79D8B1562AF95D0D0020DFCC /* Journal+DrawingStyle.swift */,
 				79A5667F2AFE105500524A57 /* Journal+JSON.swift */,
 				79A566812AFE132B00524A57 /* RawJournal.swift */,
+				79A667632B87C2FF00022369 /* DrawCount+CoreDataClass.swift */,
+				79A667642B87C2FF00022369 /* DrawCount+CoreDataProperties.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -536,12 +542,12 @@
 				98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */,
 				98202FAB2AE933D50089CF79 /* KarloApiManager.swift */,
 				98A2BC282AFCD688003C9835 /* PickerManager.swift */,
-				79EE3CA02AFCAEF8005BD2FD /* DrawingCountManager.swift */,
 				79A566792AFE058E00524A57 /* ICloudBackupManager.swift */,
 				7975B6F32B0E38030047B5BD /* FilmManager.swift */,
 				79C99FD42B0F43F0003B3A0B /* NetworkModel.swift */,
 				79F650B52B184F6800401368 /* NotificationManager.swift */,
 				A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */,
+				79A6675D2B87C1B300022369 /* DrawCountManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -678,8 +684,8 @@
 				665837742AF8110600A5833E /* FirebaseAnalyticsSwift */,
 				665837762AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport */,
 				665837782AF8110600A5833E /* FirebaseAppCheck */,
-				7975B6EF2B0E329B0047B5BD /* Kronos */,
 				A9E84A5E2B0F4588002A811F /* GoogleMobileAds */,
+				79A6675B2B87C17800022369 /* Kronos */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -717,8 +723,8 @@
 				792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				665837632AF80B7600A5833E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */,
 				A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				79A6675A2B87C17700022369 /* XCRemoteSwiftPackageReference "Kronos" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -792,6 +798,7 @@
 				79F650B62B184F6800401368 /* NotificationManager.swift in Sources */,
 				989152C72B16090C001119B1 /* NotificationInitView+Feature.swift in Sources */,
 				794216B82AE22C6A00F24CFD /* CollapsingScrollView.swift in Sources */,
+				79A6675E2B87C1B300022369 /* DrawCountManager.swift in Sources */,
 				9808AA012B0DDD7300A2CEB7 /* OnboardingView+Feature.swift in Sources */,
 				79EE3CAA2AFCBA4D005BD2FD /* OhwaAlertButton.swift in Sources */,
 				79A5667A2AFE058E00524A57 /* ICloudBackupManager.swift in Sources */,
@@ -828,6 +835,7 @@
 				79407D642AD7EC80006C7571 /* Date+Exntesion.swift in Sources */,
 				98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */,
 				6658377C2AF8CB0A00A5833E /* Tracking.swift in Sources */,
+				79A667662B87C2FF00022369 /* DrawCount+CoreDataProperties.swift in Sources */,
 				799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */,
 				989152C92B187A14001119B1 /* ProgressView+Extension.swift in Sources */,
 				79C99FD72B0F52DF003B3A0B /* DebuggingView.swift in Sources */,
@@ -845,7 +853,6 @@
 				79D8B1572AF95D0D0020DFCC /* Journal+DrawingStyle.swift in Sources */,
 				98202FAA2AE6A0800089CF79 /* LottieImageGenView.swift in Sources */,
 				98202FAC2AE933D50089CF79 /* KarloApiManager.swift in Sources */,
-				79EE3CA12AFCAEF8005BD2FD /* DrawingCountManager.swift in Sources */,
 				79F650C22B196ED700401368 /* FilmDetailView+Feature.swift in Sources */,
 				7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */,
 				7975B6E72B0DC5050047B5BD /* NotificationSettingView.swift in Sources */,
@@ -870,6 +877,7 @@
 				7924440D2B01FE1000E28FFE /* View+Render.swift in Sources */,
 				98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */,
 				799F1D932B033700009908DB /* WritingHeaderView.swift in Sources */,
+				79A667652B87C2FF00022369 /* DrawCount+CoreDataClass.swift in Sources */,
 				791F147D2AE0DD9000F8DDD2 /* UINavigationController+Extension.swift in Sources */,
 				98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */,
 			);
@@ -1127,20 +1135,20 @@
 				minimumVersion = 4.0.1;
 			};
 		};
-		7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.2;
-			};
-		};
 		79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.9.17;
+			};
+		};
+		79A6675A2B87C17700022369 /* XCRemoteSwiftPackageReference "Kronos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
 			};
 		};
 		79E5B2CF2ADD501200A86770 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
@@ -1233,15 +1241,15 @@
 			package = 792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
 		};
-		7975B6EF2B0E329B0047B5BD /* Kronos */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7975B6EE2B0E329B0047B5BD /* XCRemoteSwiftPackageReference "Kronos" */;
-			productName = Kronos;
-		};
 		79A5667D2AFE089D00524A57 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		79A6675B2B87C17800022369 /* Kronos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79A6675A2B87C17700022369 /* XCRemoteSwiftPackageReference "Kronos" */;
+			productName = Kronos;
 		};
 		79E5B2D02ADD501200A86770 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

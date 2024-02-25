@@ -8,6 +8,11 @@
 import Foundation
 import Kronos
 
+struct DrawingCount: Hashable, Codable {
+    var date: String
+    var count: Int
+}
+
 final class FilmManager {
     static let shared = FilmManager()
     static let INITIAL_COUNT = 1

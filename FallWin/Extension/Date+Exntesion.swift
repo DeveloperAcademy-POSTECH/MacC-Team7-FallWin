@@ -62,6 +62,10 @@ extension Date {
         return "\(year).\(String(format: "%02d", month)).\(String(format: "%02d", day)). \(dayOfWeek)\("date_week_suffix".localized)"
     }
     
+    var drawCountString: String {
+        return String(format: "%d-%02d-%02d", year, month, day)
+    }
+    
     var timeInMillis: Int64 {
         get {
             return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
