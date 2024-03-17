@@ -21,42 +21,18 @@ struct DrawingStyleView: View {
                 VStack(spacing: 0) {
                     MessageView(titleText: "drawing_style_title".localized, subTitleText: "drawing_style_subtitle".localized)
                         .padding(.top, 24)
-                    //                        VStack {
-                    //                            Text("prior_num_inference_steps: \(viewStore.priorSteps)")
-                    //                                .font(.pretendard(.semiBold, size: 18))
-                    //                            Slider(value: viewStore.binding(get: \.priorSteps, send: DrawingStyleFeature.Action.setPriorSteps), in: 10...100 ,step: 1)
-                    //                            Spacer()
-                    //                            Text("prior_guidance_scale: \(viewStore.priorScale)")
-                    //                                .font(.pretendard(.semiBold, size: 18))
-                    //                            Slider(value: viewStore.binding(get: \.priorScale, send: DrawingStyleFeature.Action.setPriorScale), in: 1...20, step: 0.1)
-                    //                            Spacer()
-                    //                            Text("num_inference_steps: \(viewStore.steps)")
-                    //                                .font(.pretendard(.semiBold, size: 18))
-                    //                            Slider(value: viewStore.binding(get: \.steps, send: DrawingStyleFeature.Action.setSteps), in: 10...100, step: 1)
-                    //                            Spacer()
-                    //                            Text("guidance_scale: \(viewStore.scale)")
-                    //                                .font(.pretendard(.semiBold, size: 18))
-                    //                            Slider(value: viewStore.binding(get: \.scale, send: DrawingStyleFeature.Action.setScale), in: 1...20, step: 0.1)
-                    //                        }
+                    
                     generateDrawingStyleView()
                         .padding(.top, 16)
                         .padding(.horizontal)
                     VStack(spacing: 12) {
-                        Text("drawing_style_warning".localized)
-                            .font(.pretendard(.regular, size: 14))
-                            .foregroundColor(.textTertiary)
                         Button {
                             Tracking.logEvent(Tracking.Event.A2_3_3__일기작성_화풍선택_다음버튼.rawValue)
                             print("@Log : A2_3_3__일기작성_화풍선택_다음버튼")
                             Tracking.logEvent(styleLabeling)
-                            if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
-                                viewStore.send(.showCountAlert(true))
-                            } else {
-                                viewStore.send(.showGeneratedDiaryView)
-                            }
+                            viewStore.send(.showGeneratedDiaryView)
                             
                         } label: {
-                            //                            ConfirmButtonLabelView(text: "다음", backgroundColor: viewStore.selectedDrawingStyle == nil ? Color.buttonDisabled : Color.button, foregroundColor: .textOnButton)
                             HStack(spacing: 8) {
                                 Spacer()
                                 Image(systemName: "film")

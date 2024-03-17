@@ -17,11 +17,8 @@ struct SettingsFeature: Reducer {
         // Profile
         var nickname: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.nickname) ?? "PICDA"
         var gender: String = UserDefaults.standard.string(forKey: UserDefaultsKey.User.gender) ?? "none"
-        var remainingDrawingCount: Int? = FilmManager.shared.drawingCount?.count
         var showNicknameAlert: Bool = false
         var tempNickname: String = ""
-        var showCountInfo: Bool = false
-        var showFilmNetworkAlert: Bool = false
         var devMode: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.AppEnvironment.devMode)
         var devTapCount: Int = 0
         var devLastTap: Date = Date()
@@ -38,8 +35,6 @@ struct SettingsFeature: Reducer {
         case setNickname(String)
         case showNicknameAlert(Bool)
         case setTempNickname(String)
-        case showCountInfo(Bool)
-        case getRemainingDrawingCount
         case showFilmNetworkAlert(Bool)
         case devTap
         case activateDevMode
@@ -72,18 +67,6 @@ struct SettingsFeature: Reducer {
                 
             case let .setTempNickname(nickname):
                 state.tempNickname = nickname
-                return .none
-                
-            case let .showCountInfo(show):
-                state.showCountInfo = show
-                return .none
-                
-            case .getRemainingDrawingCount:
-                state.remainingDrawingCount = FilmManager.shared.drawingCount?.count
-                return .none
-                
-            case let .showFilmNetworkAlert(show):
-                state.showFilmNetworkAlert = show
                 return .none
                 
             case .devTap:

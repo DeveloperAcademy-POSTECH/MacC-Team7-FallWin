@@ -54,6 +54,7 @@
 		7975B6EB2B0DCC770047B5BD /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6EA2B0DCC770047B5BD /* TimePickerView.swift */; };
 		7975B6F42B0E38030047B5BD /* FilmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F32B0E38030047B5BD /* FilmManager.swift */; };
 		7975B6F62B0F0C180047B5BD /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975B6F52B0F0C180047B5BD /* Notification+Name.swift */; };
+		797A67442BA5B6D9001CA3E4 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 797A67432BA5B6D9001CA3E4 /* GoogleMobileAds */; };
 		799A57A92B0B409700D6966C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 799A57A82B0B409700D6966C /* Localizable.xcstrings */; };
 		799F1D8C2B02EFDD009908DB /* JournalWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8B2B02EFDD009908DB /* JournalWritingView.swift */; };
 		799F1D8E2B02EFE9009908DB /* JournalWritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F1D8D2B02EFE9009908DB /* JournalWritingView+Feature.swift */; };
@@ -142,7 +143,6 @@
 		98A2BC292AFCD688003C9835 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2BC282AFCD688003C9835 /* PickerManager.swift */; };
 		98DA96EF2ADD5B6A000DDAFA /* DallEApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96EE2ADD5B6A000DDAFA /* DallEApiManager.swift */; };
 		98DA96F22ADD6889000DDAFA /* DallEApiTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F12ADD6889000DDAFA /* DallEApiTestView.swift */; };
-		98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		98DA96F72ADE3D2E000DDAFA /* ChatGPTApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F62ADE3D2E000DDAFA /* ChatGPTApiManager.swift */; };
 		98DA96FA2ADFA585000DDAFA /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96F92ADFA585000DDAFA /* WritingView.swift */; };
 		98DA96FC2ADFA594000DDAFA /* WritingView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA96FB2ADFA594000DDAFA /* WritingView+Feature.swift */; };
@@ -153,7 +153,6 @@
 		98F70A852AE5492E00FEE4D2 /* GeneratedDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A842AE5492E00FEE4D2 /* GeneratedDiaryView.swift */; };
 		98F70A872AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F70A862AE5493B00FEE4D2 /* GeneratedDiaryView+Feature.swift */; };
 		A9D4C73B2AF8CAA30004CF04 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4C73A2AF8CAA30004CF04 /* ImageModifier.swift */; };
-		A9E84A5F2B0F4588002A811F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A9E84A5E2B0F4588002A811F /* GoogleMobileAds */; };
 		A9E84A622B0F45B6002A811F /* RewardAdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E84A612B0F45B6002A811F /* RewardAdsManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -303,7 +302,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79A6675C2B87C17800022369 /* Kronos in Frameworks */,
-				98DA96F52ADD8F6F000DDAFA /* (null) in Frameworks */,
 				79E5B2D12ADD501200A86770 /* ComposableArchitecture in Frameworks */,
 				665837652AF80B7600A5833E /* FirebaseAnalytics in Frameworks */,
 				665837672AF80B7600A5833E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
@@ -314,12 +312,12 @@
 				79E5B2D42ADD502100A86770 /* Alamofire in Frameworks */,
 				665837752AF8110600A5833E /* FirebaseAnalyticsSwift in Frameworks */,
 				6658376B2AF80B7600A5833E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				A9E84A5F2B0F4588002A811F /* GoogleMobileAds in Frameworks */,
 				665837772AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				6658376D2AF80B7600A5833E /* FirebaseAppCheck in Frameworks */,
 				665837792AF8110600A5833E /* FirebaseAppCheck in Frameworks */,
 				98202FA72AE6A0360089CF79 /* Lottie in Frameworks */,
 				79A5667E2AFE089D00524A57 /* ZIPFoundation in Frameworks */,
+				797A67442BA5B6D9001CA3E4 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,8 +682,8 @@
 				665837742AF8110600A5833E /* FirebaseAnalyticsSwift */,
 				665837762AF8110600A5833E /* FirebaseAnalyticsWithoutAdIdSupport */,
 				665837782AF8110600A5833E /* FirebaseAppCheck */,
-				A9E84A5E2B0F4588002A811F /* GoogleMobileAds */,
 				79A6675B2B87C17800022369 /* Kronos */,
+				797A67432BA5B6D9001CA3E4 /* GoogleMobileAds */,
 			);
 			productName = FallWin;
 			productReference = 79407D4F2AD7E68D006C7571 /* FallWin.app */;
@@ -723,8 +721,8 @@
 				792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				665837632AF80B7600A5833E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				79A6675A2B87C17700022369 /* XCRemoteSwiftPackageReference "Kronos" */,
+				797A67422BA5B6D9001CA3E4 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 79407D502AD7E68D006C7571 /* Products */;
 			projectDirPath = "";
@@ -1135,6 +1133,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		797A67422BA5B6D9001CA3E4 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.2.0;
+			};
+		};
 		79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
@@ -1173,14 +1179,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.3.3;
-			};
-		};
-		A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.13.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1241,6 +1239,11 @@
 			package = 792751232AF23DC10023123C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
 		};
+		797A67432BA5B6D9001CA3E4 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 797A67422BA5B6D9001CA3E4 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		79A5667D2AFE089D00524A57 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79A5667C2AFE089D00524A57 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
@@ -1265,11 +1268,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98202FA52AE6A0360089CF79 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		A9E84A5E2B0F4588002A811F /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A9E84A5D2B0F4588002A811F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 

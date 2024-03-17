@@ -40,6 +40,7 @@ class RewardAdsManager: NSObject, GADFullScreenContentDelegate {
     }
     
     // Display reward ads
+    @discardableResult
     func displayReward() async -> Bool {
         guard let root = await UIApplication.shared.keyWindow?.rootViewController else {
             return false

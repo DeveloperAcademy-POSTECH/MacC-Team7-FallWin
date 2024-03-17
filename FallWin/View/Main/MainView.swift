@@ -80,57 +80,12 @@ struct MainView: View {
                         Tracking.logEvent(Tracking.Event.A1_3__메인_새일기쓰기.rawValue)
                         print("@Log : A1_3__메인_새일기쓰기")
                     }
-                    .alert(isPresented: viewStore.binding(get: \.showCountAlert, send: MainFeature.Action.showCountAlert), title: "limit_alert_title".localized) {
-                        Text("limit_alert_message")
-                    } primaryButton: {
-                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textPrimary), color: .backgroundPrimary) {
-                            viewStore.send(.showCountAlert(false))
-                        }
-                    } secondaryButton: {
-                        OhwaAlertButton(label: Text("limit_alert_ad").foregroundColor(.textOnButton), color: .button) {
-                            viewStore.send(.showCountAlert(false))
-                            viewStore.send(.showFilmDetailView(true))
-                        }
-                    }
-                    .alert(isPresented: viewStore.binding(get: \.showNetworkAlert, send: MainFeature.Action.showNetworkAlert), title: "network_warning_alert_title".localized) {
-                        Text("network_warning_alert_message")
-                    } primaryButton: {
-                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
-                            viewStore.send(.showNetworkAlert(false))
-                        }
-                    }
-                    .alert(isPresented: viewStore.binding(get: \.showAdFailAlert, send: MainFeature.Action.showAdFailAlert), title: "ad_fail_alert_title".localized) {
-                        Text("ad_fail_alert_message")
-                    } primaryButton: {
-                        OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
-                            viewStore.send(.showAdFailAlert(false))
-                        }
-                    }
                 
                 VStack {
                     toolbar
                         .sheet(isPresented: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), onDismiss: {  }) {
                             YearMonthPickerView(isPickerShown: viewStore.binding(get: \.isPickerShown, send: MainFeature.Action.hidePickerSheet), pickedDateTagValue: viewStore.binding(get: \.pickedDateTagValue, send: MainFeature.Action.pickDate), journals: viewStore.binding(get: \.journals, send: MainFeature.Action.bindJournal))
                                 .presentationDetents([.fraction(0.5)])
-                        }
-                        .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: MainFeature.Action.showCountInfo)) {
-                            Text("film_alert_message".localized)
-                                .multilineTextAlignment(.center)
-                        } primaryButton: {
-                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
-                                viewStore.send(.showCountInfo(false))
-                            }
-                        }
-                        .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: MainFeature.Action.showFilmNetworkAlert)) {
-                            Text("film_network_alert_message".localized)
-                                .multilineTextAlignment(.center)
-                        } primaryButton: {
-                            OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
-                                viewStore.send(.showFilmNetworkAlert(false))
-                            }
-                        }
-                        .onReceive(filmCountPublisher) { _ in
-                            viewStore.send(.getRemainingCount)
                         }
                     Spacer()
                 }
@@ -143,12 +98,8 @@ struct MainView: View {
                     JournalView(store: store)
                 }
             }
-            .navigationDestination(store: store.scope(state: \.$filmDetail, action: MainFeature.Action.filmDetail)) { store in
-                FilmDetailView(store: store)
-            }
             .onAppear {
                 viewStore.send(.fetchAll)
-                viewStore.send(.getRemainingCount)
                 viewStore.send(.hideTabBar(false))
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -223,39 +174,6 @@ struct MainView: View {
                 .foregroundStyle(Color.textPrimary)
                 
                 Spacer()
-                
-                Button {
-                    if networkModel.isConnected {
-                        viewStore.send(.showCountInfo(true))
-                    } else {
-                        viewStore.send(.showFilmNetworkAlert(true))
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "film")
-                            .resizable()
-                            .frame(width: 20, height: 18)
-                        if networkModel.isConnected {
-                            if let remainingCount = viewStore.remainingCount {
-                                Text("\(remainingCount)")
-                                    .font(.pretendard(.bold, size: 16))
-                            } else {
-                                ProgressView()
-                            }
-                        } else {
-                            Image(systemName: "network.slash")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .opacity(0.6)
-                        }
-                    }
-                    .padding(10)
-                    .background {
-                        Capsule()
-                            .fill(Color.backgroundCard)
-                            .shadow(color: .shadow.opacity(0.14), radius: 8, y: 4)
-                    }
-                }
             }
             .padding(.top)
             .padding(.horizontal, 20)
@@ -272,18 +190,7 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button {
-                        if !networkModel.isConnected {
-                            viewStore.send(.showNetworkAlert(true))
-                            return
-                        }
-                        
-                        if FilmManager.shared.drawingCount?.count ?? 0 <= 0 {
-                            viewStore.send(.showCountAlert(true))
-                            //                            rewardManager.displayReward()
-                            //Alert 추가하기
-                        } else {
-                            viewStore.send(.showWritingView)
-                        }
+                        viewStore.send(.showWritingView)
                         
                     } label: {
                         ZStack {

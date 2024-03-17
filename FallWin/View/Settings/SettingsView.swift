@@ -36,56 +36,56 @@ struct SettingsView: View {
                     }
                     .padding(.vertical, 8)
                     .listRowBackground(Color.backgroundPrimary)
-                    
-                    VStack {
-                        HStack {
-                            Text("settings_film")
-                            Button {
-                                if networkModel.isConnected {
-                                    viewStore.send(.showCountInfo(true))
-                                } else {
-                                    viewStore.send(.showFilmNetworkAlert(true))
-                                }
-                            } label: {
-                                Image(systemName: "info.circle")
-                                    .resizable()
-                                    .frame(width: 16, height: 16)
-                            }
-                            Spacer()
-                            HStack {
-                                Image(systemName: "film")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20)
-                                if networkModel.isConnected {
-                                    if let remainingCount = viewStore.remainingDrawingCount {
-                                        Text("\(remainingCount)")
-                                            .font(.pretendard(.bold, size: 16))
-                                            .foregroundColor(.textPrimary)
-                                    } else {
-                                        ProgressView()
-                                    }
-                                } else {
-                                    Image(systemName: "network.slash")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .opacity(0.6)
-                                }
-                            }
-                        }
-                        
-                        Rectangle()
-                            .fill(Color(hexCode: "#E9E4E3").opacity(0.4))
-                            .frame(height: 8)
-                            .padding(.top, 16)
-                            .padding(.horizontal, -20)
-                    }
-                    .foregroundColor(.textPrimary)
-                    .padding(.vertical, 8)
-                    .listRowBackground(Color.backgroundPrimary)
-                    .onReceive(filmCountPublisher) { _ in
-                        viewStore.send(.getRemainingDrawingCount)
-                    }
+//                    
+//                    VStack {
+//                        HStack {
+//                            Text("settings_film")
+//                            Button {
+////                                if networkModel.isConnected {
+////                                    viewStore.send(.showCountInfo(true))
+////                                } else {
+////                                    viewStore.send(.showFilmNetworkAlert(true))
+////                                }
+//                            } label: {
+//                                Image(systemName: "info.circle")
+//                                    .resizable()
+//                                    .frame(width: 16, height: 16)
+//                            }
+//                            Spacer()
+//                            HStack {
+//                                Image(systemName: "film")
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fit)
+//                                    .frame(width: 20)
+//                                if networkModel.isConnected {
+////                                    if let remainingCount = viewStore.remainingDrawingCount {
+////                                        Text("\(remainingCount)")
+////                                            .font(.pretendard(.bold, size: 16))
+////                                            .foregroundColor(.textPrimary)
+////                                    } else {
+////                                        ProgressView()
+////                                    }
+//                                } else {
+//                                    Image(systemName: "network.slash")
+//                                        .resizable()
+//                                        .frame(width: 20, height: 20)
+//                                        .opacity(0.6)
+//                                }
+//                            }
+//                        }
+//                        
+//                        Rectangle()
+//                            .fill(Color(hexCode: "#E9E4E3").opacity(0.4))
+//                            .frame(height: 8)
+//                            .padding(.top, 16)
+//                            .padding(.horizontal, -20)
+//                    }
+//                    .foregroundColor(.textPrimary)
+//                    .padding(.vertical, 8)
+//                    .listRowBackground(Color.backgroundPrimary)
+////                    .onReceive(filmCountPublisher) { _ in
+////                        viewStore.send(.getRemainingDrawingCount)
+////                    }
                 }
                 .listSectionSeparator(.hidden)
                 .alert(isPresented: viewStore.binding(get: \.showNicknameAlert, send: SettingsFeature.Action.showNicknameAlert), title: "settings_nickname_change_title".localized) {
@@ -104,25 +104,25 @@ struct SettingsView: View {
                         }
                     }
                 }
-                .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo)) {
-                    Text("film_alert_message".localized)
-                        .multilineTextAlignment(.center)
-                } primaryButton: {
-                    OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
-                        viewStore.send(.showCountInfo(false))
-                    }
-                }
-                .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: SettingsFeature.Action.showFilmNetworkAlert)) {
-                    Text("film_network_alert_message".localized)
-                        .multilineTextAlignment(.center)
-                } primaryButton: {
-                    OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
-                        viewStore.send(.showFilmNetworkAlert(false))
-                    }
-                }
-                .onReceive(filmCountPublisher) { _ in
-                    viewStore.send(.getRemainingDrawingCount)
-                }
+//                .alert(isPresented: viewStore.binding(get: \.showCountInfo, send: SettingsFeature.Action.showCountInfo)) {
+//                    Text("film_alert_message".localized)
+//                        .multilineTextAlignment(.center)
+//                } primaryButton: {
+//                    OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+//                        viewStore.send(.showCountInfo(false))
+//                    }
+//                }
+//                .alert(isPresented: viewStore.binding(get: \.showFilmNetworkAlert, send: SettingsFeature.Action.showFilmNetworkAlert)) {
+//                    Text("film_network_alert_message".localized)
+//                        .multilineTextAlignment(.center)
+//                } primaryButton: {
+//                    OhwaAlertButton(label: Text("confirm").foregroundColor(.textOnButton), color: .button) {
+//                        viewStore.send(.showFilmNetworkAlert(false))
+//                    }
+//                }
+//                .onReceive(filmCountPublisher) { _ in
+//                    viewStore.send(.getRemainingDrawingCount)
+//                }
                 
                 Section("setting_section_settings") {
                     NavigationLink {
@@ -247,17 +247,17 @@ struct SettingsView: View {
                 #endif
                 
                 if viewStore.devMode {
-                    Section(String("디버깅")) {
-                        NavigationLink {
-                            DebuggingView()
-                        } label: {
-                            Text(String("디버그 메뉴"))
-                                .font(.pretendard(size: 18))
-                                .foregroundColor(.textPrimary)
-                                .padding(.vertical, 8)
-                        }
-                        .listRowBackground(Color.backgroundPrimary)
-                    }
+//                    Section(String("디버깅")) {
+//                        NavigationLink {
+//                            DebuggingView()
+//                        } label: {
+//                            Text(String("디버그 메뉴"))
+//                                .font(.pretendard(size: 18))
+//                                .foregroundColor(.textPrimary)
+//                                .padding(.vertical, 8)
+//                        }
+//                        .listRowBackground(Color.backgroundPrimary)
+//                    }
                 }
                 
                 Spacer()
@@ -287,7 +287,7 @@ struct SettingsView: View {
                 Tracking.logScreenView(screenName: Tracking.Screen.V5__설정뷰.rawValue)
                 print("@Log : V5__설정뷰")
                 viewStore.send(.fetchAppInfo)
-                viewStore.send(.getRemainingDrawingCount)
+//                viewStore.send(.getRemainingDrawingCount)
             }
         }
     }

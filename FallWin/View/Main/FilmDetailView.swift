@@ -63,17 +63,17 @@ struct FilmDetailView: View {
                         .frame(minWidth: 100)
                         
                         Button {
-                            ATTrackingManager.requestTrackingAuthorization { _ in
-                                Task {
-                                    let reward = await adManager.displayReward()
-                                    if reward {
-                                        FilmManager.shared.increaseCount()
-                                        dismiss()
-                                    } else {
-                                        showAdFailAlert = true
-                                    }
-                                }
-                            }
+//                            ATTrackingManager.requestTrackingAuthorization { _ in
+//                                Task {
+//                                    let reward = await adManager.displayReward()
+//                                    if reward {
+//                                        FilmManager.shared.increaseCount()
+//                                        dismiss()
+//                                    } else {
+//                                        showAdFailAlert = true
+//                                    }
+//                                }
+//                            }
                             
                         } label: {
                             HStack(spacing: 16) {

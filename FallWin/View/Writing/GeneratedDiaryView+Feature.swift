@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import ComposableArchitecture
+import AppTrackingTransparency
 
 struct GeneratedDiaryFeature: Reducer {
     struct State: Equatable{
@@ -21,13 +22,16 @@ struct GeneratedDiaryFeature: Reducer {
         var steps: Double = 25.0
         var scale: Double = 5.0
         var pickedDateTagValue: DateTagValue = DateTagValue(date: Date())
+        var adShown: Bool = false
     }
     
     
     enum Action: Equatable {
+        case onAppear
         case selectDrawingStyle(_ selectedDrawingStyle: String)
         case setImage(UIImage?)
         case setImages([UIImage?])
+        case showAd
         case doneGenerating
         case doneImage(Journal)
         case setPriorSteps(_ priorSteps: Double)
@@ -36,10 +40,18 @@ struct GeneratedDiaryFeature: Reducer {
         case setScale(_ scale: Double)
         case pickDate(DateTagValue)
         case cancelWriting
+        case setAdShown(Bool)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
+        case .onAppear:
+            print("count: \(DrawCountManager.shared.getCount())")
+            if !state.adShown && DrawCountManager.shared.getCount() > 0 {
+                return .send(.showAd)
+            }
+            return .none
+            
         case let .selectDrawingStyle(selectedDrawingStyle):
             state.selectedDrawingStyle = selectedDrawingStyle
             return .none
@@ -51,6 +63,13 @@ struct GeneratedDiaryFeature: Reducer {
         case let .setImages(imageSet):
             state.imageSet = imageSet
             return .none
+            
+        case .showAd:
+            return .run { send in
+                await send(.setAdShown(true))
+                let authorization = await ATTrackingManager.requestTrackingAuthorization()
+                let award = await RewardAdsManager().displayReward()
+            }
             
         case .doneGenerating:
             let context = PersistenceController.shared.container.viewContext
@@ -90,6 +109,10 @@ struct GeneratedDiaryFeature: Reducer {
             return .none
             
         case .cancelWriting:
+            return .none
+            
+        case let .setAdShown(shown):
+            state.adShown = shown
             return .none
             
         default: return .none

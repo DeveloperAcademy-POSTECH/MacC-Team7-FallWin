@@ -28,7 +28,7 @@ extension DrawCount : Identifiable {
 extension DrawCount {
     static func fetch(context: NSManagedObjectContext = PersistenceController.shared.container.viewContext, date: String) -> DrawCount? {
         do {
-            let fetchRequest = NSFetchRequest<DrawCount>(entityName: "Journal")
+            let fetchRequest = NSFetchRequest<DrawCount>(entityName: "DrawCount")
             fetchRequest.predicate = NSPredicate(format: "date == %@", date)
             return try context.fetch(fetchRequest).first
         } catch {
@@ -44,6 +44,7 @@ extension DrawCount {
             
         } else {
             let drawCount = DrawCount(context: context)
+            drawCount.date = dateString
             drawCount.count = 0
             context.insert(drawCount)
         }
